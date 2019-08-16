@@ -77,20 +77,20 @@ module game {
 		private _preloadAsset: any[];
 		// 加载必要素材
 		protected loadNeedAsset(): void {
-			if (checkGameJsLoad("component"))
-				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-					if (checkGameJsLoad("datingnqp")) {
-						DatingPageDef.myinit("dating");
-						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded),DatingPageDef["__needLoadAsset"]);
-					}
+			// if (checkGameJsLoad("component"))
+			// 	if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
+			// 		if (checkGameJsLoad("datingnqp")) {
+			// 			DatingPageDef.myinit("dating");
+			// 			this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded),DatingPageDef["__needLoadAsset"]);
+			// 		}
 
-				} else {
+			// 	} else {
 
-					if (checkGameJsLoad("dating")) {
-						DatingPageDef.myinit("dating");
-						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), DatingPageDef["__needLoadAsset"]);
-					}
-				}
+			// 		if (checkGameJsLoad("dating")) {
+			// 			DatingPageDef.myinit("dating");
+			// 			this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), DatingPageDef["__needLoadAsset"]);
+			// 		}
+			// 	}
 		}
 
 
@@ -154,15 +154,15 @@ module game {
 			return window["gamecomponent"]
 		}
 
-		get sceneGame(): SceneGame {
+		get sceneGame() {
 			return this.gamecomponent.SceneGame.ins;
 		}
 
-		get sceneObjectMgr(): SceneObjectMgr {
+		get sceneObjectMgr() {
 			return this.sceneGame.sceneObjectMgr;
 		}
 
-		get sync(): Sync {
+		get sync() {
 			return this.sceneGame.sync;
 		}
 
