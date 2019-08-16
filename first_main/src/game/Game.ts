@@ -156,15 +156,15 @@ module game {
 			return window["gamecomponent"]
 		}
 
-		get sceneGame(): SceneGame {
+		get sceneGame() {
 			return this.gamecomponent.SceneGame.ins;
 		}
 
-		get sceneObjectMgr(): SceneObjectMgr {
+		get sceneObjectMgr() {
 			return this.sceneGame.sceneObjectMgr;
 		}
 
-		get sync(): Sync {
+		get sync() {
 			return this.sceneGame.sync;
 		}
 
