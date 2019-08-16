@@ -77,20 +77,22 @@ module game {
 		private _preloadAsset: any[];
 		// 加载必要素材
 		protected loadNeedAsset(): void {
-			if (checkGameJsLoad("component"))
-				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-					if (checkGameJsLoad("datingnqp")) {
-						DatingPageDef.myinit("dating");
-						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded),DatingPageDef["__needLoadAsset"]);
-					}
+			// if (checkGameJsLoad("component"))
+			// 	if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
+			// 		if (checkGameJsLoad("datingnqp")) {
+			// 			window["DatingPageDef"].myinit("dating");
+			// 			this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), window["DatingPageDef"]["__needLoadAsset"]);
+			// 		}
 
-				} else {
+			// 	} else {
 
-					if (checkGameJsLoad("dating")) {
-						DatingPageDef.myinit("dating");
-						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), DatingPageDef["__needLoadAsset"]);
-					}
-				}
+			// 		if (checkGameJsLoad("dating")) {
+			// 			window["DatingPageDef"].myinit("dating");
+			// 			this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), window["DatingPageDef"]["__needLoadAsset"]);
+			// 		}
+			// 	}
+
+				this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded));
 		}
 
 

@@ -122,6 +122,15 @@ module game.gui.page {
 					let type = asset.indexOf(".sk") == -1 ? RefAsset.GENRAL : RefAsset.TEMPLET;
 					this._preLoader.load(asset, type);
 				}
+			} else {
+				if (isDebug) {
+					let load_list = WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP ? [].concat("gamedatingnqp.js") : [].concat("gamedating.js");
+					let assetsLoader = new AssetsLoader();
+					assetsLoader.load(load_list.concat("gamecomponent.js"), Handler.create(this, () => {
+						let script = document.createElement('script');
+						// script.innerHTML = 
+					}))
+				}
 			}
 		}
 
