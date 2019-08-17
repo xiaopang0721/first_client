@@ -47,19 +47,27 @@ module game.gui.page {
 		/**
 		 * 棋牌
 		 */
-		static TYPE_CHESS: number = 0;
+		static TYPE_HOT: string | number = "0";
 		/**
-		 * 电玩
+		 * 棋牌
 		 */
-		static TYPE_GAME: number = 1;
-		/**
-		 *	百人
-		 */
-		static TYPE_BAIREN: number = 2;
+		static TYPE_CHESS: string | number = "1";
 		/**
 		 * 房卡
 		 */
-		static TYPE_CARD: number = 3;
+		static TYPE_CARD: string | number = "2";
+		/**
+		 * 电玩
+		 */
+		static TYPE_GAME: string | number = "3";
+		/**
+		 * 捕鱼
+		 */
+		static TYPE_BUYU: string | number = "4";
+		/**
+		 *	百人
+		 */
+		static TYPE_BAIREN: string | number = "5";
 
 		/**
 		 *	姚记版皮肤
@@ -91,7 +99,7 @@ module game.gui.page {
 		 * @param type 
 		 */
 		static getIsOpenEnter(type: string, gameID) {
-			if (type == PageDef.TYPE_CARD.toString()) {
+			if (type == PageDef.TYPE_CARD) {
 				return GAME_CARD_CLOSED_LIST.indexOf(gameID) == -1;
 			}
 			return GAME_CLOSED_LIST.indexOf(gameID) == -1;
