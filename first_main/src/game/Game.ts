@@ -144,9 +144,9 @@ module game {
 				return;
 			}
 
-			if (this.gamecomponent) {
+			if (this.__gamecomponent) {
 				for (let scene of this.sceneGame.scenesWithOperator) {
-					if (scene instanceof this.gamecomponent.SceneOperator) {
+					if (scene instanceof this.__gamecomponent.SceneOperator) {
 						scene.onMouseDown(e);
 					}
 				}
@@ -154,7 +154,7 @@ module game {
 		}
 
 		private _gamecomponent: any;
-		get gamecomponent() {
+		get __gamecomponent() {
 			if (!this._gamecomponent) {
 				this._gamecomponent = eval("window.gamecomponent");
 			}
@@ -162,7 +162,7 @@ module game {
 		}
 
 		get sceneGame() {
-			return this.gamecomponent.SceneGame.ins;
+			return this.__gamecomponent.SceneGame.ins;
 		}
 
 		get sceneObjectMgr() {
@@ -257,7 +257,7 @@ module game {
 		}
 
 		private _gamedating: any;
-		get gamedating() {
+		get __gamedating() {
 			if (!this._gamedating) {
 				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
 					this._gamedating = eval("window.gamedatingnqp");
@@ -269,7 +269,7 @@ module game {
 		}
 
 		get datingGame() {
-			return this.gamedating.DatingGame.ins;
+			return this.__gamedating.DatingGame.ins;
 		}
 
 		get isLockGame(): boolean {
@@ -297,7 +297,7 @@ module game {
 		}
 
 		setIsLockGame(v: boolean, playAni?: boolean, sign?: string) {
-			if (this.gamecomponent) {
+			if (this.__gamecomponent) {
 				this.sceneGame.setIsLockGame(v, playAni, sign);
 			}
 		}
@@ -308,9 +308,9 @@ module game {
 				return;
 			}
 
-			if (this.gamecomponent) {
+			if (this.__gamecomponent) {
 				for (let scene of this.sceneGame.scenesWithOperator) {
-					if (scene instanceof this.gamecomponent.SceneOperator) {
+					if (scene instanceof this.__gamecomponent.SceneOperator) {
 						scene.onMouseMove(e);
 					}
 				}
@@ -323,9 +323,9 @@ module game {
 				return;
 			}
 
-			if (this.gamecomponent) {
+			if (this.__gamecomponent) {
 				for (let scene of this.sceneGame.scenesWithOperator) {
-					if (scene instanceof this.gamecomponent.SceneOperator) {
+					if (scene instanceof this.__gamecomponent.SceneOperator) {
 						scene.onMouseUp(e);
 					}
 				}
@@ -333,17 +333,17 @@ module game {
 		}
 
 		clearMgr(): void {
-			if (this.gamecomponent) {
+			if (this.__gamecomponent) {
 				this.sceneGame.clearMgr();
 			}
-			if (this.gamedating) {
+			if (this.__gamedating) {
 				this.datingGame.clearMgr();
 			}
 		}
 
 		//打开登陆界面
 		public openLoginPage() {
-			if (this.gamedating) {
+			if (this.__gamedating) {
 				this.datingGame.openLoginPage();
 			}
 		}
@@ -351,11 +351,11 @@ module game {
 		// 心跳更新
 		onUpdate(diff: number): void {
 			this._uiRoot && this._uiRoot.update(diff);
-			if (this.gamedating && this.datingGame) {
+			if (this.__gamedating && this.datingGame) {
 				this.datingGame.onUpdate(diff)
 			}
 
-			if (this.gamecomponent) {
+			if (this.__gamecomponent) {
 				this.sceneGame.onUpdate(diff)
 				for (let scene of this.sceneGame.scenes) {
 					if (this._sceneCurScale != this.sceneScale) {
@@ -394,7 +394,7 @@ module game {
 			let sceneHeight = this._clientHeight / scale;
 			let x = 0, y = 0, maxHeight = 0;
 
-			if (this.gamecomponent) {
+			if (this.__gamecomponent) {
 				for (let scene of this.sceneGame.scenes) {
 					x = 0
 					y = 0

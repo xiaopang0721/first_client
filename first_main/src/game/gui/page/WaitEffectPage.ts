@@ -41,7 +41,7 @@ module game.gui.page {
 
 		private onMouseHandle(e: LEvent) {
 			if (this._game.sceneGame.network.connected) {
-				if (this._game.sceneGame.sceneObjectMgr && this._game.sceneGame.sceneObjectMgr.story instanceof this._game.gamecomponent.story.StoryBaiRenBase) {
+				if (this._game.sceneGame.sceneObjectMgr && this._game.sceneGame.sceneObjectMgr.story instanceof this._game.__gamecomponent.story.StoryBaiRenBase) {
 					this.close();
 				}
 			} else {
