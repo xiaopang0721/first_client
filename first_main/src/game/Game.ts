@@ -256,16 +256,16 @@ module game {
 				Laya.SoundManager.destroySound(this._musicUrl);
 		}
 
-		private _gamedatingnqp: any;
+		private _gamedating: any;
 		get gamedating() {
-			if (!this._gamedatingnqp) {
+			if (!this._gamedating) {
 				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-					this._gamedatingnqp = eval("window.gamedatingnqp");
+					this._gamedating = eval("window.gamedatingnqp");
 				} else {
-					this._gamedatingnqp = eval("window.gamedating");
+					this._gamedating = eval("window.gamedating");
 				}
 			}
-			return this._gamedatingnqp
+			return this._gamedating
 		}
 
 		get datingGame() {
