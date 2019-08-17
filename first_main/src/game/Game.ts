@@ -155,6 +155,7 @@ module game {
 
 		private _gamecomponent: any;
 		get __gamecomponent() {
+			if (!this._isLoadComplete) return null;
 			if (!this._gamecomponent) {
 				this._gamecomponent = eval("window.gamecomponent");
 			}
@@ -258,6 +259,7 @@ module game {
 
 		private _gamedating: any;
 		get __gamedating() {
+			if (!this._isLoadComplete) return null;
 			if (!this._gamedating) {
 				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
 					this._gamedating = eval("window.gamedatingnqp");
