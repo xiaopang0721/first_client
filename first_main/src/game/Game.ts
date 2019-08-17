@@ -259,7 +259,11 @@ module game {
 		private _gamedatingnqp: any;
 		get gamedating() {
 			if (!this._gamedatingnqp) {
-				this._gamedatingnqp = eval("window.gamedatingnqp");
+				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
+					this._gamedatingnqp = eval("window.gamedatingnqp");
+				} else {
+					this._gamedatingnqp = eval("window.gamedating");
+				}
 			}
 			return this._gamedatingnqp
 		}
@@ -331,6 +335,9 @@ module game {
 		clearMgr(): void {
 			if (this.gamecomponent) {
 				this.sceneGame.clearMgr();
+			}
+			if (this.gamedating) {
+				this.datingGame.clearMgr();
 			}
 		}
 

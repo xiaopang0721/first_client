@@ -47,27 +47,27 @@ module game.gui.page {
 		/**
 		 * 棋牌
 		 */
-		static TYPE_HOT: string | number = "0";
+		static TYPE_HOT: string = "0";
 		/**
 		 * 棋牌
 		 */
-		static TYPE_CHESS: string | number = "1";
+		static TYPE_CHESS: string = "1";
 		/**
 		 * 房卡
 		 */
-		static TYPE_CARD: string | number = "2";
+		static TYPE_CARD: string = "2";
 		/**
 		 * 电玩
 		 */
-		static TYPE_GAME: string | number = "3";
+		static TYPE_GAME: string = "3";
 		/**
 		 * 捕鱼
 		 */
-		static TYPE_BUYU: string | number = "4";
+		static TYPE_BUYU: string = "4";
 		/**
 		 *	百人
 		 */
-		static TYPE_BAIREN: string | number = "5";
+		static TYPE_BAIREN: string = "5";
 
 		/**
 		 *	姚记版皮肤
