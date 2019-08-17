@@ -91,9 +91,9 @@ module game.gui.page {
 		 * @param type 
 		 */
 		static getIsOpenEnter(type: string, gameID) {
-			// if (type == PageDef.TYPE_CARD) {
-			// 	return GAME_CARD_CLOSED_LIST.indexOf(gameID) == -1;
-			// }
+			if (type == PageDef.TYPE_CARD.toString()) {
+				return GAME_CARD_CLOSED_LIST.indexOf(gameID) == -1;
+			}
 			return GAME_CLOSED_LIST.indexOf(gameID) == -1;
 		}
 
@@ -106,8 +106,6 @@ module game.gui.page {
 	const GAME_CARD_CLOSED_LIST = [
 		"tbniuniu", "zjh", "majiang"
 	]
-
-
 
 	const GAME_NAME_LIST = {
 		"ddz": "斗地主",

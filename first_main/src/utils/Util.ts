@@ -30,7 +30,7 @@ function getOtherPlayerName(str: string) {
     if (!str) return "";
     let len: number = str.length;
     let newStr = "";
-    newStr = "****" + str[str.length - 3] + str[str.length - 2] + str[str.length - 1]
+    newStr = "****" + str[len- 3] + str[len - 2] + str[len - 1]
     return newStr;
 }
 

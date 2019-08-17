@@ -77,22 +77,23 @@ module game {
 		private _preloadAsset: any[];
 		// 加载必要素材
 		protected loadNeedAsset(): void {
-			// if (checkGameJsLoad("component"))
-			// 	if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-			// 		if (checkGameJsLoad("datingnqp")) {
-			// 			window["DatingPageDef"].myinit("dating");
-			// 			this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), window["DatingPageDef"]["__needLoadAsset"]);
-			// 		}
+			this._preloadAsset
+			if (checkGameJsLoad("component"))
+				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
+					if (checkGameJsLoad("datingnqp")) {
+						window["DatingPageDef"].myinit("dating");
+						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), window["DatingPageDef"]["__needLoadAsset"]);
+					}
 
-			// 	} else {
+				} else {
 
-			// 		if (checkGameJsLoad("dating")) {
-			// 			window["DatingPageDef"].myinit("dating");
-			// 			this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), window["DatingPageDef"]["__needLoadAsset"]);
-			// 		}
-			// 	}
+					if (checkGameJsLoad("dating")) {
+						window["DatingPageDef"].myinit("dating");
+						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), window["DatingPageDef"]["__needLoadAsset"]);
+					}
+				}
 
-				this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded));
+			// this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded));
 		}
 
 
@@ -111,7 +112,7 @@ module game {
 			return this._isLoadComplete;
 		}
 		//资源是否加载完毕
-		private onNeedAssetLoaded(preload: PreLoad): void {
+		private onNeedAssetLoaded(): void {
 			this._isLoadComplete = true;
 			//是否测试版本
 			Laya.stage.event(LEvent.RESIZE);
@@ -152,8 +153,12 @@ module game {
 			}
 		}
 
+		private _gamecomponent: any;
 		get gamecomponent() {
-			return window["gamecomponent"]
+			if (!this._gamecomponent) {
+				this._gamecomponent = eval("window.gamecomponent");
+			}
+			return this._gamecomponent
 		}
 
 		get sceneGame() {
@@ -251,8 +256,12 @@ module game {
 				Laya.SoundManager.destroySound(this._musicUrl);
 		}
 
+		private _gamedatingnqp: any;
 		get gamedating() {
-			return window["gamedatingnqp"]
+			if (!this._gamedatingnqp) {
+				this._gamedatingnqp = eval("window.gamedatingnqp");
+			}
+			return this._gamedatingnqp
 		}
 
 		get datingGame() {
@@ -408,7 +417,7 @@ module game {
 		 * @param isOnlyOK  是否只有一个按钮 =》确定
 		 * @param okSkin 确定的皮肤
 		 */
-		public alert(str: string, ecb: Function = null, ccb: Function = null, isOnlyOK: boolean = true, okSkin?: string, cancleSkin?: string): void {
+		public alert(str: string, ecb: Function, ccb: Function, isOnlyOK: boolean = true, okSkin?: string, cancleSkin?: string): void {
 			this._uiRoot.alert(str, ecb, ccb, isOnlyOK, okSkin, cancleSkin)
 		}
 
@@ -418,11 +427,8 @@ module game {
 	  * @param str 
 	  * @param isTop 是否顶层
 	  */
-		public showTips(...args): void {
-			let _args = [];
-			for (let _i = 0; _i < arguments.length; _i++) {
-				_args[_i] = arguments[_i];
-			}
+		public showTips(...agrs): void {
+			let _args = agrs;
 			if (isDebug) {
 				core.utils.Log.DATE.setTime(Date.now());
 				_args.unshift(core.utils.Log.DATE.getHours() + ":" + (core.utils.Log.DATE.getMinutes() + 1) + ":" + core.utils.Log.DATE.getSeconds() + ":" + core.utils.Log.DATE.getMilliseconds());

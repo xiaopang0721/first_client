@@ -24766,6 +24766,8 @@ declare module laya.ui {
         protected _bar: Image;
         protected _skin: string;
         protected _value: number;
+        isTween: boolean;
+        isTweenEnd: boolean;
         /**
          * 创建一个新的 <code>ProgressBar</code> 类实例。
          * @param skin 皮肤地址。

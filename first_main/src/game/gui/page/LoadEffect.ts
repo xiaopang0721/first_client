@@ -140,11 +140,6 @@ module game.gui.page {
 			}
 		}
 
-		private roateLoad(value: number): void {
-			let nextAngle: number = value + 360;
-			Laya.Tween.to(this._imgLoad, { rotation: value }, 1000, null, Handler.create(this, this.roateLoad, [nextAngle]));
-		}
-
 		private _updateEnable: boolean;
 		update(diff: number): void {
 			if (!this._updateEnable) return;

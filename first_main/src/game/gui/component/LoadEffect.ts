@@ -87,11 +87,6 @@ module game.gui.component {
 		private initView(): void {
 			if (this._view) return;
 			this._view = new Sprite();
-			// this._black = new Sprite();
-			// this._black.size(100,100);
-			// this._black.alpha = 0.5;
-			// this._view.addChild(this._black);
-
 			if (!this._black) {
 				this._black = new Sprite();
 				this._black.alpha = 0.5;
@@ -118,14 +113,8 @@ module game.gui.component {
 			this._text.align = 'center';
 			this._text.text = "正在打开页面\n(点击关闭界面)"
 			this._view.addChild(this._text);
-
-			// this.roateLoad(360);
-			// this._view.mouseEnabled = false;
-			// this._view.tips.visible = false;
 			this._view.visible = this._isTop;
 			this._parent.addChild(this._view);
-
-
 			this.layout();
 		}
 
@@ -138,11 +127,6 @@ module game.gui.component {
 			if (this._parent && timer > 3000) {
 				this._parent.close();
 			}
-		}
-
-		private roateLoad(value: number): void {
-			let nextAngle: number = value + 360;
-			Laya.Tween.to(this._imgLoad, { rotation: value }, 1000, null, Handler.create(this, this.roateLoad, [nextAngle]));
 		}
 
 		private _updateEnable: boolean;
