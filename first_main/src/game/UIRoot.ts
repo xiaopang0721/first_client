@@ -82,6 +82,9 @@ module game {
 		}
 
 		update(diff: number): void {
+			this.topUnder.checkQueue();
+			PageHandle.update(diff);
+
 			for (let key in this._generalUI.pages) {
 				let item = this._generalUI.pages[key];
 				item && item.isOpened && item.__update(diff);
