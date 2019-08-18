@@ -54,41 +54,44 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_INT_ONLINE_TIME:number = 2 //在线时长，分钟
 	public static PLAYERDATA_INT_ZERO_RESET_TIME:number = 3 //0点重置时间
 	public static PLAYERDATA_INT_BYTE0:number = 4 //0.性别
-	public static PLAYERDATA_INT_BIT0:number = 5 //0.是否游客,1.是否可以修改昵称,2.全民代理,3.连续签到,4.幸运轮盘,5.签到小红点,6.轮盘小红点,7.全面代理小红点,8.支付宝,9.IsShowBank,10.微信开关,11.在线客服是否外跳,12.今日是否分享,13.是否需要判断绑定银行卡,14.是否领取绑定赠送
+	public static PLAYERDATA_INT_BIT0:number = 5 //0.是否游客,1.是否可以修改昵称,2.全民代理,3.连续签到,4.幸运轮盘,5.签到小红点,6.轮盘小红点,7.全面代理小红点,8.支付宝,9.IsShowBank,10.微信开关,11.在线客服是否外跳,12.今日是否分享,13.是否需要判断绑定银行卡,14.是否领取绑定赠送,15.是否已提交过取款订单,16.是否已提交过汇款订单,17.首充小红点,18.是否已领取首充奖励
 	public static PLAYERDATA_INT_MONEY:number = 6 //金币
-	public static PLAYERDATA_INT_PLAYER_CARD_VALUE:number = 8 //玩家的牌
-	public static PLAYERDATA_INT_SAVE_BOX_MONEY:number = 28 //余额宝金钱
-	public static PLAYERDATA_INT_BIND_SEND_MONEY:number = 30 //绑定送钱
-	public static PLAYERDATA_INT_LAST_SHARE_TIME:number = 31 //上次分享时间
-	public static PLAYERDATA_INT_SAVE_BOX_MIN:number = 32 //产生利息最低金额
-	public static PLAYERDATA_INT_SAVE_BOX_RATE:number = 33 //余额宝利率
-	public static PLAYERDATA_INT_SGJ_COUNT:number = 34 //0 bar中奖次数， 1 77中奖次数， 2 星星中奖次数， 3 西瓜中奖次数
-	public static PLAYERDATA_INT_DE_ZHOU_MONEY:number = 35 //德州带入的金币
-	public static PLAYERDATA_INT_AGENCY_SHAREREWARD:number = 36 //分享20块钱
-	public static PLAYERDATA_INT_AGENCY_SHAREMINPAY:number = 37 //分享20块钱需要的充值金额
-	public static PLAYERDATA_INT_DAYSHAREGIVEMONEY:number = 38 //分享1块钱
-	public static PLAYERDATA_INT_BANK_RATE:number = 39 //银行卡优惠比例
-	public static PLAYERDATA_INT_ALIPAY_RATE:number = 40 //支付宝优惠比例
-	public static PLAYERDATA_INT_WX_RATE:number = 41 //微信优惠比例
-	public static PLAYERDATA_INT_MAP_LEVEL:number = 42 //玩家所在地图级别
-	public static PLAYERDATA_INT_SAVE_BOX_LAST_PROFIT:number = 43 //余额宝昨日收益
-	public static PLAYERDATA_INT_SAVE_BOX_TOTAL_PROFIT:number = 44 //余额宝累计收益
-	public static PLAYERDATA_INT_VALID_QI_FU_END_TIME:number = 45 //有效祈福的结束时间
-	public static PLAYERDATA_INT_VALID_QI_FU_TYPE:number = 46 //有效祈福类型
-	public static PLAYERDATA_INT_PLAYER_UNIT16:number = 47 //0.房卡免费次数 1.玩家房卡房主次数
-	public static PLAYERDATA_INT_TOTAL_RECHARGE:number = 48 //玩家累计充值金额
-	public static PLAYERDATA_INT_VIP_LEVEL:number = 49 //玩家vip等级
-	public static PLAYERDATA_INT_LAST_SIGN_IN_TIME:number = 50 //上次签到时间
-	public static PLAYERDATA_INT_BYTE1:number = 51 //0.连续签到天数
-	public static PLAYERDATA_INT_EFFECTIVE_SAVE_MONEY:number = 52 //有效的余额宝存款
-	public static PLAYERDATA_INT_YESTERDAY_SAVE_MONEY:number = 54 //前一天存款
-	public static PLAYERDATA_INT_TODAY_SAVE_MONEY:number = 56 //当天存款
-	public static PLAYERDATA_INT_YESTERDAY_SCORE:number = 58 //昨日轮盘积分
-	public static PLAYERDATA_INT_TODAY_SCORE:number = 60 //今日轮盘积分
-	public static PLAYERDATA_INT_VIP_AWARD_RECEIVED:number = 62 //vip等级奖励领取标识
-	public static PLAYERDATA_INT_TOTAL_YONG_JIN:number = 63 //佣金历史总奖励
-	public static PLAYERDATA_INT_CAN_TAKE_YONG_JIN:number = 65 //可提取佣金
-	public static PLAYERDATA_INT_QI_FU_END_TIME:number = 67 //不同祈福的结束时间
+	public static PLAYERDATA_INT_PLAYER_CARD_VALUE:number = 7 //玩家的牌
+	public static PLAYERDATA_INT_SAVE_BOX_MONEY:number = 27 //余额宝金钱
+	public static PLAYERDATA_INT_BIND_SEND_MONEY:number = 28 //绑定送钱
+	public static PLAYERDATA_INT_LAST_SHARE_TIME:number = 29 //上次分享时间
+	public static PLAYERDATA_INT_SAVE_BOX_MIN:number = 30 //产生利息最低金额
+	public static PLAYERDATA_INT_SAVE_BOX_RATE:number = 31 //余额宝利率
+	public static PLAYERDATA_INT_SGJ_COUNT:number = 32 //0 bar中奖次数， 1 77中奖次数， 2 星星中奖次数， 3 西瓜中奖次数
+	public static PLAYERDATA_INT_DE_ZHOU_MONEY:number = 33 //德州带入的金币
+	public static PLAYERDATA_INT_AGENCY_SHAREREWARD:number = 34 //分享20块钱
+	public static PLAYERDATA_INT_AGENCY_SHAREMINPAY:number = 35 //分享20块钱需要的充值金额
+	public static PLAYERDATA_INT_DAYSHAREGIVEMONEY:number = 36 //分享1块钱
+	public static PLAYERDATA_INT_BANK_RATE:number = 37 //银行卡优惠比例
+	public static PLAYERDATA_INT_ALIPAY_RATE:number = 38 //支付宝优惠比例
+	public static PLAYERDATA_INT_WX_RATE:number = 39 //微信优惠比例
+	public static PLAYERDATA_INT_MAP_LEVEL:number = 40 //玩家所在地图级别
+	public static PLAYERDATA_INT_SAVE_BOX_LAST_PROFIT:number = 41 //余额宝昨日收益
+	public static PLAYERDATA_INT_SAVE_BOX_TOTAL_PROFIT:number = 42 //余额宝累计收益
+	public static PLAYERDATA_INT_VALID_QI_FU_END_TIME:number = 43 //有效祈福的结束时间
+	public static PLAYERDATA_INT_VALID_QI_FU_TYPE:number = 44 //有效祈福类型
+	public static PLAYERDATA_INT_PLAYER_UNIT16:number = 45 //0.房卡免费次数 1.玩家房卡房主次数
+	public static PLAYERDATA_INT_TOTAL_RECHARGE:number = 46 //玩家累计充值金额
+	public static PLAYERDATA_INT_VIP_LEVEL:number = 47 //玩家vip等级
+	public static PLAYERDATA_INT_LAST_SIGN_IN_TIME:number = 48 //上次签到时间
+	public static PLAYERDATA_INT_BYTE1:number = 49 //0.连续签到天数 1.今日取款次数
+	public static PLAYERDATA_INT_EFFECTIVE_SAVE_MONEY:number = 50 //有效的余额宝存款
+	public static PLAYERDATA_INT_YESTERDAY_SAVE_MONEY:number = 51 //前一天存款
+	public static PLAYERDATA_INT_TODAY_SAVE_MONEY:number = 52 //当天存款
+	public static PLAYERDATA_INT_YESTERDAY_SCORE:number = 53 //昨日轮盘积分
+	public static PLAYERDATA_INT_TODAY_SCORE:number = 54 //今日轮盘积分
+	public static PLAYERDATA_INT_VIP_AWARD_RECEIVED:number = 55 //vip等级奖励领取标识
+	public static PLAYERDATA_INT_TOTAL_YONG_JIN:number = 56 //佣金历史总奖励
+	public static PLAYERDATA_INT_CAN_TAKE_YONG_JIN:number = 57 //可提取佣金
+	public static PLAYERDATA_INT_QI_FU_END_TIME:number = 58 //不同祈福的结束时间
+	public static PLAYERDATA_INT_DRAWING_REQUIRED_FLOW:number = 64 //取款所需打码
+	public static PLAYERDATA_INT_DRAWING_CURRENT_FLOW:number = 65 //当前已打码
+	public static PLAYERDATA_INT_TODAY_DRAWING_NUM:number = 66 //今日玩家取款次数
 
    // string field
 	public static PLAYERDATA_STR_ACCOUNT:number = 0 //账号信息
@@ -117,22 +120,22 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 
 	public GetRegTime():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_REG_TIME);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_REG_TIME);
     }
 
 
 	public GetLastLoginTime():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_LAST_LOGIN_TIME);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_LAST_LOGIN_TIME);
     }
 
 
 	public GetOnlineTime():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_ONLINE_TIME);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_ONLINE_TIME);
     }
 
 
 	public GetZeroResetTime():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_ZERO_RESET_TIME);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_ZERO_RESET_TIME);
     }
 
 
@@ -245,38 +248,62 @@ export class PlayerDataField extends core.obj.GuidObject{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,14);
     }
 
+
+	//是否已提交过取款订单
+	public IsIsDrawing():boolean{
+       return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,15);
+    }
+
+
+	//是否已提交过汇款订单
+	public IsIsRemiting():boolean{
+       return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,16);
+    }
+
+
+	//首充小红点
+	public IsIsFirstPay():boolean{
+       return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,17);
+    }
+
+
+	//是否已领取首充奖励
+	public IsIsFisrtPayGive():boolean{
+       return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,18);
+    }
+
 	public GetMoney():number{
-       return this.GetDouble(PlayerDataField.PLAYERDATA_INT_MONEY);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_MONEY);
     }
 
 
 	public GetPlayerCardValue(index:number):number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_PLAYER_CARD_VALUE+index);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_PLAYER_CARD_VALUE+index);
     }
 
 
 	public GetSaveBoxMoney():number{
-       return this.GetDouble(PlayerDataField.PLAYERDATA_INT_SAVE_BOX_MONEY);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_SAVE_BOX_MONEY);
     }
 
 
 	public GetBindSendMoney():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_BIND_SEND_MONEY);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_BIND_SEND_MONEY);
     }
 
 
 	public GetLastShareTime():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_LAST_SHARE_TIME);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_LAST_SHARE_TIME);
     }
 
 
 	public GetSaveBoxMin():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_SAVE_BOX_MIN);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_SAVE_BOX_MIN);
     }
 
 
 	public GetSaveBoxRate():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_SAVE_BOX_RATE);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_SAVE_BOX_RATE);
     }
 
 
@@ -322,100 +349,100 @@ export class PlayerDataField extends core.obj.GuidObject{
     }
 
 	public GetDeZhouMoney():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_DE_ZHOU_MONEY);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_DE_ZHOU_MONEY);
     }
 
 
 	public GetAgencySharereward():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_AGENCY_SHAREREWARD);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_AGENCY_SHAREREWARD);
     }
 
 
 	public GetAgencyShareminpay():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_AGENCY_SHAREMINPAY);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_AGENCY_SHAREMINPAY);
     }
 
 
 	public GetDaysharegivemoney():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_DAYSHAREGIVEMONEY);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_DAYSHAREGIVEMONEY);
     }
 
 
 	public GetBankRate():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_BANK_RATE);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_BANK_RATE);
     }
 
 
 	public GetAlipayRate():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_ALIPAY_RATE);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_ALIPAY_RATE);
     }
 
 
 	public GetWxRate():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_WX_RATE);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_WX_RATE);
     }
 
 
 	public GetMapLevel():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_MAP_LEVEL);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_MAP_LEVEL);
     }
 
 
 	public GetSaveBoxLastProfit():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_SAVE_BOX_LAST_PROFIT);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_SAVE_BOX_LAST_PROFIT);
     }
 
 
 	public GetSaveBoxTotalProfit():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_SAVE_BOX_TOTAL_PROFIT);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_SAVE_BOX_TOTAL_PROFIT);
     }
 
 
 	public GetValidQiFuEndTime():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_VALID_QI_FU_END_TIME);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_VALID_QI_FU_END_TIME);
     }
 
 
 	public GetValidQiFuType():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_VALID_QI_FU_TYPE);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_VALID_QI_FU_TYPE);
     }
 
 
 	public GetPlayerUnit16(offset:number):number{
-       return this.GetUInt16(PlayerDataField.PLAYERDATA_INT_PLAYER_UNIT16, offset);
+       return this.GetInt16(PlayerDataField.PLAYERDATA_INT_PLAYER_UNIT16, offset);
     }
 
 
 
 	//房卡免费次数
 	public GetCardFreeCount():number{
-       return this.GetUInt16(PlayerDataField.PLAYERDATA_INT_PLAYER_UNIT16,0);
+       return this.GetInt16(PlayerDataField.PLAYERDATA_INT_PLAYER_UNIT16,0);
     }
 	public SetCardFreeCount(val:number):void{
-       this.SetUInt16(PlayerDataField.PLAYERDATA_INT_PLAYER_UNIT16,0, val);
+       this.SetInt16(PlayerDataField.PLAYERDATA_INT_PLAYER_UNIT16,0, val);
     }
 
 
 	//玩家房卡房主次数
 	public GetCardCreateCount():number{
-       return this.GetUInt16(PlayerDataField.PLAYERDATA_INT_PLAYER_UNIT16,1);
+       return this.GetInt16(PlayerDataField.PLAYERDATA_INT_PLAYER_UNIT16,1);
     }
 	public SetCardCreateCount(val:number):void{
-       this.SetUInt16(PlayerDataField.PLAYERDATA_INT_PLAYER_UNIT16,1, val);
+       this.SetInt16(PlayerDataField.PLAYERDATA_INT_PLAYER_UNIT16,1, val);
     }
 
 	public GetTotalRecharge():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_TOTAL_RECHARGE);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_TOTAL_RECHARGE);
     }
 
 
 	public GetVipLevel():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_VIP_LEVEL);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_VIP_LEVEL);
     }
 
 
 	public GetLastSignInTime():number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_LAST_SIGN_IN_TIME);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_LAST_SIGN_IN_TIME);
     }
 
 
@@ -433,28 +460,37 @@ export class PlayerDataField extends core.obj.GuidObject{
        this.SetByte(PlayerDataField.PLAYERDATA_INT_BYTE1,0, val);
     }
 
+
+	//今日已取款次数
+	public GetTodayDrawginCount():number{
+       return this.GetByte(PlayerDataField.PLAYERDATA_INT_BYTE1,1);
+    }
+	public SetTodayDrawginCount(val:number):void{
+       this.SetByte(PlayerDataField.PLAYERDATA_INT_BYTE1,1, val);
+    }
+
 	public GetEffectiveSaveMoney():number{
-       return this.GetDouble(PlayerDataField.PLAYERDATA_INT_EFFECTIVE_SAVE_MONEY);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_EFFECTIVE_SAVE_MONEY);
     }
 
 
 	public GetYesterdaySaveMoney():number{
-       return this.GetDouble(PlayerDataField.PLAYERDATA_INT_YESTERDAY_SAVE_MONEY);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_YESTERDAY_SAVE_MONEY);
     }
 
 
 	public GetTodaySaveMoney():number{
-       return this.GetDouble(PlayerDataField.PLAYERDATA_INT_TODAY_SAVE_MONEY);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_TODAY_SAVE_MONEY);
     }
 
 
 	public GetYesterdayScore():number{
-       return this.GetDouble(PlayerDataField.PLAYERDATA_INT_YESTERDAY_SCORE);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_YESTERDAY_SCORE);
     }
 
 
 	public GetTodayScore():number{
-       return this.GetDouble(PlayerDataField.PLAYERDATA_INT_TODAY_SCORE);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_TODAY_SCORE);
     }
 
 
@@ -464,17 +500,32 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 
 	public GetTotalYongJin():number{
-       return this.GetDouble(PlayerDataField.PLAYERDATA_INT_TOTAL_YONG_JIN);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_TOTAL_YONG_JIN);
     }
 
 
 	public GetCanTakeYongJin():number{
-       return this.GetDouble(PlayerDataField.PLAYERDATA_INT_CAN_TAKE_YONG_JIN);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_CAN_TAKE_YONG_JIN);
     }
 
 
 	public GetQiFuEndTime(index:number):number{
-       return this.GetUInt32(PlayerDataField.PLAYERDATA_INT_QI_FU_END_TIME+index);
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_QI_FU_END_TIME+index);
+    }
+
+
+	public GetDrawingRequiredFlow():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_DRAWING_REQUIRED_FLOW);
+    }
+
+
+	public GetDrawingCurrentFlow():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_DRAWING_CURRENT_FLOW);
+    }
+
+
+	public GetTodayDrawingNum():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_TODAY_DRAWING_NUM);
     }
 
 
