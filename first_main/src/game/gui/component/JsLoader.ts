@@ -31,11 +31,13 @@ module game.gui.component {
 		}
 
 		private datingcheck(gameid: string[]) {
-			gameid && gameid.forEach(element => {
-				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-					element = element.replace("dating", "datingnqp");
+			for (let index = 0; index < gameid.length; index++) {
+				let item = gameid[index];
+				if(item == "dating" && WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP)
+				{
+					gameid[index] = "datingnqp";
 				}
-			});
+			}
 			return gameid;
 		}
 
