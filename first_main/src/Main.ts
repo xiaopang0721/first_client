@@ -20,6 +20,7 @@ import ColorFilter = Laya.ColorFilter;
 import Dictionary = Laya.Dictionary;
 import Skeleton = Laya.Skeleton;
 import Templet = Laya.Templet;                  //laya.ani.bone.Templet
+import JsLoader = game.gui.component.JsLoader; 
 
 
 import Network = core.net.Network;

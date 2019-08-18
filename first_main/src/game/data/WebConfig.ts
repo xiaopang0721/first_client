@@ -2,6 +2,7 @@ let WebConfig: any = {}
 let __window: any = window;
 let __conf = __window.externalInterfacePI;
 WebConfig.isDebug = __conf.isDebug;
+WebConfig.jsDebug = __conf.jsDebug;
 WebConfig.isOnline = __conf.isOnline;
 WebConfig.version = __conf.version;
 WebConfig.server_lock = __conf.server_lock;

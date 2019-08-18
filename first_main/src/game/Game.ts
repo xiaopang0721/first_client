@@ -74,28 +74,29 @@ module game {
 			Laya.SoundManager.setMusicVolume(musicVolume == null ? 1 : parseFloat(musicVolume));
 		}
 
-		private _preloadAsset: any[];
 		// 加载必要素材
 		protected loadNeedAsset(): void {
-			this._preloadAsset
-			if (checkGameJsLoad("component"))
+			if (WebConfig.jsDebug) {
+				JsLoader.ins.startLoad(["component", "dating"], Handler.create(this, (asserts) => {
+					this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
+				}));
+			} else {
+				if (!checkGameJsLoad("component", true)) {
+					return;
+				}
 				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-					if (checkGameJsLoad("datingnqp")) {
-						window["DatingPageDef"].myinit("dating");
-						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), window["DatingPageDef"]["__needLoadAsset"]);
+					if (checkGameJsLoad("datingnqp", true)) {
+						eval('DatingPageDef.myinit("dating")')
+						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), eval("DatingPageDef")["__needLoadAsset"]);
 					}
-
 				} else {
-
-					if (checkGameJsLoad("dating")) {
-						window["DatingPageDef"].myinit("dating");
-						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), window["DatingPageDef"]["__needLoadAsset"]);
+					if (checkGameJsLoad("dating", true)) {
+						eval('DatingPageDef.myinit("dating")')
+						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), eval("DatingPageDef")["__needLoadAsset"]);
 					}
 				}
-
-			// this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded));
+			}
 		}
-
 
 		public onAppBlur(e?: any) {
 			if (!this.datingGame) return;

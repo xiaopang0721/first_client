@@ -30,7 +30,7 @@ function getOtherPlayerName(str: string) {
     if (!str) return "";
     let len: number = str.length;
     let newStr = "";
-    newStr = "****" + str[len- 3] + str[len - 2] + str[len - 1]
+    newStr = "****" + str[len - 3] + str[len - 2] + str[len - 1]
     return newStr;
 }
 
@@ -65,8 +65,12 @@ function check_eval(str: string) {
     return obj;
 }
 
-function checkGameJsLoad(gameId) {
-    return check_eval("game"+gameId);
+function checkGameJsLoad(gameId, needError?) {
+    let isloaded = check_eval("game" + gameId);
+    if (isDebug && !isloaded && needError) {
+        throw new Error("you index.html not MyInport")
+    }
+    return isloaded;
 }
 
 function myeval(str) {
