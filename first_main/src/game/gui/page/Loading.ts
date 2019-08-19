@@ -90,23 +90,14 @@ module game.gui.page {
 			}
 
 			if (this._hasLoad || !this._canLoad) return;
-			this._hasLoad = true;
 			if (this._preAssets && this._preAssets.length) {
+				this._hasLoad = true;
 				if (!this._preLoader) this._preLoader = new PreLoad();
 				this._preLoader.on(LEvent.CHANGED, this, this.onUpdateProgress);
 				for (let index = 0; index < this._preAssets.length; index++) {
 					let asset = this._preAssets[index];
 					let type = asset.indexOf(".sk") == -1 ? RefAsset.GENRAL : RefAsset.TEMPLET;
 					this._preLoader.load(asset, type);
-				}
-			} else {
-				if (isDebug) {
-					let load_list = WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP ? [].concat("gamedatingnqp.js") : [].concat("gamedating.js");
-					let assetsLoader = new AssetsLoader();
-					assetsLoader.load(load_list.concat("gamecomponent.js"), Handler.create(this, () => {
-						let script = document.createElement('script');
-						// script.innerHTML = 
-					}))
 				}
 			}
 		}

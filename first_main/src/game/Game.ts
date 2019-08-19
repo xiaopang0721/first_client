@@ -76,7 +76,8 @@ module game {
 
 		// 加载必要素材
 		protected loadNeedAsset(): void {
-			if (WebConfig.jsDebug) {
+			this._uiRoot.showLoadProgress("资源加载中...");
+			if (WebConfig.jsDebug || WebConfig.isOnline) {
 				JsLoader.ins.startLoad(["component", "dating"], Handler.create(this, (asserts) => {
 					this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
 				}));
@@ -157,10 +158,7 @@ module game {
 		private _gamecomponent: any;
 		get __gamecomponent() {
 			if (!this._isLoadComplete) return null;
-			if (!this._gamecomponent) {
-				this._gamecomponent = eval("gamecomponent");
-			}
-			return this._gamecomponent
+			return this._gamecomponent = this._gamecomponent || checkGameJsLoad("component");
 		}
 
 		get sceneGame() {
@@ -261,14 +259,7 @@ module game {
 		private _gamedating: any;
 		get __gamedating() {
 			if (!this._isLoadComplete) return null;
-			if (!this._gamedating) {
-				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-					this._gamedating = eval("gamedatingnqp");
-				} else {
-					this._gamedating = eval("gamedating");
-				}
-			}
-			return this._gamedating
+			return this._gamedating = this._gamedating || checkGameJsLoad("dating");
 		}
 
 		get datingGame() {

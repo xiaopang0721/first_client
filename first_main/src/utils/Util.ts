@@ -66,8 +66,8 @@ function check_eval(str: string) {
 }
 
 function checkGameJsLoad(gameId, needError?) {
-    if (gameId == "dating" && WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-        gameId = "datingnqp"
+    if (gameId.indexOf("dating") != -1) {
+        gameId = WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP ? "datingnqp" : "dating";
     }
     let isloaded = check_eval("game" + gameId);
     if (isDebug && !isloaded && needError) {

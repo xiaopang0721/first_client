@@ -12,15 +12,15 @@ module game.gui.component {
 		private _jsLoaderCellList: { [key: string]: JsLoaderCell } = {}
 		public startLoad(gameIds: string[], handle: Handler) {
 			JsLoader._index++;
-			if(!this._jsLoaderCellList) this._jsLoaderCellList = {}
+			if (!this._jsLoaderCellList) this._jsLoaderCellList = {}
 			let jscell = this._jsLoaderCellList[JsLoader._index] = new JsLoaderCell(JsLoader._index)
 			jscell.game_list = this.checkoutValue(gameIds);
 			jscell.path_list = [];
 			jscell.handle = handle;
-			let ness = WebConfig.isOnline ? ".bin" : ".js";
+			let prePath = WebConfig.isOnline ? "part/bin/game{0}.bin" : "part/js/game{0}.js";
 			for (let index = 0; index < jscell.game_list.length; index++) {
 				let gameid = jscell.game_list[index];
-				let path = StringU.substitute("part/js/game{0}{1}", gameid, ness);
+				let path = StringU.substitute(prePath, gameid);
 				jscell.path_list.push(path);
 			}
 			if (jscell.path_list.length) {
