@@ -12,15 +12,14 @@ module game.gui.component {
 		private _jsLoaderCellList: { [key: string]: JsLoaderCell } = {}
 		public startLoad(gameIds: string[], handle: Handler) {
 			JsLoader._index++;
+			if(!this._jsLoaderCellList) this._jsLoaderCellList = {}
 			let jscell = this._jsLoaderCellList[JsLoader._index] = new JsLoaderCell(JsLoader._index)
-			jscell.game_list = this.datingcheck(gameIds);
+			jscell.game_list = this.checkoutValue(gameIds);
 			jscell.path_list = [];
-			jscell.game_list = gameIds;
 			jscell.handle = handle;
 			let ness = WebConfig.isOnline ? ".bin" : ".js";
 			for (let index = 0; index < jscell.game_list.length; index++) {
 				let gameid = jscell.game_list[index];
-				if (checkGameJsLoad(gameid)) continue;
 				let path = StringU.substitute("part/js/game{0}{1}", gameid, ness);
 				jscell.path_list.push(path);
 			}
@@ -30,15 +29,25 @@ module game.gui.component {
 			}
 		}
 
-		private datingcheck(gameid: string[]) {
+		private checkoutValue(gameid: string[]) {
+			if (gameid.indexOf("dating") != -1 && gameid.indexOf("component") == -1 && !checkGameJsLoad("component")) {
+				gameid.unshift("component");
+			}
+			if (gameid.indexOf("dating") == -1 && gameid.indexOf("tongyong") == -1 && !checkGameJsLoad("tongyong")) {
+				gameid.unshift("tongyong");
+			}
+			let game_list = [];
 			for (let index = 0; index < gameid.length; index++) {
 				let item = gameid[index];
-				if(item == "dating" && WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP)
-				{
+				if (item == "dating" && WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
 					gameid[index] = "datingnqp";
 				}
+
+				if (!checkGameJsLoad(item)) {
+					game_list.push(item)
+				}
 			}
-			return gameid;
+			return game_list;
 		}
 
 		private jsComplete(jscell: JsLoaderCell) {
@@ -68,7 +77,9 @@ module game.gui.component {
 					GamePageDef.myinit(gameid);
 					asset = GamePageDef["__needLoadAsset"];
 				}
-				assetList = assetList.concat(asset);
+				if (asset) {
+					assetList = assetList.concat(asset);
+				}
 			}
 
 			jscell.handle.runWith([assetList]);
