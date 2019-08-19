@@ -20,7 +20,7 @@ import ColorFilter = Laya.ColorFilter;
 import Dictionary = Laya.Dictionary;
 import Skeleton = Laya.Skeleton;
 import Templet = Laya.Templet;                  //laya.ani.bone.Templet
-import JsLoader = game.gui.component.JsLoader; 
+import JsLoader = game.gui.component.JsLoader;
 
 
 import Network = core.net.Network;
@@ -201,7 +201,8 @@ class Main {
         }
 
         WebConfig.platform = (StringU.getParameter(location.href, "p") || WebConfig.platform).toLowerCase();
-        WebConfig.server_name = ((!WebConfig.server_lock && StringU.getParameter(location.href, "p")) || WebConfig.server_name).toLowerCase();
+        WebConfig.isSingleEnter = (StringU.getParameter(location.href, "logintype") == Web_operation_fields.ACCOUNT_TYPE_USERNAME.toString()) ? true : false;
+        WebConfig.server_name = (StringU.getParameter(location.href, "p") || WebConfig.server_name).toLowerCase();
         WebConfig.gwUrl = WebConfig.gwconf[WebConfig.platform];
         WebConfig.ewmbaseUrl = WebConfig.gwUrl + "/qrcode?urlsize=9&urltext=" + encodeURIComponent(WebConfig.gwUrl) + "?invitecode="
         Vesion.addSearchPath(WebConfig.platform + "/", "langpack_1000.bin");
