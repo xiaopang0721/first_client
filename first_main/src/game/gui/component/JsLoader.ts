@@ -43,11 +43,11 @@ module game.gui.component {
 		}
 
 		private checkoutValue(gameid: string[], needError?) {
-			if (gameid.indexOf("dating") != -1 && gameid.indexOf("component") == -1 && !checkGameJsLoad("component")) {
-				!checkGameJsLoad("component", needError) && gameid.unshift("component");
+			if (gameid.indexOf("dating") != -1 && gameid.indexOf("component") == -1 && (!checkGameJsLoad("component", needError) || needError)) {
+				gameid.unshift("component");
 			}
-			if (gameid.indexOf("dating") == -1 && gameid.indexOf("tongyong") == -1 && !checkGameJsLoad("tongyong")) {
-				!checkGameJsLoad("tongyong", needError) && gameid.unshift("tongyong");
+			if (gameid.indexOf("dating") == -1 && gameid.indexOf("tongyong") == -1 && (!checkGameJsLoad("tongyong", needError) || needError)) {
+				gameid.unshift("tongyong");
 			}
 			let game_list = [];
 			for (let index = 0; index < gameid.length; index++) {
@@ -55,8 +55,7 @@ module game.gui.component {
 				if (item.indexOf("dating") != -1) {
 					item = WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP ? "datingnqp" : "dating";
 				}
-
-				if (!checkGameJsLoad(item)) {
+				if (!checkGameJsLoad(item) || needError) {
 					game_list.push(item)
 				}
 			}
