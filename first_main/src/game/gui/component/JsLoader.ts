@@ -39,8 +39,8 @@ module game.gui.component {
 			let game_list = [];
 			for (let index = 0; index < gameid.length; index++) {
 				let item = gameid[index];
-				if (item == "dating" && WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-					item = "datingnqp";
+				if (item.indexOf("dating") != -1) {
+					item = WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP ? "datingnqp" : "dating";
 				}
 
 				if (!checkGameJsLoad(item)) {
