@@ -158,7 +158,7 @@ module game {
 		get __gamecomponent() {
 			if (!this._isLoadComplete) return null;
 			if (!this._gamecomponent) {
-				this._gamecomponent = eval("window.gamecomponent");
+				this._gamecomponent = eval("gamecomponent");
 			}
 			return this._gamecomponent
 		}
@@ -263,9 +263,9 @@ module game {
 			if (!this._isLoadComplete) return null;
 			if (!this._gamedating) {
 				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-					this._gamedating = eval("window.gamedatingnqp");
+					this._gamedating = eval("gamedatingnqp");
 				} else {
-					this._gamedating = eval("window.gamedating");
+					this._gamedating = eval("gamedating");
 				}
 			}
 			return this._gamedating
