@@ -33,7 +33,7 @@ module game.gui.component {
 				let assetList = []
 				for (let index = 0; index < game_list.length; index++) {
 					let gameid = game_list[index];
-					let asset = this.getAsset(gameid);
+					let asset = getAsset(gameid);
 					if (asset && asset.length) {
 						assetList = assetList.concat(asset);
 					}
@@ -77,7 +77,7 @@ module game.gui.component {
 					document.body.appendChild(script);
 				}
 
-				let asset = this.getAsset(gameid);
+				let asset = getAsset(gameid);
 				if (asset && asset.length) {
 					assetList = assetList.concat(asset);
 				}
@@ -89,23 +89,7 @@ module game.gui.component {
 			delete this._jsLoaderCellList[jscell.index];
 		}
 
-		private getAsset(gameid: string) {
-			let asset = [];
-			if (gameid.indexOf("component") != -1) {
-				return []
-			}
-			else if (gameid.indexOf("dating") != -1) {
-				let DatingPageDef = eval("DatingPageDef");
-				DatingPageDef.myinit(gameid);
-				asset = DatingPageDef["__needLoadAsset"];
-			} else {
-				let GamePageDef = getPageDef(gameid);
-				GamePageDef.myinit(gameid);
-				asset = GamePageDef["__needLoadAsset"];
-			}
 
-			return asset
-		}
 
 		clear() {
 			for (let key in this._jsLoaderCellList) {

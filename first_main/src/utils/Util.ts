@@ -65,15 +65,40 @@ function check_eval(str: string) {
     return obj;
 }
 
-function checkGameJsLoad(gameId, needError?) {
-    if (gameId.indexOf("dating") != -1) {
-        gameId = WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP ? "datingnqp" : "dating";
+function checkGameJsLoad(gameid, needError?) {
+    if (gameid.indexOf("dating") != -1) {
+        gameid = WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP ? "datingnqp" : "dating";
     }
-    let isloaded = check_eval("game" + gameId);
+    let isloaded = check_eval("game" + gameid);
+
     if (isDebug && !isloaded && needError) {
         throw new Error("you index.html not MyInport")
     }
     return isloaded;
+}
+
+
+function getAsset(gameid: string, check?) {
+    if (gameid.indexOf("component") != -1) {
+        return []
+    }
+    else if (gameid.indexOf("dating") != -1) {
+        let DatingPageDef = eval("DatingPageDef");
+        if (check) return DatingPageDef["isinit"];
+        if (!DatingPageDef["isinit"]) {
+            DatingPageDef.myinit(gameid);
+            DatingPageDef["isinit"] = true;
+        }
+        return DatingPageDef["__needLoadAsset"];
+    } else {
+        let GamePageDef = getPageDef(gameid);
+        if (check) return GamePageDef["isinit"];
+        if (!GamePageDef["isinit"]) {
+            GamePageDef.myinit(gameid);
+            GamePageDef["isinit"] = true;
+        }
+        return GamePageDef["__needLoadAsset"];
+    }
 }
 
 function myeval(str) {
