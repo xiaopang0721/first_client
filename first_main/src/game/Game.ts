@@ -77,26 +77,9 @@ module game {
 		// 加载必要素材
 		protected loadNeedAsset(): void {
 			this._uiRoot.showLoadProgress("资源加载中...");
-			if (WebConfig.jsDebug || WebConfig.isOnline) {
-				JsLoader.ins.startLoad(["component", "dating"], Handler.create(this, (asserts) => {
-					this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
-				}));
-			} else {
-				if (!checkGameJsLoad("component", true)) {
-					return;
-				}
-				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-					if (checkGameJsLoad("datingnqp", true)) {
-						eval('DatingPageDef.myinit("dating")')
-						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), eval("DatingPageDef")["__needLoadAsset"]);
-					}
-				} else {
-					if (checkGameJsLoad("dating", true)) {
-						eval('DatingPageDef.myinit("dating")')
-						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), eval("DatingPageDef")["__needLoadAsset"]);
-					}
-				}
-			}
+			JsLoader.ins.startLoad(["dating"], Handler.create(this, (asserts) => {
+				this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
+			}));
 		}
 
 		public onAppBlur(e?: any) {
