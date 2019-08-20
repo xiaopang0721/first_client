@@ -77,8 +77,10 @@ module game {
 		// 加载必要素材
 		protected loadNeedAsset(): void {
 			this._uiRoot.showLoadProgress("资源加载中...");
-			JsLoader.ins.startLoad(["dating"], Handler.create(this, (asserts) => {
-				this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
+			JsLoader.ins.startLoad("component", Handler.create(this, (asserts) => {
+				JsLoader.ins.startLoad("dating", Handler.create(this, (asserts) => {
+					this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
+				}));
 			}));
 		}
 

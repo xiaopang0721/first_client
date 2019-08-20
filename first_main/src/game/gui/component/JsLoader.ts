@@ -10,12 +10,12 @@ module game.gui.component {
 
 		private static _index: number = 0;
 		private _jsLoaderCellList: { [key: string]: JsLoaderCell } = {}
-		public startLoad(gameIds: string[], handle: Handler) {
-			if (WebConfig.jsDebug || WebConfig.isOnline) {
+		public startLoad(gameIds: string, handle: Handler) {
+			if (!checkGameJsLoad(gameIds)) {
 				JsLoader._index++;
 				if (!this._jsLoaderCellList) this._jsLoaderCellList = {}
 				let jscell = this._jsLoaderCellList[JsLoader._index] = new JsLoaderCell(JsLoader._index)
-				jscell.game_list = this.checkoutValue(gameIds);
+				jscell.game_list = this.checkoutValue([gameIds]);
 				jscell.path_list = [];
 				jscell.handle = handle;
 				let prePath = WebConfig.isOnline ? "part/bin/game{0}.bin" : "part/js/game{0}.js";
@@ -29,7 +29,7 @@ module game.gui.component {
 					jscell.assertloader.load(jscell.path_list, Handler.create(this, this.jsComplete, [jscell]), true);
 				}
 			} else {
-				let game_list = this.checkoutValue(gameIds, true);
+				let game_list = this.checkoutValue([gameIds]);
 				let assetList = []
 				for (let index = 0; index < game_list.length; index++) {
 					let gameid = game_list[index];
@@ -42,26 +42,7 @@ module game.gui.component {
 			}
 		}
 
-		private checkoutValue(gameid: string[], needError?) {
-			if (gameid.indexOf("dating") != -1 && gameid.indexOf("component") == -1 && (!checkGameJsLoad("component", needError) || needError)) {
-				gameid.unshift("component");
-			}
-			if (gameid.indexOf("dating") == -1 && gameid.indexOf("tongyong") == -1 && (!checkGameJsLoad("tongyong", needError) || needError)) {
-				gameid.unshift("tongyong");
-			}
-			let game_list = [];
-			for (let index = 0; index < gameid.length; index++) {
-				let item = gameid[index];
-				if (item.indexOf("dating") != -1) {
-					item = WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP ? "datingnqp" : "dating";
-				}
-				if (!checkGameJsLoad(item) || needError) {
-					game_list.push(item)
-				}
-			}
-			return game_list;
-		}
-
+		
 		private jsComplete(jscell: JsLoaderCell) {
 			let assetList = []
 			for (let index = 0; index < jscell.path_list.length; index++) {
@@ -89,7 +70,23 @@ module game.gui.component {
 			delete this._jsLoaderCellList[jscell.index];
 		}
 
-
+		private checkoutValue(gameid: string[]) {
+			if (gameid.indexOf("dating") != -1 && gameid.indexOf("component") == -1 && !checkGameJsLoad("component")) {
+				gameid.unshift("component");
+			}
+			if (gameid.indexOf("dating") == -1 && gameid.indexOf("tongyong") == -1 && gameid.indexOf("component") == -1 && !checkGameJsLoad("tongyong")) {
+				gameid.unshift("tongyong");
+			}
+			let game_list = [];
+			for (let index = 0; index < gameid.length; index++) {
+				let item = gameid[index];
+				if (item.indexOf("dating") != -1) {
+					item = WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP ? "datingnqp" : "dating";
+				}
+				game_list.push(item)
+			}
+			return game_list;
+		}
 
 		clear() {
 			for (let key in this._jsLoaderCellList) {
