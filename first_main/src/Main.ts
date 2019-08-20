@@ -195,8 +195,6 @@ class Main {
         cur_vesion = arr && arr.length == 2 ? arr[1].toString() : "10086";
         let v = localGetItem("client_vesion");
         if (v != cur_vesion) {
-            localRemoveItem("gameLoadedList");
-            localRemoveItem("RefAsset_keys");
             localSetItem("client_vesion", cur_vesion)
         }
 
