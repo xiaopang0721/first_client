@@ -42,7 +42,7 @@ module game.gui.component {
 			}
 		}
 
-		
+
 		private jsComplete(jscell: JsLoaderCell) {
 			let assetList = []
 			for (let index = 0; index < jscell.path_list.length; index++) {
@@ -71,11 +71,14 @@ module game.gui.component {
 		}
 
 		private checkoutValue(gameid: string[]) {
-			if (gameid.indexOf("dating") != -1 && gameid.indexOf("component") == -1 && !checkGameJsLoad("component")) {
-				gameid.unshift("component");
+			if (gameid.indexOf("dating") != -1 && gameid.indexOf("component") == -1) {
+				!checkGameJsLoad("component") && gameid.unshift("component");
 			}
-			if (gameid.indexOf("dating") == -1 && gameid.indexOf("tongyong") == -1 && gameid.indexOf("component") == -1 && !checkGameJsLoad("tongyong")) {
-				gameid.unshift("tongyong");
+			if (gameid.indexOf("dating") == -1 && gameid.indexOf("tongyong") == -1 && gameid.indexOf("component") == -1) {
+				let GamePageDef = getPageDef("tongyong");
+				if (!GamePageDef["isinit"]) {
+					gameid.unshift("tongyong");
+				}
 			}
 			let game_list = [];
 			for (let index = 0; index < gameid.length; index++) {
