@@ -38,11 +38,11 @@ function getOtherPlayerName(str: string) {
  * 获取游戏pagedef
  * @param gameid 
  */
-function getPageDef(gameid: string) {
+function getPageDef(gameid: string,source_str1?) {
     if (!gameid) return null;
     let str: string = gameid.replace("DZ_", "");
     if (!str || str.length < 2) return null;
-    let str1 = str.substring(0, 1).toUpperCase() + str.substring(1)
+    let str1 = source_str1 || str.substring(0, 1).toUpperCase() + str.substring(1)
     let pageDef = check_eval(StringU.substitute("game{0}.page.{1}PageDef", str, str1))
     return pageDef;
 }
@@ -83,7 +83,7 @@ function getAsset(gameid: string, check?) {
         return []
     }
     else if (gameid.indexOf("dating") != -1) {
-        let DatingPageDef = eval("DatingPageDef");
+        let DatingPageDef = getPageDef(gameid,"DatingPageDef");
         if (check) return DatingPageDef["isinit"];
         if (!DatingPageDef["isinit"]) {
             DatingPageDef.myinit(gameid);
