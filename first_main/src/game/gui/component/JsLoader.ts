@@ -10,7 +10,7 @@ module game.gui.component {
 
 		private static _index: number = 0;
 		private _jsLoaderCellList: { [key: string]: JsLoaderCell } = {}
-		public startLoad(gameIds: string, handle: Handler) {
+		public startLoad(gameIds: string, handle?: Handler) {
 			if (!checkGameJsLoad(gameIds)) {
 				JsLoader._index++;
 				if (!this._jsLoaderCellList) this._jsLoaderCellList = {}
@@ -38,7 +38,7 @@ module game.gui.component {
 						assetList = assetList.concat(asset);
 					}
 				}
-				handle.runWith([assetList]);
+				handle && handle.runWith([assetList]);
 			}
 		}
 
@@ -64,7 +64,7 @@ module game.gui.component {
 				}
 			}
 
-			jscell.handle.runWith([assetList]);
+			jscell.handle && jscell.handle.runWith([assetList]);
 			jscell.assertloader.clear(true);
 			jscell.assertloader = null;
 			delete this._jsLoaderCellList[jscell.index];
@@ -76,7 +76,7 @@ module game.gui.component {
 			}
 			if (gameid.indexOf("dating") == -1 && gameid.indexOf("tongyong") == -1 && gameid.indexOf("component") == -1) {
 				let GamePageDef = getPageDef("tongyong");
-				if (!GamePageDef["isinit"]) {
+				if (!GamePageDef || !GamePageDef["isinit"]) {
 					gameid.unshift("tongyong");
 				}
 			}

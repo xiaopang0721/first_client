@@ -47,6 +47,13 @@ function getPageDef(gameid: string, source_str1?) {
     return pageDef;
 }
 
+function findGameVesion(id) {
+    if (WebConfig.isOnline) {
+        return Vesion["_VESION_FILES"][StringU.substitute("common/{0}.game.bin", id)];
+    }
+    return id;
+}
+
 function check_eval(str: string) {
     if (!str) return null;
     let arr = str.split(".");
@@ -83,7 +90,7 @@ function getAsset(gameid: string, check?) {
     }
     else if (gameid.indexOf("dating") != -1) {
         let DatingPageDef = getPageDef(gameid, "DatingPageDef");
-        if (check) return DatingPageDef["isinit"];
+        if (check) return !DatingPageDef || DatingPageDef["isinit"];
         if (!DatingPageDef["isinit"]) {
             DatingPageDef.myinit(gameid);
             DatingPageDef["isinit"] = true;
@@ -91,7 +98,7 @@ function getAsset(gameid: string, check?) {
         return DatingPageDef["__needLoadAsset"];
     } else {
         let GamePageDef = getPageDef(gameid);
-        if (check) return GamePageDef["isinit"];
+        if (check) return !GamePageDef || GamePageDef["isinit"];
         if (!GamePageDef["isinit"]) {
             GamePageDef.myinit(gameid);
             GamePageDef["isinit"] = true;
