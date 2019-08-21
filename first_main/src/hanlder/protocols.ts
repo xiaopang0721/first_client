@@ -436,8 +436,6 @@ module hanlder{
 		public static  CMSG_CHECK_LOGIN_VF :number = 214;	//check_login_vf
 		/*设置取款密码*/
 		public static  CMSG_SET_MONEY_PWD :number = 215;	//set_money_pwd
-		/*首充领取*/
-		public static  CMSG_GET_FIRST_PAY :number = 216;	//get_first_pay
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -663,7 +661,6 @@ module hanlder{
 			this._FUNCS[213] = "free_sytle_sync";
 			this._FUNCS[214] = "check_login_vf";
 			this._FUNCS[215] = "set_money_pwd";
-			this._FUNCS[216] = "get_first_pay";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1438,9 +1435,6 @@ module hanlder{
 					var obj_set_money_pwd:c2s_set_money_pwd = new c2s_set_money_pwd;
 					c2s_set_money_pwd .read(obj_set_money_pwd, bs);
 					return obj_set_money_pwd;
-				case Protocols.CMSG_GET_FIRST_PAY :	//get_first_pay
-					var obj_get_first_pay:c2s_get_first_pay = new c2s_get_first_pay;
-					return obj_get_first_pay;
 				default:
 					break;
 			}
@@ -3091,12 +3085,6 @@ module hanlder{
 			this._stream.writeString (pwd);
 			this.sendMsg( 215 , this._stream);
 			//Log.outDebug("CS====> cmd:215 set_money_pwd");
-		}
-		public call_get_first_pay ():void{
-			this._stream.reset();
-			this._stream.writeUint16( 216 );
-			this.sendMsg( 216 , this._stream);
-			//Log.outDebug("CS====> cmd:216 get_first_pay");
 		}
 	}
 
@@ -8484,16 +8472,6 @@ module hanlder{
 			var i:number;
 			//取款密码
 			self.pwd = bytes. readString ();		
-		}
-	}
-	export class c2s_get_first_pay
-	{
-		public optcode:number = 0;
-		public optname:string = "onGet_first_pay";
-	
-		public constructor()
-		{
-			
 		}
 	}
 

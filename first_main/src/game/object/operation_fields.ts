@@ -100,7 +100,6 @@ class Operation_Fields {
 	public static OPRATE_GAME_PWD_ERROR_3_TIMES:number = 8 //密码错误超过3次
 	public static OPRATE_GAME_PWD_SUCCESS:number = 9 //取款密码设置成功
 	public static OPRATE_GAME_POWER_YUEBAO_SUCCESS:number = 10 //余额宝取出成功
-	public static OPRATE_GAME_FIRST_PAY_SUCCESS:number = 11 //首充领取成功
 	//错误提示
 	private static OPRATE_STRING:{[key:string]:string} = {
 		'1':'登录操作错误类型',//登录操作错误类型
@@ -195,7 +194,6 @@ class Operation_Fields {
 		'8_8':'密码错误超过3次',//密码错误超过3次
 		'8_9':'取款密码设置成功',//取款密码设置成功
 		'8_10':'余额宝取出成功',//余额宝取出成功
-		'8_11':'首充领取成功',//首充领取成功
 
 	}
 	//获取错误提示

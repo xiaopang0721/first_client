@@ -47,11 +47,14 @@ function getPageDef(gameid: string, source_str1?) {
     return pageDef;
 }
 
+var __poolV: { [key: string]: string } = {};
 function findGameVesion(id) {
     if (WebConfig.isOnline) {
-        let zz = Laya.URL.formatURL(StringU.substitute("{0}.game.bin", id)).replace(Laya.URL.basePath, "");
-        logd(zz)
-        return Vesion["_VESION_FILES"][zz];
+        if (!__poolV[id]) {
+            __poolV[id] = Vesion["_VESION_FILES"][Laya.URL.formatURL(StringU.substitute("{0}.game.bin", id)).replace(Laya.URL.basePath, "").replace(WebConfig.res_url, "").replace("?v=", "").replace(/([0-9A-Fa-f]{7}_)+/g, "")];
+        }
+
+        return __poolV[id];
     }
     return id;
 }
