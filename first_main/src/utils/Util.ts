@@ -49,9 +49,8 @@ function getPageDef(gameid: string, source_str1?) {
 
 function findGameVesion(id) {
     if (WebConfig.isOnline) {
-        let zz = Laya.URL.formatURL(StringU.substitute("{0}.game.bin?v", id)).replace(Laya.URL.basePath, "").replace(WebConfig.res_url,"");
-        logd(zz)
-        return Vesion["_VESION_FILES"][zz];
+        let zz = Laya.URL.formatURL(StringU.substitute("{0}.game.bin?v", id)).replace(Laya.URL.basePath, "").replace(WebConfig.res_url, "");
+        return Vesion["_VESION_FILES"][zz] || Vesion["_VESION_FILES"][zz.replace("?v", "")];
     }
     return id;
 }
