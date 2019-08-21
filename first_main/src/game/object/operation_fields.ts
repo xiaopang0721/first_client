@@ -96,6 +96,10 @@ class Operation_Fields {
 	public static OPRATE_GAME_SIGN_IN_SUCCESS:number = 4 //签到成功
 	public static OPRATE_GAME_SCORE_LUCKY_DRAW:number = 5 //积分抽奖奖励
 	public static OPRATE_GAME_VIP_LEVEL_AWARD:number = 6 //VIP等级奖励
+	public static OPRATE_GAME_PWD_ERROR:number = 7 //密码错误
+	public static OPRATE_GAME_PWD_ERROR_3_TIMES:number = 8 //密码错误超过3次
+	public static OPRATE_GAME_PWD_SUCCESS:number = 9 //取款密码设置成功
+	public static OPRATE_GAME_POWER_YUEBAO_SUCCESS:number = 10 //余额宝取出成功
 	//错误提示
 	private static OPRATE_STRING:{[key:string]:string} = {
 		'1':'登录操作错误类型',//登录操作错误类型
@@ -186,6 +190,10 @@ class Operation_Fields {
 		'8_4':'签到成功',//签到成功
 		'8_5':'积分抽奖奖励',//积分抽奖奖励
 		'8_6':'VIP等级奖励',//VIP等级奖励
+		'8_7':'密码错误',//密码错误
+		'8_8':'密码错误超过3次',//密码错误超过3次
+		'8_9':'取款密码设置成功',//取款密码设置成功
+		'8_10':'余额宝取出成功',//余额宝取出成功
 
 	}
 	//获取错误提示
