@@ -80,18 +80,18 @@ module game {
 			JsLoader.ins.startLoad("component", Handler.create(this, (asserts) => {
 				JsLoader.ins.startLoad("dating", Handler.create(this, (asserts) => {
 					this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
-				}));
-			}));
-			let gameLoadedObj = JSON.parse(localGetItem("gameLoadedObj"));
-			if (gameLoadedObj) {
-				for (let key in gameLoadedObj) {
-					if (gameLoadedObj.hasOwnProperty(key)) {
-						if (gameLoadedObj[key] == findGameVesion(key)) {
-							JsLoader.ins.startLoad(key)
+					let gameLoadedObj = JSON.parse(localGetItem("gameLoadedObj"));
+					if (gameLoadedObj) {
+						for (let key in gameLoadedObj) {
+							if (gameLoadedObj.hasOwnProperty(key)) {
+								if (gameLoadedObj[key] == findGameVesion(key)) {
+									JsLoader.ins.startLoad(key)
+								}
+							}
 						}
 					}
-				}
-			}
+				}));
+			}));
 		}
 
 		public onAppBlur(e?: any) {
