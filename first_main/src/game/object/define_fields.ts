@@ -92,6 +92,7 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_INT_DRAWING_REQUIRED_FLOW:number = 64 //取款所需打码
 	public static PLAYERDATA_INT_DRAWING_CURRENT_FLOW:number = 65 //当前已打码
 	public static PLAYERDATA_INT_TODAY_DRAWING_NUM:number = 66 //今日玩家取款次数
+	public static PLAYERDATA_INT_DRAW_MONEY_ERROR_C_D:number = 67 //玩家取款密码错误冻结时间或间隔时间
 
    // string field
 	public static PLAYERDATA_STR_ACCOUNT:number = 0 //账号信息
@@ -151,6 +152,15 @@ export class PlayerDataField extends core.obj.GuidObject{
     }
 	public SetSex(val:number):void{
        this.SetByte(PlayerDataField.PLAYERDATA_INT_BYTE0,0, val);
+    }
+
+
+	//取款错误次数
+	public GetDrawMoneyErrorTimes():number{
+       return this.GetByte(PlayerDataField.PLAYERDATA_INT_BYTE0,1);
+    }
+	public SetDrawMoneyErrorTimes(val:number):void{
+       this.SetByte(PlayerDataField.PLAYERDATA_INT_BYTE0,1, val);
     }
 
 	public GetBit0(offset:number):boolean{
@@ -526,6 +536,11 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 	public GetTodayDrawingNum():number{
        return this.GetInt32(PlayerDataField.PLAYERDATA_INT_TODAY_DRAWING_NUM);
+    }
+
+
+	public GetDrawMoneyErrorCD():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_DRAW_MONEY_ERROR_C_D);
     }
 
 

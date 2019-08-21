@@ -434,6 +434,10 @@ module hanlder{
 		public static  CMSG_FREE_SYTLE_SYNC :number = 213;	//free_sytle_sync
 		/*校验登录验证码*/
 		public static  CMSG_CHECK_LOGIN_VF :number = 214;	//check_login_vf
+		/*设置取款密码*/
+		public static  CMSG_SET_MONEY_PWD :number = 215;	//set_money_pwd
+		/*首充领取*/
+		public static  CMSG_GET_FIRST_PAY :number = 216;	//get_first_pay
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -658,6 +662,8 @@ module hanlder{
 			this._FUNCS[212] = "get_commission";
 			this._FUNCS[213] = "free_sytle_sync";
 			this._FUNCS[214] = "check_login_vf";
+			this._FUNCS[215] = "set_money_pwd";
+			this._FUNCS[216] = "get_first_pay";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1428,6 +1434,13 @@ module hanlder{
 					var obj_check_login_vf:c2s_check_login_vf = new c2s_check_login_vf;
 					c2s_check_login_vf .read(obj_check_login_vf, bs);
 					return obj_check_login_vf;
+				case Protocols.CMSG_SET_MONEY_PWD :	//set_money_pwd
+					var obj_set_money_pwd:c2s_set_money_pwd = new c2s_set_money_pwd;
+					c2s_set_money_pwd .read(obj_set_money_pwd, bs);
+					return obj_set_money_pwd;
+				case Protocols.CMSG_GET_FIRST_PAY :	//get_first_pay
+					var obj_get_first_pay:c2s_get_first_pay = new c2s_get_first_pay;
+					return obj_get_first_pay;
 				default:
 					break;
 			}
@@ -3071,6 +3084,20 @@ module hanlder{
 			this.sendMsg( 214 , this._stream);
 			//Log.outDebug("CS====> cmd:214 check_login_vf");
 		}
+		public call_set_money_pwd (pwd : string ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 215 );
+			//取款密码
+			this._stream.writeString (pwd);
+			this.sendMsg( 215 , this._stream);
+			//Log.outDebug("CS====> cmd:215 set_money_pwd");
+		}
+		public call_get_first_pay ():void{
+			this._stream.reset();
+			this._stream.writeUint16( 216 );
+			this.sendMsg( 216 , this._stream);
+			//Log.outDebug("CS====> cmd:216 get_first_pay");
+		}
 	}
 
 	export class both_null_action
@@ -3316,7 +3343,7 @@ module hanlder{
 		public optname:string = "onLogin";
 	
 		/**
-		* 登?祭嘈?
+		* 登录类型
 		*/
 		public typ : number ;	//uint8
 		/**
@@ -8432,6 +8459,41 @@ module hanlder{
 			self.code = bytes. readString ();		
 			//运营商
 			self.server_name = bytes. readString ();		
+		}
+	}
+	export class c2s_set_money_pwd
+	{
+		public optcode:number = 0;
+		public optname:string = "onSet_money_pwd";
+	
+		/**
+		* 取款密码
+		*/
+		public pwd : string ;	//String
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_set_money_pwd, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//取款密码
+			self.pwd = bytes. readString ();		
+		}
+	}
+	export class c2s_get_first_pay
+	{
+		public optcode:number = 0;
+		public optname:string = "onGet_first_pay";
+	
+		public constructor()
+		{
+			
 		}
 	}
 

@@ -42,6 +42,7 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_QIFU = 39  //祈福扣款
     public static USE_MONEY_LOG_TYPE_ROOMCARD_BACK = 40  //房卡返还
     public static USE_MONEY_LOG_TYPE_LVAWARE = 41  //VIP等级奖励
+    public static USE_MONEY_LOG_TYPE_FIRSTPAY = 42  //首充奖励
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static client_money_logtype_table:{[key:number]:string}={

@@ -74,7 +74,6 @@ import Page = game.gui.base.Page;
 import TabPage = game.gui.base.TabPage;
 import TabBox = game.gui.base.TabBox;
 
-let firstAlert: boolean;
 // 是否iphoneX
 let onIPhoneX: boolean = false;
 // 本地调试

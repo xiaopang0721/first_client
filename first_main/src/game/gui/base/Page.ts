@@ -410,6 +410,20 @@ module game.gui.base {
 			}
 		}
 
+		//弹窗逻辑相关方法
+		protected firstAlertPage(): void {
+			if (DatingPageDef.FirstAlert) {
+				DatingPageDef.AlertPageIndex++;
+				let key = DatingPageDef.LOGIN_POPUP[DatingPageDef.AlertPageIndex];
+				if (key) {
+					this._game.uiRoot.general.open(key);
+				} else {
+					DatingPageDef.AlertPageIndex = 1;
+					DatingPageDef.FirstAlert = true;
+				}
+			}
+		}
+
 		// 页面关闭
 		close(): void {
 			if (this._isCloseing) {
