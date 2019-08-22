@@ -35,9 +35,9 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_APIREDBAG = 32  //红包
     public static USE_MONEY_LOG_TYPE_APICAIJUAN = 33  //彩券
     public static USE_MONEY_LOG_TYPE_INVALID_BET_MONEY = 34  //无效下注
-    public static USE_MONEY_LOG_TYPE_RECHARGE_WEIXIN = 35  //微信加款
-    public static USE_MONEY_LOG_TYPE_RECHARGE_ALIPAY = 36  //支付宝加款
-    public static USE_MONEY_LOG_TYPE_RECHARGE_BANK = 37  //银行卡加款
+    public static USE_MONEY_LOG_TYPE_RECHARGE_WEIXIN = 35  //微信充值
+    public static USE_MONEY_LOG_TYPE_RECHARGE_ALIPAY = 36  //支付宝充值
+    public static USE_MONEY_LOG_TYPE_RECHARGE_BANK = 37  //银行卡充值
     public static USE_MONEY_LOG_TYPE_CASH_ADMIN = 38  //管理员扣款
     public static USE_MONEY_LOG_TYPE_QIFU = 39  //祈福扣款
     public static USE_MONEY_LOG_TYPE_ROOMCARD_BACK = 40  //房卡返还
@@ -958,5 +958,6 @@ class Web_operation_fields {
     public static FREE_STYLE_TYPES_QIFUCONFIG_C = "qifuconfig_c"  //祈福配置
     public static FREE_STYLE_TYPES_FIRSTPAYCONFIG_C = "firstpayconfig_c"  //首充配置
     public static FREE_STYLE_TYPES_GAMEBULLETIN_C = "gamebulletin_c"  //游戏公告
+    public static FREE_STYLE_TYPES_GAMEPOPCONFIG_C = "gamepopconfig_c"  //游戏弹窗配置
 //------------------------ END -----------------------------------
 }
