@@ -23,7 +23,12 @@ module game.gui.page {
 
 		// 页面初始化函数
 		protected init(): void {
-			View.regViewRuntime(StringU.substitute("ui.{0}.dating.Loading_DHUI", WebConfig.platform), LoadingDH);
+			if (WebConfig.baseplatform == PageDef.BASE_PLATFORM_TYPE_DAZHONGQP) {
+				View.regViewRuntime("ui.dating.Loading_DHUI", LoadingDH);
+			} else {
+
+				View.regViewRuntime(StringU.substitute("ui.{0}.dating.Loading_DHUI", WebConfig.baseplatform), LoadingDH);
+			}
 			this._viewUI = this._view = this.createView('dating.LoadingUI', ['dating.Loading_DHUI']);
 			this.addChild(this._viewUI);
 			(this._viewUI.di as LoadingDH).onOpen(this._game);
