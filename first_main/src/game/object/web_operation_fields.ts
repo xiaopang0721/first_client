@@ -11,10 +11,10 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_CASH = 8  //提款
     public static USE_MONEY_LOG_TYPE_TALLAGE = 9  //抽水
     public static USE_MONEY_LOG_TYPE_XIQIAN = 10  //喜钱
-    public static USE_MONEY_LOG_TYPE_SIGNIN = 11  //签到奖励
-    public static USE_MONEY_LOG_TYPE_TURNTABLE = 12  //转盘奖励
-    public static USE_MONEY_LOG_TYPE_GMADD = 13  //GM加钱
-    public static USE_MONEY_LOG_TYPE_GMSUB = 14  //GM减钱
+    public static USE_MONEY_LOG_TYPE_SIGNIN = 11  //签到获得
+    public static USE_MONEY_LOG_TYPE_TURNTABLE = 12  //转盘获得
+    public static USE_MONEY_LOG_TYPE_GMADD = 13  //GM命令加钱
+    public static USE_MONEY_LOG_TYPE_GMSUB = 14  //GM命令减钱
     public static USE_MONEY_LOG_TYPE_RECHARGE_VIP = 15  //VIP充值
     public static USE_MONEY_LOG_TYPE_RECHARGE_RAKEBACK = 16  //佣金池领取
     public static USE_MONEY_LOG_TYPE_RECHARGE_OTHER = 17  //其他加款
@@ -23,18 +23,18 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_CASH_OTHER = 20  //其他扣款
     public static USE_MONEY_LOG_TYPE_CASH_RECHARGEREEX = 21  //加款重新审核
     public static USE_MONEY_LOG_TYPE_CASH_CASHREEX = 22  //扣款重新审核
-    public static USE_MONEY_LOG_TYPE_FISH_RECHARGE = 23  //捕鱼充值
-    public static USE_MONEY_LOG_TYPE_FISH_FIRE = 24  //捕鱼开炮
-    public static USE_MONEY_LOG_TYPE_FISH_GETFISH = 25  //捕鱼捕获
-    public static USE_MONEY_LOG_TYPE_SAFEBOX_OUT = 26  //余额宝转出
-    public static USE_MONEY_LOG_TYPE_SAFEBOX_IN = 27  //转入余额宝
-    public static USE_MONEY_LOG_TYPE_SAFEBOX_INTEREST = 28  //余额宝利息
-    public static USE_MONEY_LOG_TYPE_BIND = 29  //绑定奖励
-    public static USE_MONEY_LOG_TYPE_DAILYSHARE = 30  //分享奖励
+    public static USE_MONEY_LOG_TYPE_FISH_RECHARGE = 23  //捕鱼用户充值加款
+    public static USE_MONEY_LOG_TYPE_FISH_FIRE = 24  //捕鱼用户开炮扣款
+    public static USE_MONEY_LOG_TYPE_FISH_GETFISH = 25  //捕鱼用户捕获加款
+    public static USE_MONEY_LOG_TYPE_SAFEBOX_OUT = 26  //保险箱取出玩家余额加款
+    public static USE_MONEY_LOG_TYPE_SAFEBOX_IN = 27  //保险箱存入玩家余额扣款
+    public static USE_MONEY_LOG_TYPE_SAFEBOX_INTEREST = 28  //保险箱产生利息加款
+    public static USE_MONEY_LOG_TYPE_BIND = 29  //玩家绑定赠送金额
+    public static USE_MONEY_LOG_TYPE_DAILYSHARE = 30  //玩家分享赠送金额
     public static USE_MONEY_LOG_TYPE_ROOMCARD = 31  //房卡
     public static USE_MONEY_LOG_TYPE_APIREDBAG = 32  //红包
     public static USE_MONEY_LOG_TYPE_APICAIJUAN = 33  //彩券
-    public static USE_MONEY_LOG_TYPE_INVALID_BET_MONEY = 34  //无效下注
+    public static USE_MONEY_LOG_TYPE_INVALID_BET_MONEY = 34  //无效下注金额
     public static USE_MONEY_LOG_TYPE_RECHARGE_WEIXIN = 35  //微信加款
     public static USE_MONEY_LOG_TYPE_RECHARGE_ALIPAY = 36  //支付宝加款
     public static USE_MONEY_LOG_TYPE_RECHARGE_BANK = 37  //银行卡加款
@@ -42,8 +42,7 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_QIFU = 39  //祈福扣款
     public static USE_MONEY_LOG_TYPE_ROOMCARD_BACK = 40  //房卡返还
     public static USE_MONEY_LOG_TYPE_LVAWARE = 41  //VIP等级奖励
-    public static USE_MONEY_LOG_TYPE_RECHARGE_YSF = 42  //云闪付加款
-    public static USE_MONEY_LOG_TYPE_FIRSTPAY = 43  //首充奖励
+    public static USE_MONEY_LOG_TYPE_FIRSTPAY = 42  //首充奖励
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static client_money_logtype_table:{[key:number]:string}={
@@ -57,10 +56,10 @@ class Web_operation_fields {
         8:'提款',//提款
         9:'抽水',//抽水
         10:'喜钱',//喜钱
-        11:'签到奖励',//签到奖励
-        12:'转盘奖励',//转盘奖励
-        13:'GM加钱',//GM加钱
-        14:'GM减钱',//GM减钱
+        11:'签到获得',//签到获得
+        12:'转盘获得',//转盘获得
+        13:'GM命令加钱',//GM命令加钱
+        14:'GM命令减钱',//GM命令减钱
         15:'VIP充值',//VIP充值
         16:'佣金池领取',//佣金池领取
         17:'其他加款',//其他加款
@@ -69,18 +68,18 @@ class Web_operation_fields {
         20:'其他扣款',//其他扣款
         21:'加款重新审核',//加款重新审核
         22:'扣款重新审核',//扣款重新审核
-        23:'捕鱼充值',//捕鱼充值
-        24:'捕鱼开炮',//捕鱼开炮
-        25:'捕鱼捕获',//捕鱼捕获
-        26:'余额宝转出',//余额宝转出
-        27:'转入余额宝',//转入余额宝
-        28:'余额宝利息',//余额宝利息
-        29:'绑定奖励',//绑定奖励
-        30:'分享奖励',//分享奖励
+        23:'捕鱼用户充值加款',//捕鱼用户充值加款
+        24:'捕鱼用户开炮扣款',//捕鱼用户开炮扣款
+        25:'捕鱼用户捕获加款',//捕鱼用户捕获加款
+        26:'保险箱取出玩家余额加款',//保险箱取出玩家余额加款
+        27:'保险箱存入玩家余额扣款',//保险箱存入玩家余额扣款
+        28:'保险箱产生利息加款',//保险箱产生利息加款
+        29:'玩家绑定赠送金额',//玩家绑定赠送金额
+        30:'玩家分享赠送金额',//玩家分享赠送金额
         31:'房卡',//房卡
         32:'红包',//红包
         33:'彩券',//彩券
-        34:'无效下注',//无效下注
+        34:'无效下注金额',//无效下注金额
         35:'微信加款',//微信加款
         36:'支付宝加款',//支付宝加款
         37:'银行卡加款',//银行卡加款
@@ -89,7 +88,6 @@ class Web_operation_fields {
         40:'房卡返还',//房卡返还
         41:'VIP等级奖励',//VIP等级奖励
         42:'云闪付加款',//云闪付加款
-        43:'首充奖励',//首充奖励
 	}
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
