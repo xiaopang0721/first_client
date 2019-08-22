@@ -954,5 +954,7 @@ class Web_operation_fields {
     public static FREE_STYLE_TYPES_SIGNINCONFIG_C = "signinconfig_c"  //签到配置
     public static FREE_STYLE_TYPES_TURNTABLECONFIG_C = "turntableconfig_c"  //转盘配置
     public static FREE_STYLE_TYPES_QIFUCONFIG_C = "qifuconfig_c"  //祈福配置
+    public static FREE_STYLE_TYPES_FIRSTPAYCONFIG_C = "firstpayconfig_c"  //首充配置
+    public static FREE_STYLE_TYPES_GAMEBULLETIN_C = "gamebulletin_c"  //游戏公告
 //------------------------ END -----------------------------------
 }

@@ -93,6 +93,7 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_INT_DRAWING_CURRENT_FLOW:number = 65 //当前已打码
 	public static PLAYERDATA_INT_TODAY_DRAWING_NUM:number = 66 //今日玩家取款次数
 	public static PLAYERDATA_INT_DRAW_MONEY_ERROR_C_D:number = 67 //玩家取款密码错误冻结时间或间隔时间
+	public static PLAYERDATA_INT_FIRST_PAY_MONEY:number = 68 //首充金额
 
    // string field
 	public static PLAYERDATA_STR_ACCOUNT:number = 0 //账号信息
@@ -118,6 +119,7 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_STR_CARD_CONFIG:number = 20 //房卡配置
 	public static PLAYERDATA_STR_VIP_RECEIVED:number = 21 //vip奖励已领取标识
 	public static PLAYERDATA_STR_TAKE_PASSWORD:number = 22 //取款密码
+	public static PLAYERDATA_STR_HEAD_KUANG_IMG:number = 23 //头像框
 
 
 	public GetRegTime():number{
@@ -544,6 +546,11 @@ export class PlayerDataField extends core.obj.GuidObject{
     }
 
 
+	public GetFirstPayMoney():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_FIRST_PAY_MONEY);
+    }
+
+
 //////////////////////////////////////str function
 
 	public GetAccount():string{
@@ -658,6 +665,11 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 	public GetTakePassword():string{
        return this.GetStr(PlayerDataField.PLAYERDATA_STR_TAKE_PASSWORD);
+    }
+
+
+	public GetHeadKuangImg():string{
+       return this.GetStr(PlayerDataField.PLAYERDATA_STR_HEAD_KUANG_IMG);
     }
 
 
