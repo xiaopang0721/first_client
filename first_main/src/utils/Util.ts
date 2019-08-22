@@ -59,6 +59,33 @@ function findGameVesion(id) {
     return id;
 }
 
+function updateGameJS() {
+    let gameLoadedObj = JSON.parse(localGetItem("gameLoadedObj"));
+    if (gameLoadedObj) {
+        for (let key in gameLoadedObj) {
+            if (gameLoadedObj.hasOwnProperty(key)) {
+                if (gameLoadedObj[key] == findGameVesion(key)) {
+                    JsLoader.ins.startLoad(key)
+                }
+            }
+        }
+    }
+}
+
+function clearJSGame(ignore?: string[] | string) {
+    let obj = JsLoader.ins.gameJsPool;
+    for (let key in obj) {
+        if (ignore && ignore.indexOf(key) != -1) continue;
+        if (obj.hasOwnProperty(key)) {
+            let script = obj[key];
+            script.parentNode.removeChild(script);
+            delete obj[key]
+            delete window["game" + key];
+            window["game" + key] = null
+        }
+    }
+}
+
 function check_eval(str: string) {
     if (!str) return null;
     let arr = str.split(".");

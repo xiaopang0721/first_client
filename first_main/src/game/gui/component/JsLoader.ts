@@ -11,7 +11,7 @@ module game.gui.component {
 		private _jsLoaderCellList: { [key: string]: JsLoaderCell } = {}
 		public startLoad(gameIds: string, handle?: Handler) {
 			if (!checkGameJsLoad(gameIds)) {
-				let id =Laya.Utils.getGID()
+				let id = Laya.Utils.getGID()
 				if (!this._jsLoaderCellList) this._jsLoaderCellList = {}
 				let jscell = this._jsLoaderCellList[id] = new JsLoaderCell(id)
 				jscell.game_list = this.checkoutValue([gameIds]);
@@ -41,7 +41,10 @@ module game.gui.component {
 			}
 		}
 
-
+		private _gameJsPool: { [key: string]: HTMLElement } = {};
+		public get gameJsPool() {
+			return this._gameJsPool;
+		}
 		private jsComplete(jscell: JsLoaderCell) {
 			let assetList = []
 			for (let index = 0; index < jscell.path_list.length; index++) {
@@ -55,6 +58,9 @@ module game.gui.component {
 					let script = document.createElement('script');
 					script.innerHTML = dataStr;
 					document.body.appendChild(script);
+					if (gameid.indexOf("dating") == -1 && gameid.indexOf("component") == -1 && gameid.indexOf("tongyong") == -1) {
+						this._gameJsPool[gameid] = script;
+					}
 				}
 
 				let asset = getAsset(gameid);
@@ -67,6 +73,7 @@ module game.gui.component {
 			jscell.assertloader.clear(true);
 			jscell.assertloader = null;
 			delete this._jsLoaderCellList[jscell.index];
+			this._jsLoaderCellList[jscell.index] = null;
 		}
 
 		private checkoutValue(gameid: string[]) {
@@ -98,7 +105,7 @@ module game.gui.component {
 						if (cell.assertloader) {
 							cell.assertloader.clear();
 							cell.assertloader = null;
-							cell.handle.recover();
+							cell.handle && cell.handle.recover();
 							cell.game_list = null;
 							cell.path_list = null;
 							cell.index = null;
