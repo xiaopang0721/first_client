@@ -20,12 +20,12 @@ module game.gui {
 			if(!checkGameJsLoad("dating")) return;
 			if (this._tipQueue.length != 0) {
 				let message = this._tipQueue.shift();
-				let page = this._game.uiRoot.topUnder.getPage(window["DatingPageDef"].PAGE_TIPS);
+				let page = this.getPage(window["DatingPageDef"].PAGE_TIPS);
 				if (page && page.isOpened) {
 					page.dataSource = message;
 				} else {
 					// logd("open=======================================open")
-					this._game.uiRoot.topUnder.open(window["DatingPageDef"].PAGE_TIPS, (page: any) => {
+					this.open(window["DatingPageDef"].PAGE_TIPS, (page: any) => {
 						page.dataSource = message;
 					});
 				}

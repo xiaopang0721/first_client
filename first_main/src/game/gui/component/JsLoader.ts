@@ -8,13 +8,12 @@ module game.gui.component {
 			return this._ins = this._ins || new JsLoader();
 		}
 
-		private static _index: number = 0;
 		private _jsLoaderCellList: { [key: string]: JsLoaderCell } = {}
 		public startLoad(gameIds: string, handle?: Handler) {
 			if (!checkGameJsLoad(gameIds)) {
-				JsLoader._index++;
+				let id =Laya.Utils.getGID()
 				if (!this._jsLoaderCellList) this._jsLoaderCellList = {}
-				let jscell = this._jsLoaderCellList[JsLoader._index] = new JsLoaderCell(JsLoader._index)
+				let jscell = this._jsLoaderCellList[id] = new JsLoaderCell(id)
 				jscell.game_list = this.checkoutValue([gameIds]);
 				jscell.path_list = [];
 				jscell.handle = handle;

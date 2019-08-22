@@ -97,6 +97,10 @@ module game {
 				let item = this._topUI.pages[key];
 				item && item.isOpened && item.__update(diff);
 			}
+			for (let key in this._topUnderUI.pages) {
+				let item = this._topUnderUI.pages[key];
+				item && item.isOpened && item.__update(diff);
+			}
 		}
 
 		/**
