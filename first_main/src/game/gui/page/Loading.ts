@@ -23,31 +23,27 @@ module game.gui.page {
 
 		// 页面初始化函数
 		protected init(): void {
+			if (WebConfig.baseplatform == PageDef.BASE_PLATFORM_TYPE_DAZHONGQP) {
+				View.regViewRuntime("ui.dating.Loading_DHUI", LoadingDH);
+			} else {
+
+				View.regViewRuntime(StringU.substitute("ui.{0}.dating.Loading_DHUI", WebConfig.baseplatform), LoadingDH);
+			}
 			this._viewUI = this._view = this.createView('dating.LoadingUI', ['dating.Loading_DHUI']);
 			this.addChild(this._viewUI);
+			(this._viewUI.di as LoadingDH).onOpen(this._game);
+
 			this._viewUI.label_Tips.changeText("正在校验文件,请稍等");
 			this._viewUI.bar_jd.value = 0;
 			this._viewUI.bar_jd.isTween = true;
-			this._viewUI.box_app.visible = WebConfig.appVersion;
-			this._viewUI.txt_appbbh.text = WebConfig.appVersion;
-			this._viewUI.box_v.visible = Vesion["_defaultVesion"];
-			this._viewUI.txt_bbh.text = Vesion["_defaultVesion"];
 		}
 
 		protected onOpen(): void {
 			super.onOpen();
-			this._viewUI.btn_kefu.on(LEvent.CLICK, this, this.onBtnClickWithTween);
+
 			WebConfig.closeHelloImg();
 			WebConfig.startJsJump();
 			this.changeTips();
-		}
-
-		protected onBtnTweenEnd(e: any, target: any): void {
-			switch (target) {
-				case this._viewUI.btn_kefu:
-					WebConfig.openUrl(StringU.substitute("{0}/online_service", WebConfig.gwUrl))
-					break;
-			}
 		}
 
 		//更改提示
@@ -176,6 +172,7 @@ module game.gui.page {
 		// 页面关闭
 		close(): void {
 			if (this._viewUI) {
+				(this._viewUI.di as LoadingDH).close();
 				this._isClear = true;
 				WebConfig.update_appVersion = null;
 				Laya.timer.clearAll(this);
@@ -193,6 +190,60 @@ module game.gui.page {
 
 		createdLoadEffect(): void {
 			// 不需要加载特效
+		}
+	}
+
+	/**
+* 加载界面 
+*/
+	export class LoadingDH extends ui.dating.Loading_DHUI {
+		constructor(isHud?) {
+			super();
+			this.txt_zhenyan.visible = isHud;
+			for (let index = 0; index < 10; index++) {
+				let ani = this["ani" + index];
+				if (!ani) continue;
+				ani.stop();
+				let start = 0;
+				if (window.hasOwnProperty("LoadingDH.index" + index)) {
+					start = window["LoadingDH.index" + index];
+					!ani.isPlaying && ani.play(window["LoadingDH.index" + index])
+				} else {
+					start = 0;
+					!ani.isPlaying && ani.play();
+				}
+				// logd("开始" + start)
+			}
+		}
+
+		onOpen(game: Game): void {
+			logd(this.parent["width"]);
+			logd(this.parent["height"]);
+			this.box_app.visible = WebConfig.appVersion;
+			this.txt_appbbh.text = WebConfig.appVersion;
+			this.box_v.visible = Vesion["_defaultVesion"];
+			this.txt_bbh.text = Vesion["_defaultVesion"];
+			this.btn_kefu.on(LEvent.CLICK, this, this.onMouseHandle);
+		}
+
+		private onMouseHandle(e: LEvent): void {
+			switch (e.currentTarget) {
+				case this.btn_kefu:
+					WebConfig.openUrl(StringU.substitute("{0}/online_service", WebConfig.gwUrl))
+					break;
+			}
+		}
+
+		// 页面关闭
+		close(): void {
+			this.btn_kefu.off(LEvent.CLICK, this, this.onMouseHandle);
+			for (let index = 0; index < 10; index++) {
+				let ani = this["ani" + index];
+				if (!ani) continue;
+				ani.stop();
+				window["LoadingDH.index" + index] = ani.index;
+				// logd("结束" + window["LoadingDH.index" + index])
+			}
 		}
 	}
 }

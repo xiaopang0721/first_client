@@ -73,6 +73,8 @@ import PageDef = game.gui.page.PageDef;
 import Page = game.gui.base.Page;
 import TabPage = game.gui.base.TabPage;
 import TabBox = game.gui.base.TabBox;
+import LoadingDH = game.gui.page.LoadingDH;
+
 
 // 是否iphoneX
 let onIPhoneX: boolean = false;
