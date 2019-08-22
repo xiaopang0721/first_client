@@ -23,10 +23,10 @@ module game.gui.page {
 
 		// 页面初始化函数
 		protected init(): void {
-			View.regViewRuntime("ui.dating.Loading_DHUI", LoadingDH);
+			View.regViewRuntime(StringU.substitute("ui.{0}.dating.Loading_DHUI", WebConfig.platform), LoadingDH);
 			this._viewUI = this._view = this.createView('dating.LoadingUI', ['dating.Loading_DHUI']);
 			this.addChild(this._viewUI);
-			// (this._viewUI.di as LoadingDH).onOpen(this._game);
+			(this._viewUI.di as LoadingDH).onOpen(this._game);
 
 			this._viewUI.label_Tips.changeText("正在校验文件,请稍等");
 			this._viewUI.bar_jd.value = 0;
@@ -167,7 +167,7 @@ module game.gui.page {
 		// 页面关闭
 		close(): void {
 			if (this._viewUI) {
-				// (this._viewUI.di as LoadingDH).close();
+				(this._viewUI.di as LoadingDH).close();
 				this._isClear = true;
 				WebConfig.update_appVersion = null;
 				Laya.timer.clearAll(this);
@@ -192,8 +192,28 @@ module game.gui.page {
 * 加载界面 
 */
 	export class LoadingDH extends ui.dating.Loading_DHUI {
+		constructor(isHud?) {
+			super();
+			this.txt_zhenyan.visible = isHud;
+			for (let index = 0; index < 10; index++) {
+				let ani = this["ani" + index];
+				if (!ani) continue;
+				ani.stop();
+				let start = 0;
+				if (window.hasOwnProperty("LoadingDH.index" + index)) {
+					start = window["LoadingDH.index" + index];
+					!ani.isPlaying && ani.play(window["LoadingDH.index" + index])
+				} else {
+					start = 0;
+					!ani.isPlaying && ani.play();
+				}
+				// logd("开始" + start)
+			}
+		}
 
 		onOpen(game: Game): void {
+			logd(this.parent["width"]);
+			logd(this.parent["height"]);
 			this.box_app.visible = WebConfig.appVersion;
 			this.txt_appbbh.text = WebConfig.appVersion;
 			this.box_v.visible = Vesion["_defaultVesion"];
@@ -212,6 +232,13 @@ module game.gui.page {
 		// 页面关闭
 		close(): void {
 			this.btn_kefu.off(LEvent.CLICK, this, this.onMouseHandle);
+			for (let index = 0; index < 10; index++) {
+				let ani = this["ani" + index];
+				if (!ani) continue;
+				ani.stop();
+				window["LoadingDH.index" + index] = ani.index;
+				// logd("结束" + window["LoadingDH.index" + index])
+			}
 		}
 	}
 }

@@ -146,6 +146,10 @@ module game.gui.base {
 		}
 
 		protected createChildren(vPath: any, cls?: any): any {
+			return Page.__createChildren(vPath, cls);
+		}
+
+		public static __createChildren(vPath: any, cls?: any): any {
 			let v = Page.FindClass(vPath)
 			vPath = vPath.split(".");
 			let obj_plat;
