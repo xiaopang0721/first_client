@@ -460,7 +460,7 @@ module game.gui.base {
 			// 	return;
 			if (!this._blackSprite) {
 				this._blackSprite = new Sprite();
-				this._blackSprite.alpha = 0.5;
+				this._blackSprite.alpha = 0.7;
 				this._blackSprite.mouseEnabled = true;
 				this._blackSprite.on(LEvent.CLICK, this, this.onBlackSpriteClick);
 				this.addChildAt(this._blackSprite, 0);
