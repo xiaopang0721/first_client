@@ -160,7 +160,7 @@ class Main {
         window["showStatInfo"] = false;
         // 抗锯齿
         Config.isAntialias = true;
-        core.utils.Log.LEVEL = 4;
+        core.utils.Log.LEVEL = isDebug ? 4 : 0;
 
         Vesion.defaultPath = "common/";
         if (WebConfig.isOnline) {

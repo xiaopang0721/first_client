@@ -225,8 +225,6 @@ module game.gui.page {
 		}
 
 		onOpen(game: Game): void {
-			logd(this.parent["width"]);
-			logd(this.parent["height"]);
 			this.box_app.visible = WebConfig.appVersion;
 			this.txt_appbbh.text = WebConfig.appVersion;
 			this.box_v.visible = Vesion["_defaultVesion"];
