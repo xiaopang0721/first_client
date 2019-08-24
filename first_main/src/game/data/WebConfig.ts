@@ -402,6 +402,20 @@ WebConfig.appCloseCallBack = function () {
 
 }
 
+//关闭app
+WebConfig.closeApp()
+{
+	if (Laya.Browser.onPC) {
+
+	}
+	else if (Laya.Browser.onAndroid) {
+		__window.android && __window.android.closeApp && __window.android.closeApp();
+	}
+	else if (Laya.Browser.onIOS) {
+
+	}
+}
+
 /**
  * 微信分享回调
  */
@@ -574,8 +588,8 @@ WebConfig.wxShareQrcodeImg = function (back_url, b_w, b_h, url, x, y, w, h, titl
 }
 
 
-// WebConfig.onAndroid = __window.android;
-// WebConfig.onIOS = __window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.closeHelloImg && __window.webkit.messageHandlers.openHelloImg;
-// WebConfig.vtype = WebConfig.onAndroid ? "ANDROID" : (WebConfig.onIOS ? "IOS" : "CLIENT");
-// WebConfig.device = (WebConfig.onAndroid ? Web_operation_fields.DEVICE_TYPE_ANDROID : (WebConfig.onIOS ? Web_operation_fields.DEVICE_TYPE_IOS : Web_operation_fields.DEVICE_TYPE_WEB)).toString()
-// WebConfig.app_type = Web_operation_fields.GAME_APP_TYPE_2;
+WebConfig.onAndroid = __window.android;
+WebConfig.onIOS = __window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.closeHelloImg && __window.webkit.messageHandlers.openHelloImg;
+WebConfig.vtype = WebConfig.onAndroid ? "ANDROID" : (WebConfig.onIOS ? "IOS" : "CLIENT");
+WebConfig.device = (WebConfig.onAndroid ? Web_operation_fields.DEVICE_TYPE_ANDROID : (WebConfig.onIOS ? Web_operation_fields.DEVICE_TYPE_IOS : Web_operation_fields.DEVICE_TYPE_WEB)).toString()
+WebConfig.app_type = Web_operation_fields.GAME_APP_TYPE_2;
