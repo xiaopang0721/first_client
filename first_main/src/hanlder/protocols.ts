@@ -438,7 +438,7 @@ module hanlder{
 		public static  CMSG_SET_MONEY_PWD :number = 215;	//set_money_pwd
 		/*首充领取*/
 		public static  CMSG_GET_FIRST_PAY :number = 216;	//get_first_pay
-		/*设置头像信息*/
+		/*设置人物信息*/
 		public static  CMSG_SET_HEAD_INFO :number = 217;	//set_head_info
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
