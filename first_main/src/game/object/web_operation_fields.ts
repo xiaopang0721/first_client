@@ -739,6 +739,7 @@ class Web_operation_fields {
     public static CLIENT_IRCODE_PLAYERLVLIST = 63  //getplayerlevellist
     public static CLIENT_IRCODE_PLAYERLVAWARE = 64  //playerlevelaware
     public static CLIENT_IRCODE_CHECKLOGINVF = 65  //checkloginvf
+    public static CLIENT_IRCODE_GETBULLETINLIST = 66  //getbulletinlist
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static CARD_GAME_PAY_TYP_MASTER = 1  //房主付费
