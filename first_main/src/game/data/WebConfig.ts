@@ -390,6 +390,19 @@ WebConfig.wxShareCallBack = function () {
 }
 
 /**
+ * app关闭返回
+ */
+__window.appClose = function (success) {
+	if (WebConfig.appCloseCallBack != null) {
+		WebConfig.appCloseCallBack.runWith && WebConfig.appCloseCallBack.runWith([success]);
+	}
+}
+
+WebConfig.appCloseCallBack = function () {
+
+}
+
+/**
  * 微信分享回调
  */
 __window.wxShareCallBack = function (success) {
