@@ -19,6 +19,7 @@ module game.gui.page {
 			];
 			this._isNeedDuang = false;
 			this._delta = 500;
+			this.mouseThrough = true;
 		}
 
 		// 页面初始化函数
