@@ -90,7 +90,7 @@ module game.gui.component {
 			for (let index = 0; index < gameid.length; index++) {
 				let item = gameid[index];
 				if (item.indexOf("dating") != -1) {
-					item = WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_NQP ? "datingnqp" : "dating";
+					item = WebConfig.baseplatform == PageDef.BASE_PLATFORM_TYPE_NQP ? "datingnqp" : "dating";
 				}
 				game_list.push(item)
 			}
