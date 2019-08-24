@@ -403,8 +403,7 @@ WebConfig.appCloseCallBack = function () {
 }
 
 //关闭app
-WebConfig.closeApp()
-{
+WebConfig.closeApp = function () {
 	if (Laya.Browser.onPC) {
 
 	}
