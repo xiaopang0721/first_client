@@ -438,8 +438,8 @@ module hanlder{
 		public static  CMSG_SET_MONEY_PWD :number = 215;	//set_money_pwd
 		/*首充领取*/
 		public static  CMSG_GET_FIRST_PAY :number = 216;	//get_first_pay
-		/*设置头像框*/
-		public static  CMSG_SET_HEADKUANG :number = 217;	//set_headKuang
+		/*设置头像信息*/
+		public static  CMSG_SET_HEAD_INFO :number = 217;	//set_head_info
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -666,7 +666,7 @@ module hanlder{
 			this._FUNCS[214] = "check_login_vf";
 			this._FUNCS[215] = "set_money_pwd";
 			this._FUNCS[216] = "get_first_pay";
-			this._FUNCS[217] = "set_headKuang";
+			this._FUNCS[217] = "set_head_info";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1444,10 +1444,10 @@ module hanlder{
 				case Protocols.CMSG_GET_FIRST_PAY :	//get_first_pay
 					var obj_get_first_pay:c2s_get_first_pay = new c2s_get_first_pay;
 					return obj_get_first_pay;
-				case Protocols.CMSG_SET_HEADKUANG :	//set_headKuang
-					var obj_set_headKuang:c2s_set_headKuang = new c2s_set_headKuang;
-					c2s_set_headKuang .read(obj_set_headKuang, bs);
-					return obj_set_headKuang;
+				case Protocols.CMSG_SET_HEAD_INFO :	//set_head_info
+					var obj_set_head_info:c2s_set_head_info = new c2s_set_head_info;
+					c2s_set_head_info .read(obj_set_head_info, bs);
+					return obj_set_head_info;
 				default:
 					break;
 			}
@@ -1728,7 +1728,7 @@ module hanlder{
 			this._stream.writeInt32 (time);
 			//游戏id
 			this._stream.writeString (game_id);
-			//房间配置id
+			//房间配?胕d
 			this._stream.writeUint32 (room_config_id);
 			//
 			this._stream.writeInt32 (index);
@@ -3105,13 +3105,15 @@ module hanlder{
 			this.sendMsg( 216 , this._stream);
 			//Log.outDebug("CS====> cmd:216 get_first_pay");
 		}
-		public call_set_headKuang (headkuang : string ):void{
+		public call_set_head_info (type : number ,info : string):void{
 			this._stream.reset();
 			this._stream.writeUint16( 217 );
 			//
-			this._stream.writeString (headkuang);
+			this._stream.writeInt32 (type);
+			//
+			this._stream.writeString (info);
 			this.sendMsg( 217 , this._stream);
-			//Log.outDebug("CS====> cmd:217 set_headKuang");
+			//Log.outDebug("CS====> cmd:217 set_head_info");
 		}
 	}
 
@@ -8511,15 +8513,19 @@ module hanlder{
 			
 		}
 	}
-	export class c2s_set_headKuang
+	export class c2s_set_head_info
 	{
 		public optcode:number = 0;
-		public optname:string = "onSet_headKuang";
+		public optname:string = "onSet_head_info";
 	
 		/**
 		* 
 		*/
-		public headkuang : string ;	//String
+		public type : number ;	//int32
+		/**
+		* 
+		*/
+		public info : string ;	//String
 		public constructor()
 		{
 			
@@ -8528,12 +8534,14 @@ module hanlder{
 		/**
 		从输入二进制流中读取结构体
 		*/
-		public static read(self:c2s_set_headKuang, bytes:ByteArray):void
+		public static read(self:c2s_set_head_info, bytes:ByteArray):void
 		{
 			var parmLen:number;
 			var i:number;
 			//
-			self.headkuang = bytes. readString ();		
+			self.type = bytes. readInt32 ();		
+			//
+			self.info = bytes. readString ();		
 		}
 	}
 
