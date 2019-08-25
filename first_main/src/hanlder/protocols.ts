@@ -438,8 +438,8 @@ module hanlder{
 		public static  CMSG_SET_MONEY_PWD :number = 215;	//set_money_pwd
 		/*首充领取*/
 		public static  CMSG_GET_FIRST_PAY :number = 216;	//get_first_pay
-		/*设置头像信息*/
-		public static  CMSG_SET_HEAD_INFO :number = 217;	//set_head_info
+		/*设置人物信息*/
+		public static  CMSG_SET_ROLE_INFO :number = 217;	//set_role_info
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -666,7 +666,7 @@ module hanlder{
 			this._FUNCS[214] = "check_login_vf";
 			this._FUNCS[215] = "set_money_pwd";
 			this._FUNCS[216] = "get_first_pay";
-			this._FUNCS[217] = "set_head_info";
+			this._FUNCS[217] = "set_role_info";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1444,10 +1444,10 @@ module hanlder{
 				case Protocols.CMSG_GET_FIRST_PAY :	//get_first_pay
 					var obj_get_first_pay:c2s_get_first_pay = new c2s_get_first_pay;
 					return obj_get_first_pay;
-				case Protocols.CMSG_SET_HEAD_INFO :	//set_head_info
-					var obj_set_head_info:c2s_set_head_info = new c2s_set_head_info;
-					c2s_set_head_info .read(obj_set_head_info, bs);
-					return obj_set_head_info;
+				case Protocols.CMSG_SET_ROLE_INFO :	//set_role_info
+					var obj_set_role_info:c2s_set_role_info = new c2s_set_role_info;
+					c2s_set_role_info .read(obj_set_role_info, bs);
+					return obj_set_role_info;
 				default:
 					break;
 			}
@@ -3105,7 +3105,7 @@ module hanlder{
 			this.sendMsg( 216 , this._stream);
 			//Log.outDebug("CS====> cmd:216 get_first_pay");
 		}
-		public call_set_head_info (type : number ,info : string):void{
+		public call_set_role_info (type : number ,info : string):void{
 			this._stream.reset();
 			this._stream.writeUint16( 217 );
 			//
@@ -3113,7 +3113,7 @@ module hanlder{
 			//
 			this._stream.writeString (info);
 			this.sendMsg( 217 , this._stream);
-			//Log.outDebug("CS====> cmd:217 set_head_info");
+			//Log.outDebug("CS====> cmd:217 set_role_info");
 		}
 	}
 
@@ -8513,10 +8513,10 @@ module hanlder{
 			
 		}
 	}
-	export class c2s_set_head_info
+	export class c2s_set_role_info
 	{
 		public optcode:number = 0;
-		public optname:string = "onSet_head_info";
+		public optname:string = "onSet_role_info";
 	
 		/**
 		* 
@@ -8534,7 +8534,7 @@ module hanlder{
 		/**
 		从输入二进制流中读取结构体
 		*/
-		public static read(self:c2s_set_head_info, bytes:ByteArray):void
+		public static read(self:c2s_set_role_info, bytes:ByteArray):void
 		{
 			var parmLen:number;
 			var i:number;

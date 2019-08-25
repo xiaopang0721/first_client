@@ -1000,7 +1000,8 @@ export class UnitField extends core.obj.GuidObject{
    // string field
 	public static UNIT_STR_NAME:number = 0 //玩家名字
 	public static UNIT_STR_HEAD_IMG:number = 1 //头像
-	public static UNIT_STR_INSTANCE_I_D:number = 2 //地图实例ID
+	public static UNIT_STR_HEAD_KUANG_IMG:number = 2 //头像框
+	public static UNIT_STR_INSTANCE_I_D:number = 3 //地图实例ID
 
 
 	public GetType():number{
@@ -1346,6 +1347,11 @@ export class UnitField extends core.obj.GuidObject{
 
 	public GetHeadImg():string{
        return this.GetStr(UnitField.UNIT_STR_HEAD_IMG);
+    }
+
+
+	public GetHeadKuangImg():string{
+       return this.GetStr(UnitField.UNIT_STR_HEAD_KUANG_IMG);
     }
 
 
