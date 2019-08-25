@@ -104,6 +104,7 @@ class Operation_Fields {
 	public static OPRATE_GAME_POWER_YUEBAO_IN_SUCCESS:number = 12 //余额宝存入成功
 	public static OPRATE_GAME_DAILY_SHARE_SUCCESS:number = 13 //每日分享成功
 	public static OPRATE_GAME_BIND_GIFT_SUCCESS:number = 14 //绑定送金成功
+	public static OPRATE_GAME_FIRST_PAY_CAN_GET:number = 15 //首充可领取弹窗
 	//错误提示
 	private static OPRATE_STRING:{[key:string]:string} = {
 		'1':'登录操作错误类型',//登录操作错误类型
@@ -202,6 +203,7 @@ class Operation_Fields {
 		'8_12':'余额宝存入成功',//余额宝存入成功
 		'8_13':'每日分享成功',//每日分享成功
 		'8_14':'绑定送金成功',//绑定送金成功
+		'8_15':'首充可领取弹窗',//首充可领取弹窗
 
 	}
 	//获取错误提示
