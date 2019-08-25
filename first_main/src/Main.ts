@@ -287,6 +287,10 @@ class Main {
     private _lastTarget: Laya.Node;
     //鼠标按钮声音 全局控制
     private onMouseClick(e: LEvent): void {
+        if (e.target instanceof Laya.Node && e.target != this._lastTarget && e.target.name && e.target.name.indexOf("item") != -1) {
+            this._lastTarget = e.target;
+            this._game.playSound(Path.music_btn);
+        }
         this._game && this._game.onMouseClick(e);
     }
 

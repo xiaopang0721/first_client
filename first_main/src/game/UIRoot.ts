@@ -164,6 +164,7 @@ module game {
 				}));
 			else
 				Laya.Tween.to(btn, props, 100, Laya.Ease.elasticOut);
+			this._game.playSound(defaultPath || Path.music_btn);
 		}
 
 

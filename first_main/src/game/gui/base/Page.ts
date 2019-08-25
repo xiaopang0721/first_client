@@ -308,7 +308,6 @@ module game.gui.base {
 
 		private onClose(): void {
 			if (this._view && (this._view.hasOwnProperty("btn_close") || this._view.hasOwnProperty("btn_close1"))) {
-				this._game.playSound(Path.music + "close.mp3");
 				if (this._view) this._view.mouseEnabled = false;
 				this.btnTween(this._view.btn_close, this, this.closeTween);
 			}

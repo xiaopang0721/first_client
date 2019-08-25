@@ -187,7 +187,7 @@ module game {
 			Laya.SoundManager.setSoundVolume(volume);
 			if (volume <= 0) return;
 			isOnlyOne && this.stopSound(url);
-			Laya.timer.once(1, this, () => {
+			Laya.timer.frameOnce(1, this, () => {
 				Laya.SoundManager.playSound(url)
 			})
 		}
