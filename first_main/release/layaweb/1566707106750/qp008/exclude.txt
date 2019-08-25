@@ -1,0 +1,10 @@
+.fla
+.bat
+.sh
+lang.txt
+oprate.txt
+exclude.txt
+
+
+path.txt
+langpack

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+__root=`pwd`
+conf="conf/config.js"
+conf_min="conf/config.min.js"
+conf_bin="game_conf.bin"
+if [ -f "$conf_bin" ]; then
+	rm "$conf_bin"
+fi
+
+
+uglifyjs "$conf" -m -o "$conf_min"
+python "pack.py" "$__root" $conf_bin $conf_min
+if [ $? != 0 ]; then
+	echo "脚本执行异常"
+	exit 6
+fi
+
+echo "压缩打包game_conf.bin成功"
+#rm -rf $conf_min
+exit 0
