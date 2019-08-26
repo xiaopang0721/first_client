@@ -1,0 +1,13 @@
+res/atlas/ui/loading.atlas
+res/atlas/ui/loading.png
+res/atlas/ui/loading1.png
+res/atlas/ui/loading2.png
+res/atlas/ui/loading3.png
+res/atlas/ui/loading4.png
+res/atlas/ui/loading5.png
+res/atlas/ui/loading6.png
+res/atlas/ui/loading7.png
+res/atlas/ui/logo.atlas
+res/atlas/ui/logo.png
+res/atlas/ui/logo1.png
+res/atlas/ui/logo2.png
