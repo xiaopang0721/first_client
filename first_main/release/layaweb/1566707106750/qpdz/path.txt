@@ -1,6 +1,0 @@
-res/atlas/ui/loading.atlas
-res/atlas/ui/loading.png
-res/atlas/ui/logo.atlas
-res/atlas/ui/logo.png
-ui/logo/app_100.png
-ui/tuiguang/tu_tg3.jpg
