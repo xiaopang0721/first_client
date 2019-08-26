@@ -86,12 +86,12 @@ module game {
 		}
 
 		public onAppBlur(e?: any) {
-			if (!this.datingGame) return;
+			if (!this.__gamedating) return;
 			this.datingGame.onAppBlur(e);
 		}
 
 		public onAppFous(e?: any) {
-			if (!this.datingGame) return;
+			if (!this.__gamedating) return;
 			this.datingGame.onAppFous(e);
 		}
 
@@ -164,6 +164,7 @@ module game {
 		}
 
 		copyUrl() {
+			if(!this.__gamedating) return;
 			this.datingGame.copyUrl();
 		}
 
@@ -269,10 +270,12 @@ module game {
 		}
 
 		public wxShareUrl(title: string, description: string, img_url: string) {
+			if(!this.__gamedating) return;
 			this.datingGame.wxShareUrl(title, description, img_url);
 		}
 
 		public wxOpen() {
+			if(!this.__gamedating) return;
 			this.datingGame.wxOpen();
 		}
 
@@ -323,9 +326,8 @@ module game {
 
 		//打开登陆界面
 		public openLoginPage() {
-			if (this.__gamedating) {
-				this.datingGame.openLoginPage();
-			}
+			if(!this.__gamedating) return;
+			this.datingGame.openLoginPage();
 		}
 
 		// 心跳更新
