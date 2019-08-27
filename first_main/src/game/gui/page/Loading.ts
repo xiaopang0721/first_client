@@ -36,6 +36,10 @@ module game.gui.page {
 
 			this._viewUI.label_Tips.changeText("正在校验文件,请稍等");
 			this._viewUI.bar_jd.value = 0;
+
+			if (!this._handle) {
+				this._handle = Handler.create(this, this.progressHandle, null, false);
+			}
 		}
 
 		protected onOpen(): void {
@@ -164,17 +168,16 @@ module game.gui.page {
 		private setJinDu(value: number): void {
 			if (this._viewUI.bar_jd) {
 				Laya.Tween.clearAll(this);
-				if (!this._handle) {
-					this._handle = Handler.create(this, () => {
-						if (this._viewUI.label_jd) {
-							this._viewUI.label_jd.changeText(Math.floor(this._viewUI.bar_jd.value * 100) + "%");
-						}
-						if (this._viewUI["progress_mask"] && this._viewUI.bar_jd.bar) {
-							this._viewUI["progress_mask"].width = this._viewUI.bar_jd.bar.width;
-						}
-					}, null, false);
-				}
 				Laya.Tween.to(this._viewUI.bar_jd, { value: value, update: this._handle }, 200);
+			}
+		}
+
+		private progressHandle() {
+			if (this._viewUI.label_jd) {
+				this._viewUI.label_jd.changeText(Math.floor(this._viewUI.bar_jd.value * 100) + "%");
+			}
+			if (this._viewUI["progress_mask"] && this._viewUI.bar_jd.bar) {
+				this._viewUI["progress_mask"].width = this._viewUI.bar_jd.bar.width;
 			}
 		}
 
@@ -182,8 +185,10 @@ module game.gui.page {
 		// 页面关闭
 		close(): void {
 			if (this._viewUI) {
-				this._handle.recover();
-				this._handle = null;
+				if (this._handle) {
+					this._handle.recover();
+					this._handle = null;
+				}
 				(this._viewUI.di as LoadingDH).close();
 				this._isClear = true;
 				WebConfig.update_appVersion = null;
