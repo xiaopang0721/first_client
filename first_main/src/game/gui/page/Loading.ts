@@ -24,11 +24,11 @@ module game.gui.page {
 
 		// 页面初始化函数
 		protected init(): void {
-			if (WebConfig.baseplatform == PageDef.BASE_PLATFORM_TYPE_DAZHONGQP) {
+			if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_DAZHONGQP) {
 				View.regViewRuntime("ui.dating.Loading_DHUI", LoadingDH);
 			} else {
 
-				View.regViewRuntime(StringU.substitute("ui.{0}.dating.Loading_DHUI", WebConfig.baseplatform), LoadingDH);
+				View.regViewRuntime(StringU.substitute("ui.{0}.dating.Loading_DHUI", WebConfig.platform), LoadingDH);
 			}
 			this._viewUI = this._view = this.createView('dating.LoadingUI', ['dating.Loading_DHUI']);
 			this.addChild(this._viewUI);
@@ -36,7 +36,6 @@ module game.gui.page {
 
 			this._viewUI.label_Tips.changeText("正在校验文件,请稍等");
 			this._viewUI.bar_jd.value = 0;
-			// this._viewUI.bar_jd.isTween = true;
 		}
 
 		protected onOpen(): void {
@@ -137,6 +136,7 @@ module game.gui.page {
 				this._callBack.runWith(this._preLoader);
 				this._callBack = null;
 			}
+
 		}
 
 		private tips: string[] = [
@@ -168,6 +168,9 @@ module game.gui.page {
 					this._handle = Handler.create(this, () => {
 						if (this._viewUI.label_jd) {
 							this._viewUI.label_jd.changeText(Math.floor(this._viewUI.bar_jd.value * 100) + "%");
+						}
+						if (this._viewUI["progress_mask"] && this._viewUI.bar_jd.bar) {
+							this._viewUI["progress_mask"].width = this._viewUI.bar_jd.bar.width;
 						}
 					}, null, false);
 				}
