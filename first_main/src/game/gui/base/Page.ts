@@ -73,7 +73,7 @@ module game.gui.base {
 		// 页面打开时执行函数
 		private _onOpenFunc: Function;
 		// 页面关闭时执行函数
-		private _onCloseFunc: Function;
+		protected _onCloseFunc: Function;
 		// 贴图加载器
 		protected _assetsLoader: AssetsLoader = new AssetsLoader();
 		// 是否打开
