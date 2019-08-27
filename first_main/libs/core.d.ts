@@ -327,6 +327,22 @@ declare module core.obj {
         dispose(): void;
     }
 }
+/**
+* 对象池对象的接口
+*/
+declare module core.utils {
+    interface IPoolsObject {
+        poolName: string;
+        /**
+         * 进池 （相当于对象dispose函数）
+         */
+        intoPool(...arg: any[]): void;
+        /**
+         * 出池 （相当于对象初始化函数）
+         */
+        outPool(...arg: any[]): void;
+    }
+}
 declare module core.obj {
     class HanlderStruct implements IPoolsObject {
         /** 执行域(this)。*/
@@ -1549,6 +1565,10 @@ declare module core.utils {
          * @param v
          */
         static removeNotNeetSearchPath(v: string): void;
+        private static _prioritySearchPaths;
+        private static _fianlSearchPaths;
+        static addPrioritySearchPath(path: string, isFront?: Boolean): void;
+        static removePrioritySearchPath(path: string): void;
         private static baseFormatURL;
         private static formatURL;
         /**
