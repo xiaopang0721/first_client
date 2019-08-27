@@ -12,6 +12,7 @@ WebConfig.needMusicPreload = __conf.needMusicPreload;
 WebConfig.baseqp = __conf.baseqp;
 WebConfig.gwconf = __conf.gwconf;
 WebConfig.platform = __conf.platform;//优先href
+WebConfig.sub_baseplatform = __conf.sub_baseplatform
 WebConfig.baseplatform = __conf.baseplatform
 WebConfig.defaultplatform = __conf.defaultplatform;
 WebConfig.ai_url = __conf.ai_url;
