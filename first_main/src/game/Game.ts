@@ -266,7 +266,7 @@ module game {
 		}
 
 		public checkClientVesion(isShowTips?: boolean) {
-			this.sceneGame.checkClientVesion(isShowTips)
+			this.datingGame.checkClientVesion(isShowTips)
 		}
 
 		public wxShareUrl(title: string, description: string, img_url: string) {
