@@ -1566,9 +1566,10 @@ declare module core.utils {
          */
         static removeNotNeetSearchPath(v: string): void;
         private static _prioritySearchPaths;
-        private static _fianlSearchPaths;
         static addPrioritySearchPath(path: string, isFront?: Boolean): void;
         static removePrioritySearchPath(path: string): void;
+        static clearPrioritySearchPath(): void;
+        private static readonly fianlSearchPaths;
         private static baseFormatURL;
         private static formatURL;
         /**
