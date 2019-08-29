@@ -287,7 +287,7 @@ module game {
 			* @param sign 标识
 			*/
 		static Get(sign: string) {
-			if (this._mapList[sign]) {
+			if (this._mapList[sign] && !this._mapList[sign].destroy) {
 				throw new Error("sssss");
 			}
 
