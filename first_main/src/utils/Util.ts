@@ -59,11 +59,12 @@ function findGameVesion(id) {
     return id;
 }
 
-function updateGameJS() {
+function updateGameJS(includes?: string[] | string) {
     let gameLoadedObj = JSON.parse(localGetItem("gameLoadedObj"));
     if (gameLoadedObj) {
         let count = 0;
         for (let key in gameLoadedObj) {
+            if (includes && includes.indexOf(key) == -1) continue;
             if (gameLoadedObj.hasOwnProperty(key)) {
                 if (gameLoadedObj[key] == findGameVesion(key)) {
                     count++;

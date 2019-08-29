@@ -80,7 +80,8 @@ module game {
 			JsLoader.ins.startLoad("component", Handler.create(this, (asserts) => {
 				JsLoader.ins.startLoad("dating", Handler.create(this, (asserts) => {
 					this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
-					// updateGameJS();
+					let gameid = localGetItem("local_game_id");
+					updateGameJS(gameid);
 				}));
 			}));
 		}
@@ -164,7 +165,7 @@ module game {
 		}
 
 		copyUrl() {
-			if(!this.__gamedating) return;
+			if (!this.__gamedating) return;
 			this.datingGame.copyUrl();
 		}
 
@@ -270,12 +271,12 @@ module game {
 		}
 
 		public wxShareUrl(title: string, description: string, img_url: string) {
-			if(!this.__gamedating) return;
+			if (!this.__gamedating) return;
 			this.datingGame.wxShareUrl(title, description, img_url);
 		}
 
 		public wxOpen() {
-			if(!this.__gamedating) return;
+			if (!this.__gamedating) return;
 			this.datingGame.wxOpen();
 		}
 
@@ -326,7 +327,7 @@ module game {
 
 		//打开登陆界面
 		public openLoginPage() {
-			if(!this.__gamedating) return;
+			if (!this.__gamedating) return;
 			this.datingGame.openLoginPage();
 		}
 
