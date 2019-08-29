@@ -40,6 +40,7 @@ module game.gui.page {
 			if (!this._handle) {
 				this._handle = Handler.create(this, this.progressHandle, null, false);
 			}
+			this.progressHandle();
 		}
 
 		protected onOpen(): void {
@@ -178,6 +179,7 @@ module game.gui.page {
 			}
 			if (this._viewUI["progress_mask"] && this._viewUI.bar_jd.bar) {
 				this._viewUI["progress_mask"].width = this._viewUI.bar_jd.bar.width;
+				// logd("xxx" + this._viewUI.bar_jd.bar.width)
 			}
 		}
 
@@ -199,12 +201,12 @@ module game.gui.page {
 					this._preLoader.off(LEvent.CHANGED, this, this.onUpdateProgress);
 					this._preLoader.offAll();
 					//预加载清理
-					for (let key in this._preLoader["_loadMap"]) {
-						if (this._preLoader["_loadMap"].hasOwnProperty(key)) {
-							let asset = this._preLoader["_loadMap"][key];
-							asset && asset.release();
-						}
-					}
+					// for (let key in this._preLoader["_loadMap"]) {
+					// 	if (this._preLoader["_loadMap"].hasOwnProperty(key)) {
+					// 		let asset = this._preLoader["_loadMap"][key];
+					// 		asset && asset.release();
+					// 	}
+					// }
 
 					this._preLoader = null;
 				}
