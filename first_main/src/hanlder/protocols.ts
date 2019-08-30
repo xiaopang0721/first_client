@@ -440,6 +440,8 @@ module hanlder{
 		public static  CMSG_GET_FIRST_PAY :number = 216;	//get_first_pay
 		/*设置人物信息*/
 		public static  CMSG_SET_ROLE_INFO :number = 217;	//set_role_info
+		/*消息公告获取*/
+		public static  CMSG_GET_BULLETIN_LIST :number = 218;	//get_bulletin_list
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -667,6 +669,7 @@ module hanlder{
 			this._FUNCS[215] = "set_money_pwd";
 			this._FUNCS[216] = "get_first_pay";
 			this._FUNCS[217] = "set_role_info";
+			this._FUNCS[218] = "get_bulletin_list";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1448,6 +1451,9 @@ module hanlder{
 					var obj_set_role_info:c2s_set_role_info = new c2s_set_role_info;
 					c2s_set_role_info .read(obj_set_role_info, bs);
 					return obj_set_role_info;
+				case Protocols.CMSG_GET_BULLETIN_LIST :	//get_bulletin_list
+					var obj_get_bulletin_list:c2s_get_bulletin_list = new c2s_get_bulletin_list;
+					return obj_get_bulletin_list;
 				default:
 					break;
 			}
@@ -1728,7 +1734,7 @@ module hanlder{
 			this._stream.writeInt32 (time);
 			//游戏id
 			this._stream.writeString (game_id);
-			//房间配?胕d
+			//房间配置id
 			this._stream.writeUint32 (room_config_id);
 			//
 			this._stream.writeInt32 (index);
@@ -3114,6 +3120,12 @@ module hanlder{
 			this._stream.writeString (info);
 			this.sendMsg( 217 , this._stream);
 			//Log.outDebug("CS====> cmd:217 set_role_info");
+		}
+		public call_get_bulletin_list ():void{
+			this._stream.reset();
+			this._stream.writeUint16( 218 );
+			this.sendMsg( 218 , this._stream);
+			//Log.outDebug("CS====> cmd:218 get_bulletin_list");
 		}
 	}
 
@@ -8542,6 +8554,16 @@ module hanlder{
 			self.type = bytes. readInt32 ();		
 			//
 			self.info = bytes. readString ();		
+		}
+	}
+	export class c2s_get_bulletin_list
+	{
+		public optcode:number = 0;
+		public optname:string = "onGet_bulletin_list";
+	
+		public constructor()
+		{
+			
 		}
 	}
 
