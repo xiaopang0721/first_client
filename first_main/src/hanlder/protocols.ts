@@ -3017,7 +3017,7 @@ module hanlder{
 			this._stream.reset();
 			this._stream.writeUint16( 206 );
 			//
-			this._stream.writeFloat (money);
+			this._stream.writeInt32 (money);
 			this.sendMsg( 206 , this._stream);
 			//Log.outDebug("CS====> cmd:206 save_yuebao");
 		}
@@ -3025,7 +3025,7 @@ module hanlder{
 			this._stream.reset();
 			this._stream.writeUint16( 207 );
 			//
-			this._stream.writeFloat (money);
+			this._stream.writeInt32 (money);
 			//
 			this._stream.writeString (drawpwd);
 			this.sendMsg( 207 , this._stream);
@@ -8261,7 +8261,7 @@ module hanlder{
 		/**
 		* 
 		*/
-		public money : number ;	//float
+		public money : number ;	//int32
 		public constructor()
 		{
 			
@@ -8275,7 +8275,7 @@ module hanlder{
 			var parmLen:number;
 			var i:number;
 			//
-			self.money = bytes. readFloat ();		
+			self.money = bytes. readInt32 ();		
 		}
 	}
 	export class c2s_take_yuebao
@@ -8286,7 +8286,7 @@ module hanlder{
 		/**
 		* 
 		*/
-		public money : number ;	//float
+		public money : number ;	//int32
 		/**
 		* 
 		*/
@@ -8304,7 +8304,7 @@ module hanlder{
 			var parmLen:number;
 			var i:number;
 			//
-			self.money = bytes. readFloat ();		
+			self.money = bytes. readInt32 ();		
 			//
 			self.drawpwd = bytes. readString ();		
 		}
