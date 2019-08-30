@@ -43,7 +43,8 @@ module game.gui.component {
 
 		//获取进度
 		getProgress(gameid: string) {
-			if (this._jsLoaderCellList[gameid] || checkGameJsLoad(gameid)) {//如果是正在加载的 内容 那就显示进度
+			
+			if ((this._jsLoaderCellList && this._jsLoaderCellList[gameid]) || checkGameJsLoad(gameid)) {//如果是正在加载的 内容 那就显示进度
 				return 0.01;
 			}
 			return 0;
