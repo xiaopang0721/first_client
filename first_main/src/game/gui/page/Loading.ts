@@ -40,6 +40,12 @@ module game.gui.page {
 			if (!this._handle) {
 				this._handle = Handler.create(this, this.progressHandle, null, false);
 			}
+
+			if(this._viewUI["progress_mask"])
+			{
+				this._viewUI["progress_mask"].width = 0;
+			}
+
 			this.progressHandle();
 		}
 
