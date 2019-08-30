@@ -173,6 +173,7 @@ module game.gui.page {
 
 		private _handle: Handler;
 		private setJinDu(value: number): void {
+			value = value || 0.001;
 			if (this._viewUI.bar_jd) {
 				Laya.Tween.clearAll(this);
 				Laya.Tween.to(this._viewUI.bar_jd, { value: value, update: this._handle }, 200);
@@ -207,12 +208,12 @@ module game.gui.page {
 					this._preLoader.off(LEvent.CHANGED, this, this.onUpdateProgress);
 					this._preLoader.offAll();
 					//预加载清理
-					for (let key in this._preLoader["_loadMap"]) {
-						if (this._preLoader["_loadMap"].hasOwnProperty(key)) {
-							let asset = this._preLoader["_loadMap"][key];
-							asset && asset.release();
-						}
-					}
+					// for (let key in this._preLoader["_loadMap"]) {
+					// 	if (this._preLoader["_loadMap"].hasOwnProperty(key)) {
+					// 		let asset = this._preLoader["_loadMap"][key];
+					// 		asset && asset.release();
+					// 	}
+					// }
 
 					this._preLoader = null;
 				}
