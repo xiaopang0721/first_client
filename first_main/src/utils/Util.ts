@@ -407,3 +407,15 @@ function areaContains2(area: Array<number>, area2: Array<number>) {
     }
     return false;
 }
+
+//指定位置加入空格
+function addSpaceInPointPos(pos: number, strText: string) {
+    strText = strText.slice(0, pos) + " " + strText.slice(pos);
+    return strText;
+}
+
+//去除字符串中的空格
+function removeSpaceStr(strText: string): string {
+    strText = strText.split(" ").join("");
+    return strText;
+}
