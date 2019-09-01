@@ -799,6 +799,7 @@ module hanlder{
 					return obj_get_service;
 				case Protocols.CMSG_GET_RESET_CODE :	//get_reset_code
 					var obj_get_reset_code:c2s_get_reset_code = new c2s_get_reset_code;
+					c2s_get_reset_code .read(obj_get_reset_code, bs);
 					return obj_get_reset_code;
 				case Protocols.CMSG_GET_BET_LIST :	//get_bet_list
 					var obj_get_bet_list:c2s_get_bet_list = new c2s_get_bet_list;
@@ -1717,9 +1718,11 @@ module hanlder{
 			this.sendMsg( 33 , this._stream);
 			//Log.outDebug("CS====> cmd:33 get_service");
 		}
-		public call_get_reset_code ():void{
+		public call_get_reset_code (mobile : string ):void{
 			this._stream.reset();
 			this._stream.writeUint16( 34 );
+			//手机号
+			this._stream.writeString (mobile);
 			this.sendMsg( 34 , this._stream);
 			//Log.outDebug("CS====> cmd:34 get_reset_code");
 		}
@@ -3244,7 +3247,7 @@ module hanlder{
 		}
 
 		/**
-		从输入二进制流中读取结构体
+		?邮淙攵屏髦卸寥〗峁固?
 		*/
 		public static read(self:s2c_operation_failed, bytes:ByteArray):void
 		{
@@ -3981,9 +3984,24 @@ module hanlder{
 		public optcode:number = 0;
 		public optname:string = "onGet_reset_code";
 	
+		/**
+		* 手机号
+		*/
+		public mobile : string ;	//String
 		public constructor()
 		{
 			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_get_reset_code, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//手机号
+			self.mobile = bytes. readString ();		
 		}
 	}
 	export class c2s_get_bet_list
