@@ -21,7 +21,7 @@ import Dictionary = Laya.Dictionary;
 import Skeleton = Laya.Skeleton;
 import Templet = Laya.Templet;                  //laya.ani.bone.Templet
 import JsLoader = game.gui.component.JsLoader;
-
+import LoadingMgr = game.gui.component.LoadingMgr;
 
 import Network = core.net.Network;
 import UpdateMask = core.obj.UpdateMask;
