@@ -599,11 +599,25 @@ declare module core.resource {
     class AssetsLoader extends Laya.EventDispatcher {
         private _list;
         private _handler;
+        private _totalCount;
+        private _loadCount;
+        private _hasLoadMap;
+        private _asserts;
+        readonly asserts: string[];
         load(assets: Array<string>, handler: Handler, isEventProgress?: boolean, priority?: number, type?: string): void;
+        private __retain;
+        /**
+         * 重新hold
+         * @param assets
+         * @param handler
+         */
+        retain(assets: Array<string>, handler: Handler): void;
         private onAssetLoadProgress;
         private onAssetParseComplete;
         release(url: string, checkNow?: boolean): void;
         clear(checkNow?: boolean): void;
+        clearAssert(): void;
+        forceMoveRef(): void;
     }
 }
 declare module core.resource {

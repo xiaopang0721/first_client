@@ -10,7 +10,7 @@ module game.gui.page {
 
 		private _viewUI: ui.dating.LoadingUI;
 		private _callBack: Handler;
-		private _preLoader: PreLoad;
+		private _loader: AssetsLoader;
 		private _preAssets: any[] = []
 		constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
 			super(v, onOpenFunc, onCloseFunc);
@@ -41,8 +41,7 @@ module game.gui.page {
 				this._handle = Handler.create(this, this.progressHandle, null, false);
 			}
 
-			if(this._viewUI["progress_mask"])
-			{
+			if (this._viewUI["progress_mask"]) {
 				this._viewUI["progress_mask"].width = 0;
 			}
 
@@ -99,31 +98,23 @@ module game.gui.page {
 			if (this._hasLoad || !this._canLoad) return;
 			if (this._preAssets && this._preAssets.length) {
 				this._hasLoad = true;
-				if (!this._preLoader) this._preLoader = new PreLoad();
-				this._preLoader.on(LEvent.CHANGED, this, this.onUpdateProgress);
-				for (let index = 0; index < this._preAssets.length; index++) {
-					let asset = this._preAssets[index];
-					let type = asset.indexOf(".sk") == -1 ? RefAsset.GENRAL : RefAsset.TEMPLET;
-					this._preLoader.load(asset, type);
-				}
+				if (!this._loader) this._loader = LoadingMgr.ins.createAssertLoader("dating");
+				this._loader.on(LEvent.PROGRESS, this, this.onUpdateProgress);
+				this._loader.load(this._preAssets, Handler.create(this, this.onLoadAssetCom), true);
 			}
 		}
 
-		private onUpdateProgress(): void {
-			if (this._isClear) return;
-			let totalCount = this._preLoader.totalCount;
-			let loadCount = this._preLoader.loadCount;
-			this.setJinDu(loadCount / totalCount)
-			if (loadCount >= totalCount) {
-				this.onLoadAssetCom();
-			}
+		private onUpdateProgress(v: number): void {
+			this.setJinDu(v);
 		}
 
-		private _isComplete: boolean;
 		//资源加载完
 		private onLoadAssetCom(): void {
-			this.setJinDu(1)
-			this._isComplete = true;
+			this.setJinDu(1);
+			if (this._callBack != null) {
+				this._callBack.run();
+				this._callBack = null;
+			}
 		}
 
 		//是否已经加载
@@ -140,12 +131,6 @@ module game.gui.page {
 				this.changeTips()
 			} else {
 				this._changeTime -= this._delta;
-			}
-			if (!this._isComplete) return;
-			// if (!this._viewUI.bar_jd.isTweenEnd) return;
-			if (this._callBack != null) {
-				this._callBack.runWith(this._preLoader);
-				this._callBack = null;
 			}
 
 		}
@@ -190,7 +175,6 @@ module game.gui.page {
 			}
 		}
 
-		private _isClear: boolean;
 		// 页面关闭
 		close(): void {
 			if (this._viewUI) {
@@ -199,24 +183,11 @@ module game.gui.page {
 					this._handle = null;
 				}
 				(this._viewUI.di as LoadingDH).close();
-				this._isClear = true;
 				WebConfig.update_appVersion = null;
 				Laya.timer.clearAll(this);
 				Laya.Tween.clearAll(this);
 				this._callBack = null;
-				if (this._preLoader) {
-					this._preLoader.off(LEvent.CHANGED, this, this.onUpdateProgress);
-					this._preLoader.offAll();
-					//预加载清理
-					// for (let key in this._preLoader["_loadMap"]) {
-					// 	if (this._preLoader["_loadMap"].hasOwnProperty(key)) {
-					// 		let asset = this._preLoader["_loadMap"][key];
-					// 		asset && asset.release();
-					// 	}
-					// }
-
-					this._preLoader = null;
-				}
+				this._loader = null;
 			}
 
 			super.close();
