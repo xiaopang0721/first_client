@@ -125,6 +125,8 @@ module game.gui.page {
 		 * 帧间隔心跳
 		 */
 		deltaUpdate() {
+			!WebConfig.appVersion && WebConfig.getAppVersion();//获取app版本号
+			!WebConfig.getInviteCode && WebConfig.getInviteCode();//获取邀请码
 			this.realLoad();
 			if (this._changeTime <= 0) {
 				this._changeTime = 2500;
@@ -132,7 +134,6 @@ module game.gui.page {
 			} else {
 				this._changeTime -= this._delta;
 			}
-
 		}
 
 		private tips: string[] = [
@@ -183,7 +184,7 @@ module game.gui.page {
 					this._handle = null;
 				}
 				(this._viewUI.di as LoadingDH).close();
-				WebConfig.update_appVersion = null;
+
 				Laya.timer.clearAll(this);
 				Laya.Tween.clearAll(this);
 				this._callBack = null;

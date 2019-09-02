@@ -260,7 +260,6 @@ class Main {
         if (!diff) {
             return;
         }
-
         // 这样做才能防止白边
         this.checkClientSize();
         // 心跳

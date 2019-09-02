@@ -31,7 +31,7 @@ WebConfig.isPopJianPan = __conf.isPopJianPan;
 WebConfig.isSingleEnter = false;
 WebConfig.res_url = "rsync_folder/first_res/";
 WebConfig.ewmbaseUrl = WebConfig.gwUrl + "/qrcode?urlsize=9&urltext=" + encodeURIComponent(WebConfig.gwUrl) + "?invitecode="
-WebConfig.appVersion = null;
+WebConfig.appVersion = "";
 WebConfig.downLoadUrl = "";
 WebConfig.game_type = 0;
 WebConfig.getAppVersion = function (app_vesion) {
@@ -40,11 +40,12 @@ WebConfig.getAppVersion = function (app_vesion) {
 	}
 	else if (Laya.Browser.onAndroid) {
 		if (__window.android && __window.android.getAppVersion) {
+			if (WebConfig.appVersion) return WebConfig.appVersion;
 			WebConfig.appVersion = __window.android.getAppVersion()
-			WebConfig.update_appVersion != null && WebConfig.update_appVersion.run && WebConfig.update_appVersion.run();
 		}
 	}
 	else if (Laya.Browser.onIOS) {
+		if (WebConfig.appVersion) return WebConfig.appVersion;
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getAppVersion && __window.webkit.messageHandlers.getAppVersion.postMessage(null)
 	}
 }
@@ -61,7 +62,6 @@ WebConfig.VConsole();
 
 __window.setAppVersion = function (v) {
 	WebConfig.appVersion = v;
-	WebConfig.update_appVersion != null && WebConfig.update_appVersion.run && WebConfig.update_appVersion.run();
 }
 
 WebConfig.hasClosePreload = false;
@@ -94,7 +94,7 @@ WebConfig.openOtherApp = function (url, name) {
 	}
 }
 
-WebConfig.inviteCode = null;
+WebConfig.inviteCode = "";
 //获取app包邀请码
 WebConfig.getInviteCode = function () {
 	if (Laya.Browser.onPC) {
@@ -102,15 +102,21 @@ WebConfig.getInviteCode = function () {
 	}
 	else if (Laya.Browser.onAndroid) {
 		if (__window.android && __window.android.getInviteCode) {
-			if (!WebConfig.inviteCode) {
-				WebConfig.inviteCode = __window.android.getInviteCode()
-			}
-			return WebConfig.inviteCode;
+			if (WebConfig.inviteCode) return WebConfig.inviteCode;
+			WebConfig.inviteCode = __window.android.getInviteCode()
 		}
 	} else if (Laya.Browser.onIOS) {
-
+		if (WebConfig.inviteCode) return WebConfig.inviteCode;
+		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getInviteCode) {
+			__window.webkit.messageHandlers.getInviteCode.postMessage(null)
+		}
 	}
-	return null
+}
+
+__window.setInviteCode = function (v) {
+	if (!WebConfig.inviteCode) {
+		WebConfig.inviteCode = v
+	}
 }
 
 WebConfig.systemInfo = null
