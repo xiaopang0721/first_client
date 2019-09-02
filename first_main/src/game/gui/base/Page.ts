@@ -85,7 +85,7 @@ module game.gui.base {
 		// 是否关闭中
 		protected _isCloseing: boolean = false;
 		// 页面加载效果
-		private _loadEffect: component.LoadEffect;
+		// private _loadEffect: component.LoadEffect;
 		//是否模态窗
 		protected _isModal: boolean = false;
 		//是否要duang
@@ -198,23 +198,23 @@ module game.gui.base {
 		}
 
 		createdLoadEffect(): void {
-			this._loadEffect = new component.LoadEffect(this);
-			this._loadEffect.width = this._clientWidth;
-			this._loadEffect.height = this._clientHeight;
+			// this._loadEffect = new component.LoadEffect(this);
+			// this._loadEffect.width = this._clientWidth;
+			// this._loadEffect.height = this._clientHeight;
 		}
 
 		clearLoadEffect(): void {
-			if (this._loadEffect) {
-				this._loadEffect.destroy();
-				this._loadEffect = null;
-			}
+			// if (this._loadEffect) {
+			// 	this._loadEffect.destroy();
+			// 	this._loadEffect = null;
+			// }
 		}
 
 		//帧心跳
 		__update(diff: number) {
-			if (this._loadEffect) {
-				this._loadEffect.update(diff);
-			}
+			// if (this._loadEffect) {
+			// 	this._loadEffect.update(diff);
+			// }
 
 			if (this._isOnOpenComplete) {
 				this.update(diff);
@@ -502,10 +502,10 @@ module game.gui.base {
 		public resize(w: number, h: number, realW: number, realH: number, isLayout: boolean = true): void {
 			super.resize(w, h, realW, realH);
 			isLayout && this.layout();
-			if (this._loadEffect) {
-				this._loadEffect.width = this._clientWidth;
-				this._loadEffect.height = this._clientHeight;
-			}
+			// if (this._loadEffect) {
+			// 	this._loadEffect.width = this._clientWidth;
+			// 	this._loadEffect.height = this._clientHeight;
+			// }
 			if (this._isNeedBlack)
 				this.drawBlack();
 		}
