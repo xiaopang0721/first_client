@@ -187,7 +187,6 @@ WebConfig.getDeviceId = function () {
 	return null;
 }
 __window.setDeviceId = function (v) {
-	logd("__window.setDeviceId:", v)
 	if (!WebConfig.deviceId) WebConfig.deviceId = v;
 }
 
