@@ -99,7 +99,11 @@ module game.gui.component {
 					if (ignore && ignore.indexOf(key) != -1) continue;
 					let assertloader = this._assetsLoader[key];
 					if (assertloader) {
-						assertloader.forceMoveRef();
+						if (ignore && ignore.indexOf("dating") != -1) {
+							assertloader.forceMoveRef();
+						} else {
+							assertloader.clear(true);
+						}
 						assertloader.clearAssert();
 						assertloader = null;
 					}
