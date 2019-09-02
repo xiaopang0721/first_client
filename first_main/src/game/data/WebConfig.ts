@@ -124,14 +124,14 @@ WebConfig.getWebParms = function () {
 
 	}
 	else if (Laya.Browser.onAndroid) {
-		if (__window.android && __window.android.getWeb_parms) {
+		if (__window.android && __window.android.getWebParms) {
 			if (WebConfig.webParms) return WebConfig.webParms;
-			WebConfig.webParms = __window.android.getWeb_parms()
+			WebConfig.webParms = __window.android.getWebParms()
 		}
 	} else if (Laya.Browser.onIOS) {
 		if (WebConfig.webParms) return WebConfig.webParms;
-		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getWeb_parms) {
-			__window.webkit.messageHandlers.getWeb_parms.postMessage(null)
+		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getWebParms) {
+			__window.webkit.messageHandlers.getWebParms.postMessage(null)
 		}
 	}
 }
