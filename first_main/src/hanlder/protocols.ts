@@ -2950,7 +2950,7 @@ module hanlder{
 			this.sendMsg( 196 , this._stream);
 			//Log.outDebug("CS====> cmd:196 get_daili_yonghu");
 		}
-		public call_login_parameter (typ : number ,server_name : string,account : string,pwd : string,invitor : string,system : string,model : string,deviceid : string):void{
+		public call_login_parameter (typ : number ,server_name : string,account : string,pwd : string,invitor : string,system : string,model : string,deviceid : string,parms : string):void{
 			this._stream.reset();
 			this._stream.writeUint16( 197 );
 			//登录类型
@@ -2969,6 +2969,8 @@ module hanlder{
 			this._stream.writeString (model);
 			//唯一标识
 			this._stream.writeString (deviceid);
+			//额外数据
+			this._stream.writeString (parms);
 			this.sendMsg( 197 , this._stream);
 			//Log.outDebug("CS====> cmd:197 login_parameter");
 		}
@@ -3247,7 +3249,7 @@ module hanlder{
 		}
 
 		/**
-		?邮淙攵屏髦卸寥〗峁固?
+		从输入二进制流中读取结构体
 		*/
 		public static read(self:s2c_operation_failed, bytes:ByteArray):void
 		{
@@ -6435,7 +6437,7 @@ module hanlder{
 		}
 
 		/**
-		从输入二进制流中读取结构体
+		从输入二进制流中读取?峁固?
 		*/
 		public static read(self:c2s_robot_start_fire, bytes:ByteArray):void
 		{
@@ -8041,6 +8043,10 @@ module hanlder{
 		* 唯一标识
 		*/
 		public deviceid : string ;	//String
+		/**
+		* 额外数据
+		*/
+		public parms : string ;	//String
 		public constructor()
 		{
 			
@@ -8069,6 +8075,8 @@ module hanlder{
 			self.model = bytes. readString ();		
 			//唯一标识
 			self.deviceid = bytes. readString ();		
+			//额外数据
+			self.parms = bytes. readString ();		
 		}
 	}
 	export class c2s_get_vip_list

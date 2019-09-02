@@ -117,6 +117,29 @@ __window.setInviteCode = function (v) {
 	if (!WebConfig.inviteCode) WebConfig.inviteCode = v
 }
 
+WebConfig.webParms = "";
+//获取额外参数
+WebConfig.getWebParms = function () {
+	if (Laya.Browser.onPC) {
+
+	}
+	else if (Laya.Browser.onAndroid) {
+		if (__window.android && __window.android.getWebParms) {
+			if (WebConfig.webParms) return WebConfig.webParms;
+			WebConfig.webParms = __window.android.getWebParms()
+		}
+	} else if (Laya.Browser.onIOS) {
+		if (WebConfig.webParms) return WebConfig.webParms;
+		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getWebParms) {
+			__window.webkit.messageHandlers.getWebParms.postMessage(null)
+		}
+	}
+}
+
+__window.setWebParms = function (v) {
+	if (!WebConfig.webParms) WebConfig.webParms = v
+}
+
 WebConfig.systemInfo = null
 //获取手机系统信息
 WebConfig.getSystemInfo = function () {

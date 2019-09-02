@@ -223,6 +223,8 @@ class Main {
         logd("deviceToken", WebConfig.deviceToken);
         !WebConfig.inviteCode && WebConfig.getInviteCode();//获取邀请码
         logd("inviteCode", WebConfig.inviteCode);
+        !WebConfig.webParms && WebConfig.getWebParms();//获取额外参数
+        logd("webParms", WebConfig.webParms);
 
         Vesion.once(Vesion.LOAD_VESION_COMPLETE, this, () => {
             this.init();
