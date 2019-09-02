@@ -14,21 +14,21 @@ module game.gui {
 		public checkQueue(): void {
 			let cur_time: number = Laya.timer.currTimer;
 			if (this._nextUpdateTime > 0 && this._nextUpdateTime > cur_time) return;
-			this._nextUpdateTime = cur_time + 200;
+			this._nextUpdateTime = cur_time + 800;
 
 			// this.showTips("1111111111")
-			if(!checkGameJsLoad("dating")) return;
+			if (!checkGameJsLoad("dating")) return;
 			if (this._tipQueue.length != 0) {
 				let message = this._tipQueue.shift();
 				let page = this.getPage(window["DatingPageDef"].PAGE_TIPS);
-				if (page && page.isOpened) {
+				// if (page && page.isOpened) {
+				// 	page.dataSource = message;
+				// } else {
+				// logd("open=======================================open")
+				this.open(window["DatingPageDef"].PAGE_TIPS, (page: any) => {
 					page.dataSource = message;
-				} else {
-					// logd("open=======================================open")
-					this.open(window["DatingPageDef"].PAGE_TIPS, (page: any) => {
-						page.dataSource = message;
-					});
-				}
+				}, null, true);
+				// }
 			}
 		}
 		//显示提示
