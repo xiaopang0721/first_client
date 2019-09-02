@@ -132,7 +132,6 @@ module game.gui.page {
 			} else {
 				this._changeTime -= this._delta;
 			}
-
 		}
 
 		private tips: string[] = [
@@ -183,7 +182,7 @@ module game.gui.page {
 					this._handle = null;
 				}
 				(this._viewUI.di as LoadingDH).close();
-				WebConfig.update_appVersion = null;
+
 				Laya.timer.clearAll(this);
 				Laya.Tween.clearAll(this);
 				this._callBack = null;

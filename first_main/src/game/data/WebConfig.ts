@@ -31,7 +31,7 @@ WebConfig.isPopJianPan = __conf.isPopJianPan;
 WebConfig.isSingleEnter = false;
 WebConfig.res_url = "rsync_folder/first_res/";
 WebConfig.ewmbaseUrl = WebConfig.gwUrl + "/qrcode?urlsize=9&urltext=" + encodeURIComponent(WebConfig.gwUrl) + "?invitecode="
-WebConfig.appVersion = null;
+WebConfig.appVersion = "";
 WebConfig.downLoadUrl = "";
 WebConfig.game_type = 0;
 WebConfig.getAppVersion = function (app_vesion) {
@@ -40,11 +40,12 @@ WebConfig.getAppVersion = function (app_vesion) {
 	}
 	else if (Laya.Browser.onAndroid) {
 		if (__window.android && __window.android.getAppVersion) {
+			if (WebConfig.appVersion) return WebConfig.appVersion;
 			WebConfig.appVersion = __window.android.getAppVersion()
-			WebConfig.update_appVersion != null && WebConfig.update_appVersion.run && WebConfig.update_appVersion.run();
 		}
 	}
 	else if (Laya.Browser.onIOS) {
+		if (WebConfig.appVersion) return WebConfig.appVersion;
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getAppVersion && __window.webkit.messageHandlers.getAppVersion.postMessage(null)
 	}
 }
@@ -60,8 +61,7 @@ WebConfig.VConsole = function () {
 WebConfig.VConsole();
 
 __window.setAppVersion = function (v) {
-	WebConfig.appVersion = v;
-	WebConfig.update_appVersion != null && WebConfig.update_appVersion.run && WebConfig.update_appVersion.run();
+	if (!WebConfig.appVersion) WebConfig.appVersion = v;
 }
 
 WebConfig.hasClosePreload = false;
@@ -94,7 +94,7 @@ WebConfig.openOtherApp = function (url, name) {
 	}
 }
 
-WebConfig.inviteCode = null;
+WebConfig.inviteCode = "";
 //获取app包邀请码
 WebConfig.getInviteCode = function () {
 	if (Laya.Browser.onPC) {
@@ -102,15 +102,42 @@ WebConfig.getInviteCode = function () {
 	}
 	else if (Laya.Browser.onAndroid) {
 		if (__window.android && __window.android.getInviteCode) {
-			if (!WebConfig.inviteCode) {
-				WebConfig.inviteCode = __window.android.getInviteCode()
-			}
-			return WebConfig.inviteCode;
+			if (WebConfig.inviteCode) return WebConfig.inviteCode;
+			WebConfig.inviteCode = __window.android.getInviteCode()
 		}
 	} else if (Laya.Browser.onIOS) {
+		if (WebConfig.inviteCode) return WebConfig.inviteCode;
+		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getInviteCode) {
+			__window.webkit.messageHandlers.getInviteCode.postMessage(null)
+		}
+	}
+}
+
+__window.setInviteCode = function (v) {
+	if (!WebConfig.inviteCode) WebConfig.inviteCode = v
+}
+
+WebConfig.webParms = "";
+//获取额外参数
+WebConfig.getWebParms = function () {
+	if (Laya.Browser.onPC) {
 
 	}
-	return null
+	else if (Laya.Browser.onAndroid) {
+		if (__window.android && __window.android.getWebParms) {
+			if (WebConfig.webParms) return WebConfig.webParms;
+			WebConfig.webParms = __window.android.getWebParms()
+		}
+	} else if (Laya.Browser.onIOS) {
+		if (WebConfig.webParms) return WebConfig.webParms;
+		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getWebParms) {
+			__window.webkit.messageHandlers.getWebParms.postMessage(null)
+		}
+	}
+}
+
+__window.setWebParms = function (v) {
+	if (!WebConfig.webParms) WebConfig.webParms = v
 }
 
 WebConfig.systemInfo = null
@@ -171,21 +198,19 @@ WebConfig.getDeviceId = function () {
 	}
 	else if (Laya.Browser.onAndroid) {
 		if (__window.android && __window.android.getDeviceId) {
-			if (!WebConfig.deviceId) {
-				WebConfig.deviceId = __window.android.getDeviceId()
-			}
-			return WebConfig.deviceId;
+			if (WebConfig.deviceId) return WebConfig.deviceId;
+			WebConfig.deviceId = __window.android.getDeviceId()
 		}
 	} else if (Laya.Browser.onIOS) {
 		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getDeviceId) {
-			__window.webkit.messageHandlers.getDeviceId.postMessage(null)
+			if (WebConfig.deviceId) return WebConfig.deviceId;
+			__window.webkit.messageHandlers.getDeviceId.postMessage(null);
 		}
 	}
-	return null
+	return null;
 }
 __window.setDeviceId = function (v) {
-	logd("__window.setDeviceId:", v)
-	WebConfig.deviceId = v;
+	if (!WebConfig.deviceId) WebConfig.deviceId = v;
 }
 
 WebConfig.asdfghjkl = function () {
@@ -207,9 +232,11 @@ WebConfig.asdfghjkl = function () {
 	return 0;
 }
 
+WebConfig.deviceToken = "";
+
 __window.setDeviceToken = function (v) {
 	WebConfig.wxDebug && WebConfig.alert("setDeviceToken:" + v)
-	WebConfig.deviceToken = v || "";
+	if (!WebConfig.deviceToken) WebConfig.deviceToken = v;
 	WebConfig.update_deviceToken != null && WebConfig.update_deviceToken.run && WebConfig.update_deviceToken.run();
 }
 
@@ -220,11 +247,13 @@ WebConfig.getDeviceToken = function () {
 	}
 	else if (Laya.Browser.onAndroid) {
 		if (__window.android && __window.android.getDeviceToken) {
+			if (WebConfig.deviceToken) return this.WebConfig.deviceToken;
 			WebConfig.deviceToken = __window.android.getDeviceToken()
 			WebConfig.update_deviceToken != null && WebConfig.update_deviceToken.run && WebConfig.update_deviceToken.run();
 		}
 	}
 	else if (Laya.Browser.onIOS) {
+		if (WebConfig.deviceToken) return this.WebConfig.deviceToken;
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getDeviceToken && __window.webkit.messageHandlers.getDeviceToken.postMessage(null)
 	}
 }

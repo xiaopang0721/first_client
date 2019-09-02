@@ -211,10 +211,20 @@ class Main {
         }
         Path.map_far = StringU.substitute(Path.map_far, WebConfig.baseplatform);
         Path.map = StringU.substitute(Path.map, WebConfig.baseplatform);
-        WebConfig.logintype = StringU.getParameter(location.href, "logintype") || null;
         !WebConfig.systemInfo && WebConfig.getSystemInfo();//获取手机系统信息
+        logd("systemInfo", WebConfig.systemInfo);
         !WebConfig.modelInfo && WebConfig.getModelInfo();//获取机型
+        logd("modelInfo", WebConfig.modelInfo);
         !WebConfig.deviceId && WebConfig.getDeviceId();//获取唯一标识
+        logd("deviceId", WebConfig.deviceId);
+        !WebConfig.appVersion && WebConfig.getAppVersion();//获取app版本号
+        logd("appVersion", WebConfig.appVersion);
+        !WebConfig.deviceToken && WebConfig.getDeviceToken();//获取设备号
+        logd("deviceToken", WebConfig.deviceToken);
+        !WebConfig.inviteCode && WebConfig.getInviteCode();//获取邀请码
+        logd("inviteCode", WebConfig.inviteCode);
+        !WebConfig.webParms && WebConfig.getWebParms();//获取额外参数
+        logd("webParms", WebConfig.webParms);
 
         Vesion.once(Vesion.LOAD_VESION_COMPLETE, this, () => {
             this.init();
@@ -260,7 +270,6 @@ class Main {
         if (!diff) {
             return;
         }
-
         // 这样做才能防止白边
         this.checkClientSize();
         // 心跳
