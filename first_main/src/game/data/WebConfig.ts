@@ -61,7 +61,7 @@ WebConfig.VConsole = function () {
 WebConfig.VConsole();
 
 __window.setAppVersion = function (v) {
-	WebConfig.appVersion = v;
+	if (!WebConfig.appVersion) WebConfig.appVersion = v;
 }
 
 WebConfig.hasClosePreload = false;
@@ -114,9 +114,7 @@ WebConfig.getInviteCode = function () {
 }
 
 __window.setInviteCode = function (v) {
-	if (!WebConfig.inviteCode) {
-		WebConfig.inviteCode = v
-	}
+	if (!WebConfig.inviteCode) WebConfig.inviteCode = v
 }
 
 WebConfig.systemInfo = null
