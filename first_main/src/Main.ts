@@ -211,10 +211,12 @@ class Main {
         }
         Path.map_far = StringU.substitute(Path.map_far, WebConfig.baseplatform);
         Path.map = StringU.substitute(Path.map, WebConfig.baseplatform);
-        WebConfig.logintype = StringU.getParameter(location.href, "logintype") || null;
         !WebConfig.systemInfo && WebConfig.getSystemInfo();//获取手机系统信息
         !WebConfig.modelInfo && WebConfig.getModelInfo();//获取机型
         !WebConfig.deviceId && WebConfig.getDeviceId();//获取唯一标识
+        !WebConfig.appVersion && WebConfig.getAppVersion();//获取app版本号
+        !WebConfig.deviceToken && WebConfig.getDeviceToken();//获取设备号
+        !WebConfig.inviteCode && WebConfig.getInviteCode();//获取邀请码
 
         Vesion.once(Vesion.LOAD_VESION_COMPLETE, this, () => {
             this.init();

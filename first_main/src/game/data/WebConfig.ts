@@ -175,21 +175,20 @@ WebConfig.getDeviceId = function () {
 	}
 	else if (Laya.Browser.onAndroid) {
 		if (__window.android && __window.android.getDeviceId) {
-			if (!WebConfig.deviceId) {
-				WebConfig.deviceId = __window.android.getDeviceId()
-			}
-			return WebConfig.deviceId;
+			if (WebConfig.deviceId) return WebConfig.deviceId;
+			WebConfig.deviceId = __window.android.getDeviceId()
 		}
 	} else if (Laya.Browser.onIOS) {
 		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getDeviceId) {
-			__window.webkit.messageHandlers.getDeviceId.postMessage(null)
+			if (WebConfig.deviceId) return WebConfig.deviceId;
+			__window.webkit.messageHandlers.getDeviceId.postMessage(null);
 		}
 	}
-	return null
+	return null;
 }
 __window.setDeviceId = function (v) {
 	logd("__window.setDeviceId:", v)
-	WebConfig.deviceId = v;
+	if (!WebConfig.deviceId) WebConfig.deviceId = v;
 }
 
 WebConfig.asdfghjkl = function () {
@@ -211,9 +210,11 @@ WebConfig.asdfghjkl = function () {
 	return 0;
 }
 
+WebConfig.deviceToken = "";
+
 __window.setDeviceToken = function (v) {
 	WebConfig.wxDebug && WebConfig.alert("setDeviceToken:" + v)
-	WebConfig.deviceToken = v || "";
+	if (!WebConfig.deviceToken) WebConfig.deviceToken = v;
 	WebConfig.update_deviceToken != null && WebConfig.update_deviceToken.run && WebConfig.update_deviceToken.run();
 }
 
@@ -224,11 +225,13 @@ WebConfig.getDeviceToken = function () {
 	}
 	else if (Laya.Browser.onAndroid) {
 		if (__window.android && __window.android.getDeviceToken) {
+			if (WebConfig.deviceToken) return this.WebConfig.deviceToken;
 			WebConfig.deviceToken = __window.android.getDeviceToken()
 			WebConfig.update_deviceToken != null && WebConfig.update_deviceToken.run && WebConfig.update_deviceToken.run();
 		}
 	}
 	else if (Laya.Browser.onIOS) {
+		if (WebConfig.deviceToken) return this.WebConfig.deviceToken;
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getDeviceToken && __window.webkit.messageHandlers.getDeviceToken.postMessage(null)
 	}
 }

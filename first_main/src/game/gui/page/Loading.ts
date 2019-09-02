@@ -125,8 +125,6 @@ module game.gui.page {
 		 * 帧间隔心跳
 		 */
 		deltaUpdate() {
-			!WebConfig.appVersion && WebConfig.getAppVersion();//获取app版本号
-			!WebConfig.getInviteCode && WebConfig.getInviteCode();//获取邀请码
 			this.realLoad();
 			if (this._changeTime <= 0) {
 				this._changeTime = 2500;
