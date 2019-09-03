@@ -217,10 +217,10 @@ class Main {
         logd("modelInfo", WebConfig.modelInfo);
         !WebConfig.deviceId && WebConfig.getDeviceId();//获取唯一标识
         logd("deviceId", WebConfig.deviceId);
-        !WebConfig.appVersion && WebConfig.getAppVersion();//获取app版本号
-        logd("appVersion", WebConfig.appVersion);
         !WebConfig.deviceToken && WebConfig.getDeviceToken();//获取设备号
         logd("deviceToken", WebConfig.deviceToken);
+        !WebConfig.appVersion && WebConfig.getAppVersion();//获取app版本号
+        logd("appVersion", WebConfig.appVersion);
         !WebConfig.inviteCode && WebConfig.getInviteCode();//获取邀请码
         logd("inviteCode", WebConfig.inviteCode);
         !WebConfig.webParms && WebConfig.getWebParms();//获取额外参数

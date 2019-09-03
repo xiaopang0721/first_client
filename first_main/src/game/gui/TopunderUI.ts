@@ -14,7 +14,7 @@ module game.gui {
 		public checkQueue(): void {
 			let cur_time: number = Laya.timer.currTimer;
 			if (this._nextUpdateTime > 0 && this._nextUpdateTime > cur_time) return;
-			this._nextUpdateTime = cur_time + 800;
+			this._nextUpdateTime = cur_time + 200;
 
 			// this.showTips("1111111111")
 			if (!checkGameJsLoad("dating")) return;

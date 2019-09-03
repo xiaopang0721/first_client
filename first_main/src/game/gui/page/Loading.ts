@@ -94,7 +94,6 @@ module game.gui.page {
 			} else {
 				this._canLoad = true;
 			}
-
 			if (this._hasLoad || !this._canLoad) return;
 			if (this._preAssets && this._preAssets.length) {
 				this._hasLoad = true;
