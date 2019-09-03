@@ -39,6 +39,7 @@ class Operation_Fields {
 	public static OPRATE_CLOSE_OTHER_ONLINE:number = 15 //其他在线中
 	public static OPRATE_CLOSE_WEB_GET_INFO_ERR:number = 16 //web请求失败
 	public static OPRATE_CLOSE_WEB_CRASH:number = 17 //web崩溃
+	public static OPRATE_CLOSE_ON_PKT_STATUS_NOVER_ERR:number = 18 //还没登陆就发了错误的包上来
 	//操作错误类型
 	public static OPRATE_TELEPORT:number = 3 //传送操作错误类型
 	public static OPRATE_TELEPORT_FAIL:number = 1 //传送失败
@@ -145,6 +146,7 @@ class Operation_Fields {
 		'2_15':'其他在线中',//其他在线中
 		'2_16':'web请求失败',//web请求失败
 		'2_17':'web崩溃',//web崩溃
+		'2_18':'还没登陆就发了错误的包上来',//还没登陆就发了错误的包上来
 		'3':'传送操作错误类型',//传送操作错误类型
 		'3_1':'传送失败',//传送失败
 		'3_2':'离开地图失败',//离开地图失败

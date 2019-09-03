@@ -27,28 +27,28 @@ public static kGroupTypHuaFei:number = 9 //鱼群类型-话费鱼
 
 
 ////////////////////////////////////////////////////////////////
-   //GlobalObject def
+//GlobalObject def
 ////////////////////////////////////////////////////////////////
 export class GlobalObjectField extends core.obj.GuidObject{
-   // define
+// define
 
-   // int field
+// int field
 
-   // string field
+// string field
 
 
 //////////////////////////////////////str function
 
 }////////////////////////////////////////////////////////////////
-   //PlayerData def
+//PlayerData def
 ////////////////////////////////////////////////////////////////
 export class PlayerDataField extends core.obj.GuidObject{
-   // define
+// define
 	public static MONEY_TYPE_GOLD:number = 1 //元宝
 	public static ONLINE_STATUS_OFFLINE:number = 0 //离线状态
 	public static ONLINE_STATUS_ONLINE:number = 1 //在线状态
 
-   // int field
+// int field
 	public static PLAYERDATA_INT_REG_TIME:number = 0 //玩家创建时间
 	public static PLAYERDATA_INT_LAST_LOGIN_TIME:number = 1 //最后一次登录时间
 	public static PLAYERDATA_INT_ONLINE_TIME:number = 2 //在线时长，分钟
@@ -95,7 +95,7 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_INT_DRAW_MONEY_ERROR_C_D:number = 67 //玩家取款密码错误冻结时间或间隔时间
 	public static PLAYERDATA_INT_FIRST_PAY_MONEY:number = 68 //首充金额
 
-   // string field
+// string field
 	public static PLAYERDATA_STR_ACCOUNT:number = 0 //账号信息
 	public static PLAYERDATA_STR_SESSION_KEY:number = 1 //登录秘钥
 	public static PLAYERDATA_STR_NAME:number = 2 //玩家名字
@@ -148,7 +148,7 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 
 
-	//性别
+//性别
 	public GetSex():number{
        return this.GetByte(PlayerDataField.PLAYERDATA_INT_BYTE0,0);
     }
@@ -157,7 +157,7 @@ export class PlayerDataField extends core.obj.GuidObject{
     }
 
 
-	//取款错误次数
+//取款错误次数
 	public GetDrawMoneyErrorTimes():number{
        return this.GetByte(PlayerDataField.PLAYERDATA_INT_BYTE0,1);
     }
@@ -171,115 +171,115 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 
 
-	//是否游客
+//是否游客
 	public IsIsGuest():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,0);
     }
 
 
-	//是否可以修改昵称
+//是否可以修改昵称
 	public IsNicknameChanged():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,1);
     }
 
 
-	//全民代理
+//全民代理
 	public IsIsQmdl():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,2);
     }
 
 
-	//连续签到
+//连续签到
 	public IsIsLxqd ():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,3);
     }
 
 
-	//幸运轮盘
+//幸运轮盘
 	public IsIsXylp():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,4);
     }
 
 
-	//签到小红点
+//签到小红点
 	public IsIsShowRedQianDao():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,5);
     }
 
 
-	//轮盘小红点
+//轮盘小红点
 	public IsIsShowRedLunPan():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,6);
     }
 
 
-	//全面代理小红点
+//全面代理小红点
 	public IsIsShowRedQMDL():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,7);
     }
 
 
-	//支付宝
+//支付宝
 	public IsIsShowAlipay():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,8);
     }
 
 
-	//银行卡
+//银行卡
 	public IsIsShowBank():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,9);
     }
 
 
-	//微信开关
+//微信开关
 	public IsIsOpenWX():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,10);
     }
 
 
-	//在线客服是否外跳
+//在线客服是否外跳
 	public IsIsOuterJump():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,11);
     }
 
 
-	//今日是否分享
+//今日是否分享
 	public IsIsShare():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,12);
     }
 
 
-	//是否需要判断绑定银行卡
+//是否需要判断绑定银行卡
 	public IsIsNeedBank():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,13);
     }
 
 
-	//是否领取绑定赠送
+//是否领取绑定赠送
 	public IsGetBindReward():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,14);
     }
 
 
-	//是否已提交过取款订单
+//是否已提交过取款订单
 	public IsIsDrawing():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,15);
     }
 
 
-	//是否已提交过汇款订单
+//是否已提交过汇款订单
 	public IsIsRemiting():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,16);
     }
 
 
-	//首充小红点
+//首充小红点
 	public IsIsFirstPay():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,17);
     }
 
 
-	//是否已领取首充奖励
+//是否已领取首充奖励
 	public IsIsFisrtPayGive():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,18);
     }
@@ -325,7 +325,7 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 
 
-	//bar中奖次数，
+//bar中奖次数，
 	public GetBarCount():number{
        return this.GetByte(PlayerDataField.PLAYERDATA_INT_SGJ_COUNT,0);
     }
@@ -334,7 +334,7 @@ export class PlayerDataField extends core.obj.GuidObject{
     }
 
 
-	//77中奖次数，
+//77中奖次数，
 	public GetQiQiCount():number{
        return this.GetByte(PlayerDataField.PLAYERDATA_INT_SGJ_COUNT,1);
     }
@@ -343,7 +343,7 @@ export class PlayerDataField extends core.obj.GuidObject{
     }
 
 
-	//星星中奖次数，
+//星星中奖次数，
 	public GetXingXingCount():number{
        return this.GetByte(PlayerDataField.PLAYERDATA_INT_SGJ_COUNT,2);
     }
@@ -352,7 +352,7 @@ export class PlayerDataField extends core.obj.GuidObject{
     }
 
 
-	//西瓜中奖次数
+//西瓜中奖次数
 	public GetXiGuaCount():number{
        return this.GetByte(PlayerDataField.PLAYERDATA_INT_SGJ_COUNT,3);
     }
@@ -426,7 +426,7 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 
 
-	//房卡免费次数
+//房卡免费次数
 	public GetCardFreeCount():number{
        return this.GetInt16(PlayerDataField.PLAYERDATA_INT_PLAYER_UNIT16,0);
     }
@@ -435,7 +435,7 @@ export class PlayerDataField extends core.obj.GuidObject{
     }
 
 
-	//玩家房卡房主次数
+//玩家房卡房主次数
 	public GetCardCreateCount():number{
        return this.GetInt16(PlayerDataField.PLAYERDATA_INT_PLAYER_UNIT16,1);
     }
@@ -464,7 +464,7 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 
 
-	//连续签到天数
+//连续签到天数
 	public GetSignInDays():number{
        return this.GetByte(PlayerDataField.PLAYERDATA_INT_BYTE1,0);
     }
@@ -473,7 +473,7 @@ export class PlayerDataField extends core.obj.GuidObject{
     }
 
 
-	//今日已取款次数
+//今日已取款次数
 	public GetTodayDrawginCount():number{
        return this.GetByte(PlayerDataField.PLAYERDATA_INT_BYTE1,1);
     }
@@ -674,16 +674,16 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 
 }////////////////////////////////////////////////////////////////
-   //Map def
+//Map def
 ////////////////////////////////////////////////////////////////
 export class MapField extends core.obj.GuidObject{
-   // define
+// define
 	public static PLAY_STATUS_NONE:number = 0 //初始化
 	public static PLAY_STATUS_START:number = 1 //游戏开始
 	public static MAP_STATE_READY:number = 0 //准备
 	public static MAP_STATE_BEGIN:number = 1 //开始
 
-   // int field
+// int field
 	public static MAP_INT_START_TIME:number = 0 //开始时间
 	public static MAP_INT_END_TIME:number = 1 //结束时间
 	public static MAP_INT_MAP_BYTE:number = 2 //地图Byte,0游戏运行状态,1地图状态,2下注玩家位置,3.地图级别
@@ -700,7 +700,7 @@ export class MapField extends core.obj.GuidObject{
 	public static MAP_INT_BATTLE_BEING:number = 14 //战斗开始下标
 	public static MAP_INT_BATTLE_END:number = 50014 //战斗结束下标
 
-   // string field
+// string field
 	public static MAP_STR_INSTANCE_I_D:number = 0 //地图实例ID
 	public static MAP_STR_MAP_I_D:number = 1 //地图模板ID
 	public static MAP_STR_GAME_NO:number = 2 //牌局号
@@ -730,7 +730,7 @@ export class MapField extends core.obj.GuidObject{
 
 
 
-	//游戏运行状态
+//游戏运行状态
 	public GetPlayState():number{
        return this.GetByte(MapField.MAP_INT_MAP_BYTE,0);
     }
@@ -739,7 +739,7 @@ export class MapField extends core.obj.GuidObject{
     }
 
 
-	//地图状态
+//地图状态
 	public GetMapState():number{
        return this.GetByte(MapField.MAP_INT_MAP_BYTE,1);
     }
@@ -748,7 +748,7 @@ export class MapField extends core.obj.GuidObject{
     }
 
 
-	//下注玩家位置
+//下注玩家位置
 	public GetCurrentBetPos():number{
        return this.GetByte(MapField.MAP_INT_MAP_BYTE,2);
     }
@@ -757,7 +757,7 @@ export class MapField extends core.obj.GuidObject{
     }
 
 
-	//地图级别
+//地图级别
 	public GetMapLevel():number{
        return this.GetByte(MapField.MAP_INT_MAP_BYTE,3);
     }
@@ -771,7 +771,7 @@ export class MapField extends core.obj.GuidObject{
 
 
 
-	//回合数
+//回合数
 	public GetRound():number{
        return this.GetByte(MapField.MAP_INT_MAP_BYTE1,0);
     }
@@ -780,7 +780,7 @@ export class MapField extends core.obj.GuidObject{
     }
 
 
-	//继续游戏
+//继续游戏
 	public GetContinueGame():number{
        return this.GetByte(MapField.MAP_INT_MAP_BYTE1,1);
     }
@@ -789,7 +789,7 @@ export class MapField extends core.obj.GuidObject{
     }
 
 
-	//房卡付费类型
+//房卡付费类型
 	public GetCardRoomPayTyp():number{
        return this.GetByte(MapField.MAP_INT_MAP_BYTE1,2);
     }
@@ -798,7 +798,7 @@ export class MapField extends core.obj.GuidObject{
     }
 
 
-	//房卡局数
+//房卡局数
 	public GetCardRoomGameNumber():number{
        return this.GetByte(MapField.MAP_INT_MAP_BYTE1,3);
     }
@@ -832,7 +832,7 @@ export class MapField extends core.obj.GuidObject{
 
 
 
-	//牌库数量
+//牌库数量
 	public GetCardPoolCount():number{
        return this.GetUInt16(MapField.MAP_INT_MAP_UINT16,0);
     }
@@ -841,7 +841,7 @@ export class MapField extends core.obj.GuidObject{
     }
 
 
-	//百人地图庄家座位
+//百人地图庄家座位
 	public GetBankerSeat():number{
        return this.GetUInt16(MapField.MAP_INT_MAP_UINT16,1);
     }
@@ -855,7 +855,7 @@ export class MapField extends core.obj.GuidObject{
 
 
 
-	//补牌类型
+//补牌类型
 	public GetAddCardType():number{
        return this.GetByte(MapField.MAP_INT_MAP_BYTE2,0);
     }
@@ -864,7 +864,7 @@ export class MapField extends core.obj.GuidObject{
     }
 
 
-	//最后操作的玩家
+//最后操作的玩家
 	public GetLastOptPlayer():number{
        return this.GetByte(MapField.MAP_INT_MAP_BYTE2,1);
     }
@@ -873,7 +873,7 @@ export class MapField extends core.obj.GuidObject{
     }
 
 
-	//盲注位置
+//盲注位置
 	public GetMangZhuPos():number{
        return this.GetByte(MapField.MAP_INT_MAP_BYTE2,2);
     }
@@ -964,15 +964,15 @@ export class MapField extends core.obj.GuidObject{
 
 
 }////////////////////////////////////////////////////////////////
-   //Unit def
+//Unit def
 ////////////////////////////////////////////////////////////////
 export class UnitField extends core.obj.GuidObject{
-   // define
+// define
 	public static TYPE_ID_PLAYER:number = 1 //玩家
 	public static TYPE_ID_FISH:number = 2 //鱼
 	public static TYPE_ID_ROBOT:number = 3 //机器人
 
-   // int field
+// int field
 	public static UNIT_INT_TYPE:number = 0 //类型
 	public static UNIT_INT_MONEY:number = 1 //金币
 	public static UNIT_INT_BYTE1:number = 3 //0预留,1庄闲,2特殊座位,3连庄次数
@@ -997,7 +997,7 @@ export class UnitField extends core.obj.GuidObject{
 	public static UNIT_INT_VIP_LEVEL:number = 23 //VIP等级
 	public static UNIT_INT_Q_F_END_TIME:number = 24 //不同祈福的结束时间
 
-   // string field
+// string field
 	public static UNIT_STR_NAME:number = 0 //玩家名字
 	public static UNIT_STR_HEAD_IMG:number = 1 //头像
 	public static UNIT_STR_HEAD_KUANG_IMG:number = 2 //头像框
@@ -1020,7 +1020,7 @@ export class UnitField extends core.obj.GuidObject{
 
 
 
-	//预留
+//预留
 	public GetResever():number{
        return this.GetByte(UnitField.UNIT_INT_BYTE1,0);
     }
@@ -1029,7 +1029,7 @@ export class UnitField extends core.obj.GuidObject{
     }
 
 
-	//身份，庄家或者闲家之类的
+//身份，庄家或者闲家之类的
 	public GetIdentity():number{
        return this.GetByte(UnitField.UNIT_INT_BYTE1,1);
     }
@@ -1038,7 +1038,7 @@ export class UnitField extends core.obj.GuidObject{
     }
 
 
-	//特殊座位
+//特殊座位
 	public GetSeat():number{
        return this.GetByte(UnitField.UNIT_INT_BYTE1,2);
     }
@@ -1047,7 +1047,7 @@ export class UnitField extends core.obj.GuidObject{
     }
 
 
-	//连庄次数
+//连庄次数
 	public GetLzNum():number{
        return this.GetByte(UnitField.UNIT_INT_BYTE1,3);
     }
@@ -1061,85 +1061,85 @@ export class UnitField extends core.obj.GuidObject{
 
 
 
-	//是否准备
+//是否准备
 	public IsReady():boolean{
        return this.GetBit(UnitField.UNIT_INT_BIT1,0);
     }
 
 
-	//是否下注
+//是否下注
 	public IsBet():boolean{
        return this.GetBit(UnitField.UNIT_INT_BIT1,1);
     }
 
 
-	//是否明牌
+//是否明牌
 	public IsSeeCard():boolean{
        return this.GetBit(UnitField.UNIT_INT_BIT1,2);
     }
 
 
-	//是否放弃
+//是否放弃
 	public IsGiveUp():boolean{
        return this.GetBit(UnitField.UNIT_INT_BIT1,3);
     }
 
 
-	//是否离线
+//是否离线
 	public IsOffline():boolean{
        return this.GetBit(UnitField.UNIT_INT_BIT1,4);
     }
 
 
-	//是否比输
+//是否比输
 	public IsIsDefeated():boolean{
        return this.GetBit(UnitField.UNIT_INT_BIT1,5);
     }
 
 
-	//是否抢庄
+//是否抢庄
 	public IsBankerRate():boolean{
        return this.GetBit(UnitField.UNIT_INT_BIT1,6);
     }
 
 
-	//是否拼牌
+//是否拼牌
 	public IsPinPai():boolean{
        return this.GetBit(UnitField.UNIT_INT_BIT1,7);
     }
 
 
-	//是否比过牌
+//是否比过牌
 	public IsCompare():boolean{
        return this.GetBit(UnitField.UNIT_INT_BIT1,8);
     }
 
 
-	//是否下注完成
+//是否下注完成
 	public IsBetComplete():boolean{
        return this.GetBit(UnitField.UNIT_INT_BIT1,9);
     }
 
 
-	//是否摊牌
+//是否摊牌
 	public IsShowCards():boolean{
        return this.GetBit(UnitField.UNIT_INT_BIT1,10);
     }
 
 
-	//是否过牌
+//是否过牌
 	public IsPass():boolean{
        return this.GetBit(UnitField.UNIT_INT_BIT1,11);
     }
 
 
-	//是否同意结束
+//是否同意结束
 	public IsAgreeEnd():boolean{
        return this.GetBit(UnitField.UNIT_INT_BIT1,12);
     }
 
 
-	//是否ALLIN
+//是否ALLIN
 	public IsAllIn():boolean{
        return this.GetBit(UnitField.UNIT_INT_BIT1,13);
     }
@@ -1155,7 +1155,7 @@ export class UnitField extends core.obj.GuidObject{
 
 
 
-	//座位
+//座位
 	public GetIndex():number{
        return this.GetUInt16(UnitField.UNIT_INT_UINT16,0);
     }
@@ -1169,7 +1169,7 @@ export class UnitField extends core.obj.GuidObject{
 
 
 
-	//鱼在鱼群里的位置
+//鱼在鱼群里的位置
 	public GetFishPosition():number{
        return this.GetUInt16(UnitField.UNIT_INT_U160,0);
     }
@@ -1178,7 +1178,7 @@ export class UnitField extends core.obj.GuidObject{
     }
 
 
-	//鱼群的实例ID
+//鱼群的实例ID
 	public GetTeamID():number{
        return this.GetUInt16(UnitField.UNIT_INT_U160,1);
     }
@@ -1222,7 +1222,7 @@ export class UnitField extends core.obj.GuidObject{
 
 
 
-	//生存状态
+//生存状态
 	public GetLiveStatus():number{
        return this.GetByte(UnitField.UNIT_INT_BYTE2,0);
     }
@@ -1231,7 +1231,7 @@ export class UnitField extends core.obj.GuidObject{
     }
 
 
-	//1代表从左边出生
+//1代表从左边出生
 	public GetFromLeft():number{
        return this.GetByte(UnitField.UNIT_INT_BYTE2,1);
     }
@@ -1240,7 +1240,7 @@ export class UnitField extends core.obj.GuidObject{
     }
 
 
-	//倍率
+//倍率
 	public GetRate():number{
        return this.GetByte(UnitField.UNIT_INT_BYTE2,2);
     }
@@ -1249,7 +1249,7 @@ export class UnitField extends core.obj.GuidObject{
     }
 
 
-	//房主
+//房主
 	public GetRoomMaster():number{
        return this.GetByte(UnitField.UNIT_INT_BYTE2,3);
     }
@@ -1268,7 +1268,7 @@ export class UnitField extends core.obj.GuidObject{
 
 
 
-	//玩家的炮台位置
+//玩家的炮台位置
 	public GetPosition():number{
        return this.GetByte(UnitField.UNIT_INT_BYTE3,0);
     }
@@ -1277,7 +1277,7 @@ export class UnitField extends core.obj.GuidObject{
     }
 
 
-	//是不是机器人
+//是不是机器人
 	public GetIsRobot():number{
        return this.GetByte(UnitField.UNIT_INT_BYTE3,1);
     }
@@ -1286,7 +1286,7 @@ export class UnitField extends core.obj.GuidObject{
     }
 
 
-	//划鱼状态
+//划鱼状态
 	public GetBulletState():number{
        return this.GetByte(UnitField.UNIT_INT_BYTE3,2);
     }
@@ -1295,7 +1295,7 @@ export class UnitField extends core.obj.GuidObject{
     }
 
 
-	//1当前炮倍数
+//1当前炮倍数
 	public GetFireLevel():number{
        return this.GetByte(UnitField.UNIT_INT_BYTE3,3);
     }
