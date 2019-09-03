@@ -99,11 +99,7 @@ module game.gui.component {
 					if (ignore && ignore.indexOf(key) != -1) continue;
 					let assertloader = this._assetsLoader[key];
 					if (assertloader) {
-						assertloader.forceMoveRef();
-						// if (ignore && ignore.indexOf("dating") != -1) {
-						// } else {
-						// 	assertloader.clear(true);
-						// }
+						assertloader.clear(true);
 						assertloader.clearAssert();
 						assertloader = null;
 					}
@@ -212,12 +208,9 @@ module game.gui.component {
 		private _obj: any = { progress: 0.001 }
 		private onUpdateProgress(v: number): void {
 			if (v && this._obj.progress && this._obj.progress == v) return;
-			Laya.Tween.clearTween(this._obj);
-			Laya.Tween.to(this._obj, { progress: v }, 200, null, Handler.create(this, () => {
-				if (this._obj.progress >= 1) {
-					this.onLoadAssetCom();
-				}
-			}))
+			this._obj.progress = v;
+			if (this._obj.progress >= 1) 
+				this.onLoadAssetCom();
 		}
 
 		//资源加载完
