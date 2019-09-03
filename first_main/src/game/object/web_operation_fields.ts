@@ -372,6 +372,7 @@ class Web_operation_fields {
         201:'获取VIP等级失败！',//获取VIP等级失败！
         202:'领取VIP等级奖励失败！',//领取VIP等级奖励失败！
         203:'当前重复错误次数过多，请60分钟后再试！',//当前重复错误次数过多，请60分钟后再试！
+        204:'已生成订单，请等待到账！',//已生成订单，请等待到账！
 	}
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
@@ -919,6 +920,14 @@ class Web_operation_fields {
     public static GAME_GONGGAO_OPENPAGE_TYPE_HUODONG = 6  //优惠活动
     public static GAME_GONGGAO_OPENPAGE_TYPE_YUEBAO = 7  //余额宝
     public static GAME_GONGGAO_OPENPAGE_TYPE_FANGKA = 8  //房卡标签
+//------------------------ END -----------------------------------
+//------------------------START-----------------------------------
+    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_NONE = 1  //不跳转
+    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_VIP = 2  //VIP充值
+    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_YHK = 3  //银行卡转账
+    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_WX = 4  //微信转账
+    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_ZFB = 5  //支付宝转账
+    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_YSF = 6  //云闪付转账
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_SHUISANSHUI_TYPE0 = 1  //乌龙
