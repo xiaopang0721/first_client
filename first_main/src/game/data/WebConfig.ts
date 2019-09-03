@@ -31,9 +31,9 @@ WebConfig.isPopJianPan = __conf.isPopJianPan;
 WebConfig.isSingleEnter = false;
 WebConfig.res_url = "rsync_folder/first_res/";
 WebConfig.ewmbaseUrl = WebConfig.gwUrl + "/qrcode?urlsize=9&urltext=" + encodeURIComponent(WebConfig.gwUrl) + "?invitecode="
-WebConfig.appVersion = "";
 WebConfig.downLoadUrl = "";
 WebConfig.game_type = 0;
+WebConfig.appVersion = "";
 WebConfig.getAppVersion = function (app_vesion) {
 	if (Laya.Browser.onPC) {
 
@@ -50,6 +50,10 @@ WebConfig.getAppVersion = function (app_vesion) {
 	}
 }
 
+__window.setAppVersion = function (v) {
+	if (!WebConfig.appVersion) WebConfig.appVersion = v;
+}
+
 WebConfig.vConsole = null;
 WebConfig.VConsole = function () {
 	if (WebConfig.gameGmOpen) {
@@ -60,9 +64,6 @@ WebConfig.VConsole = function () {
 }
 WebConfig.VConsole();
 
-__window.setAppVersion = function (v) {
-	if (!WebConfig.appVersion) WebConfig.appVersion = v;
-}
 
 WebConfig.hasClosePreload = false;
 __window.hasClosePreload = function () {
