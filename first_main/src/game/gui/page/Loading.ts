@@ -97,7 +97,7 @@ module game.gui.page {
 			if (this._hasLoad || !this._canLoad) return;
 			if (this._preAssets && this._preAssets.length) {
 				this._hasLoad = true;
-				if (!this._loader) this._loader = LoadingMgr.ins.createAssertLoader("dating");
+				if (!this._loader) this._loader = LoadingMgr.ins.createAssertLoader("dating", true);
 				this._loader.on(LEvent.PROGRESS, this, this.onUpdateProgress);
 				this._loader.load(this._preAssets, Handler.create(this, this.onLoadAssetCom), true);
 			}
