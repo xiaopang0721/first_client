@@ -29,14 +29,13 @@ module game.gui.component {
 
 		private _preLoader: LoadingRender;
 		private _callBackHandle: Handler;
-		private _isLoading: boolean;
 		private _waitList: LoadingRender[] = []
 		load(gameid: string, preAsset: any[], priority: number = 4) {
 			if (this.isLoaded(gameid) || this.isInLoadList(gameid)) {
 				return false;
 			}
 			this._map[gameid] = findGameVesion(gameid);
-			if (this._isLoading) {//加载中 进入等待列表
+			if (this.isLoading) {//加载中 进入等待列表
 				let preLoader = new LoadingRender(gameid, preAsset, priority);
 				if (priority == 0) {
 					this._waitList.unshift(preLoader);
@@ -50,7 +49,6 @@ module game.gui.component {
 				if (!this._preLoader) {
 					this._preLoader = new LoadingRender(gameid, preAsset, priority);
 					if (this._preLoader.startLoad()) {
-						this._isLoading = true;
 						return true;
 					}
 				}
@@ -61,7 +59,7 @@ module game.gui.component {
 
 		//是否在加载中
 		get isLoading() {
-			return this._isLoading;
+			return this._preLoader || this._waitList && this._waitList.length > 0;
 		}
 
 		private _assetsLoader: { [key: string]: AssetsLoader } = {};
@@ -149,7 +147,6 @@ module game.gui.component {
 			}
 
 			this._waitList.length = 0;//等待列表清空
-			this._isLoading = false;
 		}
 
 		freeAndLoadNext() {
@@ -162,13 +159,9 @@ module game.gui.component {
 				this._preLoader = null;
 			}
 			if (this._waitList.length > 0) {
-				this._preLoader = this._waitList.shift()
-				if (this._preLoader && this._preLoader.startLoad()) {
-					this._isLoading = true;
-					return;
-				}
+				this._preLoader = this._waitList.shift();
+				this._preLoader && this._preLoader.startLoad();
 			}
-			this._isLoading = false;
 		}
 	}
 
@@ -230,6 +223,10 @@ module game.gui.component {
 		}
 
 		clearLoadingRender() {
+			if (this._assertloader) {
+				this._assertloader.clear();
+				this._assertloader.off(LEvent.PROGRESS, this, this.onUpdateProgress);
+			}
 			this._assertloader = null;
 			this._preAssets = null;
 			this._gameId = null;
