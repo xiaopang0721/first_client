@@ -402,7 +402,7 @@ module game.gui.base {
 				this._view = null;
 			}
 			this._assetsLoader.offAll();
-			this._assetsLoader.clear(true);
+			this._assetsLoader.clear();
 		}
 
 		// 重新布局
