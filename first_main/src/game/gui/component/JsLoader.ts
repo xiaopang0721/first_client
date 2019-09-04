@@ -25,7 +25,7 @@ module game.gui.component {
 				}
 				if (jscell.path_list.length) {
 					jscell.assertloader = new AssetsLoader()
-					jscell.assertloader.load(jscell.path_list, Handler.create(this, this.jsComplete, [jscell]), true, 4);
+					jscell.assertloader.load(jscell.path_list, Handler.create(this, this.jsComplete, [jscell]), false, 4);
 				}
 			} else {
 				let game_list = this.checkoutValue([gameIds]);
