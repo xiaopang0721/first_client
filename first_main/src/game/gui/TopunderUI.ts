@@ -17,18 +17,13 @@ module game.gui {
 			this._nextUpdateTime = cur_time + 200;
 
 			// this.showTips("1111111111")
-			if (!checkGameJsLoad("dating")) return;
+			if (!checkGameJsLoad("dating") || !this._game.datingGame) return;
 			if (this._tipQueue.length != 0) {
 				let message = this._tipQueue.shift();
 				let page = this.getPage(window["DatingPageDef"].PAGE_TIPS);
-				// if (page && page.isOpened) {
-				// 	page.dataSource = message;
-				// } else {
-				// logd("open=======================================open")
 				this.open(window["DatingPageDef"].PAGE_TIPS, (page: any) => {
 					page.dataSource = message;
 				}, null, true);
-				// }
 			}
 		}
 		//显示提示
