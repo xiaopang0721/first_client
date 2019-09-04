@@ -602,8 +602,6 @@ declare module core.resource {
         private _totalCount;
         private _loadCount;
         private _hasLoadMap;
-        private _asserts;
-        readonly asserts: string[];
         load(assets: Array<string>, handler: Handler, isEventProgress?: boolean, priority?: number, type?: string): void;
         private __retain;
         /**
@@ -616,7 +614,6 @@ declare module core.resource {
         private onAssetParseComplete;
         release(url: string, checkNow?: boolean): void;
         clear(checkNow?: boolean): void;
-        clearAssert(): void;
         forceMoveRef(): void;
     }
 }
