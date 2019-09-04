@@ -66,11 +66,23 @@ module game.gui.component {
 
 		private _assetsLoader: { [key: string]: AssetsLoader } = {};
 		//创建缓存池
-		public createAssertLoader(gameId: string) {
-			if (!this._assetsLoader[gameId]) {
+		public createAssertLoader(gameId: string, createNew?: boolean) {
+			if (!this._assetsLoader[gameId] && createNew) {
 				this._assetsLoader[gameId] = new AssetsLoader();
 			}
 			return this._assetsLoader[gameId];
+		}
+
+		public clearGameAsset(gameId: string) {
+			for (let key in this._assetsLoader) {
+				if (this._assetsLoader.hasOwnProperty(key)) {
+					if (gameId != key) continue;
+					let assertloader = this._assetsLoader[key];
+					assertloader && assertloader.clear();
+					assertloader = null;
+					delete this._assetsLoader[key];
+				}
+			}
 		}
 
 		/**
@@ -99,8 +111,8 @@ module game.gui.component {
 					if (ignore && ignore.indexOf(key) != -1) continue;
 					let assertloader = this._assetsLoader[key];
 					if (assertloader) {
-						assertloader.clear(true);
-						assertloader.clearAssert();
+						assertloader.clear();
+						// assertloader.clearAssert();
 						assertloader = null;
 					}
 
@@ -198,7 +210,7 @@ module game.gui.component {
 		startLoad(): boolean {
 			if (this._assertloader) return false;
 			if (!this._assertloader) {
-				this._assertloader = LoadingMgr.ins.createAssertLoader(this._gameId);
+				this._assertloader = LoadingMgr.ins.createAssertLoader(this._gameId, true);
 			}
 			this._assertloader.on(LEvent.PROGRESS, this, this.onUpdateProgress);
 			this._assertloader.load(this._preAssets, Handler.create(this, this.onLoadAssetCom), true, this._priority);
@@ -209,7 +221,7 @@ module game.gui.component {
 		private onUpdateProgress(v: number): void {
 			if (v && this._obj.progress && this._obj.progress == v) return;
 			this._obj.progress = v;
-			if (this._obj.progress >= 1) 
+			if (this._obj.progress >= 1)
 				this.onLoadAssetCom();
 		}
 
@@ -230,7 +242,10 @@ module game.gui.component {
 		}
 
 		clearLoadingRender() {
-			this._assertloader = null;
+			if (this._assertloader) {
+				LoadingMgr.ins.clearGameAsset(this._gameId);
+				this._assertloader = null;
+			}
 			this._preAssets = null;
 			this._gameId = null;
 		}
