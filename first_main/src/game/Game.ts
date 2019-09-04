@@ -151,6 +151,7 @@ module game {
 		}
 
 		get sceneGame() {
+			if (!this._isLoadComplete) return null;
 			return this.__gamecomponent.SceneGame.ins;
 		}
 
@@ -253,6 +254,7 @@ module game {
 		}
 
 		get datingGame() {
+			if (!this._isLoadComplete) return null;
 			return this.__gamedating.DatingGame.ins;
 		}
 
