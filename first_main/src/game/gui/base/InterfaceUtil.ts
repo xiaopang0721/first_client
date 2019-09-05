@@ -22,9 +22,4 @@ module game.gui.base {
 		clear(): void;
 	}
 
-	export interface Ireg<T> {
-		registered(reg: T);
-		// unregistered(reg: T);
-	}
-
 }

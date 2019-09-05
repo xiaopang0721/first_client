@@ -22,56 +22,40 @@ import Skeleton = Laya.Skeleton;
 import Templet = Laya.Templet;                  //laya.ani.bone.Templet
 import JsLoader = game.gui.component.JsLoader;
 import LoadingMgr = game.gui.component.LoadingMgr;
-
 import Network = core.net.Network;
 import UpdateMask = core.obj.UpdateMask;
 import GuidObject = core.obj.GuidObject;
-
 import Vesion = core.utils.Vesion;
 import RandNickname = core.utils.RandNickname;
-
 import Vector2 = core.utils.Vector2;
 import Base64 = core.utils.Base64;
 import StringU = core.utils.StringU;
 import Random = core.utils.Random;
 import L = core.utils.L;
-
 import RefAsset = core.resource.RefAsset;
 import RefSound = core.resource.RefSound;
-
 import Path = game.data.Path;
-
 import RefTemplet = core.resource.RefTemplet;
 import Protocols = hanlder.Protocols;
 import MapField = game.object.MapField;
 import UnitField = game.object.UnitField;
 import PlayerDataField = game.object.PlayerDataField;
-
-
 import WaitEffectPage = game.gui.page.WaitEffectPage;
-
-
-
 import Template = game.data.Template;
 import PageHandle = game.PageHandle;
 import UIRoot = game.UIRoot;
 import Game = game.Game;
 import IUIRoot = game.gui.base.IUIRoot;
 import IGame = game.gui.base.IGame;
-import Ireg = game.gui.base.Ireg;
-
 import GeneralUI = game.gui.GeneralUI;
 import HUD = game.gui.HUD;
 import TopUI = game.gui.TopUI;
 import TopunderUI = game.gui.TopunderUI;
-
-
 import PageDef = game.gui.page.PageDef;
 import Page = game.gui.base.Page;
 import TabPage = game.gui.base.TabPage;
 import TabBox = game.gui.base.TabBox;
 import LoadingDH = game.gui.page.LoadingDH;
-
 
 // 是否iphoneX
 let onIPhoneX: boolean = false;
