@@ -20,10 +20,14 @@ module game.gui {
 			if (!checkGameJsLoad("dating") || !this._game.datingGame) return;
 			if (this._tipQueue.length != 0) {
 				let message = this._tipQueue.shift();
-				let page = this.getPage(window["DatingPageDef"].PAGE_TIPS);
-				this.open(window["DatingPageDef"].PAGE_TIPS, (page: any) => {
+				let page: TipsPage = this.getPage(window["DatingPageDef"].PAGE_TIPS) as TipsPage;
+				if (page) {
 					page.dataSource = message;
-				}, null, true);
+				} else {
+					this.open(window["DatingPageDef"].PAGE_TIPS, (page: any) => {
+						page.dataSource = message;
+					}, null, true);
+				}
 			}
 		}
 		//显示提示
