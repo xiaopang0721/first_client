@@ -20,7 +20,7 @@ module game.gui {
 			if (!checkGameJsLoad("dating") || !this._game.datingGame) return;
 			if (this._tipQueue.length != 0) {
 				let message = this._tipQueue.shift();
-				let page: TipsPage = this.getPage(window["DatingPageDef"].PAGE_TIPS) as TipsPage;
+				let page: any = this.getPage(window["DatingPageDef"].PAGE_TIPS) as any;
 				if (page) {
 					page.dataSource = message;
 				} else {
