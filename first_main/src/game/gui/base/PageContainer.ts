@@ -22,12 +22,9 @@ module game.gui.base {
 		}
 
 		// 打开页面
-		open(key: string, onOpenFunc?: Function, onCloseFunc?: Function, createNew?: boolean, index: number = -1): Page {
+		open(key: string, onOpenFunc?: Function, onCloseFunc?: Function, index:number = -1): Page {
 			key = key.toString()
-			let page: Page;
-			if (!createNew) {
-				page = this._pages[key]
-			}
+			let page: Page = this._pages[key];
 			if (!page) {
 				let pageClass: any = PageDef.getPageClass(key);
 				page = new pageClass(this._game, onOpenFunc, () => {
