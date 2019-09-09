@@ -98,9 +98,6 @@ module game.gui.component {
 			let game_list = [];
 			for (let index = 0; index < gameid.length; index++) {
 				let item = gameid[index];
-				if (item.indexOf("dating") != -1) {
-					item = WebConfig.baseplatform == PageDef.BASE_PLATFORM_TYPE_NQP ? "datingnqp" : "dating";
-				}
 				game_list.push(item)
 			}
 			return game_list;
