@@ -7,7 +7,6 @@
 /first_main/src/gamebrniuniu
 /first_main/src/gamebuyu
 /first_main/src/gamecaishendao
-/first_main/src/gamecomponent
 /first_main/src/gamedating
 /first_main/src/gameddz
 /first_main/src/gamedezhou
@@ -39,3 +38,4 @@
 /first_main/src/gamedatingnqp
 /first_main/libs/game*.d.ts
 /first_main/libs/tsd
+/first_main/src/gamecomponent
