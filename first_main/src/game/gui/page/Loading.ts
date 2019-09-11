@@ -82,7 +82,19 @@ module game.gui.page {
 		}
 
 		private realLoad() {
-			if (this._hasLoad) return;
+			if (WebConfig.onIOS) {
+				if (!WebConfig.appVersion) return;
+				let nowVesion = parseInt(WebConfig.appVersion.toString().replace(/\./g, ""));
+				if (nowVesion >= 20) {
+					WebConfig.closePreload();
+					this._canLoad = WebConfig.hasClosePreload;
+				} else {
+					this._canLoad = true;
+				}
+			} else {
+				this._canLoad = true;
+			}
+			if (this._hasLoad || !this._canLoad) return;
 			if (this._preAssets && this._preAssets.length) {
 				this._hasLoad = true;
 				if (!this._loader) this._loader = LoadingMgr.ins.createAssertLoader("dating", true);
@@ -106,10 +118,13 @@ module game.gui.page {
 
 		//是否已经加载
 		private _hasLoad: boolean;
+		//是否可以加载
+		private _canLoad: boolean;
 		/**
 		 * 帧间隔心跳
 		 */
 		deltaUpdate() {
+			this.realLoad();
 			if (this._changeTime <= 0) {
 				this._changeTime = 2500;
 				this.changeTips()
@@ -149,12 +164,12 @@ module game.gui.page {
 		}
 
 		private progressHandle() {
+			if (this._viewUI.label_jd) {
+				this._viewUI.label_jd.changeText(Math.floor(this._viewUI.bar_jd.value * 100) + "%");
+			}
 			if (this._viewUI["progress_mask"] && this._viewUI.bar_jd.bar) {
 				this._viewUI["progress_mask"].width = this._viewUI.bar_jd.bar.width;
 				// logd("xxx" + this._viewUI.bar_jd.bar.width)
-			}
-			if (this._viewUI.label_jd) {
-				this._viewUI.label_jd.changeText(Math.floor(this._viewUI.bar_jd.value * 100) + "%");
 			}
 		}
 
