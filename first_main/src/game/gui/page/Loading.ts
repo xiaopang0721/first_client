@@ -164,12 +164,12 @@ module game.gui.page {
 		}
 
 		private progressHandle() {
-			if (this._viewUI.label_jd) {
-				this._viewUI.label_jd.changeText(Math.floor(this._viewUI.bar_jd.value * 100) + "%");
-			}
 			if (this._viewUI["progress_mask"] && this._viewUI.bar_jd.bar) {
 				this._viewUI["progress_mask"].width = this._viewUI.bar_jd.bar.width;
 				// logd("xxx" + this._viewUI.bar_jd.bar.width)
+			}
+			if (this._viewUI.label_jd) {
+				this._viewUI.label_jd.changeText(Math.floor(this._viewUI.bar_jd.value * 100) + "%");
 			}
 		}
 
