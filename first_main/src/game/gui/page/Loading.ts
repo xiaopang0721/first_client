@@ -12,6 +12,7 @@ module game.gui.page {
 		private _callBack: Handler;
 		private _loader: AssetsLoader;
 		private _preAssets: any[] = []
+		private _nowVesion: number = 0
 		constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
 			super(v, onOpenFunc, onCloseFunc);
 			this._asset = [
@@ -84,7 +85,8 @@ module game.gui.page {
 		private realLoad() {
 			if (WebConfig.onIOS) {
 				if (!WebConfig.appVersion) return;
-				let nowVesion = parseInt(WebConfig.appVersion.toString().replace(/\./g, ""));
+				this._nowVesion = this._nowVesion || parseInt(WebConfig.appVersion.toString().replace(/\./g, ""));
+				let nowVesion = this._nowVesion
 				if (nowVesion < 30) {
 					WebConfig.closePreload();
 					this._canLoad = WebConfig.hasClosePreload;
