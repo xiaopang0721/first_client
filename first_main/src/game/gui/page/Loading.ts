@@ -85,7 +85,7 @@ module game.gui.page {
 			if (WebConfig.onIOS) {
 				if (!WebConfig.appVersion) return;
 				let nowVesion = parseInt(WebConfig.appVersion.toString().replace(/\./g, ""));
-				if (nowVesion >= 20) {
+				if (nowVesion < 30) {
 					WebConfig.closePreload();
 					this._canLoad = WebConfig.hasClosePreload;
 				} else {
