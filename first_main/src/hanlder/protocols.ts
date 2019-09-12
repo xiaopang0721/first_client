@@ -442,6 +442,8 @@ module hanlder{
 		public static  CMSG_SET_ROLE_INFO :number = 217;	//set_role_info
 		/*消息公告获取*/
 		public static  CMSG_GET_BULLETIN_LIST :number = 218;	//get_bulletin_list
+		/*读取公告*/
+		public static  CMSG_READ_BULLETIN :number = 219;	//read_bulletin
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -670,6 +672,7 @@ module hanlder{
 			this._FUNCS[216] = "get_first_pay";
 			this._FUNCS[217] = "set_role_info";
 			this._FUNCS[218] = "get_bulletin_list";
+			this._FUNCS[219] = "read_bulletin";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1455,6 +1458,9 @@ module hanlder{
 				case Protocols.CMSG_GET_BULLETIN_LIST :	//get_bulletin_list
 					var obj_get_bulletin_list:c2s_get_bulletin_list = new c2s_get_bulletin_list;
 					return obj_get_bulletin_list;
+				case Protocols.CMSG_READ_BULLETIN :	//read_bulletin
+					var obj_read_bulletin:c2s_read_bulletin = new c2s_read_bulletin;
+					return obj_read_bulletin;
 				default:
 					break;
 			}
@@ -3131,6 +3137,12 @@ module hanlder{
 			this._stream.writeUint16( 218 );
 			this.sendMsg( 218 , this._stream);
 			//Log.outDebug("CS====> cmd:218 get_bulletin_list");
+		}
+		public call_read_bulletin ():void{
+			this._stream.reset();
+			this._stream.writeUint16( 219 );
+			this.sendMsg( 219 , this._stream);
+			//Log.outDebug("CS====> cmd:219 read_bulletin");
 		}
 	}
 
@@ -5971,7 +5983,7 @@ module hanlder{
 		{
 			var parmLen:number;
 			var i:number;
-			//下注倍数
+			//?伦⒈妒?
 			self.num = bytes. readUint8 ();		
 		}
 	}
@@ -6437,7 +6449,7 @@ module hanlder{
 		}
 
 		/**
-		从输入二进制流中读取?峁固?
+		从输入二进制流中读取结构体
 		*/
 		public static read(self:c2s_robot_start_fire, bytes:ByteArray):void
 		{
@@ -6827,7 +6839,7 @@ module hanlder{
 		}
 
 		/**
-		从输入二进制流中读取结构体
+		从输入二进制流中?寥〗峁固?
 		*/
 		public static read(self:c2s_shisanshui_playing, bytes:ByteArray):void
 		{
@@ -8586,6 +8598,16 @@ module hanlder{
 	{
 		public optcode:number = 0;
 		public optname:string = "onGet_bulletin_list";
+	
+		public constructor()
+		{
+			
+		}
+	}
+	export class c2s_read_bulletin
+	{
+		public optcode:number = 0;
+		public optname:string = "onRead_bulletin";
 	
 		public constructor()
 		{
