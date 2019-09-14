@@ -111,9 +111,6 @@ function check_eval(str: string) {
 }
 
 function checkGameJsLoad(gameid, needError?) {
-    if (gameid.indexOf("dating") != -1) {
-        gameid = WebConfig.baseplatform == PageDef.BASE_PLATFORM_TYPE_NQP ? "datingnqp" : "dating";
-    }
     let isloaded = check_eval("game" + gameid);
     if (isDebug && !isloaded && needError) {
         throw new Error("you index.html not MyInport")

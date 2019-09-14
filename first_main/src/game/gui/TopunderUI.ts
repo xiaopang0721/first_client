@@ -26,7 +26,7 @@ module game.gui {
 				} else {
 					this.open(window["DatingPageDef"].PAGE_TIPS, (page: any) => {
 						page.dataSource = message;
-					}, null, true);
+					});
 				}
 			}
 		}
