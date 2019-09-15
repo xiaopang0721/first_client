@@ -13,6 +13,7 @@ module game.data {
 		static ui_atlas_effect: string = "custom_atlas/ui/";
 		static custom_atlas: string = "custom_atlas/";
 		
+		static sound_hy: string = Path.music + 'qi_kai_de_sheng.mp3';
 		static music_bg: string = Path.music + 'bg.mp3';
 		static music_btn: string = Path.music + 'btn.mp3';
 		static music_copy: string = Path.music + 'copy.mp3';
