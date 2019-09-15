@@ -39,3 +39,6 @@
 /first_main/libs/game*.d.ts
 /first_main/libs/tsd
 /first_main/src/gamecomponent
+/first_main/cmd_index_handle.sh
+/first_main/index_libs/game.txt
+/lib_release
