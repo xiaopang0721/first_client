@@ -151,6 +151,8 @@ module game {
 
 			if (btn.scaleX < 0 && scaleX == 1) scaleX = -1;
 			if (btn.scaleY < 0 && scaleY == 1) scaleY = -1;
+			if (btn.scaleX > 0 && btn.scaleX < 1) scaleX = btn.scaleX;
+			if (btn.scaleY > 0 && btn.scaleY < 1) scaleY = btn.scaleY;
 			let props: any = { scaleX: scaleX, scaleY: scaleY };
 			btn.scaleX = scaleX * 0.75;
 			btn.scaleY = scaleY * 0.75;
