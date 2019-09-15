@@ -34,13 +34,12 @@ game_list=(
 "gameelslp"
 )
 
-gameXXX=()
-
 src="$__root/src"
 bin="$__root/bin"
 indx="$bin/index.html"
 index_libs="$bin/index_libs"
 temp="$__root/temp.txt"
+mytemp="$__root/mytemp.txt"
 #获取关键行号
 startRow=`cat $indx | grep -En 'startTagAAA|endTagAAA' | awk -F: '{print $1}' | sed -n '1p'`
 endRow=`cat $indx | grep -En 'startTagAAA|endTagAAA' | awk -F: '{print $1}' | sed -n '2p'`
@@ -49,10 +48,20 @@ endRow=$[endRow-1]
 echo $startRow
 echo $endRow
 
+startCustomRow=`cat $indx | grep -En 'Custom' | awk -F: '{print $1}' | sed -n '1p'`
+endCustomRow=`cat $indx | grep -En 'Custom' | awk -F: '{print $1}' | sed -n '2p'`
+startCustomRow=$[startCustomRow+1]
+endCustomRow=$[endCustomRow-1]
+echo $startCustomRow
+echo $endCustomRow
+
 echo 'one'
 
 rm -rf $temp
 touch $temp
+
+rm -rf $mytemp
+touch $mytemp
 
 cd $src
 for d in ${game_list[@]}; do
@@ -64,7 +73,10 @@ for d in ${game_list[@]}; do
 			exit 6
 		fi
 		echo "txt: $txt"
-		echo `cat $txt` >>  $temp
+		echo `cat $txt`>>$temp
+		if [ "$d" != "game" ];then
+			echo '<script src="js/'$d'/MyInport.js"></script>\n'>>$mytemp
+		fi
 	fi
 done
 
@@ -81,6 +93,21 @@ sed -i 's/script>-<script-src/script>\n<script-src/g' $indx
 sed -i 's/<script-src/\t<script\ src/g' $indx
 
 rm -rf $temp
-# rm -rf game.txt
+
+
+echo 'four'
+
+sed -i 's/<script\ src/<script-src/g' $mytemp
+sed -i 's/script>\ <script-src/script>-<script-src/g' $mytemp
+sed -i ":a;N;s/\n//g;ta" $mytemp
+
+echo 'five'
+
+sed -i ${startCustomRow},${endCustomRow}c`cat $mytemp` $indx
+sed -i 's/script>-<script-src/script>\n<script-src/g' $indx
+sed -i 's/<script-src/\t<script\ src/g' $indx
+
+rm -rf $mytemp
+
 
 
