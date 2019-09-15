@@ -42,6 +42,13 @@ module game {
 			this._sceneScaleSpeed = v;
 		}
 
+		// 判断是否全面屏
+		get isFullScreen(): boolean {
+			// logd('********************', this._clientWidth, this._clientHeight, this._clientWidth / this._clientHeight);
+			let rate: number = this._clientWidth / this._clientHeight;
+			return rate >= 1.8;
+		}
+
 		// ui
 		protected _uiRoot: UIRoot;
 		get uiRoot(): UIRoot {
