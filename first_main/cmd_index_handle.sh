@@ -48,13 +48,6 @@ endRow=$[endRow-1]
 echo $startRow
 echo $endRow
 
-startCustomRow=`cat $indx | grep -En 'startCustom' | awk -F: '{print $1}'`
-endCustomRow=`cat $indx | grep -En 'endCustom' | awk -F: '{print $1}'`
-startCustomRow=$[startCustomRow+1]
-endCustomRow=$[endCustomRow-1]
-echo $startCustomRow
-echo $endCustomRow
-
 echo 'one'
 
 rm -rf $temp
@@ -96,6 +89,14 @@ rm -rf $temp
 
 
 echo 'four'
+
+startCustomRow=`cat $indx | grep -En 'startCustom' | awk -F: '{print $1}'`
+endCustomRow=`cat $indx | grep -En 'endCustom' | awk -F: '{print $1}'`
+startCustomRow=$[startCustomRow+1]
+endCustomRow=$[endCustomRow-1]
+echo $startCustomRow
+echo $endCustomRow
+
 
 sed -i 's/<script\ src/<script-src/g' $mytemp
 sed -i 's/script>\ <script-src/script>-<script-src/g' $mytemp
