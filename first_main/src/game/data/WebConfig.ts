@@ -54,15 +54,15 @@ __window.setAppVersion = function (v) {
 	if (!WebConfig.appVersion) WebConfig.appVersion = v;
 }
 
-WebConfig.vConsole = null;
-WebConfig.VConsole = function () {
-	if (WebConfig.gameGmOpen) {
-		if (WebConfig.vConsole) return;
-		WebConfig.vConsole = new window["VConsole"]();
-		console.log('Hello world');
-	}
-}
-WebConfig.VConsole();
+// WebConfig.vConsole = null;
+// WebConfig.VConsole = function () {
+// 	if (WebConfig.gameGmOpen) {
+// 		if (WebConfig.vConsole) return;
+// 		WebConfig.vConsole = new window["VConsole"]();
+// 		console.log('Hello world');
+// 	}
+// }
+// WebConfig.VConsole();
 
 
 WebConfig.hasClosePreload = false;
