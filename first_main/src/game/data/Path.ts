@@ -12,7 +12,9 @@ module game.data {
 		static temp: string = 'data/temp/';
 		static ui_atlas_effect: string = "custom_atlas/ui/";
 		static custom_atlas: string = "custom_atlas/";
-		
+		static ui_tongyong_sk: string = "tongyong_ui/game_ui/tongyong/sk/";
+		static atlas_game_ui_tongyong: string = "tongyong_res/atlas/tongyong_ui/game_ui/tongyong/";
+
 		static sound_hy: string = Path.music + 'qi_kai_de_sheng.mp3';
 		static music_bg: string = Path.music + 'bg.mp3';
 		static music_btn: string = Path.music + 'btn.mp3';
