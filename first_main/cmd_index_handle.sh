@@ -41,19 +41,12 @@ index_libs="$bin/index_libs"
 temp="$__root/temp.txt"
 mytemp="$__root/mytemp.txt"
 #获取关键行号
-startRow=`cat $indx | grep -En 'startTagAAA|endTagAAA' | awk -F: '{print $1}' | sed -n '1p'`
-endRow=`cat $indx | grep -En 'startTagAAA|endTagAAA' | awk -F: '{print $1}' | sed -n '2p'`
+startRow=`cat $indx | grep -En 'startTagAAA' | awk -F: '{print $1}'`
+endRow=`cat $indx | grep -En 'endTagAAA' | awk -F: '{print $1}'`
 startRow=$[startRow+1]
 endRow=$[endRow-1]
 echo $startRow
 echo $endRow
-
-startCustomRow=`cat $indx | grep -En 'Custom' | awk -F: '{print $1}' | sed -n '1p'`
-endCustomRow=`cat $indx | grep -En 'Custom' | awk -F: '{print $1}' | sed -n '2p'`
-startCustomRow=$[startCustomRow+1]
-endCustomRow=$[endCustomRow-1]
-echo $startCustomRow
-echo $endCustomRow
 
 echo 'one'
 
@@ -75,7 +68,7 @@ for d in ${game_list[@]}; do
 		echo "txt: $txt"
 		echo `cat $txt`>>$temp
 		if [ "$d" != "game" ];then
-			echo '<script src="js/'$d'/MyInport.js"></script>\n'>>$mytemp
+			echo '<script-src="js/'$d'/MyInport.js"></script>\n'>>$mytemp
 		fi
 	fi
 done
@@ -97,6 +90,14 @@ rm -rf $temp
 
 echo 'four'
 
+startCustomRow=`cat $indx | grep -En 'startCustom' | awk -F: '{print $1}'`
+endCustomRow=`cat $indx | grep -En 'endCustom' | awk -F: '{print $1}'`
+startCustomRow=$[startCustomRow+1]
+endCustomRow=$[endCustomRow-1]
+echo $startCustomRow
+echo $endCustomRow
+
+
 sed -i 's/<script\ src/<script-src/g' $mytemp
 sed -i 's/script>\ <script-src/script>-<script-src/g' $mytemp
 sed -i ":a;N;s/\n//g;ta" $mytemp
@@ -108,6 +109,11 @@ sed -i 's/script>-<script-src/script>\n<script-src/g' $indx
 sed -i 's/<script-src/\t<script\ src/g' $indx
 
 rm -rf $mytemp
+
+if [ -z $1 ] ;then
+	read -p "脚本执行完成,输入任意信息结束..." var
+fi
+exit 0
 
 
 
