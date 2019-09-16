@@ -110,5 +110,10 @@ sed -i 's/<script-src/\t<script\ src/g' $indx
 
 rm -rf $mytemp
 
+if [ -z $1 ] ;then
+	read -p "脚本执行完成,输入任意信息结束..." var
+fi
+exit 0
+
 
 
