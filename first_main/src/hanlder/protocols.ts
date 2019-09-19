@@ -2858,7 +2858,7 @@ module hanlder{
 			this.sendMsg( 184 , this._stream);
 			//Log.outDebug("CS====> cmd:184 player_qifu");
 		}
-		public call_recharge_confirm (account : string ,money : number ,type : number ,from_msg : string,id : number ):void{
+		public call_recharge_confirm (account : string ,money : number ,type : number ,from_msg : string):void{
 			this._stream.reset();
 			this._stream.writeUint16( 185 );
 			//账号
@@ -2869,8 +2869,6 @@ module hanlder{
 			this._stream.writeInt32 (type);
 			//转账信息
 			this._stream.writeString (from_msg);
-			//类型id
-			this._stream.writeInt32 (id);
 			this.sendMsg( 185 , this._stream);
 			//Log.outDebug("CS====> cmd:185 recharge_confirm");
 		}
@@ -5985,7 +5983,7 @@ module hanlder{
 		{
 			var parmLen:number;
 			var i:number;
-			//下注倍数
+			//?伦⒈妒?
 			self.num = bytes. readUint8 ();		
 		}
 	}
@@ -6841,7 +6839,7 @@ module hanlder{
 		}
 
 		/**
-		从输入二进制流中读取结构体
+		从输入二进制流中?寥〗峁固?
 		*/
 		public static read(self:c2s_shisanshui_playing, bytes:ByteArray):void
 		{
@@ -7789,10 +7787,6 @@ module hanlder{
 		* 转账信息
 		*/
 		public from_msg : string ;	//String
-		/**
-		* 类型id
-		*/
-		public id : number ;	//int32
 		public constructor()
 		{
 			
@@ -7813,8 +7807,6 @@ module hanlder{
 			self.type = bytes. readInt32 ();		
 			//转账信息
 			self.from_msg = bytes. readString ();		
-			//类型id
-			self.id = bytes. readInt32 ();		
 		}
 	}
 	export class c2s_login_invite

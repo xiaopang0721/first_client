@@ -44,8 +44,6 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_LVAWARE = 41  //VIP等级奖励
     public static USE_MONEY_LOG_TYPE_RECHARGE_YSF = 42  //云闪付加款
     public static USE_MONEY_LOG_TYPE_FIRSTPAY = 43  //首充奖励
-    public static USE_MONEY_LOG_TYPE_RECHARGE_WXBANK = 44  //微信转银行
-    public static USE_MONEY_LOG_TYPE_RECHARGE_ZFBBANK = 45  //支付宝转银行
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static client_money_logtype_table:{[key:number]:string}={
@@ -92,8 +90,6 @@ class Web_operation_fields {
         41:'VIP等级奖励',//VIP等级奖励
         42:'云闪付加款',//云闪付加款
         43:'首充奖励',//首充奖励
-        44:'微信转银行',//微信转银行
-        45:'支付宝转银行',//支付宝转银行
 	}
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
@@ -116,8 +112,6 @@ class Web_operation_fields {
     public static GAME_PAYIMG_TYPE_FAST = 13  //快速充值
     public static GAME_PAYIMG_TYPE_YSF = 14  //云闪付
     public static GAME_PAYIMG_TYPE_YSFSM = 15  //云闪付扫码
-    public static GAME_PAYIMG_TYPE_WXBANK = 16  //微信转银行
-    public static GAME_PAYIMG_TYPE_ZFBBANK = 17  //支付宝转银行
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_AGENT_REBATE_TYPE_DAY = 1  //按日返佣
@@ -935,8 +929,6 @@ class Web_operation_fields {
     public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_WX = 4  //微信转账
     public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_ZFB = 5  //支付宝转账
     public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_YSF = 6  //云闪付转账
-    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_WXBANK = 7  //微信转银行
-    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_ZFBBANK = 8  //支付宝转银行
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_SHUISANSHUI_TYPE0 = 1  //乌龙
@@ -980,6 +972,5 @@ class Web_operation_fields {
     public static FREE_STYLE_TYPES_FIRSTPAYCONFIG_C = "firstpayconfig_c"  //首充配置
     public static FREE_STYLE_TYPES_GAMEBULLETIN_C = "gamebulletin_c"  //游戏公告
     public static FREE_STYLE_TYPES_GAMEPOPCONFIG_C = "gamepopconfig_c"  //游戏弹窗配置
-    public static FREE_STYLE_TYPES_PROMOTIONSCFG_C = "promotionscfg_c"  //优惠活动配置
 //------------------------ END -----------------------------------
 }

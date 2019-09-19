@@ -418,8 +418,8 @@ module game {
 		 * @param isOnlyOK  是否只有一个按钮 =》确定
 		 * @param okSkin 确定的皮肤
 		 */
-		public alert(str: string, ecb: Function, ccb: Function, isOnlyOK: boolean = true, okSkin?: string, cancleSkin?: string, titleSkin?: string): void {
-			this._uiRoot.alert(str, ecb, ccb, isOnlyOK, okSkin, cancleSkin, titleSkin)
+		public alert(str: string, ecb: Function, ccb: Function, isOnlyOK: boolean = true, okSkin?: string, cancleSkin?: string): void {
+			this._uiRoot.alert(str, ecb, ccb, isOnlyOK, okSkin, cancleSkin)
 		}
 
 

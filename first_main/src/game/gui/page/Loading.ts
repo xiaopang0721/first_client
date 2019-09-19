@@ -28,7 +28,8 @@ module game.gui.page {
 			if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_DAZHONGQP) {
 				View.regViewRuntime("ui.dating.Loading_DHUI", LoadingDH);
 			} else {
-				View.regViewRuntime(StringU.substitute("ui.{0}.dating.Loading_DHUI", WebConfig.platform), LoadingDH); 
+
+				View.regViewRuntime(StringU.substitute("ui.{0}.dating.Loading_DHUI", WebConfig.platform), LoadingDH);
 			}
 			this._viewUI = this._view = this.createView('dating.LoadingUI', ['dating.Loading_DHUI']);
 			this.addChild(this._viewUI);

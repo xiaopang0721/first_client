@@ -111,11 +111,11 @@ module game {
 		 * @param isOnlyOK  是否只有一个按钮 =》确定
 		 * @param okSkin 确定的皮肤
 		 */
-		alert(str: string, ecb: Function = null, ccb: Function = null, isOnlyOK: boolean = true, okSkin?: string, cancleSkin?: string, titleSkin?: string): void {
+		alert(str: string, ecb: Function = null, ccb: Function = null, isOnlyOK: boolean = true, okSkin?: string, cancleSkin?: string): void {
 			this.top.close(window["DatingPageDef"].PAGE_TIP);
 			this.top.open(window["DatingPageDef"].PAGE_TIP, (tip: any) => {
 				tip.isOnlyOK = isOnlyOK;
-				tip.setInfo(str, ecb, ccb, okSkin, cancleSkin, titleSkin);
+				tip.setInfo(str, ecb, ccb, okSkin, cancleSkin);
 			});
 		}
 
