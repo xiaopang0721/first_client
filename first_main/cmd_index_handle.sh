@@ -52,10 +52,8 @@ echo $endRow
 echo 'one'
 
 rm -rf $temp
-touch $temp
 
 rm -rf $mytemp
-touch $mytemp
 
 cd $src
 for d in ${game_list[@]}; do
@@ -67,49 +65,58 @@ for d in ${game_list[@]}; do
 			continue
 		fi
 		echo "txt: $txt"
+		if [ ! -f ];then
+			touch $temp
+		fi
 		echo `cat $txt`>>$temp
 		if [ "$d" != "game" ];then
+			if [ ! -f ];then
+				touch $mytemp
+			fi
 			echo '<script-src="js/'$d'/MyInport.js"></script>\n'>>$mytemp
 		fi
 	fi
 done
 
-echo 'two'
+if [ -f "$temp" ];then
+	echo 'two'
+	
+	sed -i 's/<script\ src/<script-src/g' $temp
+	sed -i 's/script>\ <script-src/script>-<script-src/g' $temp
+	sed -i ":a;N;s/\n//g;ta" $temp
 
-sed -i 's/<script\ src/<script-src/g' $temp
-sed -i 's/script>\ <script-src/script>-<script-src/g' $temp
-sed -i ":a;N;s/\n//g;ta" $temp
+	echo 'three'
 
-echo 'three'
+	sed -i ${startRow},${endRow}c`cat $temp` $indx
+	sed -i 's/script>-<script-src/script>\n<script-src/g' $indx
+	sed -i 's/<script-src/\t<script\ src/g' $indx
 
-sed -i ${startRow},${endRow}c`cat $temp` $indx
-sed -i 's/script>-<script-src/script>\n<script-src/g' $indx
-sed -i 's/<script-src/\t<script\ src/g' $indx
+	rm -rf $temp
+fi
 
-rm -rf $temp
+if [ -f "$mytemp" ];then
+	echo 'four'
 
+	startCustomRow=`cat $indx | grep -En 'startCustom' | awk -F: '{print $1}'`
+	endCustomRow=`cat $indx | grep -En 'endCustom' | awk -F: '{print $1}'`
+	startCustomRow=$[startCustomRow+1]
+	endCustomRow=$[endCustomRow-1]
+	echo $startCustomRow
+	echo $endCustomRow
 
-echo 'four'
+	sed -i 's/<script\ src/<script-src/g' $mytemp
+	sed -i 's/script>\ <script-src/script>-<script-src/g' $mytemp
+	sed -i ":a;N;s/\n//g;ta" $mytemp
 
-startCustomRow=`cat $indx | grep -En 'startCustom' | awk -F: '{print $1}'`
-endCustomRow=`cat $indx | grep -En 'endCustom' | awk -F: '{print $1}'`
-startCustomRow=$[startCustomRow+1]
-endCustomRow=$[endCustomRow-1]
-echo $startCustomRow
-echo $endCustomRow
+	echo 'five'
 
+	sed -i ${startCustomRow},${endCustomRow}c`cat $mytemp` $indx
+	sed -i 's/script>-<script-src/script>\n<script-src/g' $indx
+	sed -i 's/<script-src/\t<script\ src/g' $indx
 
-sed -i 's/<script\ src/<script-src/g' $mytemp
-sed -i 's/script>\ <script-src/script>-<script-src/g' $mytemp
-sed -i ":a;N;s/\n//g;ta" $mytemp
+	rm -rf $mytemp
+fi
 
-echo 'five'
-
-sed -i ${startCustomRow},${endCustomRow}c`cat $mytemp` $indx
-sed -i 's/script>-<script-src/script>\n<script-src/g' $indx
-sed -i 's/<script-src/\t<script\ src/g' $indx
-
-rm -rf $mytemp
 
 if [ -z $1 ] ;then
 	read -p "脚本执行完成,输入任意信息结束..." var
