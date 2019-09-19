@@ -65,8 +65,8 @@ module game.gui.component {
 					let dataStr = path.indexOf(".bin") != -1 ? StringU.readZlibData(new ByteArray(tempData)) : tempData;
 					let script = document.createElement('script');
 					// script.type = "module";
-					script.async = false;
-					script.defer = true;
+					// script.async = false;
+					// script.defer = true;
 					script.innerHTML = dataStr;
 					document.body.appendChild(script);
 					if (gameid.indexOf("dating") == -1 && gameid.indexOf("component") == -1 && gameid.indexOf("tongyong") == -1) {
