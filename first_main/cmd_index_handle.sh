@@ -14,18 +14,19 @@ game_list=(
 "gamebrniuniu"
 "gamebuyu"
 "gamecaishendao"
-"gameddz"
+"gamerddz"
 "gamedezhou"
 "gameebgang"
 "gamehonghei"
 "gamelonghu"
 "gamemajiang"
 "gameniuniu"
+"gamerniuniu"
 "gamepaijiu"
-"gamepaodekuai"
+"gamerpaodekuai"
 "gamesangong"
 "gamesaolei"
-"gameshisanshui"
+"gamershisanshui"
 "gameshuiguoji"
 "gametbniuniu"
 "gametoubao"
@@ -63,7 +64,7 @@ for d in ${game_list[@]}; do
 		txt=${index_libs}/${d}.txt
 		if [ ! -f "$txt" ];then
 			echo "检查异常 没有 $d 的模版文件"
-			exit 6
+			continue
 		fi
 		echo "txt: $txt"
 		echo `cat $txt`>>$temp
