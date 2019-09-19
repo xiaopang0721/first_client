@@ -93,16 +93,16 @@ if [ -f "$temp" ];then
 
 	rm -rf $temp
 fi
+echo 'four'
+
+startCustomRow=`cat $indx | grep -En 'startCustom' | awk -F: '{print $1}'`
+endCustomRow=`cat $indx | grep -En 'endCustom' | awk -F: '{print $1}'`
+startCustomRow=$[startCustomRow+1]
+endCustomRow=$[endCustomRow-1]
+echo $startCustomRow
+echo $endCustomRow
 
 if [ -f "$mytemp" ];then
-	echo 'four'
-
-	startCustomRow=`cat $indx | grep -En 'startCustom' | awk -F: '{print $1}'`
-	endCustomRow=`cat $indx | grep -En 'endCustom' | awk -F: '{print $1}'`
-	startCustomRow=$[startCustomRow+1]
-	endCustomRow=$[endCustomRow-1]
-	echo $startCustomRow
-	echo $endCustomRow
 
 	sed -i 's/<script\ src/<script-src/g' $mytemp
 	sed -i 's/script>\ <script-src/script>-<script-src/g' $mytemp
@@ -113,9 +113,11 @@ if [ -f "$mytemp" ];then
 	sed -i ${startCustomRow},${endCustomRow}c`cat $mytemp` $indx
 	sed -i 's/script>-<script-src/script>\n<script-src/g' $indx
 	sed -i 's/<script-src/\t<script\ src/g' $indx
-
 	rm -rf $mytemp
+else
+	sed -i ${startCustomRow},${endCustomRow}c'		<!--导入类添加到这里-->' $indx
 fi
+
 
 
 if [ -z $1 ] ;then
