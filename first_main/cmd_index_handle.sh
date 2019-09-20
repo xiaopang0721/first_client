@@ -65,12 +65,12 @@ for d in ${game_list[@]}; do
 			continue
 		fi
 		echo "txt: $txt"
-		if [ ! -f ];then
+		if [ ! -f $temp ];then
 			touch $temp
 		fi
 		echo `cat $txt`>>$temp
 		if [ "$d" != "game" ];then
-			if [ ! -f ];then
+			if [ ! -f $mytemp ];then
 				touch $mytemp
 			fi
 			echo '<script-src="js/'$d'/MyInport.js"></script>\n'>>$mytemp
