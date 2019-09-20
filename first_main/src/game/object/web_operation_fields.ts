@@ -11,10 +11,10 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_CASH = 8  //提款
     public static USE_MONEY_LOG_TYPE_TALLAGE = 9  //抽水
     public static USE_MONEY_LOG_TYPE_XIQIAN = 10  //喜钱
-    public static USE_MONEY_LOG_TYPE_SIGNIN = 11  //签到获得
-    public static USE_MONEY_LOG_TYPE_TURNTABLE = 12  //转盘获得
-    public static USE_MONEY_LOG_TYPE_GMADD = 13  //GM命令加钱
-    public static USE_MONEY_LOG_TYPE_GMSUB = 14  //GM命令减钱
+    public static USE_MONEY_LOG_TYPE_SIGNIN = 11  //签到奖励
+    public static USE_MONEY_LOG_TYPE_TURNTABLE = 12  //转盘奖励
+    public static USE_MONEY_LOG_TYPE_GMADD = 13  //GM加钱
+    public static USE_MONEY_LOG_TYPE_GMSUB = 14  //GM减钱
     public static USE_MONEY_LOG_TYPE_RECHARGE_VIP = 15  //VIP充值
     public static USE_MONEY_LOG_TYPE_RECHARGE_RAKEBACK = 16  //佣金池领取
     public static USE_MONEY_LOG_TYPE_RECHARGE_OTHER = 17  //其他加款
@@ -23,25 +23,29 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_CASH_OTHER = 20  //其他扣款
     public static USE_MONEY_LOG_TYPE_CASH_RECHARGEREEX = 21  //加款重新审核
     public static USE_MONEY_LOG_TYPE_CASH_CASHREEX = 22  //扣款重新审核
-    public static USE_MONEY_LOG_TYPE_FISH_RECHARGE = 23  //捕鱼用户充值加款
-    public static USE_MONEY_LOG_TYPE_FISH_FIRE = 24  //捕鱼用户开炮扣款
-    public static USE_MONEY_LOG_TYPE_FISH_GETFISH = 25  //捕鱼用户捕获加款
-    public static USE_MONEY_LOG_TYPE_SAFEBOX_OUT = 26  //保险箱取出玩家余额加款
-    public static USE_MONEY_LOG_TYPE_SAFEBOX_IN = 27  //保险箱存入玩家余额扣款
-    public static USE_MONEY_LOG_TYPE_SAFEBOX_INTEREST = 28  //保险箱产生利息加款
-    public static USE_MONEY_LOG_TYPE_BIND = 29  //玩家绑定赠送金额
-    public static USE_MONEY_LOG_TYPE_DAILYSHARE = 30  //玩家分享赠送金额
+    public static USE_MONEY_LOG_TYPE_FISH_RECHARGE = 23  //捕鱼充值
+    public static USE_MONEY_LOG_TYPE_FISH_FIRE = 24  //捕鱼开炮
+    public static USE_MONEY_LOG_TYPE_FISH_GETFISH = 25  //捕鱼捕获
+    public static USE_MONEY_LOG_TYPE_SAFEBOX_OUT = 26  //余额宝转出
+    public static USE_MONEY_LOG_TYPE_SAFEBOX_IN = 27  //转入余额宝
+    public static USE_MONEY_LOG_TYPE_SAFEBOX_INTEREST = 28  //余额宝利息
+    public static USE_MONEY_LOG_TYPE_BIND = 29  //绑定奖励
+    public static USE_MONEY_LOG_TYPE_DAILYSHARE = 30  //分享奖励
     public static USE_MONEY_LOG_TYPE_ROOMCARD = 31  //房卡
     public static USE_MONEY_LOG_TYPE_APIREDBAG = 32  //红包
     public static USE_MONEY_LOG_TYPE_APICAIJUAN = 33  //彩券
-    public static USE_MONEY_LOG_TYPE_INVALID_BET_MONEY = 34  //无效下注金额
-    public static USE_MONEY_LOG_TYPE_RECHARGE_WEIXIN = 35  //微信加款
-    public static USE_MONEY_LOG_TYPE_RECHARGE_ALIPAY = 36  //支付宝加款
-    public static USE_MONEY_LOG_TYPE_RECHARGE_BANK = 37  //银行卡加款
+    public static USE_MONEY_LOG_TYPE_INVALID_BET_MONEY = 34  //无效下注
+    public static USE_MONEY_LOG_TYPE_RECHARGE_WEIXIN = 35  //微信充值
+    public static USE_MONEY_LOG_TYPE_RECHARGE_ALIPAY = 36  //支付宝充值
+    public static USE_MONEY_LOG_TYPE_RECHARGE_BANK = 37  //银行卡充值
     public static USE_MONEY_LOG_TYPE_CASH_ADMIN = 38  //管理员扣款
     public static USE_MONEY_LOG_TYPE_QIFU = 39  //祈福扣款
     public static USE_MONEY_LOG_TYPE_ROOMCARD_BACK = 40  //房卡返还
     public static USE_MONEY_LOG_TYPE_LVAWARE = 41  //VIP等级奖励
+    public static USE_MONEY_LOG_TYPE_RECHARGE_YSF = 42  //云闪付加款
+    public static USE_MONEY_LOG_TYPE_FIRSTPAY = 43  //首充奖励
+    public static USE_MONEY_LOG_TYPE_RECHARGE_WXBANK = 44  //微信转银行
+    public static USE_MONEY_LOG_TYPE_RECHARGE_ZFBBANK = 45  //支付宝转银行
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static client_money_logtype_table:{[key:number]:string}={
@@ -55,10 +59,10 @@ class Web_operation_fields {
         8:'提款',//提款
         9:'抽水',//抽水
         10:'喜钱',//喜钱
-        11:'签到获得',//签到获得
-        12:'转盘获得',//转盘获得
-        13:'GM命令加钱',//GM命令加钱
-        14:'GM命令减钱',//GM命令减钱
+        11:'签到奖励',//签到奖励
+        12:'转盘奖励',//转盘奖励
+        13:'GM加钱',//GM加钱
+        14:'GM减钱',//GM减钱
         15:'VIP充值',//VIP充值
         16:'佣金池领取',//佣金池领取
         17:'其他加款',//其他加款
@@ -67,18 +71,18 @@ class Web_operation_fields {
         20:'其他扣款',//其他扣款
         21:'加款重新审核',//加款重新审核
         22:'扣款重新审核',//扣款重新审核
-        23:'捕鱼用户充值加款',//捕鱼用户充值加款
-        24:'捕鱼用户开炮扣款',//捕鱼用户开炮扣款
-        25:'捕鱼用户捕获加款',//捕鱼用户捕获加款
-        26:'保险箱取出玩家余额加款',//保险箱取出玩家余额加款
-        27:'保险箱存入玩家余额扣款',//保险箱存入玩家余额扣款
-        28:'保险箱产生利息加款',//保险箱产生利息加款
-        29:'玩家绑定赠送金额',//玩家绑定赠送金额
-        30:'玩家分享赠送金额',//玩家分享赠送金额
+        23:'捕鱼充值',//捕鱼充值
+        24:'捕鱼开炮',//捕鱼开炮
+        25:'捕鱼捕获',//捕鱼捕获
+        26:'余额宝转出',//余额宝转出
+        27:'转入余额宝',//转入余额宝
+        28:'余额宝利息',//余额宝利息
+        29:'绑定奖励',//绑定奖励
+        30:'分享奖励',//分享奖励
         31:'房卡',//房卡
         32:'红包',//红包
         33:'彩券',//彩券
-        34:'无效下注金额',//无效下注金额
+        34:'无效下注',//无效下注
         35:'微信加款',//微信加款
         36:'支付宝加款',//支付宝加款
         37:'银行卡加款',//银行卡加款
@@ -87,6 +91,9 @@ class Web_operation_fields {
         40:'房卡返还',//房卡返还
         41:'VIP等级奖励',//VIP等级奖励
         42:'云闪付加款',//云闪付加款
+        43:'首充奖励',//首充奖励
+        44:'微信转银行',//微信转银行
+        45:'支付宝转银行',//支付宝转银行
 	}
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
@@ -109,6 +116,8 @@ class Web_operation_fields {
     public static GAME_PAYIMG_TYPE_FAST = 13  //快速充值
     public static GAME_PAYIMG_TYPE_YSF = 14  //云闪付
     public static GAME_PAYIMG_TYPE_YSFSM = 15  //云闪付扫码
+    public static GAME_PAYIMG_TYPE_WXBANK = 16  //微信转银行
+    public static GAME_PAYIMG_TYPE_ZFBBANK = 17  //支付宝转银行
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_AGENT_REBATE_TYPE_DAY = 1  //按日返佣
@@ -198,8 +207,8 @@ class Web_operation_fields {
         30:'注册失败，生成邀请码发生错误，请确认！',//注册失败，生成邀请码发生错误，请确认！
         31:'密码不能为空，请确认！',//密码不能为空，请确认！
         32:'请输入正确的旧密码！',//请输入正确的旧密码！
-        33:'密码错误，请确认！',//密码错误，请确认！
-        34:'该玩家账号不存在，请联系客服处理！',//该玩家账号不存在，请联系客服处理！
+        33:'密码错误，请检查！',//密码错误，请检查！
+        34:'无此用户，请使用验证码登录/注册',//无此用户，请使用验证码登录/注册
         35:'账号长度不符合要求(至少3位)，请确认！',//账号长度不符合要求(至少3位)，请确认！
         36:'账号已被冻结，请联系客服处理！',//账号已被冻结，请联系客服处理！
         37:'获取玩家邮件数据失败，请确认！',//获取玩家邮件数据失败，请确认！
@@ -215,7 +224,7 @@ class Web_operation_fields {
         47:'当前操作已执行，请勿重复提交！',//当前操作已执行，请勿重复提交！
         48:'当前操作对应的服务器没有执行记录，请确认！',//当前操作对应的服务器没有执行记录，请确认！
         49:'获取验证码失败，账号不能为空，请确认！',//获取验证码失败，账号不能为空，请确认！
-        50:'生成该手机验证码次数过于频繁，请稍候重试！',//生成该手机验证码次数过于频繁，请稍候重试！
+        50:'获取验证码过于频繁，请稍候重试！',//获取验证码过于频繁，请稍候重试！
         51:'获取玩家投注记录失败，请稍候重试！',//获取玩家投注记录失败，请稍候重试！
         52:'玩家进入游戏失败，游戏不存在，请确认！',//玩家进入游戏失败，游戏不存在，请确认！
         53:'玩家进入游戏失败，参数不正确，请确认！',//玩家进入游戏失败，参数不正确，请确认！
@@ -273,9 +282,9 @@ class Web_operation_fields {
         105:'注册邀请码对应关系出错，参数不正确，请确认！',//注册邀请码对应关系出错，参数不正确，请确认！
         106:'注册邀请码对应关系出错，IP格式不正确，请确认！',//注册邀请码对应关系出错，IP格式不正确，请确认！
         107:'注册邀请码对应关系出错，当前邀请码玩家数据不存在，请确认！',//注册邀请码对应关系出错，当前邀请码玩家数据不存在，请确认！
-        108:'重置密码操作失败，验证码不正确，请确认，谢谢！',//重置密码操作失败，验证码不正确，请确认，谢谢！
-        109:'重置密码操作失败，请确认，谢谢！',//重置密码操作失败，请确认，谢谢！
-        110:'重置密码操作失败，手机号码不匹配，请确认，谢谢！',//重置密码操作失败，手机号码不匹配，请确认，谢谢！
+        108:'设置密码操作失败，验证码不正确，请确认，谢谢！',//设置密码操作失败，验证码不正确，请确认，谢谢！
+        109:'设置密码操作失败，请确认，谢谢！',//设置密码操作失败，请确认，谢谢！
+        110:'设置密码操作失败，手机号码不匹配，请确认，谢谢！',//设置密码操作失败，手机号码不匹配，请确认，谢谢！
         111:'删除邮件操作失败，请确认，谢谢！',//删除邮件操作失败，请确认，谢谢！
         112:'更改玩家资料失败，参数不正确，请确认，谢谢！',//更改玩家资料失败，参数不正确，请确认，谢谢！
         113:'更改玩家资料失败，请确认，谢谢！',//更改玩家资料失败，请确认，谢谢！
@@ -329,7 +338,7 @@ class Web_operation_fields {
         161:'微信登陆错误，登陆相关参数不正确或未配置，请确认！',//微信登陆错误，登陆相关参数不正确或未配置，请确认！
         162:'微信登陆错误，获取用户信息失败，请确认！',//微信登陆错误，获取用户信息失败，请确认！
         163:'玩家登陆错误，登陆类型不正确，请确认！',//玩家登陆错误，登陆类型不正确，请确认！
-        164:'玩家登陆错误，密码或验证码不正确，请确认！',//玩家登陆错误，密码或验证码不正确，请确认！
+        164:'验证码错误，请检查！',//验证码错误，请检查！
         165:'玩家登陆错误，更新玩家信息失败，请确认！',//玩家登陆错误，更新玩家信息失败，请确认！
         166:'玩家资料修改失败，昵称只能修改一次，请确认！',//玩家资料修改失败，昵称只能修改一次，请确认！
         167:'账号绑定失败，绑定类型不正确，请确认！',//账号绑定失败，绑定类型不正确，请确认！
@@ -368,6 +377,8 @@ class Web_operation_fields {
         200:'获取祈福数据失败！',//获取祈福数据失败！
         201:'获取VIP等级失败！',//获取VIP等级失败！
         202:'领取VIP等级奖励失败！',//领取VIP等级奖励失败！
+        203:'当前重复错误次数过多，请60分钟后再试！',//当前重复错误次数过多，请60分钟后再试！
+        204:'已生成订单，请等待到账！',//已生成订单，请等待到账！
 	}
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
@@ -735,6 +746,8 @@ class Web_operation_fields {
     public static CLIENT_IRCODE_AGENCYPLAYEROFFLINEDATA = 62  //getagencyplayerofflinedata
     public static CLIENT_IRCODE_PLAYERLVLIST = 63  //getplayerlevellist
     public static CLIENT_IRCODE_PLAYERLVAWARE = 64  //playerlevelaware
+    public static CLIENT_IRCODE_CHECKLOGINVF = 65  //checkloginvf
+    public static CLIENT_IRCODE_GETBULLETINLIST = 66  //getbulletinlist
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static CARD_GAME_PAY_TYP_MASTER = 1  //房主付费
@@ -877,11 +890,17 @@ class Web_operation_fields {
     public static GAME_SERVER_MSG_TYPE_CARD_CONFIG = 4  //房卡配置
     public static GAME_SERVER_MSG_TYPE_NOTICE_LIST = 5  //公告列表
     public static GAME_SERVER_MSG_TYPE_CHANGE_PDATA = 6  //更新pdata
-    public static GAME_SERVER_MSG_TYPE_SIGNIN_CONFIG = 7  //签到配置
-    public static GAME_SERVER_MSG_TYPE_TURNTABLE_CONFIG = 8  //转盘配置
-    public static GAME_SERVER_MSG_TYPE_VIP_CONFIG = 9  //VIP配置
-    public static GAME_SERVER_MSG_TYPE_QIFU_CONFIG = 10  //祈福配置
-    public static GAME_SERVER_MSG_TYPE_BASE_CONFIG = 11  //基础配置
+    public static GAME_SERVER_MSG_TYPE_FREE_STYLE = 7  //配置系统通知
+    public static GAME_SERVER_MSG_TYPE_SIGNIN_CONFIG = 8  //签到配置
+    public static GAME_SERVER_MSG_TYPE_TURNTABLE_CONFIG = 9  //转盘配置
+    public static GAME_SERVER_MSG_TYPE_VIP_CONFIG = 10  //VIP配置
+    public static GAME_SERVER_MSG_TYPE_QIFU_CONFIG = 11  //祈福配置
+    public static GAME_SERVER_MSG_TYPE_BASE_CONFIG = 12  //基础配置
+    public static GAME_SERVER_MSG_TYPE_ORDER_STATUS = 13  //订单状态
+    public static GAME_SERVER_MSG_TYPE_CHANGE_FLOW = 14  //修改打码量
+    public static GAME_SERVER_MSG_TYPE_ADD_YONGJIN = 15  //添加佣金池金额
+    public static GAME_SERVER_MSG_TYPE_NEW_BULLETIN = 16  //新游戏公告通知
+    public static GAME_SERVER_MSG_TYPE_LOCK_ACCOUNT = 17  //封号
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_QIFU_TYPE_XISHOU = 1  //洗手
@@ -909,6 +928,16 @@ class Web_operation_fields {
     public static GAME_GONGGAO_OPENPAGE_TYPE_HUODONG = 6  //优惠活动
     public static GAME_GONGGAO_OPENPAGE_TYPE_YUEBAO = 7  //余额宝
     public static GAME_GONGGAO_OPENPAGE_TYPE_FANGKA = 8  //房卡标签
+//------------------------ END -----------------------------------
+//------------------------START-----------------------------------
+    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_NONE = 1  //不跳转
+    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_VIP = 2  //VIP充值
+    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_YHK = 3  //银行卡转账
+    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_WX = 4  //微信转账
+    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_ZFB = 5  //支付宝转账
+    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_YSF = 6  //云闪付转账
+    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_WXBANK = 7  //微信转银行
+    public static GAME_GONGGAO_OPENPAGE_RECHARGE_TYPE_ZFBBANK = 8  //支付宝转银行
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_SHUISANSHUI_TYPE0 = 1  //乌龙
@@ -942,5 +971,16 @@ class Web_operation_fields {
     public static DAILI_YONGHU_TIME_TYPE_QIANRI = 5  //前日
     public static DAILI_YONGHU_TIME_TYPE_ZUORI = 6  //昨日
     public static DAILI_YONGHU_TIME_TYPE_JINRI = 7  //今日
+//------------------------ END -----------------------------------
+//------------------------START-----------------------------------
+    public static FREE_STYLE_TYPES_BASECONFIG_C = "baseconfig_c"  //基础配置
+    public static FREE_STYLE_TYPES_VIPLVCONFIG_C = "viplvconfig_c"  //VIP等级配置
+    public static FREE_STYLE_TYPES_SIGNINCONFIG_C = "signinconfig_c"  //签到配置
+    public static FREE_STYLE_TYPES_TURNTABLECONFIG_C = "turntableconfig_c"  //转盘配置
+    public static FREE_STYLE_TYPES_QIFUCONFIG_C = "qifuconfig_c"  //祈福配置
+    public static FREE_STYLE_TYPES_FIRSTPAYCONFIG_C = "firstpayconfig_c"  //首充配置
+    public static FREE_STYLE_TYPES_GAMEBULLETIN_C = "gamebulletin_c"  //游戏公告
+    public static FREE_STYLE_TYPES_GAMEPOPCONFIG_C = "gamepopconfig_c"  //游戏弹窗配置
+    public static FREE_STYLE_TYPES_PROMOTIONSCFG_C = "promotionscfg_c"  //优惠活动配置
 //------------------------ END -----------------------------------
 }

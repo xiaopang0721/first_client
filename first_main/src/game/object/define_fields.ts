@@ -290,6 +290,12 @@ export class PlayerDataField extends core.obj.GuidObject{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,19);
     }
 
+
+//是否封号
+	public IsIsLockAccount():boolean{
+       return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,20);
+    }
+
 	public GetMoney():number{
        return this.GetInt32(PlayerDataField.PLAYERDATA_INT_MONEY);
     }
