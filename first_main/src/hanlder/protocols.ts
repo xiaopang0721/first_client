@@ -6025,7 +6025,7 @@ module hanlder{
 		{
 			var parmLen:number;
 			var i:number;
-			//下注倍数
+			//?伦⒈妒?
 			self.num = bytes. readUint8 ();		
 		}
 	}
@@ -6881,7 +6881,7 @@ module hanlder{
 		}
 
 		/**
-		从输入二进制流中读取结构体
+		从输入二进制流中?寥〗峁固?
 		*/
 		public static read(self:c2s_shisanshui_playing, bytes:ByteArray):void
 		{
