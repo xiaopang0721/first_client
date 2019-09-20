@@ -430,7 +430,7 @@ module hanlder{
 		public static  CMSG_GET_BIND_REWARD :number = 211;	//get_bind_reward
 		/*佣金领取*/
 		public static  CMSG_GET_COMMISSION :number = 212;	//get_commission
-		/**/
+		/*freestyle系统*/
 		public static  CMSG_FREE_SYTLE_SYNC :number = 213;	//free_sytle_sync
 		/*校验登录验证码*/
 		public static  CMSG_CHECK_LOGIN_VF :number = 214;	//check_login_vf
@@ -444,6 +444,14 @@ module hanlder{
 		public static  CMSG_GET_BULLETIN_LIST :number = 218;	//get_bulletin_list
 		/*读取公告*/
 		public static  CMSG_READ_BULLETIN :number = 219;	//read_bulletin
+		/*房卡牛牛抢庄*/
+		public static  CMSG_RNIUNIU_BANKER :number = 220;	//rniuniu_banker
+		/*房卡牛牛下注*/
+		public static  CMSG_RNIUNIU_BET :number = 221;	//rniuniu_bet
+		/*房卡牛牛拼牌*/
+		public static  CMSG_RNIUNIU_PINPAI :number = 222;	//rniuniu_pinpai
+		/*根据房间号获取游戏id*/
+		public static  CMSG_GET_GAMEID_BY_ROOM_ID :number = 223;	//get_gameid_by_room_id
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -673,6 +681,10 @@ module hanlder{
 			this._FUNCS[217] = "set_role_info";
 			this._FUNCS[218] = "get_bulletin_list";
 			this._FUNCS[219] = "read_bulletin";
+			this._FUNCS[220] = "rniuniu_banker";
+			this._FUNCS[221] = "rniuniu_bet";
+			this._FUNCS[222] = "rniuniu_pinpai";
+			this._FUNCS[223] = "get_gameid_by_room_id";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1461,6 +1473,21 @@ module hanlder{
 				case Protocols.CMSG_READ_BULLETIN :	//read_bulletin
 					var obj_read_bulletin:c2s_read_bulletin = new c2s_read_bulletin;
 					return obj_read_bulletin;
+				case Protocols.CMSG_RNIUNIU_BANKER :	//rniuniu_banker
+					var obj_rniuniu_banker:c2s_rniuniu_banker = new c2s_rniuniu_banker;
+					c2s_rniuniu_banker .read(obj_rniuniu_banker, bs);
+					return obj_rniuniu_banker;
+				case Protocols.CMSG_RNIUNIU_BET :	//rniuniu_bet
+					var obj_rniuniu_bet:c2s_rniuniu_bet = new c2s_rniuniu_bet;
+					c2s_rniuniu_bet .read(obj_rniuniu_bet, bs);
+					return obj_rniuniu_bet;
+				case Protocols.CMSG_RNIUNIU_PINPAI :	//rniuniu_pinpai
+					var obj_rniuniu_pinpai:c2s_rniuniu_pinpai = new c2s_rniuniu_pinpai;
+					return obj_rniuniu_pinpai;
+				case Protocols.CMSG_GET_GAMEID_BY_ROOM_ID :	//get_gameid_by_room_id
+					var obj_get_gameid_by_room_id:c2s_get_gameid_by_room_id = new c2s_get_gameid_by_room_id;
+					c2s_get_gameid_by_room_id .read(obj_get_gameid_by_room_id, bs);
+					return obj_get_gameid_by_room_id;
 				default:
 					break;
 			}
@@ -2858,7 +2885,7 @@ module hanlder{
 			this.sendMsg( 184 , this._stream);
 			//Log.outDebug("CS====> cmd:184 player_qifu");
 		}
-		public call_recharge_confirm (account : string ,money : number ,type : number ,from_msg : string,id : number ):void{
+		public call_recharge_confirm (account : string ,money : number ,type : number ,from_msg : string):void{
 			this._stream.reset();
 			this._stream.writeUint16( 185 );
 			//账号
@@ -2869,8 +2896,6 @@ module hanlder{
 			this._stream.writeInt32 (type);
 			//转账信息
 			this._stream.writeString (from_msg);
-			//类型id
-			this._stream.writeInt32 (id);
 			this.sendMsg( 185 , this._stream);
 			//Log.outDebug("CS====> cmd:185 recharge_confirm");
 		}
@@ -3145,6 +3170,36 @@ module hanlder{
 			this._stream.writeUint16( 219 );
 			this.sendMsg( 219 , this._stream);
 			//Log.outDebug("CS====> cmd:219 read_bulletin");
+		}
+		public call_rniuniu_banker (num : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 220 );
+			//抢庄倍率
+			this._stream.writeInt32 (num);
+			this.sendMsg( 220 , this._stream);
+			//Log.outDebug("CS====> cmd:220 rniuniu_banker");
+		}
+		public call_rniuniu_bet (num : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 221 );
+			//下注倍率
+			this._stream.writeInt32 (num);
+			this.sendMsg( 221 , this._stream);
+			//Log.outDebug("CS====> cmd:221 rniuniu_bet");
+		}
+		public call_rniuniu_pinpai ():void{
+			this._stream.reset();
+			this._stream.writeUint16( 222 );
+			this.sendMsg( 222 , this._stream);
+			//Log.outDebug("CS====> cmd:222 rniuniu_pinpai");
+		}
+		public call_get_gameid_by_room_id (roomid : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 223 );
+			//房间号
+			this._stream.writeInt32 (roomid);
+			this.sendMsg( 223 , this._stream);
+			//Log.outDebug("CS====> cmd:223 get_gameid_by_room_id");
 		}
 	}
 
@@ -3548,7 +3603,7 @@ module hanlder{
 		*/
 		public game_number : number ;	//uint32
 		/**
-		* 支付类型1:房主2:AA
+		* 支付类??:房主2:AA
 		*/
 		public pay_typ : number ;	//uint32
 		/**
@@ -7789,10 +7844,6 @@ module hanlder{
 		* 转账信息
 		*/
 		public from_msg : string ;	//String
-		/**
-		* 类型id
-		*/
-		public id : number ;	//int32
 		public constructor()
 		{
 			
@@ -7813,8 +7864,6 @@ module hanlder{
 			self.type = bytes. readInt32 ();		
 			//转账信息
 			self.from_msg = bytes. readString ();		
-			//类型id
-			self.id = bytes. readInt32 ();		
 		}
 	}
 	export class c2s_login_invite
@@ -8620,6 +8669,91 @@ module hanlder{
 		public constructor()
 		{
 			
+		}
+	}
+	export class c2s_rniuniu_banker
+	{
+		public optcode:number = 0;
+		public optname:string = "onRniuniu_banker";
+	
+		/**
+		* 抢庄倍率
+		*/
+		public num : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_rniuniu_banker, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//抢庄倍率
+			self.num = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_rniuniu_bet
+	{
+		public optcode:number = 0;
+		public optname:string = "onRniuniu_bet";
+	
+		/**
+		* 下注倍率
+		*/
+		public num : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_rniuniu_bet, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//下注倍率
+			self.num = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_rniuniu_pinpai
+	{
+		public optcode:number = 0;
+		public optname:string = "onRniuniu_pinpai";
+	
+		public constructor()
+		{
+			
+		}
+	}
+	export class c2s_get_gameid_by_room_id
+	{
+		public optcode:number = 0;
+		public optname:string = "onGet_gameid_by_room_id";
+	
+		/**
+		* 房间号
+		*/
+		public roomid : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_get_gameid_by_room_id, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//房间号
+			self.roomid = bytes. readInt32 ();		
 		}
 	}
 
