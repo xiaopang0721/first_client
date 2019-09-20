@@ -1590,9 +1590,11 @@ module hanlder{
 			this.sendMsg( 16 , this._stream);
 			//Log.outDebug("CS====> cmd:16 create_room");
 		}
-		public call_join_room (card_id : string ):void{
+		public call_join_room (id : string ,card_id : string):void{
 			this._stream.reset();
 			this._stream.writeUint16( 17 );
+			//游戏id
+			this._stream.writeString (id);
 			//房卡id
 			this._stream.writeString (card_id);
 			this.sendMsg( 17 , this._stream);
@@ -3581,6 +3583,10 @@ module hanlder{
 		public optname:string = "onJoin_room";
 	
 		/**
+		* 游戏id
+		*/
+		public id : string ;	//String
+		/**
 		* 房卡id
 		*/
 		public card_id : string ;	//String
@@ -3596,6 +3602,8 @@ module hanlder{
 		{
 			var parmLen:number;
 			var i:number;
+			//游戏id
+			self.id = bytes. readString ();		
 			//房卡id
 			self.card_id = bytes. readString ();		
 		}
@@ -5975,7 +5983,7 @@ module hanlder{
 		{
 			var parmLen:number;
 			var i:number;
-			//下注倍数
+			//?伦⒈妒?
 			self.num = bytes. readUint8 ();		
 		}
 	}
@@ -6831,7 +6839,7 @@ module hanlder{
 		}
 
 		/**
-		从输入二进制流中读取结构体
+		从输入二进制流中?寥〗峁固?
 		*/
 		public static read(self:c2s_shisanshui_playing, bytes:ByteArray):void
 		{
