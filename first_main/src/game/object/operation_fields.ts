@@ -19,7 +19,6 @@ class Operation_Fields {
 	public static OPRATE_LOGIN_MAX_PLAYER:number = 15 //非常抱歉，当前服务器人数已满，请尝试其他服务器登录吧
 	public static OPRATE_LOGIN_GAME_LIST:number = 16 //游戏列表
 	public static OPRATE_LOGIN_MOBILE_VF:number = 17 //手机验证码
-	public static OPRATE_LOGIN_CALL_SESSION_KEY:number = 18 //sessionkey
 	//操作错误类型
 	public static OPRATE_CLOSE:number = 2 //关闭客户端操作错误类型
 	public static OPRATE_CLOSE_LOGOUT:number = 1 //客戶端退出登录
@@ -28,18 +27,14 @@ class Operation_Fields {
 	public static OPRATE_CLOSE_KICK_PLAYER:number = 4 //踢下线
 	public static OPRATE_CLOSE_SIGN_ERR:number = 5 //sign错误
 	public static OPRATE_CLOSE_ACCOUNT_ERR:number = 6 //账号错误
-	public static OPRATE_CLOSE_GET_PLAYER_ERR:number = 7 //从后台获取玩家数据异常
-	public static OPRATE_CLOSE_GET_SESSIONKEY_ERR:number = 8 //从后台获取sessionkey异常
-	public static OPRATE_CLOSE_SESSIONKEY_MISS_PARA:number = 9 //sessionkey参数缺失
-	public static OPRATE_CLOSE_SERVER_NAME_NOT_FOUND:number = 10 //找不到这个平台
-	public static OPRATE_CLOSE_SIGN_SERVER_NAME_INCONFORMITY:number = 11 //sing与server_name不一致
-	public static OPRATE_CLOSE_RELOGIN:number = 12 //重复登录
-	public static OPRATE_CLOSE_TIMEOUT:number = 13 //超时
-	public static OPRATE_CLOSE_FORCE_RELOGIN:number = 14 //允许强制重新登陆
-	public static OPRATE_CLOSE_OTHER_ONLINE:number = 15 //其他在线中
-	public static OPRATE_CLOSE_WEB_GET_INFO_ERR:number = 16 //web请求失败
-	public static OPRATE_CLOSE_WEB_CRASH:number = 17 //web崩溃
-	public static OPRATE_CLOSE_ON_PKT_STATUS_NOVER_ERR:number = 18 //还没登陆就发了错误的包上来
+	public static OPRATE_CLOSE_SERVER_NAME_NOT_FOUND:number = 7 //找不到这个平台
+	public static OPRATE_CLOSE_SIGN_SERVER_NAME_INCONFORMITY:number = 8 //sing与server_name不一致
+	public static OPRATE_CLOSE_RELOGIN:number = 9 //重复登录
+	public static OPRATE_CLOSE_TIMEOUT:number = 10 //超时
+	public static OPRATE_CLOSE_FORCE_RELOGIN:number = 11 //允许强制重新登陆
+	public static OPRATE_CLOSE_OTHER_ONLINE:number = 12 //其他在线中
+	public static OPRATE_CLOSE_WEB_GET_INFO_ERR:number = 13 //web请求失败
+	public static OPRATE_CLOSE_WEB_CRASH:number = 14 //web崩溃
 	//操作错误类型
 	public static OPRATE_TELEPORT:number = 3 //传送操作错误类型
 	public static OPRATE_TELEPORT_FAIL:number = 1 //传送失败
@@ -97,16 +92,6 @@ class Operation_Fields {
 	public static OPRATE_GAME_SIGN_IN_SUCCESS:number = 4 //签到成功
 	public static OPRATE_GAME_SCORE_LUCKY_DRAW:number = 5 //积分抽奖奖励
 	public static OPRATE_GAME_VIP_LEVEL_AWARD:number = 6 //VIP等级奖励
-	public static OPRATE_GAME_PWD_ERROR:number = 7 //密码错误
-	public static OPRATE_GAME_PWD_ERROR_3_TIMES:number = 8 //密码错误超过3次
-	public static OPRATE_GAME_PWD_SUCCESS:number = 9 //取款密码设置成功
-	public static OPRATE_GAME_POWER_YUEBAO_OUT_SUCCESS:number = 10 //余额宝取出成功
-	public static OPRATE_GAME_FIRST_PAY_SUCCESS:number = 11 //首充领取成功
-	public static OPRATE_GAME_POWER_YUEBAO_IN_SUCCESS:number = 12 //余额宝存入成功
-	public static OPRATE_GAME_DAILY_SHARE_SUCCESS:number = 13 //每日分享成功
-	public static OPRATE_GAME_BIND_GIFT_SUCCESS:number = 14 //绑定送金成功
-	public static OPRATE_GAME_FIRST_PAY_CAN_GET:number = 15 //首充可领取弹窗
-	public static OPRATE_GAME_DRAW_FAIL_LEFT_MA:number = 16 //剩余打码量不为0
 	//错误提示
 	private static OPRATE_STRING:{[key:string]:string} = {
 		'1':'登录操作错误类型',//登录操作错误类型
@@ -127,7 +112,6 @@ class Operation_Fields {
 		'1_15':'非常抱歉，当前服务器人数已满，请尝试其他服务器登录吧',//非常抱歉，当前服务器人数已满，请尝试其他服务器登录吧
 		'1_16':'游戏列表',//游戏列表
 		'1_17':'手机验证码',//手机验证码
-		'1_18':'sessionkey',//sessionkey
 		'2':'关闭客户端操作错误类型',//关闭客户端操作错误类型
 		'2_1':'客戶端退出登录',//客戶端退出登录
 		'2_2':'封账号',//封账号
@@ -135,18 +119,14 @@ class Operation_Fields {
 		'2_4':'踢下线',//踢下线
 		'2_5':'sign错误',//sign错误
 		'2_6':'账号错误',//账号错误
-		'2_7':'从后台获取玩家数据异常',//从后台获取玩家数据异常
-		'2_8':'从后台获取sessionkey异常',//从后台获取sessionkey异常
-		'2_9':'sessionkey参数缺失',//sessionkey参数缺失
-		'2_10':'找不到这个平台',//找不到这个平台
-		'2_11':'sing与server_name不一致',//sing与server_name不一致
-		'2_12':'重复登录',//重复登录
-		'2_13':'超时',//超时
-		'2_14':'允许强制重新登陆',//允许强制重新登陆
-		'2_15':'其他在线中',//其他在线中
-		'2_16':'web请求失败',//web请求失败
-		'2_17':'web崩溃',//web崩溃
-		'2_18':'还没登陆就发了错误的包上来',//还没登陆就发了错误的包上来
+		'2_7':'找不到这个平台',//找不到这个平台
+		'2_8':'sing与server_name不一致',//sing与server_name不一致
+		'2_9':'重复登录',//重复登录
+		'2_10':'超时',//超时
+		'2_11':'允许强制重新登陆',//允许强制重新登陆
+		'2_12':'其他在线中',//其他在线中
+		'2_13':'web请求失败',//web请求失败
+		'2_14':'web崩溃',//web崩溃
 		'3':'传送操作错误类型',//传送操作错误类型
 		'3_1':'传送失败',//传送失败
 		'3_2':'离开地图失败',//离开地图失败
@@ -198,16 +178,6 @@ class Operation_Fields {
 		'8_4':'签到成功',//签到成功
 		'8_5':'积分抽奖奖励',//积分抽奖奖励
 		'8_6':'VIP等级奖励',//VIP等级奖励
-		'8_7':'密码错误',//密码错误
-		'8_8':'密码错误超过3次',//密码错误超过3次
-		'8_9':'取款密码设置成功',//取款密码设置成功
-		'8_10':'余额宝取出成功',//余额宝取出成功
-		'8_11':'首充领取成功',//首充领取成功
-		'8_12':'余额宝存入成功',//余额宝存入成功
-		'8_13':'每日分享成功',//每日分享成功
-		'8_14':'绑定送金成功',//绑定送金成功
-		'8_15':'首充可领取弹窗',//首充可领取弹窗
-		'8_16':'剩余打码量不为0',//剩余打码量不为0
 
 	}
 	//获取错误提示
