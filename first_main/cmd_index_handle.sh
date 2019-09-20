@@ -51,10 +51,8 @@ echo $endRow
 echo 'one'
 
 rm -rf $temp
-touch $temp
 
 rm -rf $mytemp
-touch $mytemp
 
 cd $src
 for d in ${game_list[@]}; do
@@ -66,28 +64,34 @@ for d in ${game_list[@]}; do
 			exit 6
 		fi
 		echo "txt: $txt"
+		if [ ! -f ];then
+			touch $temp
+		fi
 		echo `cat $txt`>>$temp
 		if [ "$d" != "game" ];then
+			if [ ! -f ];then
+				touch $mytemp
+			fi
 			echo '<script-src="js/'$d'/MyInport.js"></script>\n'>>$mytemp
 		fi
 	fi
 done
 
-echo 'two'
+if [ -f "$temp" ];then
+	echo 'two'
+	
+	sed -i 's/<script\ src/<script-src/g' $temp
+	sed -i 's/script>\ <script-src/script>-<script-src/g' $temp
+	sed -i ":a;N;s/\n//g;ta" $temp
 
-sed -i 's/<script\ src/<script-src/g' $temp
-sed -i 's/script>\ <script-src/script>-<script-src/g' $temp
-sed -i ":a;N;s/\n//g;ta" $temp
+	echo 'three'
 
-echo 'three'
+	sed -i ${startRow},${endRow}c`cat $temp` $indx
+	sed -i 's/script>-<script-src/script>\n<script-src/g' $indx
+	sed -i 's/<script-src/\t<script\ src/g' $indx
 
-sed -i ${startRow},${endRow}c`cat $temp` $indx
-sed -i 's/script>-<script-src/script>\n<script-src/g' $indx
-sed -i 's/<script-src/\t<script\ src/g' $indx
-
-rm -rf $temp
-
-
+	rm -rf $temp
+fi
 echo 'four'
 
 startCustomRow=`cat $indx | grep -En 'startCustom' | awk -F: '{print $1}'`
@@ -97,18 +101,23 @@ endCustomRow=$[endCustomRow-1]
 echo $startCustomRow
 echo $endCustomRow
 
+if [ -f "$mytemp" ];then
 
-sed -i 's/<script\ src/<script-src/g' $mytemp
-sed -i 's/script>\ <script-src/script>-<script-src/g' $mytemp
-sed -i ":a;N;s/\n//g;ta" $mytemp
+	sed -i 's/<script\ src/<script-src/g' $mytemp
+	sed -i 's/script>\ <script-src/script>-<script-src/g' $mytemp
+	sed -i ":a;N;s/\n//g;ta" $mytemp
 
-echo 'five'
+	echo 'five'
 
-sed -i ${startCustomRow},${endCustomRow}c`cat $mytemp` $indx
-sed -i 's/script>-<script-src/script>\n<script-src/g' $indx
-sed -i 's/<script-src/\t<script\ src/g' $indx
+	sed -i ${startCustomRow},${endCustomRow}c`cat $mytemp` $indx
+	sed -i 's/script>-<script-src/script>\n<script-src/g' $indx
+	sed -i 's/<script-src/\t<script\ src/g' $indx
+	rm -rf $mytemp
+else
+	sed -i ${startCustomRow},${endCustomRow}c'		<!--导入类添加到这里-->' $indx
+fi
 
-rm -rf $mytemp
+
 
 if [ -z $1 ] ;then
 	read -p "脚本执行完成,输入任意信息结束..." var

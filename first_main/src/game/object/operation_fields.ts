@@ -85,6 +85,7 @@ class Operation_Fields {
 	public static OPRATE_CARDROOM_DISS_ROOM:number = 11 //房间已经解散
 	public static OPRATE_CARDROOM_GAME_START:number = 12 //游戏已经开始
 	public static OPRATE_CARDROOM_GAME_OVER:number = 13 //游戏已经结束
+	public static OPRATE_CARDROOM_GAME_ID_RETURN:number = 14 //返回游戏id
 	//操作错误类型
 	public static OPRATE_BUYU:number = 7 //捕鱼操作错误类型
 	public static OPRATE_BUYU_NOT_MONEY:number = 1 //钱币不足
@@ -188,6 +189,7 @@ class Operation_Fields {
 		'6_11':'房间已经解散',//房间已经解散
 		'6_12':'游戏已经开始',//游戏已经开始
 		'6_13':'游戏已经结束',//游戏已经结束
+		'6_14':'返回游戏id',//返回游戏id
 		'7':'捕鱼操作错误类型',//捕鱼操作错误类型
 		'7_1':'钱币不足',//钱币不足
 		'7_2':'子弹不足',//子弹不足

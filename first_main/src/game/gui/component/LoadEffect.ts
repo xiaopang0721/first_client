@@ -24,7 +24,7 @@ module game.gui.component {
 		private _parent: game.gui.base.Page;
 		private _createdTimer: number;
 		private _view: any;
-		private _imgLoad: ui.dating.Loading1UI;
+		private _imgLoad: ui.nqp.dating.Loading1UI;
 		private _black: Sprite;
 		private _clientWidth: number;
 		private _clientHeight: number;

@@ -894,6 +894,7 @@ class Web_operation_fields {
     public static GAME_SERVER_MSG_TYPE_CHANGE_FLOW = 14  //修改打码量
     public static GAME_SERVER_MSG_TYPE_ADD_YONGJIN = 15  //添加佣金池金额
     public static GAME_SERVER_MSG_TYPE_NEW_BULLETIN = 16  //新游戏公告通知
+    public static GAME_SERVER_MSG_TYPE_LOCK_ACCOUNT = 17  //封号
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_QIFU_TYPE_XISHOU = 1  //洗手
