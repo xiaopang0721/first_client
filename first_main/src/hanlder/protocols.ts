@@ -430,7 +430,7 @@ module hanlder{
 		public static  CMSG_GET_BIND_REWARD :number = 211;	//get_bind_reward
 		/*佣金领取*/
 		public static  CMSG_GET_COMMISSION :number = 212;	//get_commission
-		/**/
+		/*freestyle系统*/
 		public static  CMSG_FREE_SYTLE_SYNC :number = 213;	//free_sytle_sync
 		/*校验登录验证码*/
 		public static  CMSG_CHECK_LOGIN_VF :number = 214;	//check_login_vf
@@ -450,6 +450,8 @@ module hanlder{
 		public static  CMSG_RNIUNIU_BET :number = 221;	//rniuniu_bet
 		/*房卡牛牛拼牌*/
 		public static  CMSG_RNIUNIU_PINPAI :number = 222;	//rniuniu_pinpai
+		/*根据房间号获取游戏id*/
+		public static  CMSG_GET_GAMEID_BY_ROOM_ID :number = 223;	//get_gameid_by_room_id
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -682,6 +684,7 @@ module hanlder{
 			this._FUNCS[220] = "rniuniu_banker";
 			this._FUNCS[221] = "rniuniu_bet";
 			this._FUNCS[222] = "rniuniu_pinpai";
+			this._FUNCS[223] = "get_gameid_by_room_id";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1481,6 +1484,10 @@ module hanlder{
 				case Protocols.CMSG_RNIUNIU_PINPAI :	//rniuniu_pinpai
 					var obj_rniuniu_pinpai:c2s_rniuniu_pinpai = new c2s_rniuniu_pinpai;
 					return obj_rniuniu_pinpai;
+				case Protocols.CMSG_GET_GAMEID_BY_ROOM_ID :	//get_gameid_by_room_id
+					var obj_get_gameid_by_room_id:c2s_get_gameid_by_room_id = new c2s_get_gameid_by_room_id;
+					c2s_get_gameid_by_room_id .read(obj_get_gameid_by_room_id, bs);
+					return obj_get_gameid_by_room_id;
 				default:
 					break;
 			}
@@ -3186,6 +3193,14 @@ module hanlder{
 			this.sendMsg( 222 , this._stream);
 			//Log.outDebug("CS====> cmd:222 rniuniu_pinpai");
 		}
+		public call_get_gameid_by_room_id (roomid : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 223 );
+			//房间号
+			this._stream.writeInt32 (roomid);
+			this.sendMsg( 223 , this._stream);
+			//Log.outDebug("CS====> cmd:223 get_gameid_by_room_id");
+		}
 	}
 
 	export class both_null_action
@@ -3588,7 +3603,7 @@ module hanlder{
 		*/
 		public game_number : number ;	//uint32
 		/**
-		* 支付类型1:房主2:AA
+		* 支付类??:房主2:AA
 		*/
 		public pay_typ : number ;	//uint32
 		/**
@@ -6025,7 +6040,7 @@ module hanlder{
 		{
 			var parmLen:number;
 			var i:number;
-			//?伦⒈妒?
+			//下注倍数
 			self.num = bytes. readUint8 ();		
 		}
 	}
@@ -6881,7 +6896,7 @@ module hanlder{
 		}
 
 		/**
-		从输入二进制流中?寥〗峁固?
+		从输入二进制流中读取结构体
 		*/
 		public static read(self:c2s_shisanshui_playing, bytes:ByteArray):void
 		{
@@ -8714,6 +8729,31 @@ module hanlder{
 		public constructor()
 		{
 			
+		}
+	}
+	export class c2s_get_gameid_by_room_id
+	{
+		public optcode:number = 0;
+		public optname:string = "onGet_gameid_by_room_id";
+	
+		/**
+		* 房间号
+		*/
+		public roomid : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_get_gameid_by_room_id, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//房间号
+			self.roomid = bytes. readInt32 ();		
 		}
 	}
 
