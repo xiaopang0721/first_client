@@ -1590,11 +1590,9 @@ module hanlder{
 			this.sendMsg( 16 , this._stream);
 			//Log.outDebug("CS====> cmd:16 create_room");
 		}
-		public call_join_room (id : string ,card_id : string):void{
+		public call_join_room (card_id : string ):void{
 			this._stream.reset();
 			this._stream.writeUint16( 17 );
-			//游戏id
-			this._stream.writeString (id);
 			//房卡id
 			this._stream.writeString (card_id);
 			this.sendMsg( 17 , this._stream);
@@ -2858,7 +2856,7 @@ module hanlder{
 			this.sendMsg( 184 , this._stream);
 			//Log.outDebug("CS====> cmd:184 player_qifu");
 		}
-		public call_recharge_confirm (account : string ,money : number ,type : number ,from_msg : string,id : number ):void{
+		public call_recharge_confirm (account : string ,money : number ,type : number ,from_msg : string):void{
 			this._stream.reset();
 			this._stream.writeUint16( 185 );
 			//账号
@@ -2869,8 +2867,6 @@ module hanlder{
 			this._stream.writeInt32 (type);
 			//转账信息
 			this._stream.writeString (from_msg);
-			//类型id
-			this._stream.writeInt32 (id);
 			this.sendMsg( 185 , this._stream);
 			//Log.outDebug("CS====> cmd:185 recharge_confirm");
 		}
@@ -3585,10 +3581,6 @@ module hanlder{
 		public optname:string = "onJoin_room";
 	
 		/**
-		* 游戏id
-		*/
-		public id : string ;	//String
-		/**
 		* 房卡id
 		*/
 		public card_id : string ;	//String
@@ -3604,8 +3596,6 @@ module hanlder{
 		{
 			var parmLen:number;
 			var i:number;
-			//游戏id
-			self.id = bytes. readString ();		
 			//房卡id
 			self.card_id = bytes. readString ();		
 		}
@@ -7789,10 +7779,6 @@ module hanlder{
 		* 转账信息
 		*/
 		public from_msg : string ;	//String
-		/**
-		* 类型id
-		*/
-		public id : number ;	//int32
 		public constructor()
 		{
 			
@@ -7813,8 +7799,6 @@ module hanlder{
 			self.type = bytes. readInt32 ();		
 			//转账信息
 			self.from_msg = bytes. readString ();		
-			//类型id
-			self.id = bytes. readInt32 ();		
 		}
 	}
 	export class c2s_login_invite
