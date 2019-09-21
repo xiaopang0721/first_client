@@ -3193,11 +3193,11 @@ module hanlder{
 			this.sendMsg( 222 , this._stream);
 			//Log.outDebug("CS====> cmd:222 rniuniu_pinpai");
 		}
-		public call_get_gameid_by_room_id (roomid : number ):void{
+		public call_get_gameid_by_room_id (roomid : string ):void{
 			this._stream.reset();
 			this._stream.writeUint16( 223 );
 			//房间号
-			this._stream.writeInt32 (roomid);
+			this._stream.writeString (roomid);
 			this.sendMsg( 223 , this._stream);
 			//Log.outDebug("CS====> cmd:223 get_gameid_by_room_id");
 		}
@@ -3603,7 +3603,7 @@ module hanlder{
 		*/
 		public game_number : number ;	//uint32
 		/**
-		* 支付类??:房主2:AA
+		* 支付类型1:房主2:AA
 		*/
 		public pay_typ : number ;	//uint32
 		/**
@@ -8739,7 +8739,7 @@ module hanlder{
 		/**
 		* 房间号
 		*/
-		public roomid : number ;	//int32
+		public roomid : string ;	//String
 		public constructor()
 		{
 			
@@ -8753,7 +8753,7 @@ module hanlder{
 			var parmLen:number;
 			var i:number;
 			//房间号
-			self.roomid = bytes. readInt32 ();		
+			self.roomid = bytes. readString ();		
 		}
 	}
 
