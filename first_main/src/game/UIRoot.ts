@@ -164,7 +164,7 @@ module game {
 							callback && callback(args, btn);
 					}));
 				else
-					Laya.Tween.to(btn, props, 80, null);
+					Laya.Tween.to(btn, { scaleX: scaleX, scaleY: scaleY }, 80, null);
 			}));
 			this._game.playSound(defaultPath || Path.music_btn);
 		}
