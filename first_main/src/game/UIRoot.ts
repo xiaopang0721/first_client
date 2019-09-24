@@ -142,11 +142,19 @@ module game {
 
 			if (!btn.anchorX) {
 				btn.anchorX = 0.5
-				btn.x = btn.x + btn.width * 0.5;
+				if (btn.centerX || btn.centerX == 0) {
+					btn.centerX = btn.centerX;
+				} else {
+					btn.x = btn.x + btn.width * 0.5;
+				}
 			}
 			if (!btn.anchorY) {
 				btn.anchorY = 0.5
-				btn.y = btn.y + btn.height * 0.5;
+				if (btn.centerY || btn.centerY == 0) {
+					btn.centerY = btn.centerY;
+				} else {
+					btn.y = btn.y + btn.height * 0.5;
+				}
 			}
 
 			if (btn.scaleX < 0 && scaleX == 1) scaleX = -1;
@@ -157,7 +165,7 @@ module game {
 			Laya.Tween.clearAll(btn);
 			Laya.Tween.to(btn, props, 80, null, Handler.create(this, () => {
 				if (callback)
-					Laya.Tween.to(btn, { scaleX: scaleX, scaleY: scaleY }, 80,null, Handler.create(this, () => {
+					Laya.Tween.to(btn, { scaleX: scaleX, scaleY: scaleY }, 80, null, Handler.create(this, () => {
 						if (caller && callback)
 							callback.call(caller, args, btn);
 						else
