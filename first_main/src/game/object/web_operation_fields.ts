@@ -984,7 +984,7 @@ class Web_operation_fields {
     public static FREE_STYLE_TYPES_GAMEBULLETIN_C = "gamebulletin_c"  //游戏公告
     public static FREE_STYLE_TYPES_GAMEPOPCONFIG_C = "gamepopconfig_c"  //游戏弹窗配置
     public static FREE_STYLE_TYPES_PROMOTIONSCFG_C = "promotionscfg_c"  //优惠活动配置
-    public static FREE_STYLE_TYPES_HOMEADLUNBOCFG_C = "homeadlunbocfg_c"  //首页轮播图片配置
+    public static FREE_STYLE_TYPES_GUANGGAOLUNBO_C = "guanggaolunbo_c"  //首页轮播图片配置
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_HOME_AD_LOOP_TYPE_DAILI = 1  //代理
