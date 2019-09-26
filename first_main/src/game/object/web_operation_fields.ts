@@ -5,8 +5,8 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_BET = 2  //下注
     public static USE_MONEY_LOG_TYPE_SETTLEMENT = 3  //结算
     public static USE_MONEY_LOG_TYPE_NEWVALUE = 4  //获得新值
-    public static USE_MONEY_LOG_TYPE_MONEY2COIN = 5  //余额兑换游戏币
-    public static USE_MONEY_LOG_TYPE_COIN2MONEY = 6  //游戏币兑换余额
+    public static USE_MONEY_LOG_TYPE_API_RECHARGE = 5  //API存入
+    public static USE_MONEY_LOG_TYPE_API_DRAWING = 6  //API取出
     public static USE_MONEY_LOG_TYPE_RECHARGE = 7  //第三方充值
     public static USE_MONEY_LOG_TYPE_CASH = 8  //提款
     public static USE_MONEY_LOG_TYPE_TALLAGE = 9  //抽水
@@ -46,6 +46,7 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_FIRSTPAY = 43  //首充奖励
     public static USE_MONEY_LOG_TYPE_RECHARGE_WXBANK = 44  //微信转银行
     public static USE_MONEY_LOG_TYPE_RECHARGE_ZFBBANK = 45  //支付宝转银行
+    public static USE_MONEY_LOG_TYPE_GUEST_GIVEMONEY = 46  //游客送金
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static client_money_logtype_table:{[key:number]:string}={
@@ -94,6 +95,7 @@ class Web_operation_fields {
         43:'首充奖励',//首充奖励
         44:'微信转银行',//微信转银行
         45:'支付宝转银行',//支付宝转银行
+        46:'游客送金',//游客送金
 	}
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
@@ -982,5 +984,14 @@ class Web_operation_fields {
     public static FREE_STYLE_TYPES_GAMEBULLETIN_C = "gamebulletin_c"  //游戏公告
     public static FREE_STYLE_TYPES_GAMEPOPCONFIG_C = "gamepopconfig_c"  //游戏弹窗配置
     public static FREE_STYLE_TYPES_PROMOTIONSCFG_C = "promotionscfg_c"  //优惠活动配置
+    public static FREE_STYLE_TYPES_HOMEADLUNBOCFG_C = "homeadlunbocfg_c"  //首页轮播图片配置
+//------------------------ END -----------------------------------
+//------------------------START-----------------------------------
+    public static GAME_HOME_AD_LOOP_TYPE_DAILI = 1  //代理
+    public static GAME_HOME_AD_LOOP_TYPE_FENXIANG = 2  //分享
+    public static GAME_HOME_AD_LOOP_TYPE_GUANWANG = 3  //官网
+    public static GAME_HOME_AD_LOOP_TYPE_VIP = 4  //VIP
+    public static GAME_HOME_AD_LOOP_TYPE_YUEBAO = 5  //余额宝
+    public static GAME_HOME_AD_LOOP_TYPE_ZHUANPAN = 6  //转盘
 //------------------------ END -----------------------------------
 }
