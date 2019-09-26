@@ -197,11 +197,11 @@ module game {
 			this._lastSoundTime = Laya.timer.currTimer;
 			//为什么先取音量再设置音量？
 			let volume = Laya.SoundManager.soundVolume;
-			// Laya.SoundManager.setSoundVolume(volume);
+			Laya.SoundManager.setSoundVolume(volume);
 			if (volume <= 0) return;
 			isOnlyOne && this.stopSound(url);
 			Laya.timer.frameOnce(1, this, () => {
-				Laya.SoundManager.playSound(url)
+				Laya.SoundManager.playSound(url);
 			})
 		}
 
