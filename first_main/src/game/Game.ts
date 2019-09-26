@@ -191,12 +191,12 @@ module game {
 		 */
 		private _lastSoundTime: number;
 		playSound(url: string, isOnlyOne: boolean = true): void {
-			let volume = Laya.SoundManager.soundVolume;
 			if (url == Path.music_btn && Laya.timer.currTimer - this._lastSoundTime < 500) {
 				return;
 			}
 			this._lastSoundTime = Laya.timer.currTimer;
-			Laya.SoundManager.setSoundVolume(volume);
+			let volume = Laya.SoundManager.soundVolume;
+			// Laya.SoundManager.setSoundVolume(volume);
 			if (volume <= 0) return;
 			isOnlyOne && this.stopSound(url);
 			Laya.timer.frameOnce(1, this, () => {
