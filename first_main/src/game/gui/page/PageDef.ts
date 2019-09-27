@@ -128,7 +128,7 @@ module game.gui.page {
 		"benchibaoma": "奔驰宝马",
 		"blackjack": "21点",
 		"brniuniu": "百人牛牛",
-		"buyu": "大众捕鱼",
+		"buyu": "AE捕鱼王",
 		"caishendao": "财神到",
 		"dezhou": "德州扑克",
 		"ebgang": "二八杠",
