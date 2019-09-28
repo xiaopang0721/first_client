@@ -453,7 +453,7 @@ module hanlder{
 		/*根据房间号获取游戏id*/
 		public static  CMSG_GET_GAMEID_BY_ROOM_ID :number = 223;	//get_gameid_by_room_id
 		/*设置app状态*/
-		public static  CMSG_SET_APP_STATUS :number = 224;	//set_app_status
+		public static  CMSG_SET_APP_STATE :number = 224;	//set_app_state
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -687,7 +687,7 @@ module hanlder{
 			this._FUNCS[221] = "rniuniu_bet";
 			this._FUNCS[222] = "rniuniu_pinpai";
 			this._FUNCS[223] = "get_gameid_by_room_id";
-			this._FUNCS[224] = "set_app_status";
+			this._FUNCS[224] = "set_app_state";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1491,10 +1491,10 @@ module hanlder{
 					var obj_get_gameid_by_room_id:c2s_get_gameid_by_room_id = new c2s_get_gameid_by_room_id;
 					c2s_get_gameid_by_room_id .read(obj_get_gameid_by_room_id, bs);
 					return obj_get_gameid_by_room_id;
-				case Protocols.CMSG_SET_APP_STATUS :	//set_app_status
-					var obj_set_app_status:c2s_set_app_status = new c2s_set_app_status;
-					c2s_set_app_status .read(obj_set_app_status, bs);
-					return obj_set_app_status;
+				case Protocols.CMSG_SET_APP_STATE :	//set_app_state
+					var obj_set_app_state:c2s_set_app_state = new c2s_set_app_state;
+					c2s_set_app_state .read(obj_set_app_state, bs);
+					return obj_set_app_state;
 				default:
 					break;
 			}
@@ -3208,13 +3208,13 @@ module hanlder{
 			this.sendMsg( 223 , this._stream);
 			//Log.outDebug("CS====> cmd:223 get_gameid_by_room_id");
 		}
-		public call_set_app_status (status : number ):void{
+		public call_set_app_state (state : number ):void{
 			this._stream.reset();
 			this._stream.writeUint16( 224 );
-			//0.正常|1.最小化
-			this._stream.writeInt32 (status);
+			//1.正常|2.最小化
+			this._stream.writeInt32 (state);
 			this.sendMsg( 224 , this._stream);
-			//Log.outDebug("CS====> cmd:224 set_app_status");
+			//Log.outDebug("CS====> cmd:224 set_app_state");
 		}
 	}
 
@@ -8771,15 +8771,15 @@ module hanlder{
 			self.roomid = bytes. readString ();		
 		}
 	}
-	export class c2s_set_app_status
+	export class c2s_set_app_state
 	{
 		public optcode:number = 0;
-		public optname:string = "onSet_app_status";
+		public optname:string = "onSet_app_state";
 	
 		/**
-		* 0.正常|1.最小化
+		* 1.正常|2.最小化
 		*/
-		public status : number ;	//int32
+		public state : number ;	//int32
 		public constructor()
 		{
 			
@@ -8788,12 +8788,12 @@ module hanlder{
 		/**
 		从输入二进制流中读取结构体
 		*/
-		public static read(self:c2s_set_app_status, bytes:ByteArray):void
+		public static read(self:c2s_set_app_state, bytes:ByteArray):void
 		{
 			var parmLen:number;
 			var i:number;
-			//0.正常|1.最小化
-			self.status = bytes. readInt32 ();		
+			//1.正常|2.最小化
+			self.state = bytes. readInt32 ();		
 		}
 	}
 
