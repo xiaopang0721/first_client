@@ -452,6 +452,8 @@ module hanlder{
 		public static  CMSG_RNIUNIU_PINPAI :number = 222;	//rniuniu_pinpai
 		/*根据房间号获取游戏id*/
 		public static  CMSG_GET_GAMEID_BY_ROOM_ID :number = 223;	//get_gameid_by_room_id
+		/*设置app状态*/
+		public static  CMSG_SET_APP_STATUS :number = 224;	//set_app_status
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -685,6 +687,7 @@ module hanlder{
 			this._FUNCS[221] = "rniuniu_bet";
 			this._FUNCS[222] = "rniuniu_pinpai";
 			this._FUNCS[223] = "get_gameid_by_room_id";
+			this._FUNCS[224] = "set_app_status";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1488,6 +1491,10 @@ module hanlder{
 					var obj_get_gameid_by_room_id:c2s_get_gameid_by_room_id = new c2s_get_gameid_by_room_id;
 					c2s_get_gameid_by_room_id .read(obj_get_gameid_by_room_id, bs);
 					return obj_get_gameid_by_room_id;
+				case Protocols.CMSG_SET_APP_STATUS :	//set_app_status
+					var obj_set_app_status:c2s_set_app_status = new c2s_set_app_status;
+					c2s_set_app_status .read(obj_set_app_status, bs);
+					return obj_set_app_status;
 				default:
 					break;
 			}
@@ -3193,13 +3200,21 @@ module hanlder{
 			this.sendMsg( 222 , this._stream);
 			//Log.outDebug("CS====> cmd:222 rniuniu_pinpai");
 		}
-		public call_get_gameid_by_room_id (roomid : number ):void{
+		public call_get_gameid_by_room_id (roomid : string ):void{
 			this._stream.reset();
 			this._stream.writeUint16( 223 );
 			//房间号
-			this._stream.writeInt32 (roomid);
+			this._stream.writeString (roomid);
 			this.sendMsg( 223 , this._stream);
 			//Log.outDebug("CS====> cmd:223 get_gameid_by_room_id");
+		}
+		public call_set_app_status (status : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 224 );
+			//0.正常|1.最小化
+			this._stream.writeInt32 (status);
+			this.sendMsg( 224 , this._stream);
+			//Log.outDebug("CS====> cmd:224 set_app_status");
 		}
 	}
 
@@ -3603,7 +3618,7 @@ module hanlder{
 		*/
 		public game_number : number ;	//uint32
 		/**
-		* 支付类??:房主2:AA
+		* 支付类型1:房主2:AA
 		*/
 		public pay_typ : number ;	//uint32
 		/**
@@ -8739,7 +8754,7 @@ module hanlder{
 		/**
 		* 房间号
 		*/
-		public roomid : number ;	//int32
+		public roomid : string ;	//String
 		public constructor()
 		{
 			
@@ -8753,7 +8768,32 @@ module hanlder{
 			var parmLen:number;
 			var i:number;
 			//房间号
-			self.roomid = bytes. readInt32 ();		
+			self.roomid = bytes. readString ();		
+		}
+	}
+	export class c2s_set_app_status
+	{
+		public optcode:number = 0;
+		public optname:string = "onSet_app_status";
+	
+		/**
+		* 0.正常|1.最小化
+		*/
+		public status : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_set_app_status, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//0.正常|1.最小化
+			self.status = bytes. readInt32 ();		
 		}
 	}
 
