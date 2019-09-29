@@ -98,13 +98,11 @@ module game {
 		public onAppBlur(e?: any) {
 			if (!this.__gamedating) return;
 			this.datingGame.onAppBlur(e);
-			this.sceneObjectMgr.event(SceneObjectMgr.EVENT_APP_STATE_CHANGE, Web_operation_fields.APP_STATE_TYPE_MINIMIZE);
 		}
 
 		public onAppFous(e?: any) {
 			if (!this.__gamedating) return;
 			this.datingGame.onAppFous(e);
-			this.sceneObjectMgr.event(SceneObjectMgr.EVENT_APP_STATE_CHANGE, Web_operation_fields.APP_STATE_TYPE_NORMAL);
 		}
 
 		private _isLoadComplete: boolean;
@@ -197,12 +195,13 @@ module game {
 				return;
 			}
 			this._lastSoundTime = Laya.timer.currTimer;
+			//为什么先取音量再设置音量？
 			let volume = Laya.SoundManager.soundVolume;
-			// Laya.SoundManager.setSoundVolume(volume);
+			Laya.SoundManager.setSoundVolume(volume);
 			if (volume <= 0) return;
 			isOnlyOne && this.stopSound(url);
 			Laya.timer.frameOnce(1, this, () => {
-				Laya.SoundManager.playSound(url)
+				Laya.SoundManager.playSound(url);
 			})
 		}
 
