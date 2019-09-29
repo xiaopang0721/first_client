@@ -141,31 +141,39 @@ module game {
 			this._lastTarget = btn;
 
 			if (!btn.anchorX) {
+				if (btn.centerX || btn.centerX == 0) {
+					btn.centerX = btn.centerX;
+				} else {
+					btn.x = btn.x + btn.width * 0.5;
+				}
 				btn.anchorX = 0.5
-				btn.x = btn.x + btn.width * 0.5;
 			}
 			if (!btn.anchorY) {
+				if (btn.centerY || btn.centerY == 0) {
+					btn.centerY = btn.centerY;
+				} else {
+					btn.y = btn.y + btn.height * 0.5;
+				}
 				btn.anchorY = 0.5
-				btn.y = btn.y + btn.height * 0.5;
 			}
 
 			if (btn.scaleX < 0 && scaleX == 1) scaleX = -1;
 			if (btn.scaleY < 0 && scaleY == 1) scaleY = -1;
 			if (btn.scaleX > 0 && btn.scaleX < 1) scaleX = btn.scaleX;
 			if (btn.scaleY > 0 && btn.scaleY < 1) scaleY = btn.scaleY;
-			let props: any = { scaleX: scaleX, scaleY: scaleY };
-			btn.scaleX = scaleX * 0.75;
-			btn.scaleY = scaleY * 0.75;
+			let props: any = { scaleX: scaleX * 0.8, scaleY: scaleY * 0.8 };
 			Laya.Tween.clearAll(btn);
-			if (callback)
-				Laya.Tween.to(btn, props, 100, Laya.Ease.elasticOut, Handler.create(this, () => {
-					if (caller && callback)
-						callback.call(caller, args, btn);
-					else
-						callback && callback(args, btn);
-				}));
-			else
-				Laya.Tween.to(btn, props, 100, Laya.Ease.elasticOut);
+			Laya.Tween.to(btn, props, 80, null, Handler.create(this, () => {
+				if (callback)
+					Laya.Tween.to(btn, { scaleX: scaleX, scaleY: scaleY }, 80, null, Handler.create(this, () => {
+						if (caller && callback)
+							callback.call(caller, args, btn);
+						else
+							callback && callback(args, btn);
+					}));
+				else
+					Laya.Tween.to(btn, { scaleX: scaleX, scaleY: scaleY }, 80, null);
+			}));
 			this._game.playSound(defaultPath || Path.music_btn);
 		}
 
