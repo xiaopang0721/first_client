@@ -98,13 +98,11 @@ module game {
 		public onAppBlur(e?: any) {
 			if (!this.__gamedating) return;
 			this.datingGame.onAppBlur(e);
-			this.sceneGame.sceneObjectMgr.event(SceneObjectMgr.EVENT_APP_STATE_CHANGE, Web_operation_fields.APP_STATE_TYPE_MINIMIZE);
 		}
 
 		public onAppFous(e?: any) {
 			if (!this.__gamedating) return;
 			this.datingGame.onAppFous(e);
-			this.sceneGame.sceneObjectMgr.event(SceneObjectMgr.EVENT_APP_STATE_CHANGE, Web_operation_fields.APP_STATE_TYPE_NORMAL);
 		}
 
 		private _isLoadComplete: boolean;
