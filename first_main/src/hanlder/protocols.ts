@@ -3238,7 +3238,7 @@ module hanlder{
 		public call_voting (type : number ):void{
 			this._stream.reset();
 			this._stream.writeUint16( 226 );
-			//0:拒绝&1:同意
+			//0:拒绝|1:赞同
 			this._stream.writeUint8 (type);
 			this.sendMsg( 226 , this._stream);
 			//Log.outDebug("CS====> cmd:226 voting");
@@ -8839,7 +8839,7 @@ module hanlder{
 		public optname:string = "onVoting";
 	
 		/**
-		* 0:拒绝&1:同意
+		* 0:拒绝|1:赞同
 		*/
 		public type : number ;	//uint8
 		public constructor()
@@ -8854,7 +8854,7 @@ module hanlder{
 		{
 			var parmLen:number;
 			var i:number;
-			//0:拒绝&1:同意
+			//0:拒绝|1:赞同
 			self.type = bytes. readUint8 ();		
 		}
 	}
