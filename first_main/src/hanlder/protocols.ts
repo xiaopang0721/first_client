@@ -452,6 +452,12 @@ module hanlder{
 		public static  CMSG_RNIUNIU_PINPAI :number = 222;	//rniuniu_pinpai
 		/*根据房间号获取游戏id*/
 		public static  CMSG_GET_GAMEID_BY_ROOM_ID :number = 223;	//get_gameid_by_room_id
+		/*设置app状态*/
+		public static  CMSG_SET_APP_STATE :number = 224;	//set_app_state
+		/*发起投票*/
+		public static  CMSG_SPOSOR_VOTE :number = 225;	//sposor_vote
+		/*投票中*/
+		public static  CMSG_VOTING :number = 226;	//voting
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -685,6 +691,9 @@ module hanlder{
 			this._FUNCS[221] = "rniuniu_bet";
 			this._FUNCS[222] = "rniuniu_pinpai";
 			this._FUNCS[223] = "get_gameid_by_room_id";
+			this._FUNCS[224] = "set_app_state";
+			this._FUNCS[225] = "sposor_vote";
+			this._FUNCS[226] = "voting";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1488,6 +1497,17 @@ module hanlder{
 					var obj_get_gameid_by_room_id:c2s_get_gameid_by_room_id = new c2s_get_gameid_by_room_id;
 					c2s_get_gameid_by_room_id .read(obj_get_gameid_by_room_id, bs);
 					return obj_get_gameid_by_room_id;
+				case Protocols.CMSG_SET_APP_STATE :	//set_app_state
+					var obj_set_app_state:c2s_set_app_state = new c2s_set_app_state;
+					c2s_set_app_state .read(obj_set_app_state, bs);
+					return obj_set_app_state;
+				case Protocols.CMSG_SPOSOR_VOTE :	//sposor_vote
+					var obj_sposor_vote:c2s_sposor_vote = new c2s_sposor_vote;
+					return obj_sposor_vote;
+				case Protocols.CMSG_VOTING :	//voting
+					var obj_voting:c2s_voting = new c2s_voting;
+					c2s_voting .read(obj_voting, bs);
+					return obj_voting;
 				default:
 					break;
 			}
@@ -3200,6 +3220,28 @@ module hanlder{
 			this._stream.writeString (roomid);
 			this.sendMsg( 223 , this._stream);
 			//Log.outDebug("CS====> cmd:223 get_gameid_by_room_id");
+		}
+		public call_set_app_state (state : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 224 );
+			//1.正常|2.最小化
+			this._stream.writeInt32 (state);
+			this.sendMsg( 224 , this._stream);
+			//Log.outDebug("CS====> cmd:224 set_app_state");
+		}
+		public call_sposor_vote ():void{
+			this._stream.reset();
+			this._stream.writeUint16( 225 );
+			this.sendMsg( 225 , this._stream);
+			//Log.outDebug("CS====> cmd:225 sposor_vote");
+		}
+		public call_voting (type : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 226 );
+			//0:拒绝&1:同意
+			this._stream.writeUint8 (type);
+			this.sendMsg( 226 , this._stream);
+			//Log.outDebug("CS====> cmd:226 voting");
 		}
 	}
 
@@ -8754,6 +8796,66 @@ module hanlder{
 			var i:number;
 			//房间号
 			self.roomid = bytes. readString ();		
+		}
+	}
+	export class c2s_set_app_state
+	{
+		public optcode:number = 0;
+		public optname:string = "onSet_app_state";
+	
+		/**
+		* 1.正常|2.最小化
+		*/
+		public state : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_set_app_state, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//1.正常|2.最小化
+			self.state = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_sposor_vote
+	{
+		public optcode:number = 0;
+		public optname:string = "onSposor_vote";
+	
+		public constructor()
+		{
+			
+		}
+	}
+	export class c2s_voting
+	{
+		public optcode:number = 0;
+		public optname:string = "onVoting";
+	
+		/**
+		* 0:拒绝&1:同意
+		*/
+		public type : number ;	//uint8
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_voting, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//0:拒绝&1:同意
+			self.type = bytes. readUint8 ();		
 		}
 	}
 
