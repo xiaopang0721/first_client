@@ -2,6 +2,8 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
+    "declaration": true,
+    "declarationDir": "../lib_release/libs",
     "sourceMap": true
   },
   "exclude": [

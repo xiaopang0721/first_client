@@ -300,14 +300,14 @@ class Main {
 
     // 休眠
     private onBlur(e: LEvent): void {
-        if (WebConfig.onAndroid || WebConfig.onIOS) {
+        if (WebConfig.onAndroid || WebConfig.onIOS || isDebug) {
             this._game && this._game.uiRoot && this._game.onAppBlur && this._game.onAppBlur(e);
         }
     }
 
     // 激活
     private onFocus(e: LEvent): void {
-        if (WebConfig.onAndroid || WebConfig.onIOS) {
+        if (WebConfig.onAndroid || WebConfig.onIOS || isDebug) {
             this._game && this._game.uiRoot && this._game.onAppFous && this._game.onAppFous(e);
         }
     }
