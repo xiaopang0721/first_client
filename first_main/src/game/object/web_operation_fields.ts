@@ -994,4 +994,8 @@ class Web_operation_fields {
     public static GAME_HOME_AD_LOOP_TYPE_YUEBAO = 5  //余额宝
     public static GAME_HOME_AD_LOOP_TYPE_ZHUANPAN = 6  //转盘
 //------------------------ END -----------------------------------
+//------------------------START-----------------------------------
+    public static APP_STATE_TYPE_NORMAL = 1  //正常
+    public static APP_STATE_TYPE_MINIMIZE = 2  //最小化
+//------------------------ END -----------------------------------
 }
