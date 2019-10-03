@@ -3,7 +3,7 @@
 */
 module game.gui.base {
 
-	interface PageMap {
+	export interface PageMap {
 		[index: string]: Page;
 	}
 
