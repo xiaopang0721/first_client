@@ -30,7 +30,7 @@ WebConfig.gameGmOpen = __conf.gameGmOpen;
 WebConfig.isPopJianPan = __conf.isPopJianPan;
 WebConfig.isSingleEnter = false;
 WebConfig.res_url = "rsync_folder/first_res/";
-WebConfig.ewmbaseUrl = WebConfig.gwUrl + "/qrcode?urlsize=9&urltext=" + encodeURIComponent(WebConfig.gwUrl) + "?invitecode="
+WebConfig.ewmbaseUrl = WebConfig.ai_url + "/qrcode?urlsize=9&urltext=" + encodeURIComponent(WebConfig.gwUrl) + "?invitecode="
 WebConfig.downLoadUrl = "";
 WebConfig.game_type = 0;
 WebConfig.appVersion = "";
