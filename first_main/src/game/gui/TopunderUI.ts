@@ -16,7 +16,6 @@ module game.gui {
 			if (this._nextUpdateTime > 0 && this._nextUpdateTime > cur_time) return;
 			this._nextUpdateTime = cur_time + 200;
 
-			// this.showTips("1111111111")
 			if (!checkGameJsLoad("dating") || !this._game.datingGame) return;
 			if (this._tipQueue.length != 0) {
 				let message = this._tipQueue.shift();
