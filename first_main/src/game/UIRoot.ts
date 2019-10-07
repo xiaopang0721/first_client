@@ -372,7 +372,7 @@ module game {
 		}
 	}
 
-	interface IPageHandle {
+	export interface IPageHandle {
 		id: string;
 		dataSource?: any;
 		parent: game.gui.base.PageContainer;

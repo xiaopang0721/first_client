@@ -2,7 +2,7 @@
 * 页面定义
 */
 module game.gui.page {
-	interface ClassMap {
+	export interface ClassMap {
 		[index: string]: Object;
 	}
 
