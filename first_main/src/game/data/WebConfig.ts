@@ -12,6 +12,10 @@ WebConfig.needMusicPreload = __conf.needMusicPreload;
 WebConfig.baseqp = __conf.baseqp;
 WebConfig.gwconf = __conf.gwconf;
 WebConfig.platform = __conf.platform;//优先href
+WebConfig.gameid = "";
+WebConfig.sessionkey = "account=12345735&server_name=zwx&tm=1571893298&sign=fd3df1fbebe1dd7df0e8f09b948dd2eb";
+WebConfig.params = "";
+WebConfig.enterGameLocked = false;
 WebConfig.sub_baseplatform = __conf.sub_baseplatform
 WebConfig.baseplatform = __conf.baseplatform
 WebConfig.defaultplatform = __conf.defaultplatform;
