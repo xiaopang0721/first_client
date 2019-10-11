@@ -180,35 +180,7 @@ class Main {
             localSetItem("client_vesion", cur_vesion)
         }
 
-        WebConfig.platform = (StringU.getParameter(location.href, "p") || WebConfig.platform).toLowerCase();
-        WebConfig.isSingleEnter = (StringU.getParameter(location.href, "logintype") == Web_operation_fields.ACCOUNT_TYPE_USERNAME.toString()) ? true : false;
-        WebConfig.server_name = (StringU.getParameter(location.href, "p") || WebConfig.server_name).toLowerCase();
-        WebConfig.gwUrl = WebConfig.gwconf[WebConfig.platform];
-        WebConfig.ewmbaseUrl = WebConfig.ai_url + "/qrcode?urlsize=9&urltext=" + encodeURIComponent(WebConfig.gwUrl) + "?invitecode="
-        Vesion.addSearchPath(WebConfig.platform + "/", "langpack_1000.bin");
-        WebConfig.baseplatform = WebConfig.baseqp[WebConfig.platform];
-        logd("platform：", WebConfig.platform, 'baseplatform', WebConfig.baseplatform);
-        if (WebConfig.baseplatform) {
-            Vesion.addSearchPath(WebConfig.baseplatform + "/", "langpack_1000.bin");
-        } else {
-            WebConfig.baseplatform = WebConfig.defaultplatform;
-        }
-        Path.map_far = StringU.substitute(Path.map_far, WebConfig.baseplatform);
-        Path.map = StringU.substitute(Path.map, WebConfig.baseplatform);
-        !WebConfig.systemInfo && WebConfig.getSystemInfo();//获取手机系统信息
-        logd("systemInfo", WebConfig.systemInfo);
-        !WebConfig.modelInfo && WebConfig.getModelInfo();//获取机型
-        logd("modelInfo", WebConfig.modelInfo);
-        !WebConfig.deviceId && WebConfig.getDeviceId();//获取唯一标识
-        logd("deviceId", WebConfig.deviceId);
-        !WebConfig.deviceToken && WebConfig.getDeviceToken();//获取设备号
-        logd("deviceToken", WebConfig.deviceToken);
-        !WebConfig.appVersion && WebConfig.getAppVersion();//获取app版本号
-        logd("appVersion", WebConfig.appVersion);
-        !WebConfig.inviteCode && WebConfig.getInviteCode();//获取邀请码
-        logd("inviteCode", WebConfig.inviteCode);
-        !WebConfig.webParms && WebConfig.getWebParms();//获取额外参数
-        logd("webParms", WebConfig.webParms);
+       
 
         Vesion.once(Vesion.LOAD_VESION_COMPLETE, this, () => {
             this.init();

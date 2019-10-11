@@ -86,12 +86,19 @@ module game {
 			this._uiRoot.showLoadProgress("资源加载中...");
 			JsLoader.ins.startLoad("component", Handler.create(this, (asserts) => {
 				JsLoader.ins.startLoad("dating", Handler.create(this, (asserts) => {
-					this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
-					let gameid = localGetItem("local_game_id");
-					if (gameid) {
-						updateGameJS(gameid);
+					if (WebConfig.enterGameLocked) {
+						JsLoader.ins.startLoad(WebConfig.gameid, Handler.create(this, (asserts) => {
+							this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
+						}));
+					} else {
+						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
+						let gameid = localGetItem("local_game_id");
+						if (gameid) {
+							updateGameJS(gameid);
+						}
 					}
 				}));
+
 			}));
 		}
 
@@ -114,11 +121,17 @@ module game {
 			this._isLoadComplete = true;
 			//是否测试版本
 			Laya.stage.event(LEvent.RESIZE);
-			if (isDebug) {
-				this.closeProssgress();
-				this.openLoginPage();
+			if (WebConfig.enterGameLocked) {
+				this.sceneGame.connectSoctet(() => {
+					this.network.call_get_session(WebConfig.sessionkey, "", "");
+				}, "call_get_session");
 			} else {
-				this.sceneGame.login("Game onNeedAssetLoaded");
+				if (isDebug) {
+					this.closeProssgress();
+					this.openLoginPage();
+				} else {
+					this.sceneGame.login("Game onNeedAssetLoaded");
+				}
 			}
 		}
 
