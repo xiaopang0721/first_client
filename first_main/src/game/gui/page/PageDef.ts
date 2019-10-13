@@ -2,7 +2,7 @@
 * 页面定义
 */
 module game.gui.page {
-	interface ClassMap {
+	export interface ClassMap {
 		[index: string]: Object;
 	}
 
@@ -141,6 +141,10 @@ module game.gui.page {
 		"shuiguoji": "水果机",
 		"toubao": "皇冠骰宝",
 		"zoo": "飞禽走兽",
+		"rddz": "房卡-斗地主",
+		"rniuniu": "房卡-抢庄牛牛",
+		"rpaodekuai": "房卡-跑得快",
+		"rshisanshui": "房卡-十三水",
 	}
 
 }

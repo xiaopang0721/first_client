@@ -454,10 +454,14 @@ module hanlder{
 		public static  CMSG_GET_GAMEID_BY_ROOM_ID :number = 223;	//get_gameid_by_room_id
 		/*设置app状态*/
 		public static  CMSG_SET_APP_STATE :number = 224;	//set_app_state
-		/*发起投票*/
-		public static  CMSG_SPOSOR_VOTE :number = 225;	//sposor_vote
-		/*投票中*/
-		public static  CMSG_VOTING :number = 226;	//voting
+		/*房卡跑得快-投票解散*/
+		public static  CMSG_RPAODEKUAI_VOTE :number = 225;	//rpaodekuai_vote
+		/*房卡抢庄牛牛-投票解散*/
+		public static  CMSG_RNIUNIU_VOTE :number = 226;	//rniuniu_vote
+		/*房卡斗地主-投票解散*/
+		public static  CMSG_RDDZ_VOTE :number = 227;	//rddz_vote
+		/*房卡十三水-投票解散*/
+		public static  CMSG_RSHISANSHUI_VOTE :number = 228;	//rshisanshui_vote
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -692,8 +696,10 @@ module hanlder{
 			this._FUNCS[222] = "rniuniu_pinpai";
 			this._FUNCS[223] = "get_gameid_by_room_id";
 			this._FUNCS[224] = "set_app_state";
-			this._FUNCS[225] = "sposor_vote";
-			this._FUNCS[226] = "voting";
+			this._FUNCS[225] = "rpaodekuai_vote";
+			this._FUNCS[226] = "rniuniu_vote";
+			this._FUNCS[227] = "rddz_vote";
+			this._FUNCS[228] = "rshisanshui_vote";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1501,13 +1507,22 @@ module hanlder{
 					var obj_set_app_state:c2s_set_app_state = new c2s_set_app_state;
 					c2s_set_app_state .read(obj_set_app_state, bs);
 					return obj_set_app_state;
-				case Protocols.CMSG_SPOSOR_VOTE :	//sposor_vote
-					var obj_sposor_vote:c2s_sposor_vote = new c2s_sposor_vote;
-					return obj_sposor_vote;
-				case Protocols.CMSG_VOTING :	//voting
-					var obj_voting:c2s_voting = new c2s_voting;
-					c2s_voting .read(obj_voting, bs);
-					return obj_voting;
+				case Protocols.CMSG_RPAODEKUAI_VOTE :	//rpaodekuai_vote
+					var obj_rpaodekuai_vote:c2s_rpaodekuai_vote = new c2s_rpaodekuai_vote;
+					c2s_rpaodekuai_vote .read(obj_rpaodekuai_vote, bs);
+					return obj_rpaodekuai_vote;
+				case Protocols.CMSG_RNIUNIU_VOTE :	//rniuniu_vote
+					var obj_rniuniu_vote:c2s_rniuniu_vote = new c2s_rniuniu_vote;
+					c2s_rniuniu_vote .read(obj_rniuniu_vote, bs);
+					return obj_rniuniu_vote;
+				case Protocols.CMSG_RDDZ_VOTE :	//rddz_vote
+					var obj_rddz_vote:c2s_rddz_vote = new c2s_rddz_vote;
+					c2s_rddz_vote .read(obj_rddz_vote, bs);
+					return obj_rddz_vote;
+				case Protocols.CMSG_RSHISANSHUI_VOTE :	//rshisanshui_vote
+					var obj_rshisanshui_vote:c2s_rshisanshui_vote = new c2s_rshisanshui_vote;
+					c2s_rshisanshui_vote .read(obj_rshisanshui_vote, bs);
+					return obj_rshisanshui_vote;
 				default:
 					break;
 			}
@@ -3229,19 +3244,37 @@ module hanlder{
 			this.sendMsg( 224 , this._stream);
 			//Log.outDebug("CS====> cmd:224 set_app_state");
 		}
-		public call_sposor_vote ():void{
+		public call_rpaodekuai_vote (type : number ):void{
 			this._stream.reset();
 			this._stream.writeUint16( 225 );
+			//0:拒绝|1:赞同
+			this._stream.writeInt32 (type);
 			this.sendMsg( 225 , this._stream);
-			//Log.outDebug("CS====> cmd:225 sposor_vote");
+			//Log.outDebug("CS====> cmd:225 rpaodekuai_vote");
 		}
-		public call_voting (type : number ):void{
+		public call_rniuniu_vote (type : number ):void{
 			this._stream.reset();
 			this._stream.writeUint16( 226 );
 			//0:拒绝|1:赞同
-			this._stream.writeUint8 (type);
+			this._stream.writeInt32 (type);
 			this.sendMsg( 226 , this._stream);
-			//Log.outDebug("CS====> cmd:226 voting");
+			//Log.outDebug("CS====> cmd:226 rniuniu_vote");
+		}
+		public call_rddz_vote (type : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 227 );
+			//0:拒绝|1:赞同
+			this._stream.writeInt32 (type);
+			this.sendMsg( 227 , this._stream);
+			//Log.outDebug("CS====> cmd:227 rddz_vote");
+		}
+		public call_rshisanshui_vote (type : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 228 );
+			//0:拒绝|1:赞同
+			this._stream.writeInt32 (type);
+			this.sendMsg( 228 , this._stream);
+			//Log.outDebug("CS====> cmd:228 rshisanshui_vote");
 		}
 	}
 
@@ -5334,7 +5367,7 @@ module hanlder{
 		}
 
 		/**
-		从输入二进制流中读取结构体
+		从输入二进制流中?寥〗峁固?
 		*/
 		public static read(self:c2s_ddz_play_card, bytes:ByteArray):void
 		{
@@ -8823,25 +8856,15 @@ module hanlder{
 			self.state = bytes. readInt32 ();		
 		}
 	}
-	export class c2s_sposor_vote
+	export class c2s_rpaodekuai_vote
 	{
 		public optcode:number = 0;
-		public optname:string = "onSposor_vote";
-	
-		public constructor()
-		{
-			
-		}
-	}
-	export class c2s_voting
-	{
-		public optcode:number = 0;
-		public optname:string = "onVoting";
+		public optname:string = "onRpaodekuai_vote";
 	
 		/**
 		* 0:拒绝|1:赞同
 		*/
-		public type : number ;	//uint8
+		public type : number ;	//int32
 		public constructor()
 		{
 			
@@ -8850,12 +8873,87 @@ module hanlder{
 		/**
 		从输入二进制流中读取结构体
 		*/
-		public static read(self:c2s_voting, bytes:ByteArray):void
+		public static read(self:c2s_rpaodekuai_vote, bytes:ByteArray):void
 		{
 			var parmLen:number;
 			var i:number;
 			//0:拒绝|1:赞同
-			self.type = bytes. readUint8 ();		
+			self.type = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_rniuniu_vote
+	{
+		public optcode:number = 0;
+		public optname:string = "onRniuniu_vote";
+	
+		/**
+		* 0:拒绝|1:赞同
+		*/
+		public type : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_rniuniu_vote, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//0:拒绝|1:赞同
+			self.type = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_rddz_vote
+	{
+		public optcode:number = 0;
+		public optname:string = "onRddz_vote";
+	
+		/**
+		* 0:拒绝|1:赞同
+		*/
+		public type : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_rddz_vote, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//0:拒绝|1:赞同
+			self.type = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_rshisanshui_vote
+	{
+		public optcode:number = 0;
+		public optname:string = "onRshisanshui_vote";
+	
+		/**
+		* 0:拒绝|1:赞同
+		*/
+		public type : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_rshisanshui_vote, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//0:拒绝|1:赞同
+			self.type = bytes. readInt32 ();		
 		}
 	}
 

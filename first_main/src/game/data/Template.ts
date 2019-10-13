@@ -21,9 +21,9 @@ module game.data{
 		/**根据id获取某条数据*/
 		static getSingeTempDataById(arr:Array<Object>, value:number):Object{
 			if(!arr || value <= 0) return null;
-			let len:number = arr.length;
-			for(let i:number = 0; i < len; i++){
-				let obj:Object = arr[i];
+			var len:number = arr.length;
+			for(var i:number = 0; i < len; i++){
+				var obj:Object = arr[i];
 				if(!obj) continue;
 				if(obj["id"] == value){
 					return obj;
@@ -61,13 +61,6 @@ module game.data{
 		}
 
 		/**
-		 * tb_expression根据对应id取数据
-		 */
-		static getExpressionTempById(id:number):tb_expression{
-			return <tb_expression>(this.getSingeTempDataById(this.data["tb_expression"],id));
-		}
-
-		/**
 		 * tb_fish根据对应id取数据
 		 */
 		static getFishTempById(id:number):tb_fish{
@@ -82,20 +75,6 @@ module game.data{
 		}
 
 		/**
-		 * tb_god根据对应id取数据
-		 */
-		static getGodTempById(id:number):tb_god{
-			return <tb_god>(this.getSingeTempDataById(this.data["tb_god"],id));
-		}
-
-		/**
-		 * tb_item根据对应id取数据
-		 */
-		static getItemTempById(id:number):tb_item{
-			return <tb_item>(this.getSingeTempDataById(this.data["tb_item"],id));
-		}
-
-		/**
 		 * tb_kucun_config根据对应id取数据
 		 */
 		static getKucun_configTempById(id:number):tb_kucun_config{
@@ -103,24 +82,10 @@ module game.data{
 		}
 
 		/**
-		 * tb_mail根据对应id取数据
-		 */
-		static getMailTempById(id:number):tb_mail{
-			return <tb_mail>(this.getSingeTempDataById(this.data["tb_mail"],id));
-		}
-
-		/**
 		 * tb_mapAssert根据对应id取数据
 		 */
 		static getMapAssertTempById(id:number):tb_mapAssert{
 			return <tb_mapAssert>(this.getSingeTempDataById(this.data["tb_mapAssert"],id));
-		}
-
-		/**
-		 * tb_recharge根据对应id取数据
-		 */
-		static getRechargeTempById(id:number):tb_recharge{
-			return <tb_recharge>(this.getSingeTempDataById(this.data["tb_recharge"],id));
 		}
 
 		/**
@@ -138,38 +103,10 @@ module game.data{
 		}
 
 		/**
-		 * tb_say_notice根据对应id取数据
-		 */
-		static getSay_noticeTempById(id:number):tb_say_notice{
-			return <tb_say_notice>(this.getSingeTempDataById(this.data["tb_say_notice"],id));
-		}
-
-		/**
-		 * tb_shop根据对应id取数据
-		 */
-		static getShopTempById(id:number):tb_shop{
-			return <tb_shop>(this.getSingeTempDataById(this.data["tb_shop"],id));
-		}
-
-		/**
-		 * tb_tips根据对应id取数据
-		 */
-		static getTipsTempById(id:number):tb_tips{
-			return <tb_tips>(this.getSingeTempDataById(this.data["tb_tips"],id));
-		}
-
-		/**
 		 * tb_yz_group根据对应id取数据
 		 */
 		static getYz_groupTempById(id:number):tb_yz_group{
 			return <tb_yz_group>(this.getSingeTempDataById(this.data["tb_yz_group"],id));
-		}
-
-		/**
-		 * tb_zuanshi根据对应id取数据
-		 */
-		static getZuanshiTempById(id:number):tb_zuanshi{
-			return <tb_zuanshi>(this.getSingeTempDataById(this.data["tb_zuanshi"],id));
 		}
 
 	}
@@ -213,11 +150,6 @@ module game.data{
 		init_resources:Array<any>; //	玩家初始拥有资源
 		boss_beilv:number; //	BOSS库存倍率控制
 	}
-	export interface tb_expression{
-		id:number; //	编号
-		word:string; //	表情替换符
-		display:string; //	表情资源
-	}
 	export interface tb_fish{
 		id:number; //	编号
 		type:number; //	鱼的类型
@@ -246,35 +178,6 @@ module game.data{
 		group_id:number; //	鱼群ID
 		lines_id:Array<any>; //	路径ID
 	}
-	export interface tb_god{
-		id:number; //	编号
-		name:string; //	物品名称
-		reward:Array<any>; //	获得奖励
-		cost:number; //	花费RMB金额
-		cost_dq:Array<any>; //	消耗点券数量
-		first:Array<any>; //	首次赠送
-		isfirst:number; //	是否首充
-		priority:number; //	排序
-		displayid:string; //	图标
-		ivsible:number; //	是否显示
-	}
-	export interface tb_item{
-		id:number; //	编号
-		name:string; //	名字
-		type:number; //	物品类型
-		quality:number; //	品质
-		level:number; //	使用等级
-		itemdesc:string; //	物品说明
-		binding:number; //	是否绑定
-		max_overlap:number; //	叠加数2
-		icon:string; //	图标资源
-		batch_use:number; //	是否批量使用
-		is_giving:number; //	是否可赠送
-		quick_use:number; //	快捷使用
-		come:string; //	获取来源
-		first_drop:number; //	掉落ID
-		show:number; //	是否显示
-	}
 	export interface tb_kucun_config{
 		id:number; //	ID
 		room_type:number; //	房间类型
@@ -290,16 +193,6 @@ module game.data{
 		boss_init_money:number; //	BOSS库存初始库存值
 		boss_fish_rate:Array<any>; //	BOSS库存捕获系数
 	}
-	export interface tb_mail{
-		id:number; //	编号
-		type:number; //	类型
-		title:string; //	标题
-		msg:string; //	信息
-		award:Array<any>; //	物品奖励
-		money:number; //	金币
-		begin_date:number; //	发送时间
-		end_date:number; //	结束时间
-	}
 	export interface tb_mapAssert{
 		id:number; //	编号
 		name:string; //	地图名称
@@ -308,20 +201,6 @@ module game.data{
 		imgId:number; //	地图资源图片
 		sound:string; //	地图声音
 		isWave:number; //	是否要波动
-	}
-	export interface tb_recharge{
-		id:number; //	编号
-		name:string; //	物品名称
-		reward:Array<any>; //	获得奖励
-		cost:number; //	花费RMB金额
-		cost_dq:Array<any>; //	消耗点券数量
-		first:Array<any>; //	首次赠送
-		isfirst:number; //	是否首充
-		priority:number; //	排序
-		displayid:string; //	图标
-		ivsible:number; //	是否显示
-		need_vip:number; //	需要VIP等级
-		sc_type:number; //	商城类型
 	}
 	export interface tb_refresh_fish_count{
 		id:number; //	编号
@@ -342,40 +221,9 @@ module game.data{
 		num_min:number; //	人数下限
 		num_max:number; //	人数上限
 	}
-	export interface tb_say_notice{
-		id:number; //	ID
-		notice:string; //	炮的倍数
-	}
-	export interface tb_shop{
-		id:number; //	唯一id
-		type:number; //	商城类型
-		need_vip:number; //	需要VIP等级
-		sell:Array<any>; //	出售道具
-		cost:Array<any>; //	购买消耗
-		show_item:string; //	消耗图标展示
-		discount:number; //	折扣
-		hf_jz:number; //	话费价值
-		limit_dh:number; //	话费卡限制兑换
-	}
-	export interface tb_tips{
-		id:number; //	编号
-		tips:string; //	提示内容
-	}
 	export interface tb_yz_group{
 		id:number; //	编号
 		yz_id:number; //	鱼阵ID
 		yz_group_line:Array<any>; //	编号ID
-	}
-	export interface tb_zuanshi{
-		id:number; //	编号
-		name:string; //	物品名称
-		reward:Array<any>; //	获得奖励
-		cost:number; //	花费RMB金额
-		cost_dq:Array<any>; //	消耗点券数量
-		first:Array<any>; //	首次赠送
-		isfirst:number; //	是否首充
-		priority:number; //	排序
-		displayid:string; //	图标
-		ivsible:number; //	是否显示
 	}
 }
