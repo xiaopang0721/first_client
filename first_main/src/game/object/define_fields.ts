@@ -58,7 +58,7 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_INT_MONEY:number = 6 //金币
 	public static PLAYERDATA_INT_PLAYER_CARD_VALUE:number = 7 //玩家的牌
 	public static PLAYERDATA_INT_SAVE_BOX_MONEY:number = 27 //余额宝金钱
-	public static PLAYERDATA_INT_BIND_SEND_MONEY:number = 28 //绑定送钱
+	public static PLAYERDATA_INT_GIVING_MONEY:number = 28 //赠送的金钱数
 	public static PLAYERDATA_INT_LAST_SHARE_TIME:number = 29 //上次分享时间
 	public static PLAYERDATA_INT_SAVE_BOX_MIN:number = 30 //产生利息最低金额
 	public static PLAYERDATA_INT_SAVE_BOX_RATE:number = 31 //余额宝利率
@@ -311,8 +311,8 @@ export class PlayerDataField extends core.obj.GuidObject{
     }
 
 
-	public GetBindSendMoney():number{
-       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_BIND_SEND_MONEY);
+	public GetGivingMoney():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_GIVING_MONEY);
     }
 
 
