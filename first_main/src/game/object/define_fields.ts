@@ -707,10 +707,11 @@ export class MapField extends core.obj.GuidObject{
 	public static MAP_INT_MAP_UINT16:number = 8 //0.牌库数量 1.百人地图庄家座位
 	public static MAP_INT_MAP_BYTE2:number = 9 //0.补牌类型 1.最后操作的玩家 2.盲注位置 3.预留
 	public static MAP_INT_MONEY:number = 10 //系统庄金币
-	public static MAP_INT_YU_CHAO_LAI_QI_TIME:number = 12 //鱼潮来袭时间戳
-	public static MAP_INT_BATTLE_INDEX:number = 13 //战斗结构体当前使用的最后一个下标
-	public static MAP_INT_BATTLE_BEING:number = 14 //战斗开始下标
-	public static MAP_INT_BATTLE_END:number = 50014 //战斗结束下标
+	public static MAP_INT_TOU_PIAO_TIME:number = 12 //投票倒计时
+	public static MAP_INT_YU_CHAO_LAI_QI_TIME:number = 13 //鱼潮来袭时间戳
+	public static MAP_INT_BATTLE_INDEX:number = 14 //战斗结构体当前使用的最后一个下标
+	public static MAP_INT_BATTLE_BEING:number = 15 //战斗开始下标
+	public static MAP_INT_BATTLE_END:number = 50015 //战斗结束下标
 
 // string field
 	public static MAP_STR_INSTANCE_I_D:number = 0 //地图实例ID
@@ -895,6 +896,11 @@ export class MapField extends core.obj.GuidObject{
 
 	public GetMoney():number{
        return this.GetDouble(MapField.MAP_INT_MONEY);
+    }
+
+
+	public GetTouPiaoTime():number{
+       return this.GetUInt32(MapField.MAP_INT_TOU_PIAO_TIME);
     }
 
 
