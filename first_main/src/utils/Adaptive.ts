@@ -19,29 +19,6 @@ module utils {
 				// Laya.timer.once(100,this,this._changeCanvasSize);
 				Laya.timer.callLater(this, this._changeCanvasSize);
 			}
-
-			/**画布容器，用来盛放画布的容器。方便对画布进行控制*/
-			Laya.getset(true, Browser, 'container', function () {
-				Browser.__init__();
-				if (!Browser["_container"]) {
-					Browser["_container"] = Browser.createElement("div");
-					Browser["_container"].id = "layaContainer";
-					let loadingContainer = Browser.getElementById("loadingContainer");
-					if (loadingContainer) {
-						Browser.document.body.insertBefore(Browser["_container"], loadingContainer);
-					} else {
-						Browser.document.body.appendChild(Browser["_container"]);
-					}
-				}
-				return Browser["_container"];
-			}, function (value) {
-				Browser["_container"] = value;
-			});
-
-		}
-
-		static clearPreloadView() {
-			window["__main_min_close"] = true;
 		}
 
 		//解析参数

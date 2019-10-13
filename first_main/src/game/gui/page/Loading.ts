@@ -51,7 +51,7 @@ module game.gui.page {
 
 		protected onOpen(): void {
 			super.onOpen();
-			utils.Adaptive.clearPreloadView();
+
 			WebConfig.closeHelloImg();
 			WebConfig.startJsJump();
 			this.changeTips();
