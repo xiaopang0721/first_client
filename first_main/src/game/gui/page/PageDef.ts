@@ -116,11 +116,8 @@ module game.gui.page {
 	]
 
 	const GAME_NAME_LIST = {
-		"ddz": "斗地主",
 		"majiang": "四川麻将",
 		"niuniu": "抢庄牛牛",
-		"paodekuai": "跑得快",
-		"shisanshui": "十三水",
 		"tbniuniu": "通比牛牛",
 		"zjh": "炸金花",
 		"baijiale": "百家乐",

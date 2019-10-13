@@ -233,6 +233,7 @@ module game.gui.component {
 			name && main.game.showTips(name + "更新完成！")
 			LoadingMgr.ins.freeAndLoadNext();
 			this.clearLoadingRender();
+			main.game.sceneObjectMgr.event(SceneObjectMgr.__EVENT_JOIN_CARDROOM_GAME_UPDATE);
 		}
 
 		clearLoadingRender() {
