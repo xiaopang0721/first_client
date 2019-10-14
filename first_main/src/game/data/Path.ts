@@ -3,6 +3,7 @@
 */
 module game.data {
 	export class Path {
+		static ui: string = "ui/";
 		static atlas_ui: string = "res/atlas/ui/";
 		static map: string = "map/{0}/";
 		static map_far: string = "map/{0}/far/";
