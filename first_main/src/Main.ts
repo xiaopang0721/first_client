@@ -98,6 +98,8 @@ class Main {
     }
 
     constructor() {
+        // 屏幕适配
+        utils.Adaptive.init();
         // 是否IPhoneX
         if (Browser.onIPhone && Math.abs(Browser.pixelRatio - 3) < 0.01) {
             onIPhoneX = (Browser.clientWidth == 375 && Browser.clientHeight == 812) || (Browser.clientWidth == 812 && Browser.clientHeight == 375);
@@ -110,8 +112,6 @@ class Main {
             //初始化引擎
             Laya.init(this.widthDesginPixelw, this.heightDesginPixelw, Laya.WebGL);
         }
-        // 屏幕适配
-        utils.Adaptive.init();
         Laya.SoundManager.useAudioMusic = false
         logd('location.href', location.href);
         let erralert = 0;
