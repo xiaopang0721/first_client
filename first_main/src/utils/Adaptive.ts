@@ -54,7 +54,6 @@ module utils {
 			WebConfig.isSingleEnter = (StringU.getParameter(location.href, "logintype") == Web_operation_fields.ACCOUNT_TYPE_USERNAME.toString()) ? true : false;
 			WebConfig.server_name = (StringU.getParameter(location.href, "p") || WebConfig.server_name).toLowerCase();
 			WebConfig.gwUrl = WebConfig.gwconf[WebConfig.platform];
-			WebConfig.ewmbaseUrl = WebConfig.ai_url + "/qrcode?urlsize=9&urltext=" + encodeURIComponent(WebConfig.gwUrl) + "?invitecode="
 			Vesion.addSearchPath(WebConfig.platform + "/", "langpack_1000.bin");
 			WebConfig.baseplatform = WebConfig.baseqp[WebConfig.platform];
 			logd("platform：", WebConfig.platform, 'baseplatform', WebConfig.baseplatform);
