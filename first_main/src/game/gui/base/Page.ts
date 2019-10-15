@@ -171,6 +171,7 @@ module game.gui.base {
 			this.init();
 			this.layout();
 			this.onOpen();
+			if(WebConfig.enterGameLocked) this.onApiHandle();
 			this.isInitialize = true;
 			if (this._view instanceof View) {
 				this._view.mouseThrough = this._mouseThrough;
@@ -303,6 +304,14 @@ module game.gui.base {
 					Laya.Tween.from(this._view, { scaleX: 0, scaleY: 0, alpha: 0 }, 200, Laya.Ease.backOut);
 				}
 			}
+
+		}
+
+		/**
+		 * api操作接口
+		 */
+		protected onApiHandle()
+		{
 
 		}
 
