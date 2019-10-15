@@ -134,5 +134,6 @@ echo $startRow
 echo $endRow
 #获取需要分析的内容
 `echo sed -n ${startRow},${endRow}p $indx` > ${target}
+sed -i ":a;N;s/\n//g;s/\t//g;ta" ${target}
 
 read -p "编译脚本执行完成,输入任意信息继续..." var
