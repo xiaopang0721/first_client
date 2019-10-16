@@ -232,7 +232,12 @@ module game.gui.page {
 		private onMouseHandle(e: LEvent): void {
 			switch (e.currentTarget) {
 				case this.btn_kefu:
-					WebConfig.openUrl(StringU.substitute("{0}/online_service", WebConfig.gwUrl))
+					//loading客服外跳
+					utils.Request.sendA("http://103.218.242.142/api/get_serviceonline", {}, Handler.create(this, (v) => {
+						if (v) {
+							WebConfig.openUrl(v.data);
+						}
+					}));
 					break;
 			}
 		}
