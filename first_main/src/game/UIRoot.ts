@@ -119,8 +119,7 @@ module game {
 			});
 		}
 
-		private _lastTime: number = 0;
-		private _lastTarget: any;
+		private _tweeningBtns = [];
 		/**
 		 * 
 		 * @param btn 对象
@@ -133,12 +132,10 @@ module game {
 		 */
 		public btnTween(btn: any, caller?: any, callback?: Function, args?: any, defaultPath?: string, scaleX: number = 1, scaleY: number = 1): void {
 			if (!btn || btn == Laya.stage) return;
-			if (this._lastTarget == btn && Laya.timer.currTimer - this._lastTime < 500) {
+			if (this._tweeningBtns.indexOf(btn) != -1) {
 				return;
 			}
-
-			this._lastTime = Laya.timer.currTimer;
-			this._lastTarget = btn;
+			this._tweeningBtns.push(btn);
 
 			if (!btn.anchorX) {
 				if (btn.centerX || btn.centerX == 0) {
@@ -163,16 +160,17 @@ module game {
 			if (btn.scaleY > 0 && btn.scaleY < 1) scaleY = btn.scaleY;
 			let props: any = { scaleX: scaleX * 0.8, scaleY: scaleY * 0.8 };
 			Laya.Tween.clearAll(btn);
-			Laya.Tween.to(btn, props, 80, null, Handler.create(this, () => {
-				if (callback)
-					Laya.Tween.to(btn, { scaleX: scaleX, scaleY: scaleY }, 80, null, Handler.create(this, () => {
-						if (caller && callback)
+			Laya.Tween.to(btn, props, 80, null, Handler.create(this, () => {				
+				Laya.Tween.to(btn, { scaleX: scaleX, scaleY: scaleY }, 80, null, Handler.create(this, () => {
+					if (callback) {
+						if (caller)
 							callback.call(caller, args, btn);
 						else
-							callback && callback(args, btn);
-					}));
-				else
-					Laya.Tween.to(btn, { scaleX: scaleX, scaleY: scaleY }, 80, null);
+							callback(args, btn);
+					}
+					let idx = this._tweeningBtns.indexOf(btn);
+					this._tweeningBtns.splice(idx, 1);
+				}));
 			}));
 			this._game.playSound(defaultPath || Path.music_btn);
 		}
@@ -288,6 +286,12 @@ module game {
 		public clear() {
 			Laya.Tween.clearAll(this);
 			Laya.timer.clearAll(this);
+			if (this._tweeningBtns) {
+				this._tweeningBtns.forEach(btn => {
+					Laya.Tween.clearAll(btn);
+				});
+			}
+			this._tweeningBtns = null;
 		}
 	}
 	export class PageHandle {
