@@ -233,7 +233,7 @@ module game.gui.page {
 			switch (e.currentTarget) {
 				case this.btn_kefu:
 					//loading客服外跳
-					let ipconf = WebConfig.ipconf[WebConfig.platform];
+					let ipconf = WebConfig.ipconf && WebConfig.ipconf[WebConfig.platform];
 					if (ipconf) {
 						utils.Request.sendA(ipconf + "/api/get_serviceonline", {}, Handler.create(this, (v) => {
 							if (v) {
