@@ -135,7 +135,12 @@ module game {
 			if (this._tweeningBtns.indexOf(btn) != -1) {
 				return;
 			}
+			let delayTime = 80;
 			this._tweeningBtns.push(btn);
+			Laya.timer.once(delayTime * 2 + 20, this, ()=>{
+				let idx = this._tweeningBtns.indexOf(btn);
+				this._tweeningBtns.splice(idx, 1);
+			})
 
 			if (!btn.anchorX) {
 				if (btn.centerX || btn.centerX == 0) {
@@ -158,18 +163,16 @@ module game {
 			if (btn.scaleY < 0 && scaleY == 1) scaleY = -1;
 			if (btn.scaleX > 0 && btn.scaleX < 1) scaleX = btn.scaleX;
 			if (btn.scaleY > 0 && btn.scaleY < 1) scaleY = btn.scaleY;
-			let props: any = { scaleX: scaleX * 0.8, scaleY: scaleY * 0.8 };
+			let props: any = { scaleX: scaleX * 0.85, scaleY: scaleY * 0.85 };
 			Laya.Tween.clearAll(btn);
-			Laya.Tween.to(btn, props, 80, null, Handler.create(this, () => {				
-				Laya.Tween.to(btn, { scaleX: scaleX, scaleY: scaleY }, 80, null, Handler.create(this, () => {
+			Laya.Tween.to(btn, props, delayTime, null, Handler.create(this, () => {				
+				Laya.Tween.to(btn, { scaleX: scaleX, scaleY: scaleY }, delayTime, null, Handler.create(this, () => {
 					if (callback) {
 						if (caller)
 							callback.call(caller, args, btn);
 						else
 							callback(args, btn);
-					}
-					let idx = this._tweeningBtns.indexOf(btn);
-					this._tweeningBtns.splice(idx, 1);
+					}					
 				}));
 			}));
 			this._game.playSound(defaultPath || Path.music_btn);

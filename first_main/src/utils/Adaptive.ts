@@ -4,8 +4,8 @@
 module utils {
 	export class Adaptive {
 		static init() {
-			this.Stage_resetCanvas();
 			this.ParseParam();
+			this.Stage_resetCanvas();
 		}
 
 		private static Stage_resetCanvas() {
@@ -38,6 +38,14 @@ module utils {
 				Browser["_container"] = value;
 			});
 
+			Laya.EventDispatcher.prototype["onAPI"] = function (type, caller, listener, args) {
+				if(WebConfig.enterGameLocked) return this;
+				return this.on(type,caller,listener,args);
+			}
+			Laya.EventDispatcher.prototype["offAPI"] = function (type,caller,listener,onceOnly) {
+				return this.off(type,caller,listener,onceOnly);
+			}
+
 		}
 
 		static clearPreloadView() {
@@ -50,7 +58,7 @@ module utils {
 			WebConfig.gameid = (StringU.getParameter(location.href, "gameid") || WebConfig.gameid).toLowerCase();
 			WebConfig.sessionkey = (StringU.getParameter(location.href, "sessionkey") || WebConfig.sessionkey).toLowerCase();
 			WebConfig.params = (StringU.getParameter(location.href, "params") || WebConfig.params).toLowerCase();
-			WebConfig.enterGameLocked = WebConfig.gameid && WebConfig.sessionkey;
+			WebConfig.enterGameLocked = WebConfig.gameid && WebConfig.sessionkey ? true : false;
 			WebConfig.isSingleEnter = (StringU.getParameter(location.href, "logintype") == Web_operation_fields.ACCOUNT_TYPE_USERNAME.toString()) ? true : false;
 			WebConfig.server_name = (StringU.getParameter(location.href, "p") || WebConfig.server_name).toLowerCase();
 			WebConfig.gwUrl = WebConfig.gwconf[WebConfig.platform];
