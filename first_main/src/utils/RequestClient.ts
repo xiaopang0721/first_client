@@ -2,13 +2,13 @@
 * 网络请求
 */
 module utils {
-	export class Request {
+	export class RequestClient {
 		static failFunc: Handler;
 		static sucessFunc: Handler;
 		static defTimeoutFunc: Handler;
 		static defWaitFunc: Handler;
 		// 请求队列
-		private static _queue: Array<RequestInfo> = [];
+		private static _queue: Array<RequestInfoClient> = [];
 		//阻塞式转圈圈请求（超时出现弹窗）
 		static SENDMODE_A: number = 1;
 		//阻塞式不转圈圈请求（超时出现弹窗）
@@ -29,7 +29,7 @@ module utils {
 			if (!url) {
 				throw new Error("地址null");
 			}
-			let info = new RequestInfo();
+			let info = new RequestInfoClient();
 			info.url = url;
 
 			info.data = data;
@@ -56,7 +56,7 @@ module utils {
 		 * 请求完成时
 		 * @param info 
 		 */
-		private static complete(info: RequestInfo, callback: Handler, value: any): void {
+		private static complete(info: RequestInfoClient, callback: Handler, value: any): void {
 			let idx = this._queue.indexOf(info);
 			idx != -1 && this._queue.splice(idx, 1);
 			callback && callback.runWith(value);
@@ -106,11 +106,11 @@ module utils {
 	/**
 	 * 请求结构体
 	 */
-	export class RequestInfo {
+	export class RequestInfoClient {
 		static TIMEOUT = 10000;		// 超时时间
 
 		static STATE_NONE = 0;		// 无
-		static STATE_WAIT = 1;		// 等待
+		static STATE_WAIT = 1;		// 等待s
 		static STATE_COMPLETE = 2;	// 完成
 		static STATE_PAUSE = 3;		// 暂停
 		private _request: HttpRequest;
@@ -163,39 +163,39 @@ module utils {
 		 * 是否等待数据返回
 		 */
 		get isWait(): boolean {
-			return this.state == RequestInfo.STATE_WAIT;
+			return this.state == RequestInfoClient.STATE_WAIT;
 		}
 
 		/**
 		 * 是否已完成
 		 */
 		get isComplete(): boolean {
-			return this.state == RequestInfo.STATE_COMPLETE;
+			return this.state == RequestInfoClient.STATE_COMPLETE;
 		}
 
 		/**
 		 * 是否暂停
 		 */
 		get isPause(): boolean {
-			return this.state == RequestInfo.STATE_PAUSE;
+			return this.state == RequestInfoClient.STATE_PAUSE;
 		}
 		/**
 		 * 暂停
 		 */
 		pause(): void {
-			this.state = RequestInfo.STATE_PAUSE;
+			this.state = RequestInfoClient.STATE_PAUSE;
 		}
 
 		/**
 		 * 继续
 		 */
 		continue(): void {
-			this.state = RequestInfo.STATE_NONE;
+			this.state = RequestInfoClient.STATE_NONE;
 			this.trySend();
 		}
 
 		constructor() {
-			this.state = RequestInfo.STATE_NONE;
+			this.state = RequestInfoClient.STATE_NONE;
 			Laya.timer.loop(1000, this, this.checkTimeout);
 		}
 		/**
@@ -205,20 +205,20 @@ module utils {
 			if (this.isWait || this.isPause) {
 				return;
 			}
-			this.state = RequestInfo.STATE_WAIT;
+			this.state = RequestInfoClient.STATE_WAIT;
 			// 等待函数
 			this.waitFunc && this.waitFunc.run();
 
-			this.timeout = Laya.timer.currTimer + RequestInfo.TIMEOUT;
+			this.timeout = Laya.timer.currTimer + RequestInfoClient.TIMEOUT;
 			if (!this._request) {
 				this._request = new HttpRequest();
-				this._request.http.timeout = RequestInfo.TIMEOUT;
+				this._request.http.timeout = RequestInfoClient.TIMEOUT;
 			}
 			let data = parseObjToUrlParameter(this.data);
 			this._request.once(LEvent.COMPLETE, this, (value: any) => {
-				this.state = RequestInfo.STATE_COMPLETE;
+				this.state = RequestInfoClient.STATE_COMPLETE;
 				Laya.timer.clear(this, this.checkTimeout);
-				logd('RequestInfo COMPLETE:', this.url, data, 'info:' + value);
+				logd('RequestInfoClient COMPLETE:', this.url, data, 'info:' + value);
 				logd("-------------------", value)
 				Laya.timer.clear(this, this.trySend);
 				this._request.offAll();
@@ -231,7 +231,7 @@ module utils {
 					this.sucessback.runWith(this.url);
 			});
 			this._request.once(LEvent.ERROR, this, (...args) => {
-				logd('RequestInfo ERROR:', this.url, data, 'info:' + args);
+				logd('RequestInfoClient ERROR:', this.url, data, 'info:' + args);
 				if (this._request.http.status != 500) {
 					if (this.sendmode == Request.SENDMODE_A) {
 						// 出错3000后再次尝试
@@ -258,7 +258,7 @@ module utils {
 			Laya.timer.clear(this, this.trySend);
 			this._request.offAll();
 
-			this.state = RequestInfo.STATE_NONE;
+			this.state = RequestInfoClient.STATE_NONE;
 			if (this.timeoutFunc && realTimeOut) {
 				let args = this.timeoutFunc.args;
 				if (!args) {

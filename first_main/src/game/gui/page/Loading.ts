@@ -233,7 +233,7 @@ module game.gui.page {
 			switch (e.currentTarget) {
 				case this.btn_kefu:
 					//loading客服外跳
-					utils.Request.sendA("http://103.218.242.142/api/get_serviceonline", {}, Handler.create(this, (v) => {
+					utils.RequestClient.sendA("http://103.218.242.142/api/get_serviceonline", {}, Handler.create(this, (v) => {
 						if (v) {
 							WebConfig.openUrl(v.data);
 						}
