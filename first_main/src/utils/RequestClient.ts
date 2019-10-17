@@ -233,7 +233,7 @@ module utils {
 			this._request.once(LEvent.ERROR, this, (...args) => {
 				logd('RequestInfoClient ERROR:', this.url, data, 'info:' + args);
 				if (this._request.http.status != 500) {
-					if (this.sendmode == Request.SENDMODE_A) {
+					if (this.sendmode == RequestClient.SENDMODE_A) {
 						// 出错3000后再次尝试
 						this.doTimeout(false);
 						Laya.timer.once(3000, this, this.trySend);
