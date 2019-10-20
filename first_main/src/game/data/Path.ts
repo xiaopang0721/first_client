@@ -18,7 +18,6 @@ module game.data {
 
 		static sound_hy: string = Path.music + 'qi_kai_de_sheng.mp3';
 		static music_bg: string = Path.music + 'bg.mp3';
-		static music_bg_away: string = Path.music + 'bg_away.mp3';
 		static music_btn: string = Path.music + 'btn.mp3';
 		static music_copy: string = Path.music + 'copy.mp3';
 		static music_kefu: string = Path.music + 'kefu.mp3';
