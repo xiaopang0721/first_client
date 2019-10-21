@@ -85,6 +85,10 @@ module game.gui.page {
 		 *	新版皮肤
 		 */
 		static BASE_PLATFORM_TYPE_NQP: string = "nqp";
+		/**
+		 *	暗金版皮肤
+		 */
+		static BASE_PLATFORM_TYPE_AJQP: string = "ajqp";
 
 		/**
 		 * 获取游戏名字
