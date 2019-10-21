@@ -11,8 +11,6 @@ module game.data {
 		static music: string = "music/";
 		static data: string = 'data/';
 		static temp: string = 'data/temp/';
-		static ui_atlas_effect: string = "custom_atlas/ui/";
-		static custom_atlas: string = "custom_atlas/";
 		static ui_tongyong_sk: string = "tongyong_ui/game_ui/tongyong/sk/";
 		static atlas_game_ui_tongyong: string = "tongyong_res/atlas/tongyong_ui/game_ui/tongyong/";
 
@@ -24,7 +22,15 @@ module game.data {
 		static music_tuiguang: string = Path.music + 'tuiguang.mp3';
 		static music_zhuanpan: string = Path.music + 'zhuanpan.mp3';
 		static scene: string = 'scene/';
-		static custom_atlas_scene: string = 'custom_atlas/scene/';
+		static get custom_atlas():string {
+			return "custom_atlas/" + WebConfig.platform + "/";
+		}
+		static get ui_atlas_effect():string {
+			return Path.custom_atlas + "ui/";
+		}
+		static get custom_atlas_scene():string {
+			return Path.custom_atlas + Path.scene;
+		}
 		
 		/**
 		 * 获得一直序列帧地址

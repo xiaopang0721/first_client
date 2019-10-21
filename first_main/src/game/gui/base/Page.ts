@@ -21,16 +21,8 @@ module game.gui.base {
 				if (!vv) {
 					vv = this.FindLang(vPath);
 				}
-				// if (!this._view) {
-				// 	this._view = new ui[v]();
-				// }
-			}
-			else if (v instanceof Laya.Node) {
-				// this._view = v;
-				vv = v;
 			}
 			else {
-				// this._view = new v();
 				vv = v;
 			}
 			return vv;

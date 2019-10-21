@@ -74,21 +74,13 @@ module game.gui.page {
 		 */
 		static BASE_PLATFORM_TYPE_DAZHONGQP: string = "dazhongqp";
 		/**
-		 *	大众版皮肤
+		 *	暗金版皮肤
 		 */
-		static BASE_PLATFORM_TYPE_DZQP: string = "dzqp";
-		/**
-		 *	Q版皮肤
-		 */
-		static BASE_PLATFORM_TYPE_QB: string = "qban";
+		static BASE_PLATFORM_TYPE_AJQP: string = "ajqp";
 		/**
 		 *	新版皮肤
 		 */
 		static BASE_PLATFORM_TYPE_NQP: string = "nqp";
-		/**
-		 *	暗金版皮肤
-		 */
-		static BASE_PLATFORM_TYPE_AJQP: string = "ajqp";
 
 		/**
 		 * 获取游戏名字
