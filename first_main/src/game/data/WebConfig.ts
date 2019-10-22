@@ -195,19 +195,8 @@ __window.setModelInfo = function (v) {
 	WebConfig.modelInfo = v;
 }
 
-WebConfig._deviceId = '';
+WebConfig.deviceId = '';
 
-WebConfig.deviceId = function () {
-	if (Laya.Browser.onPC) {
-		return ''
-
-	} else if (Laya.Browser.onAndroid) {
-		return WebConfig._deviceId;
-	}
-	else if (Laya.Browser.onIOS) {
-		return WebConfig.deviceToken
-	}
-}
 //获取手机唯一标识
 WebConfig.getDeviceId = function () {
 	if (Laya.Browser.onPC) {
@@ -215,19 +204,25 @@ WebConfig.getDeviceId = function () {
 	}
 	else if (Laya.Browser.onAndroid) {
 		if (__window.android && __window.android.getDeviceId) {
-			if (WebConfig._deviceId) return WebConfig._deviceId;
-			WebConfig._deviceId = __window.android.getDeviceId()
+			if (WebConfig.deviceId) return WebConfig.deviceId;
+			WebConfig.deviceId = __window.android.getDeviceId()
 		}
 	} else if (Laya.Browser.onIOS) {
 		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getDeviceId) {
-			if (WebConfig._deviceId) return WebConfig._deviceId;
+			if (WebConfig.deviceId) return WebConfig.deviceId;
 			__window.webkit.messageHandlers.getDeviceId.postMessage(null);
 		}
 	}
 	return null;
 }
 __window.setDeviceId = function (v) {
-	if (!WebConfig._deviceId) WebConfig._deviceId = v;
+	if (!WebConfig.deviceId) {
+		if (Laya.Browser.onIOS) {
+			WebConfig.deviceId = WebConfig.deviceToken || v;
+		} else {
+			WebConfig.deviceId = v;
+		}
+	}
 }
 
 WebConfig.asdfghjkl = function () {
@@ -253,7 +248,12 @@ WebConfig.deviceToken = "";
 
 __window.setDeviceToken = function (v) {
 	WebConfig.wxDebug && WebConfig.alert("setDeviceToken:" + v)
-	if (!WebConfig.deviceToken) WebConfig.deviceToken = v;
+	if (!WebConfig.deviceToken) {
+		if (Laya.Browser.onIOS) {
+			WebConfig.deviceId = v;
+		}
+		WebConfig.deviceToken = v;
+	}
 	WebConfig.update_deviceToken != null && WebConfig.update_deviceToken.run && WebConfig.update_deviceToken.run();
 }
 
