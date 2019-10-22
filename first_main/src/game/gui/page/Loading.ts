@@ -243,7 +243,7 @@ module game.gui.page {
 							}
 						}));
 					} else {
-						WebConfig.openUrl(StringU.substitute("{0}/online_service", WebConfig.gwConfUrl))
+						WebConfig.openUrl(StringU.substitute("{0}/online_service", WebConfig.gwconf[WebConfig.platform]))
 					}
 					break;
 			}

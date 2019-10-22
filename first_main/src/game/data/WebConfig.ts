@@ -8,7 +8,6 @@ WebConfig.version = __conf.version;
 WebConfig.server_lock = __conf.server_lock;
 WebConfig.server_name = __conf.server_name;
 WebConfig.gwUrl = __conf.gwUrl;
-WebConfig.gwConfUrl = __conf.gwUrl;
 WebConfig.needMusicPreload = __conf.needMusicPreload;
 WebConfig.baseqp = __conf.baseqp;
 WebConfig.gwconf = __conf.gwconf;
