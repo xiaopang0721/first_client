@@ -147,13 +147,12 @@ module game.gui.base {
 			let obj_plat;
 			if (typeof cls === "string") {
 				obj_plat = Page.FindLang(vPath, cls)
+				if (obj_plat) 
+					obj_plat.__proto__.uiView = v.uiView;
 			}
-			if (obj_plat) {
-				obj_plat.uiView = v.uiView;
-			}
-			let obj_ui = Page.FindLang(vPath)
-			if (obj_ui) {
-				obj_ui.uiView = v.uiView;
+			else if (typeof cls === 'function') {
+				if (cls.uiView)
+					cls.__proto__.uiView = v.uiView;
 			}
 			return cls;
 		}
