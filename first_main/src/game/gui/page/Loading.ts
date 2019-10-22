@@ -234,8 +234,10 @@ module game.gui.page {
 				case this.btn_kefu:
 					//loading客服外跳
 					let ipconf = WebConfig.ipconf && WebConfig.ipconf[WebConfig.platform];
+					logd("客服外跳ip：", ipconf)
 					if (ipconf) {
 						utils.Request.sendA(ipconf + "/api/get_serviceonline", {}, Handler.create(this, (v) => {
+							logd("客服外跳地址：", v.data)
 							if (v) {
 								WebConfig.openUrl(v.data);
 							}
