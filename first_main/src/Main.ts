@@ -123,7 +123,7 @@ class Main {
                 if (isDebug) {
                     throw new Error(data.error.toString());
                 } else {
-                    localSetItem("client_error", Vesion["_defaultVesion"] + ",devicetype:" + WebConfig.vtype + "," + WebConfig.appVersion + ",SystemInfo:" + WebConfig.systemInfo + ",ModelInfo:" + WebConfig.modelInfo + ",DeviceId:" + WebConfig.deviceId + ",userid:" + WebConfig.info.userid + ",gameid:" + WebConfig.info.gameid + "," + WebConfig.gwUrl + ":" + data.error);
+                    localSetItem("client_error", Vesion["_defaultVesion"] + ",devicetype:" + WebConfig.vtype + "," + WebConfig.appVersion + ",SystemInfo:" + WebConfig.systemInfo + ",ModelInfo:" + WebConfig.modelInfo + ",DeviceId:" + WebConfig._deviceId + ",userid:" + WebConfig.info.userid + ",gameid:" + WebConfig.info.gameid + "," + WebConfig.gwUrl + ":" + data.error);
                 }
             }
         }
