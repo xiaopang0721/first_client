@@ -450,6 +450,19 @@ WebConfig.closeApp = function () {
 	}
 }
 
+//网络是否连接
+WebConfig.isConnectIsNomarl = function () {
+	if (Laya.Browser.onPC) {
+
+	}
+	else if (Laya.Browser.onAndroid) {
+		__window.android && __window.android.isConnectIsNomarl && __window.android.isConnectIsNomarl();
+	}
+	else if (Laya.Browser.onIOS) {
+
+	}
+}
+
 /**
  * 微信分享回调
  */
@@ -566,7 +579,7 @@ WebConfig.wxShareText = function (txt, scene) {
 
 	}
 	else if (Laya.Browser.onAndroid) {
-		__window.wxShareCallBack(__window.android && __window.android.wxShareText && __window.android.wxShareText(txt, scene));
+		__window.android && __window.android.wxShareText && __window.android.wxShareText(txt, scene);
 	}
 	else if (Laya.Browser.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.wxShareText && __window.webkit.messageHandlers.wxShareText.postMessage([txt, scene])
@@ -582,7 +595,7 @@ WebConfig.wxShareImage = function (url, title, description, scene) {
 
 	}
 	else if (Laya.Browser.onAndroid) {
-		__window.wxShareCallBack(__window.android && __window.android.wxShareImage && __window.android.wxShareImage(url, title, description, scene));
+		__window.android && __window.android.wxShareImage && __window.android.wxShareImage(url, title, description, scene);
 	}
 	else if (Laya.Browser.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.wxShareImage && __window.webkit.messageHandlers.wxShareImage.postMessage([url, title, description, scene])
@@ -614,7 +627,7 @@ WebConfig.wxShareQrcodeImg = function (back_url, b_w, b_h, url, x, y, w, h, titl
 
 	}
 	else if (Laya.Browser.onAndroid) {
-		__window.wxShareCallBack(__window.android && __window.android.wxShareQrcodeImg && __window.android.wxShareQrcodeImg(back_url, b_w, b_h, url, x, y, w, h, title, description, scene));
+		__window.android && __window.android.wxShareQrcodeImg && __window.android.wxShareQrcodeImg(back_url, b_w, b_h, url, x, y, w, h, title, description, scene);
 	}
 	else if (Laya.Browser.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.wxShareQrcodeImg && __window.webkit.messageHandlers.wxShareQrcodeImg.postMessage([back_url, b_w, b_h, url, x, y, w, h, title, description, scene])
