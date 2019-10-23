@@ -236,14 +236,9 @@ module game.gui.page {
 					let ipconf = WebConfig.ipconf && WebConfig.ipconf[WebConfig.platform];
 					logd("客服外跳ip：", ipconf)
 					if (ipconf) {
-						utils.Request.sendA(ipconf + "/api/get_serviceonline", {}, Handler.create(this, (v) => {
-							logd("客服外跳地址：", v.data)
-							if (v) {
-								WebConfig.openUrl(v.data);
-							}
-						}));
+						WebConfig.openUrl(StringU.substitute("{0}/online_service", ipconf))
 					} else {
-						WebConfig.openUrl(StringU.substitute("{0}/online_service", WebConfig.gwUrl))
+						WebConfig.openUrl(StringU.substitute("{0}/online_service", WebConfig.gwconf[WebConfig.platform]))
 					}
 					break;
 			}
