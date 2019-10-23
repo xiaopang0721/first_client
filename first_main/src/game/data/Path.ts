@@ -5,8 +5,8 @@ module game.data {
 	export class Path {
 		static ui: string = "ui/";
 		static atlas_ui: string = "res/atlas/ui/";
-		static map: string = "map/{0}/";
-		static map_far: string = "map/{0}/far/";
+		static map: string = "map/";
+		static map_far: string = "map/far/";
 		static mapEffect: string = "mapEffect/";
 		static music: string = "music/";
 		static data: string = 'data/';

@@ -84,8 +84,7 @@ module utils {
 				}
 			}
 
-			Path.map_far = StringU.substitute(Path.map_far, WebConfig.baseplatform);
-			Path.map = StringU.substitute(Path.map, WebConfig.baseplatform);
+			
 			!WebConfig.systemInfo && WebConfig.getSystemInfo();//获取手机系统信息
 			logd("systemInfo", WebConfig.systemInfo);
 			!WebConfig.modelInfo && WebConfig.getModelInfo();//获取机型
