@@ -90,8 +90,8 @@ module utils {
 			logd("systemInfo", WebConfig.systemInfo);
 			!WebConfig.modelInfo && WebConfig.getModelInfo();//获取机型
 			logd("modelInfo", WebConfig.modelInfo);
-			!WebConfig._deviceId && WebConfig.getDeviceId();//获取唯一标识
-			logd("deviceId", WebConfig._deviceId);
+			!WebConfig.deviceId && WebConfig.getDeviceId();//获取唯一标识
+			logd("deviceId", WebConfig.deviceId);
 			!WebConfig.deviceToken && WebConfig.getDeviceToken();//获取设备号
 			logd("deviceToken", WebConfig.deviceToken);
 			!WebConfig.appVersion && WebConfig.getAppVersion();//获取app版本号
