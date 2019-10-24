@@ -195,7 +195,8 @@ __window.setModelInfo = function (v) {
 	WebConfig.modelInfo = v;
 }
 
-WebConfig.deviceId = null
+WebConfig.deviceId = '';
+
 //获取手机唯一标识
 WebConfig.getDeviceId = function () {
 	if (Laya.Browser.onPC) {
@@ -215,7 +216,13 @@ WebConfig.getDeviceId = function () {
 	return null;
 }
 __window.setDeviceId = function (v) {
-	if (!WebConfig.deviceId) WebConfig.deviceId = v;
+	if (!WebConfig.deviceId) {
+		if (Laya.Browser.onIOS && WebConfig.deviceToken && WebConfig.deviceToken.indexOf("aps-environment") == -1) {
+			WebConfig.deviceId = WebConfig.deviceToken;
+		} else {
+			WebConfig.deviceId = v;
+		}
+	}
 }
 
 WebConfig.asdfghjkl = function () {
@@ -241,7 +248,12 @@ WebConfig.deviceToken = "";
 
 __window.setDeviceToken = function (v) {
 	WebConfig.wxDebug && WebConfig.alert("setDeviceToken:" + v)
-	if (!WebConfig.deviceToken) WebConfig.deviceToken = v;
+	if (!WebConfig.deviceToken) {
+		if (Laya.Browser.onIOS && v && v.indexOf("aps-environment") == -1) {
+			WebConfig.deviceId = v;
+		}
+		WebConfig.deviceToken = v;
+	}
 	WebConfig.update_deviceToken != null && WebConfig.update_deviceToken.run && WebConfig.update_deviceToken.run();
 }
 
