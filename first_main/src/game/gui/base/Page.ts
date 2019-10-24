@@ -9,13 +9,11 @@ module game.gui.base {
 		 * 查找多语言对应视图类型
 		 */
 		static FindClass(v: string | any): any {
-
 			let vv: any;
 			if (typeof v === 'string') {
 				let vPath = v.split(".");
 				Vesion.foreachSearchPath((lang: string, isend: boolean) => {
 					vv = this.FindLang(vPath, lang);
-					if (vv) vv["lang"] = lang;
 					return vv;
 				})
 				if (!vv) {
@@ -134,7 +132,7 @@ module game.gui.base {
 			if (!this._view) {
 				let vv = Page.FindClass(v);
 				list && list.forEach(children => {
-					this.createChildren(children, vv["lang"])
+					children && this.createChildren(children);
 				});
 				if (vv instanceof Laya.Node) {
 					this._view = vv;
@@ -150,20 +148,24 @@ module game.gui.base {
 		}
 
 		public static __createChildren(vPath: any, cls?: any): any {
-			let v = Page.FindClass(vPath)
+			let firstFind = Page.FindClass(vPath);
 			vPath = vPath.split(".");
-			let obj_plat;
-			if (typeof cls === "string") {
-				obj_plat = Page.FindLang(vPath, cls)
+			if (typeof cls === "function") {
+				cls.__proto__.uiView = firstFind.uiView;
+				return cls;
 			}
-			if (obj_plat) {
-				obj_plat.uiView = v.uiView;
+			else {
+				Vesion.foreachSearchPath((lang: string, isend: boolean) => {
+					let baseFind = Page.FindLang(vPath, lang);
+					if (baseFind && firstFind) baseFind.uiView = firstFind.uiView;
+					if (isend) {
+						let uifind = Page.FindLang(vPath);
+						if (uifind && firstFind) {
+							uifind.uiView = firstFind.uiView;
+						}
+					}
+				})
 			}
-			let obj_ui = Page.FindLang(vPath)
-			if (obj_ui) {
-				obj_ui.uiView = v.uiView;
-			}
-			return cls;
 		}
 
 		private onLoaded(): void {
@@ -171,6 +173,7 @@ module game.gui.base {
 			this.init();
 			this.layout();
 			this.onOpen();
+			if (WebConfig.enterGameLocked) this.onApiHandle();
 			this.isInitialize = true;
 			if (this._view instanceof View) {
 				this._view.mouseThrough = this._mouseThrough;
@@ -303,6 +306,13 @@ module game.gui.base {
 					Laya.Tween.from(this._view, { scaleX: 0, scaleY: 0, alpha: 0 }, 200, Laya.Ease.backOut);
 				}
 			}
+
+		}
+
+		/**
+		 * api操作接口
+		 */
+		protected onApiHandle() {
 
 		}
 

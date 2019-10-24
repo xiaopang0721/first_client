@@ -11,6 +11,7 @@ WebConfig.gwUrl = __conf.gwUrl;
 WebConfig.needMusicPreload = __conf.needMusicPreload;
 WebConfig.baseqp = __conf.baseqp;
 WebConfig.gwconf = __conf.gwconf;
+WebConfig.ipconf = __conf.ipconf;
 WebConfig.platform = __conf.platform;//优先href
 WebConfig.gameid = "";
 WebConfig.sessionkey = "account=12345735&server_name=zwx&tm=1571893298&sign=fd3df1fbebe1dd7df0e8f09b948dd2eb";
@@ -194,7 +195,8 @@ __window.setModelInfo = function (v) {
 	WebConfig.modelInfo = v;
 }
 
-WebConfig.deviceId = null
+WebConfig.deviceId = '';
+
 //获取手机唯一标识
 WebConfig.getDeviceId = function () {
 	if (Laya.Browser.onPC) {
@@ -214,7 +216,13 @@ WebConfig.getDeviceId = function () {
 	return null;
 }
 __window.setDeviceId = function (v) {
-	if (!WebConfig.deviceId) WebConfig.deviceId = v;
+	if (!WebConfig.deviceId) {
+		if (Laya.Browser.onIOS && WebConfig.deviceToken && WebConfig.deviceToken.indexOf("aps-environment") == -1) {
+			WebConfig.deviceId = WebConfig.deviceToken;
+		} else {
+			WebConfig.deviceId = v;
+		}
+	}
 }
 
 WebConfig.asdfghjkl = function () {
@@ -240,7 +248,12 @@ WebConfig.deviceToken = "";
 
 __window.setDeviceToken = function (v) {
 	WebConfig.wxDebug && WebConfig.alert("setDeviceToken:" + v)
-	if (!WebConfig.deviceToken) WebConfig.deviceToken = v;
+	if (!WebConfig.deviceToken) {
+		if (Laya.Browser.onIOS && v && v.indexOf("aps-environment") == -1) {
+			WebConfig.deviceId = v;
+		}
+		WebConfig.deviceToken = v;
+	}
 	WebConfig.update_deviceToken != null && WebConfig.update_deviceToken.run && WebConfig.update_deviceToken.run();
 }
 
@@ -449,6 +462,19 @@ WebConfig.closeApp = function () {
 	}
 }
 
+//网络是否连接
+WebConfig.isConnectIsNomarl = function () {
+	if (Laya.Browser.onPC) {
+
+	}
+	else if (Laya.Browser.onAndroid) {
+		__window.android && __window.android.isConnectIsNomarl && __window.android.isConnectIsNomarl();
+	}
+	else if (Laya.Browser.onIOS) {
+
+	}
+}
+
 /**
  * 微信分享回调
  */
@@ -565,7 +591,7 @@ WebConfig.wxShareText = function (txt, scene) {
 
 	}
 	else if (Laya.Browser.onAndroid) {
-		__window.wxShareCallBack(__window.android && __window.android.wxShareText && __window.android.wxShareText(txt, scene));
+		__window.android && __window.android.wxShareText && __window.android.wxShareText(txt, scene);
 	}
 	else if (Laya.Browser.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.wxShareText && __window.webkit.messageHandlers.wxShareText.postMessage([txt, scene])
@@ -581,7 +607,7 @@ WebConfig.wxShareImage = function (url, title, description, scene) {
 
 	}
 	else if (Laya.Browser.onAndroid) {
-		__window.wxShareCallBack(__window.android && __window.android.wxShareImage && __window.android.wxShareImage(url, title, description, scene));
+		__window.android && __window.android.wxShareImage && __window.android.wxShareImage(url, title, description, scene);
 	}
 	else if (Laya.Browser.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.wxShareImage && __window.webkit.messageHandlers.wxShareImage.postMessage([url, title, description, scene])
@@ -613,7 +639,7 @@ WebConfig.wxShareQrcodeImg = function (back_url, b_w, b_h, url, x, y, w, h, titl
 
 	}
 	else if (Laya.Browser.onAndroid) {
-		__window.wxShareCallBack(__window.android && __window.android.wxShareQrcodeImg && __window.android.wxShareQrcodeImg(back_url, b_w, b_h, url, x, y, w, h, title, description, scene));
+		__window.android && __window.android.wxShareQrcodeImg && __window.android.wxShareQrcodeImg(back_url, b_w, b_h, url, x, y, w, h, title, description, scene);
 	}
 	else if (Laya.Browser.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.wxShareQrcodeImg && __window.webkit.messageHandlers.wxShareQrcodeImg.postMessage([back_url, b_w, b_h, url, x, y, w, h, title, description, scene])

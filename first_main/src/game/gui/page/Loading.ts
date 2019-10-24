@@ -232,7 +232,14 @@ module game.gui.page {
 		private onMouseHandle(e: LEvent): void {
 			switch (e.currentTarget) {
 				case this.btn_kefu:
-					WebConfig.openUrl(StringU.substitute("{0}/online_service", WebConfig.gwUrl))
+					//loading客服外跳
+					let ipconf = WebConfig.ipconf && WebConfig.ipconf[WebConfig.platform];
+					logd("客服外跳ip：", ipconf)
+					if (ipconf) {
+						WebConfig.openUrl(StringU.substitute("{0}/online_service", ipconf))
+					} else {
+						WebConfig.openUrl(StringU.substitute("{0}/online_service", WebConfig.gwconf[WebConfig.platform]))
+					}
 					break;
 			}
 		}

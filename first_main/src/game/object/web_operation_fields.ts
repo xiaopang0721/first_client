@@ -13,7 +13,7 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_XIQIAN = 10  //喜钱
     public static USE_MONEY_LOG_TYPE_SIGNIN = 11  //签到奖励
     public static USE_MONEY_LOG_TYPE_TURNTABLE = 12  //转盘奖励
-    public static USE_MONEY_LOG_TYPE_GMADD = 13  //GM加钱
+    public static USE_MONEY_LOG_TYPE_RECHARGE_TYMOBILE = 13  //特邀手机赠送
     public static USE_MONEY_LOG_TYPE_GMSUB = 14  //GM减钱
     public static USE_MONEY_LOG_TYPE_RECHARGE_VIP = 15  //VIP充值
     public static USE_MONEY_LOG_TYPE_RECHARGE_RAKEBACK = 16  //佣金池领取
@@ -62,7 +62,7 @@ class Web_operation_fields {
         10:'喜钱',//喜钱
         11:'签到奖励',//签到奖励
         12:'转盘奖励',//转盘奖励
-        13:'GM加钱',//GM加钱
+        13:'特邀手机赠送',//特邀手机赠送
         14:'GM减钱',//GM减钱
         15:'VIP充值',//VIP充值
         16:'佣金池领取',//佣金池领取

@@ -75,10 +75,11 @@ module game {
 				this.loadNeedAsset();
 			}), false, 0);
 
+			// 初始化音量
 			let soundVolume: string = localGetItem("soundVolume")
 			let musicVolume: string = localGetItem("musicVolume")
-			Laya.SoundManager.setSoundVolume(soundVolume == null ? 1 : parseFloat(soundVolume));
-			Laya.SoundManager.setMusicVolume(musicVolume == null ? 1 : parseFloat(musicVolume));
+			Laya.SoundManager.setSoundVolume(soundVolume == null ? 0.15 : parseFloat(soundVolume));
+			Laya.SoundManager.setMusicVolume(musicVolume == null ? 0.15 : parseFloat(musicVolume));
 		}
 
 		// 加载必要素材

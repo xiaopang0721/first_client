@@ -4,8 +4,8 @@
 module utils {
 	export class Adaptive {
 		static init() {
-			this.Stage_resetCanvas();
 			this.ParseParam();
+			this.Stage_resetCanvas();
 		}
 
 		private static Stage_resetCanvas() {
@@ -38,6 +38,14 @@ module utils {
 				Browser["_container"] = value;
 			});
 
+			Laya.EventDispatcher.prototype["onAPI"] = function (type, caller, listener, args) {
+				if (WebConfig.enterGameLocked) return this;
+				return this.on(type, caller, listener, args);
+			}
+			Laya.EventDispatcher.prototype["offAPI"] = function (type, caller, listener, onceOnly) {
+				return this.off(type, caller, listener, onceOnly);
+			}
+
 		}
 
 		static clearPreloadView() {
@@ -50,18 +58,32 @@ module utils {
 			WebConfig.gameid = (StringU.getParameter(location.href, "gameid") || WebConfig.gameid).toLowerCase();
 			WebConfig.sessionkey = (StringU.getParameter(location.href, "sessionkey") || WebConfig.sessionkey).toLowerCase();
 			WebConfig.params = (StringU.getParameter(location.href, "params") || WebConfig.params).toLowerCase();
-			WebConfig.enterGameLocked = WebConfig.gameid && WebConfig.sessionkey;
+			WebConfig.enterGameLocked = WebConfig.gameid && WebConfig.sessionkey ? true : false;
 			WebConfig.isSingleEnter = (StringU.getParameter(location.href, "logintype") == Web_operation_fields.ACCOUNT_TYPE_USERNAME.toString()) ? true : false;
 			WebConfig.server_name = (StringU.getParameter(location.href, "p") || WebConfig.server_name).toLowerCase();
 			WebConfig.gwUrl = WebConfig.gwconf[WebConfig.platform];
 			Vesion.addSearchPath(WebConfig.platform + "/", "langpack_1000.bin");
-			WebConfig.baseplatform = WebConfig.baseqp[WebConfig.platform];
-			logd("platform：", WebConfig.platform, 'baseplatform', WebConfig.baseplatform);
-			if (WebConfig.baseplatform) {
-				Vesion.addSearchPath(WebConfig.baseplatform + "/", "langpack_1000.bin");
+			let baseplatform = WebConfig.baseqp[WebConfig.platform];
+			if (typeof baseplatform === "string") {
+				WebConfig.baseplatform = baseplatform || WebConfig.defaultplatform;
+				logd("platform：", WebConfig.platform, 'baseplatform', WebConfig.baseplatform);
+				if (WebConfig.baseplatform) {
+					Vesion.addSearchPath(WebConfig.baseplatform + "/", "langpack_1000.bin");
+				}
 			} else {
-				WebConfig.baseplatform = WebConfig.defaultplatform;
+				for (let index = 0; index < baseplatform.length; index++) {
+					if (index != baseplatform.length - 1) {
+						Vesion.addSearchPath(baseplatform[index] + "/", "langpack_1000.bin");
+					} else {
+						WebConfig.baseplatform = baseplatform[index] || WebConfig.defaultplatform;
+						logd("platform：", WebConfig.platform, 'baseplatform', WebConfig.baseplatform);
+						if (WebConfig.baseplatform) {
+							Vesion.addSearchPath(WebConfig.baseplatform + "/", "langpack_1000.bin");
+						}
+					}
+				}
 			}
+
 			Path.map_far = StringU.substitute(Path.map_far, WebConfig.baseplatform);
 			Path.map = StringU.substitute(Path.map, WebConfig.baseplatform);
 			!WebConfig.systemInfo && WebConfig.getSystemInfo();//获取手机系统信息

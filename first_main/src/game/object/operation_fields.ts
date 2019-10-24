@@ -71,6 +71,7 @@ class Operation_Fields {
 	public static OPRATE_WEB_BIND_SUCCESS:number = 4 //绑定账号成功
 	public static OPRATE_WEB_RECHARGE_SUCCESS:number = 5 //充值成功
 	public static OPRATE_WEB_CASH_SUCCESS:number = 6 //提款成功
+	public static OPRATE_WEB_SPECIAL_PLAYER_SUCCESS:number = 7 //特邀用户给与奖励成功
 	//操作错误类型
 	public static OPRATE_CARDROOM:number = 6 //房卡操作错误类型
 	public static OPRATE_CARDROOM_NOT_CARD_ROOM:number = 1 //该游戏不是房卡游戏
@@ -177,6 +178,7 @@ class Operation_Fields {
 		'5_4':'绑定账号成功',//绑定账号成功
 		'5_5':'充值成功',//充值成功
 		'5_6':'提款成功',//提款成功
+		'5_7':'特邀用户给与奖励成功',//特邀用户给与奖励成功
 		'6':'房卡操作错误类型',//房卡操作错误类型
 		'6_1':'该游戏不是房卡游戏',//该游戏不是房卡游戏
 		'6_2':'创建房间余额不足',//创建房间余额不足
