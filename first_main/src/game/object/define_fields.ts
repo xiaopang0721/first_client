@@ -94,6 +94,7 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_INT_TODAY_DRAWING_NUM:number = 66 //今日玩家取款次数
 	public static PLAYERDATA_INT_DRAW_MONEY_ERROR_C_D:number = 67 //玩家取款密码错误冻结时间或间隔时间
 	public static PLAYERDATA_INT_FIRST_PAY_MONEY:number = 68 //首充金额
+	public static PLAYERDATA_INT_NICK_NAME_TIME:number = 69 //修改昵称时间
 
 // string field
 	public static PLAYERDATA_STR_ACCOUNT:number = 0 //账号信息
@@ -560,6 +561,11 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 	public GetFirstPayMoney():number{
        return this.GetInt32(PlayerDataField.PLAYERDATA_INT_FIRST_PAY_MONEY);
+    }
+
+
+	public GetNickNameTime():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_NICK_NAME_TIME);
     }
 
 
