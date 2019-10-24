@@ -124,6 +124,7 @@ forEachDirMakeDTS "${lib_release}/libs"
 rm -rf "${release}"
 
 indx="$__root/bin/index.html"
+mkdir -p "$__root/index_libs"
 target="$__root/index_libs/game.txt"
 
 startRow=`cat $indx | grep -En 'startTag' | awk -F: '{print $1}'`
