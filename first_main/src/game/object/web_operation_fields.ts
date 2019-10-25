@@ -14,7 +14,7 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_SIGNIN = 11  //签到奖励
     public static USE_MONEY_LOG_TYPE_TURNTABLE = 12  //转盘奖励
     public static USE_MONEY_LOG_TYPE_RECHARGE_TYMOBILE = 13  //特邀手机赠送
-    public static USE_MONEY_LOG_TYPE_GMSUB = 14  //GM减钱
+    public static USE_MONEY_LOG_TYPE_HONGBAO = 14  //红包发放
     public static USE_MONEY_LOG_TYPE_RECHARGE_VIP = 15  //VIP充值
     public static USE_MONEY_LOG_TYPE_RECHARGE_RAKEBACK = 16  //佣金池领取
     public static USE_MONEY_LOG_TYPE_RECHARGE_OTHER = 17  //其他加款
@@ -63,7 +63,7 @@ class Web_operation_fields {
         11:'签到奖励',//签到奖励
         12:'转盘奖励',//转盘奖励
         13:'特邀手机赠送',//特邀手机赠送
-        14:'GM减钱',//GM减钱
+        14:'红包发放',//红包发放
         15:'VIP充值',//VIP充值
         16:'佣金池领取',//佣金池领取
         17:'其他加款',//其他加款
@@ -903,6 +903,7 @@ class Web_operation_fields {
     public static GAME_SERVER_MSG_TYPE_ADD_YONGJIN = 15  //添加佣金池金额
     public static GAME_SERVER_MSG_TYPE_NEW_BULLETIN = 16  //新游戏公告通知
     public static GAME_SERVER_MSG_TYPE_LOCK_ACCOUNT = 17  //封号
+    public static GAME_SERVER_MSG_TYPE_CHANGE_HONGBAO = 18  //红包通知
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_QIFU_TYPE_XISHOU = 1  //洗手
