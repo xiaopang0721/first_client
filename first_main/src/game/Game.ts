@@ -349,6 +349,10 @@ module game {
 			if (this.__gamedating) {
 				this.datingGame.clearMgr();
 			}
+
+			if (this._uiRoot) {
+				this._uiRoot.closeAll();
+			}
 		}
 
 		//打开登陆界面

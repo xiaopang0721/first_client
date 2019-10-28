@@ -265,6 +265,7 @@ module game.gui.base {
 		}
 
 		update(diff: number) {
+			if(this._isCloseing) return;
 			if (this.__time <= 0) {
 				this.deltaUpdate();
 				this.__time = this._delta;

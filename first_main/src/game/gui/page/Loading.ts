@@ -135,7 +135,7 @@ module game.gui.page {
 			}
 		}
 
-		private tips: string[] = [
+		private readonly ENUM_TIPS: string[] = [
 			"三五好友，一起相约来斗地主",
 			"听说下雨天更适合打牌哟",
 			"对局中牌的顺序都是随机的，不用担心被人猜中！",
@@ -144,15 +144,16 @@ module game.gui.page {
 			"牌桌上最伤感情的事，就是你拿豹子我拿金花",
 			"不要让人发现自己的牌路，牌路就是技术",
 			"虽然认输不会死，但我死也不认输"];
+		private _lenTips = 0;
 		private _changeTime: number = 2500;
 		private _lastIndex: number = 0;
 		private changeTips(): void {
-			let index = MathU.randomRange(0, this.tips.length - 1);
-			if (this._lastIndex == index) {
-				this.changeTips();
-			} else {
-				this._lastIndex = index;
-				this._viewUI.txt_ad.text = this.tips[index];
+			if (!this._lenTips) this._lenTips = this.ENUM_TIPS.length;
+			this._lastIndex = this._lastIndex++ % this._lenTips;
+			try {
+				this._viewUI.txt_ad.changeText(this.ENUM_TIPS[this._lastIndex]);
+			} catch (error) {
+				
 			}
 		}
 
@@ -188,6 +189,7 @@ module game.gui.page {
 				Laya.Tween.clearAll(this);
 				this._callBack = null;
 				this._loader = null;
+				this._lastIndex = 0;
 			}
 
 			super.close();
