@@ -462,6 +462,8 @@ module hanlder{
 		public static  CMSG_RDDZ_VOTE :number = 227;	//rddz_vote
 		/*房卡十三水-投票解散*/
 		public static  CMSG_RSHISANSHUI_VOTE :number = 228;	//rshisanshui_vote
+		/*红包操作*/
+		public static  CMSG_HONGBAO_OPERATE :number = 229;	//hongbao_operate
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -700,6 +702,7 @@ module hanlder{
 			this._FUNCS[226] = "rniuniu_vote";
 			this._FUNCS[227] = "rddz_vote";
 			this._FUNCS[228] = "rshisanshui_vote";
+			this._FUNCS[229] = "hongbao_operate";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1523,6 +1526,10 @@ module hanlder{
 					var obj_rshisanshui_vote:c2s_rshisanshui_vote = new c2s_rshisanshui_vote;
 					c2s_rshisanshui_vote .read(obj_rshisanshui_vote, bs);
 					return obj_rshisanshui_vote;
+				case Protocols.CMSG_HONGBAO_OPERATE :	//hongbao_operate
+					var obj_hongbao_operate:c2s_hongbao_operate = new c2s_hongbao_operate;
+					c2s_hongbao_operate .read(obj_hongbao_operate, bs);
+					return obj_hongbao_operate;
 				default:
 					break;
 			}
@@ -3275,6 +3282,16 @@ module hanlder{
 			this._stream.writeInt32 (type);
 			this.sendMsg( 228 , this._stream);
 			//Log.outDebug("CS====> cmd:228 rshisanshui_vote");
+		}
+		public call_hongbao_operate (id : number ,type : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 229 );
+			//红包id
+			this._stream.writeInt32 (id);
+			//操作类型 0抢红包|1领红包
+			this._stream.writeInt32 (type);
+			this.sendMsg( 229 , this._stream);
+			//Log.outDebug("CS====> cmd:229 hongbao_operate");
 		}
 	}
 
@@ -5367,7 +5384,7 @@ module hanlder{
 		}
 
 		/**
-		从输入二进制流中?寥〗峁固?
+		从输入二进制流中读取结构体
 		*/
 		public static read(self:c2s_ddz_play_card, bytes:ByteArray):void
 		{
@@ -8953,6 +8970,37 @@ module hanlder{
 			var parmLen:number;
 			var i:number;
 			//0:拒绝|1:赞同
+			self.type = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_hongbao_operate
+	{
+		public optcode:number = 0;
+		public optname:string = "onHongbao_operate";
+	
+		/**
+		* 红包id
+		*/
+		public id : number ;	//int32
+		/**
+		* 操作类型 0抢红包|1领红包
+		*/
+		public type : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_hongbao_operate, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//红包id
+			self.id = bytes. readInt32 ();		
+			//操作类型 0抢红包|1领红包
 			self.type = bytes. readInt32 ();		
 		}
 	}
