@@ -351,7 +351,7 @@ module game {
 			}
 
 			if (this._uiRoot) {
-				this._uiRoot.closeAll([PageDef.PAGE_LOADING,DatingPageDef.PAGE_LOGIN,DatingPageDef.PAGE_WAITEFFECT]);
+				this._uiRoot.closeAll([PageDef.PAGE_LOADING,DatingPageDef["PAGE_LOGIN"],DatingPageDef["PAGE_WAITEFFECT"]]);
 			}
 		}
 
