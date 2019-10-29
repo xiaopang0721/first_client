@@ -86,19 +86,19 @@ module utils {
 
 			Path.map_far = StringU.substitute(Path.map_far, WebConfig.baseplatform);
 			Path.map = StringU.substitute(Path.map, WebConfig.baseplatform);
-			WebConfig.getSystemInfo();//获取手机系统信息
+			!WebConfig.systemInfo && WebConfig.getSystemInfo();//获取手机系统信息
 			logd("systemInfo", WebConfig.systemInfo);
-			WebConfig.getModelInfo();//获取机型
+			!WebConfig.modelInfo && WebConfig.getModelInfo();//获取机型
 			logd("modelInfo", WebConfig.modelInfo);
-			WebConfig.getDeviceId();//获取唯一标识
+			!WebConfig.deviceId && WebConfig.getDeviceId();//获取唯一标识
 			logd("deviceId", WebConfig.deviceId);
-			WebConfig.getDeviceToken();//获取设备号
+			!WebConfig.deviceToken && WebConfig.getDeviceToken();//获取设备号
 			logd("deviceToken", WebConfig.deviceToken);
-			WebConfig.getAppVersion();//获取app版本号
+			!WebConfig.appVersion && WebConfig.getAppVersion();//获取app版本号
 			logd("appVersion", WebConfig.appVersion);
-			WebConfig.getInviteCode();//获取邀请码
+			!WebConfig.inviteCode && WebConfig.getInviteCode();//获取邀请码
 			logd("inviteCode", WebConfig.inviteCode);
-			WebConfig.getWebParms();//获取额外参数
+			!WebConfig.webParms && WebConfig.getWebParms();//获取额外参数
 			logd("webParms", WebConfig.webParms);
 		}
 
