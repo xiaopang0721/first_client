@@ -464,6 +464,8 @@ module hanlder{
 		public static  CMSG_RSHISANSHUI_VOTE :number = 228;	//rshisanshui_vote
 		/*红包操作*/
 		public static  CMSG_HONGBAO_OPERATE :number = 229;	//hongbao_operate
+		/*红包通知*/
+		public static  SMSG_HONGBAO_SYNC :number = 230;	//hongbao_sync
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -703,6 +705,7 @@ module hanlder{
 			this._FUNCS[227] = "rddz_vote";
 			this._FUNCS[228] = "rshisanshui_vote";
 			this._FUNCS[229] = "hongbao_operate";
+			this._FUNCS[230] = "hongbao_sync";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1530,6 +1533,10 @@ module hanlder{
 					var obj_hongbao_operate:c2s_hongbao_operate = new c2s_hongbao_operate;
 					c2s_hongbao_operate .read(obj_hongbao_operate, bs);
 					return obj_hongbao_operate;
+				case Protocols.SMSG_HONGBAO_SYNC :	//hongbao_sync
+					var obj_hongbao_sync:s2c_hongbao_sync = new s2c_hongbao_sync;
+					s2c_hongbao_sync .read(obj_hongbao_sync, bs);
+					return obj_hongbao_sync;
 				default:
 					break;
 			}
@@ -2414,7 +2421,7 @@ module hanlder{
 			this._stream.writeUint16( 113 );
 			//相对自身的朝向
 			this._stream.writeUint8 (toward);
-			//瞄准目标OID
+			//?樽寄勘闛ID
 			this._stream.writeUint32 (target_oid);
 			//是否炸金币
 			this._stream.writeUint8 (is_boom);
@@ -6653,7 +6660,7 @@ module hanlder{
 		*/
 		public num : number ;	//uint32
 		/**
-		* 下注位置
+		* 下注?恢?
 		*/
 		public index : number ;	//uint8
 		public constructor()
@@ -9002,6 +9009,31 @@ module hanlder{
 			self.id = bytes. readInt32 ();		
 			//操作类型 0抢红包|1领红包
 			self.type = bytes. readInt32 ();		
+		}
+	}
+	export class s2c_hongbao_sync
+	{
+		public optcode:number = 0;
+		public optname:string = "onHongbao_sync";
+	
+		/**
+		* 
+		*/
+		public data : string ;	//String
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:s2c_hongbao_sync, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//
+			self.data = bytes. readString ();		
 		}
 	}
 
