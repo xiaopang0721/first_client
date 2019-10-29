@@ -39,8 +39,8 @@ module game {
 			this._HUD = new HUD(v);
 			//提示层
 			this._topUnderUI = new TopunderUI(v);
-
-			this.addChild(this._HUD);
+			//HUD挪动到UIRoot层级之下
+			Laya.stage.addChildAt(this._HUD, 0);
 			this.addChild(this._generalUI);
 			this.addChild(this._topUnderUI);
 			this.addChild(this._topUI);
@@ -137,7 +137,7 @@ module game {
 			}
 			let delayTime = 80;
 			this._tweeningBtns.push(btn);
-			Laya.timer.once(delayTime * 2 + 20, this, ()=>{
+			Laya.timer.once(delayTime * 2 + 20, this, () => {
 				let idx = this._tweeningBtns.indexOf(btn);
 				this._tweeningBtns.splice(idx, 1);
 			})
@@ -165,14 +165,14 @@ module game {
 			if (btn.scaleY > 0 && btn.scaleY < 1) scaleY = btn.scaleY;
 			let props: any = { scaleX: scaleX * 0.85, scaleY: scaleY * 0.85 };
 			Laya.Tween.clearAll(btn);
-			Laya.Tween.to(btn, props, delayTime, null, Handler.create(this, () => {				
+			Laya.Tween.to(btn, props, delayTime, null, Handler.create(this, () => {
 				Laya.Tween.to(btn, { scaleX: scaleX, scaleY: scaleY }, delayTime, null, Handler.create(this, () => {
 					if (callback) {
 						if (caller)
 							callback.call(caller, args, btn);
 						else
 							callback(args, btn);
-					}					
+					}
 				}));
 			}));
 			this._game.playSound(defaultPath || Path.music_btn);
@@ -279,9 +279,11 @@ module game {
 			this._clientHeight = h;
 			this._clientRealWidth = realW;
 			this._clientRealHeight = realH;
+			this._HUD.size(this.x, this.y);
+			this._HUD.scale(this.scaleX, this.scaleY);
+			this._HUD.resize(w, h, realW, realH);
 			this._topUI.resize(w, h, realW, realH);
 			this._generalUI.resize(w, h, realW, realH);
-			this._HUD.resize(w, h, realW, realH);
 			this._topUnderUI.resize(w, h, realW, realH);
 		}
 
