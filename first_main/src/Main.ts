@@ -200,13 +200,6 @@ class Main {
             Vesion["_defaultVesion"] = "1.0.0"
         }
 
-        if(Vesion["_defaultVesion"])
-        {
-            Vesion["_defaultVesionValue"] = parseInt(Vesion["_defaultVesion"].toString().replace(/\./g, ""));
-        }else{
-            Vesion["_defaultVesionValue"] = 10086;
-        }
-
         this._apps = [];
         this._game = new Game();
         this._apps.push(this._game);
