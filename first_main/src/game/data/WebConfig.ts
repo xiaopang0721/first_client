@@ -48,7 +48,7 @@ WebConfig.getAppVersion = function () {
 			WebConfig.appVersion = __window.android.getAppVersion()
 		}
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (WebConfig.onIOS) {
 		if (WebConfig.appVersion) return WebConfig.appVersion;
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getAppVersion && __window.webkit.messageHandlers.getAppVersion.postMessage(null)
 	}
@@ -648,7 +648,7 @@ WebConfig.wxShareQrcodeImg = function (back_url, b_w, b_h, url, x, y, w, h, titl
 
 
 WebConfig.onAndroid = __window.android;
-WebConfig.onIOS = __window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.closeHelloImg && __window.webkit.messageHandlers.openHelloImg;
+WebConfig.onIOS = __window.webkit && __window.webkit.messageHandlers;
 WebConfig.vtype = WebConfig.onAndroid ? "ANDROID" : (WebConfig.onIOS ? "IOS" : "CLIENT");
 WebConfig.device = (WebConfig.onAndroid ? Web_operation_fields.DEVICE_TYPE_ANDROID : (WebConfig.onIOS ? Web_operation_fields.DEVICE_TYPE_IOS : Web_operation_fields.DEVICE_TYPE_WEB)).toString()
 WebConfig.app_type = Web_operation_fields.GAME_APP_TYPE_2;
