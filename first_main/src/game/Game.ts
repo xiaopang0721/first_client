@@ -349,15 +349,6 @@ module game {
 			if (this.__gamedating) {
 				this.datingGame.clearMgr();
 			}
-
-			if (this._uiRoot) {
-				let datingPageDef = window["DatingPageDef"];
-				if (datingPageDef) {
-					this._uiRoot.closeAll([PageDef.PAGE_LOADING, datingPageDef["PAGE_LOGIN"], datingPageDef["PAGE_WAITEFFECT"]]);
-				} else {
-					this._uiRoot.closeAll([PageDef.PAGE_LOADING]);
-				}
-			}
 		}
 
 		//打开登陆界面
