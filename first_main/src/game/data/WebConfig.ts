@@ -42,13 +42,13 @@ WebConfig.getAppVersion = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		if (__window.android && __window.android.getAppVersion) {
 			if (WebConfig.appVersion) return WebConfig.appVersion;
 			WebConfig.appVersion = __window.android.getAppVersion()
 		}
 	}
-	else if (WebConfig.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		if (WebConfig.appVersion) return WebConfig.appVersion;
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getAppVersion && __window.webkit.messageHandlers.getAppVersion.postMessage(null)
 	}
@@ -75,7 +75,7 @@ __window.hasClosePreload = function () {
 }
 
 WebConfig.closePreload = function () {
-	if (Laya.Browser.onIOS) {
+	if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.closePreload) {
 			__window.webkit.messageHandlers.closePreload.postMessage(null)
 		}
@@ -87,12 +87,12 @@ WebConfig.openOtherApp = function (url, name) {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		if (__window.android && __window.android.openOtherApp) {
 			__window.android.openOtherApp(url, name)
 		}
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.openOtherApp) {
 			__window.webkit.messageHandlers.openOtherApp.postMessage([url, name])
 		}
@@ -105,12 +105,12 @@ WebConfig.getInviteCode = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		if (__window.android && __window.android.getInviteCode) {
 			if (WebConfig.inviteCode) return WebConfig.inviteCode;
 			WebConfig.inviteCode = __window.android.getInviteCode()
 		}
-	} else if (Laya.Browser.onIOS) {
+	} else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		if (WebConfig.inviteCode) return WebConfig.inviteCode;
 		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getInviteCode) {
 			__window.webkit.messageHandlers.getInviteCode.postMessage(null)
@@ -128,12 +128,12 @@ WebConfig.getWebParms = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		if (__window.android && __window.android.getWebParms) {
 			if (WebConfig.webParms) return WebConfig.webParms;
 			WebConfig.webParms = __window.android.getWebParms()
 		}
-	} else if (Laya.Browser.onIOS) {
+	} else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		if (WebConfig.webParms) return WebConfig.webParms;
 		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getWebParms) {
 			__window.webkit.messageHandlers.getWebParms.postMessage(null)
@@ -151,14 +151,14 @@ WebConfig.getSystemInfo = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		if (__window.android && __window.android.getSystemInfo) {
 			if (!WebConfig.systemInfo) {
 				WebConfig.systemInfo = __window.android.getSystemInfo()
 			}
 			return WebConfig.systemInfo;
 		}
-	} else if (Laya.Browser.onIOS) {
+	} else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getSystemInfo) {
 			__window.webkit.messageHandlers.getSystemInfo.postMessage(null)
 		}
@@ -176,14 +176,14 @@ WebConfig.getModelInfo = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		if (__window.android && __window.android.getModelInfo) {
 			if (!WebConfig.modelInfo) {
 				WebConfig.modelInfo = __window.android.getModelInfo()
 			}
 			return WebConfig.modelInfo;
 		}
-	} else if (Laya.Browser.onIOS) {
+	} else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getModelInfo) {
 			__window.webkit.messageHandlers.getModelInfo.postMessage(null)
 		}
@@ -202,12 +202,12 @@ WebConfig.getDeviceId = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		if (__window.android && __window.android.getDeviceId) {
 			if (WebConfig.deviceId) return WebConfig.deviceId;
 			WebConfig.deviceId = __window.android.getDeviceId()
 		}
-	} else if (Laya.Browser.onIOS) {
+	} else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getDeviceId) {
 			if (WebConfig.deviceId) return WebConfig.deviceId;
 			__window.webkit.messageHandlers.getDeviceId.postMessage(null);
@@ -217,7 +217,7 @@ WebConfig.getDeviceId = function () {
 }
 __window.setDeviceId = function (v) {
 	if (!WebConfig.deviceId) {
-		if (Laya.Browser.onIOS && WebConfig.deviceToken && WebConfig.deviceToken.indexOf("aps-environment") == -1) {
+		if (Laya.Browser.onIOS || WebConfig.onIOS && WebConfig.deviceToken && WebConfig.deviceToken.indexOf("aps-environment") == -1) {
 			WebConfig.deviceId = WebConfig.deviceToken;
 		} else {
 			WebConfig.deviceId = v;
@@ -229,13 +229,13 @@ WebConfig.asdfghjkl = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		if (__window.android && __window.android.asdfghjkl) {
 			__window.android.asdfghjkl()
 			return 1;
 		}
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		if (__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.asdfghjkl) {
 			__window.webkit.messageHandlers.asdfghjkl.postMessage(null)
 			return 2;
@@ -249,7 +249,7 @@ WebConfig.deviceToken = "";
 __window.setDeviceToken = function (v) {
 	WebConfig.wxDebug && WebConfig.alert("setDeviceToken:" + v)
 	if (!WebConfig.deviceToken) {
-		if (Laya.Browser.onIOS && v && v.indexOf("aps-environment") == -1) {
+		if (Laya.Browser.onIOS || WebConfig.onIOS && v && v.indexOf("aps-environment") == -1) {
 			WebConfig.deviceId = v;
 		}
 		WebConfig.deviceToken = v;
@@ -262,27 +262,27 @@ WebConfig.getDeviceToken = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		if (__window.android && __window.android.getDeviceToken) {
 			if (WebConfig.deviceToken) return this.WebConfig.deviceToken;
 			WebConfig.deviceToken = __window.android.getDeviceToken()
 			WebConfig.update_deviceToken != null && WebConfig.update_deviceToken.run && WebConfig.update_deviceToken.run();
 		}
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		if (WebConfig.deviceToken) return this.WebConfig.deviceToken;
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.getDeviceToken && __window.webkit.messageHandlers.getDeviceToken.postMessage(null)
 	}
 }
 
 WebConfig.alert = function (url_str) {
-	if (Laya.Browser.onPC || Laya.Browser.onAndroid) {
+	if (Laya.Browser.onPC || Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		alert(url_str)
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		WebConfig.showToast(url_str)
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		WebConfig.showToast(url_str)
 	}
 }
@@ -292,10 +292,10 @@ WebConfig.openUrl = function (url_str) {
 		if (Laya.Browser.onPC) {
 			window.open(url_str, "", "location=no,status=no,scrollvars=no")
 		}
-		else if (Laya.Browser.onAndroid) {
+		else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 			__window.android && __window.android.openUrl && __window.android.openUrl(url_str)
 		}
-		else if (Laya.Browser.onIOS) {
+		else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 			__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.openUrl && __window.webkit.messageHandlers.openUrl.postMessage(url_str)
 		}
 	} catch (error) {
@@ -307,10 +307,10 @@ WebConfig.copyTxt = function (url_str) {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.copyTxt && __window.android.copyTxt(url_str)
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.copyTxt && __window.webkit.messageHandlers.copyTxt.postMessage(url_str)
 	}
 }
@@ -319,10 +319,10 @@ WebConfig.copyUrl = function (url_str) {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.copyUrl && __window.android.copyUrl(url_str)
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.copyUrl && __window.webkit.messageHandlers.copyUrl.postMessage(url_str)
 	}
 }
@@ -331,10 +331,10 @@ WebConfig.showToast = function (str) {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.showToast && __window.android.showToast(str)
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.showToast && __window.webkit.messageHandlers.showToast.postMessage(str)
 	}
 }
@@ -343,10 +343,10 @@ WebConfig.closeHelloImg = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.closeHelloImg && __window.android.closeHelloImg()
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.closeHelloImg && __window.webkit.messageHandlers.closeHelloImg.postMessage(null)
 	}
 }
@@ -355,10 +355,10 @@ WebConfig.openHelloImg = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.openHelloImg && __window.android.openHelloImg()
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.openHelloImg && __window.webkit.messageHandlers.openHelloImg.postMessage(null)
 	}
 }
@@ -370,10 +370,10 @@ WebConfig.startJsJump = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.startJsJump && __window.android.startJsJump()
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.startJsJump && __window.webkit.messageHandlers.startJsJump.postMessage(null)
 	}
 }
@@ -384,16 +384,16 @@ WebConfig.stopJsJump = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.stopJsJump && __window.android.stopJsJump()
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.stopJsJump && __window.webkit.messageHandlers.stopJsJump.postMessage(null)
 	}
 }
 
 WebConfig.setNotificationInfo = function (str) {
-	if (Laya.Browser.onAndroid) {
+	if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.setNotificationInfo && __window.android.setNotificationInfo(str)
 	}
 }
@@ -402,10 +402,10 @@ WebConfig.saveHttpImage = function (url_str) {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.saveHttpImage && __window.android.saveHttpImage(url_str)
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.saveHttpImage && __window.webkit.messageHandlers.saveHttpImage.postMessage(url_str)
 	}
 }
@@ -417,10 +417,10 @@ WebConfig.saveQrcodeImage = function (back_url, b_w, b_h, url, x, y, w, h) {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.saveQrcodeImage && __window.android.saveQrcodeImage(back_url, b_w, b_h, url, x, y, w, h);
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.saveQrcodeImage && __window.webkit.messageHandlers.saveQrcodeImage.postMessage([back_url, b_w, b_h, url, x, y, w, h])
 	}
 }
@@ -454,10 +454,10 @@ WebConfig.closeApp = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.closeApp && __window.android.closeApp();
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 
 	}
 }
@@ -467,10 +467,10 @@ WebConfig.isConnectIsNomarl = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.isConnectIsNomarl && __window.android.isConnectIsNomarl();
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 
 	}
 }
@@ -529,10 +529,10 @@ WebConfig.wxLogin = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.wxLogin && __window.android.wxLogin()
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.wxLogin && __window.webkit.messageHandlers.wxLogin.postMessage(null)
 	}
 }
@@ -544,10 +544,10 @@ WebConfig.wxOpen = function () {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.wxOpen && __window.android.wxOpen()
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.wxOpen && __window.webkit.messageHandlers.wxOpen.postMessage(null)
 	}
 }
@@ -559,10 +559,10 @@ WebConfig.wxReg = function (appid) {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.wxReg && __window.android.wxReg(appid)
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.wxReg && __window.webkit.messageHandlers.wxReg.postMessage(appid)
 	}
 }
@@ -574,10 +574,10 @@ WebConfig.setPlatformUrl = function (url) {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.setPlatformUrl && __window.android.setPlatformUrl(url)
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 
 	}
 }
@@ -590,10 +590,10 @@ WebConfig.wxShareText = function (txt, scene) {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.wxShareText && __window.android.wxShareText(txt, scene);
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.wxShareText && __window.webkit.messageHandlers.wxShareText.postMessage([txt, scene])
 	}
 }
@@ -606,10 +606,10 @@ WebConfig.wxShareImage = function (url, title, description, scene) {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.wxShareImage && __window.android.wxShareImage(url, title, description, scene);
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.wxShareImage && __window.webkit.messageHandlers.wxShareImage.postMessage([url, title, description, scene])
 	}
 }
@@ -622,10 +622,10 @@ WebConfig.wxShareUrl = function (url, title, description, icon_url, scene) {
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.wxShareUrl && __window.android.wxShareUrl(url, title, description, icon_url, scene);
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.wxShareUrl && __window.webkit.messageHandlers.wxShareUrl.postMessage([url, title, description, icon_url, scene])
 	}
 }
@@ -638,10 +638,10 @@ WebConfig.wxShareQrcodeImg = function (back_url, b_w, b_h, url, x, y, w, h, titl
 	if (Laya.Browser.onPC) {
 
 	}
-	else if (Laya.Browser.onAndroid) {
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
 		__window.android && __window.android.wxShareQrcodeImg && __window.android.wxShareQrcodeImg(back_url, b_w, b_h, url, x, y, w, h, title, description, scene);
 	}
-	else if (Laya.Browser.onIOS) {
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
 		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.wxShareQrcodeImg && __window.webkit.messageHandlers.wxShareQrcodeImg.postMessage([back_url, b_w, b_h, url, x, y, w, h, title, description, scene])
 	}
 }
