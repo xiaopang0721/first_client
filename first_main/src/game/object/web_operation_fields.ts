@@ -750,6 +750,8 @@ class Web_operation_fields {
     public static CLIENT_IRCODE_PLAYERLVAWARE = 64  //playerlevelaware
     public static CLIENT_IRCODE_CHECKLOGINVF = 65  //checkloginvf
     public static CLIENT_IRCODE_GETBULLETINLIST = 66  //getbulletinlist
+    public static CLIENT_IRCODE_GET_HONGBAO_LIST = 67  //gethongbaolist
+    public static CLIENT_IRCODE_GET_HONGBAO_RECORD_LIST = 68  //gethongbaorecordlist
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static CARD_GAME_PAY_TYP_MASTER = 1  //房主付费
