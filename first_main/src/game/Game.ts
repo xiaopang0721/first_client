@@ -89,10 +89,10 @@ module game {
 				JsLoader.ins.startLoad("dating", Handler.create(this, (asserts) => {
 					if (WebConfig.enterGameLocked) {
 						JsLoader.ins.startLoad(WebConfig.gameid, Handler.create(this, (asserts) => {
-							this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
+							this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts, WebConfig.gameid);
 						}));
 					} else {
-						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
+						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts, "dating");
 						let gameid = localGetItem("local_game_id");
 						if (gameid) {
 							updateGameJS(gameid);
