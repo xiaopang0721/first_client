@@ -208,7 +208,7 @@ module game {
 			if (url == Path.music_btn && Laya.timer.currTimer - this._lastSoundTime < 500) {
 				return;
 			}
-			this._lastSoundTime = Laya.timer.currTimer;
+			if (url == Path.music_btn) this._lastSoundTime = Laya.timer.currTimer;
 			//为什么先取音量再设置音量？
 			let volume = Laya.SoundManager.soundVolume;
 			Laya.SoundManager.setSoundVolume(volume);
@@ -348,10 +348,6 @@ module game {
 			}
 			if (this.__gamedating) {
 				this.datingGame.clearMgr();
-			}
-
-			if (this._uiRoot) {
-				this._uiRoot.closeAll();
 			}
 		}
 
