@@ -113,6 +113,7 @@ class Operation_Fields {
 	public static OPRATE_GAME_GET_HONGBAO_SUCCESS:number = 17 //红包领取成功
 	public static OPRATE_GAME_GET_HONGBAO_FAILED:number = 18 //红包领取失败
 	public static OPRATE_GAME_HONGBAO_IS_UNVALID:number = 19 //该红包红包已经失效
+	public static OPRATE_GAME_HONGBAO_FORMAT_MONEY_ERROR:number = 20 //红包格式金额错误
 	//错误提示
 	private static OPRATE_STRING:{[key:string]:string} = {
 		'1':'登录操作错误类型',//登录操作错误类型
@@ -220,6 +221,7 @@ class Operation_Fields {
 		'8_17':'红包领取成功',//红包领取成功
 		'8_18':'红包领取失败',//红包领取失败
 		'8_19':'该红包红包已经失效',//该红包红包已经失效
+		'8_20':'红包格式金额错误',//红包格式金额错误
 
 	}
 	//获取错误提示
