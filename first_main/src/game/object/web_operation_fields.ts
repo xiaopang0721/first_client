@@ -650,6 +650,16 @@ class Web_operation_fields {
     public static GAME_ROOM_CONFIG_ELSLP_8 = 239  //俄罗斯轮盘8
     public static GAME_ROOM_CONFIG_ELSLP_9 = 240  //俄罗斯轮盘9
     public static GAME_ROOM_CONFIG_ELSLP_10 = 241  //俄罗斯轮盘10
+    public static GAME_ROOM_CONFIG_MPNIUNIU_1 = 242  //明牌牛牛新手场
+    public static GAME_ROOM_CONFIG_MPNIUNIU_2 = 243  //明牌牛牛小资场
+    public static GAME_ROOM_CONFIG_MPNIUNIU_3 = 244  //明牌牛牛老板场
+    public static GAME_ROOM_CONFIG_MPNIUNIU_4 = 245  //明牌牛牛富豪场
+    public static GAME_ROOM_CONFIG_MPNIUNIU_5 = 246  //明牌牛牛场5
+    public static GAME_ROOM_CONFIG_MPNIUNIU_6 = 247  //明牌牛牛场6
+    public static GAME_ROOM_CONFIG_MPNIUNIU_7 = 248  //明牌牛牛场7
+    public static GAME_ROOM_CONFIG_MPNIUNIU_8 = 249  //明牌牛牛场8
+    public static GAME_ROOM_CONFIG_MPNIUNIU_9 = 250  //明牌牛牛场9
+    public static GAME_ROOM_CONFIG_MPNIUNIU_10 = 251  //明牌牛牛场10
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_CARDTYPE_EBGANG_DOUBLE_1 = 1  //一宝
