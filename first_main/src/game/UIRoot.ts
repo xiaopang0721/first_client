@@ -56,15 +56,15 @@ module game {
 		 * @param preAsset 预加载资源
 		 * @param time 心跳间隔
 		 */
-		showLoadProgress(str: string, callback?: Handler, preAsset?: any[], desc?: string): void {
+		showLoadProgress(str: string, callback?: Handler, preAsset?: any[]): void {
 			let loading = this._HUD.getPage(PageDef.PAGE_LOADING) as game.gui.page.Loading;
 			if (!loading) {
 				loading = this._HUD.open(PageDef.PAGE_LOADING, (page: game.gui.page.Loading) => {
-					page.setProgress(str, callback, preAsset, desc);
+					page.setProgress(str, callback, preAsset);
 				}) as game.gui.page.Loading;
 			}
 			else {
-				loading.setProgress(str, callback, preAsset, desc);
+				loading.setProgress(str, callback, preAsset);
 			}
 		}
 

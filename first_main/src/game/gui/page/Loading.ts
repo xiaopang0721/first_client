@@ -10,7 +10,6 @@ module game.gui.page {
 
 		private _viewUI: ui.dating.LoadingUI;
 		private _callBack: Handler;
-		private _desc: string;
 		private _loader: AssetsLoader;
 		private _preAssets: any[] = []
 		private _nowVesion: number = 0
@@ -20,7 +19,7 @@ module game.gui.page {
 				Path.atlas_ui + "loading.atlas"
 			];
 			this._isNeedDuang = false;
-			this._delta = 50;
+			this._delta = 500;
 			this.mouseThrough = true;
 		}
 
@@ -52,7 +51,6 @@ module game.gui.page {
 
 		protected onOpen(): void {
 			super.onOpen();
-			this._game.uiRoot.general.close(PageDef.PAGE_WAITEFFECT);
 			utils.Adaptive.clearPreloadView();
 			WebConfig.closeHelloImg();
 			WebConfig.startJsJump();
@@ -75,12 +73,11 @@ module game.gui.page {
 		 * @param preAsset 预加载资源
 		 * @param time 心跳间隔
 		 */
-		setProgress(str: string, callback?: Handler, preAssets?: any[], desc?: string): void {
+		setProgress(str: string, callback?: Handler, preAssets?: any[]): void {
 			if (!this._viewUI) return;
 			this.setTip(str);
 			this._callBack = callback;
 			this._preAssets = preAssets;
-			this._desc = this._desc || desc;
 			//如果需要加载资源
 			this.realLoad();
 		}
@@ -102,13 +99,7 @@ module game.gui.page {
 			if (this._hasLoad || !this._canLoad) return;
 			if (this._preAssets && this._preAssets.length) {
 				this._hasLoad = true;
-				if (!this._loader) {
-					if (this._desc) {
-						this._loader = LoadingMgr.ins.createAssertLoader(this._desc, true);
-					} else {
-						this._loader = new AssetsLoader();
-					}
-				}
+				if (!this._loader) this._loader = LoadingMgr.ins.createAssertLoader("dating", true);
 				this._loader.on(LEvent.PROGRESS, this, this.onUpdateProgress);
 				this._loader.load(this._preAssets, Handler.create(this, this.onLoadAssetCom), true);
 			}
@@ -162,7 +153,7 @@ module game.gui.page {
 			try {
 				this._viewUI.txt_ad.changeText(this.ENUM_TIPS[this._lastIndex]);
 			} catch (error) {
-
+				
 			}
 		}
 
@@ -196,21 +187,8 @@ module game.gui.page {
 
 				Laya.timer.clearAll(this);
 				Laya.Tween.clearAll(this);
-				if (this._callBack != null) {
-					this._callBack.recover();
-					this._callBack = null;
-				}
-
-				if (this._loader) {
-					if (this._desc != "dating") {
-						this._loader.clear();
-					}
-					this._loader = null;
-				}
-
-				this._preAssets = []
-
-				this._desc = null;
+				this._callBack = null;
+				this._loader = null;
 				this._lastIndex = 0;
 			}
 
