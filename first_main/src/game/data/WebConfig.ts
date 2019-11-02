@@ -217,7 +217,7 @@ WebConfig.getDeviceId = function () {
 }
 __window.setDeviceId = function (v) {
 	if (!WebConfig.deviceId) {
-		if (Laya.Browser.onIOS || WebConfig.onIOS && WebConfig.deviceToken && WebConfig.deviceToken.indexOf("aps-environment") == -1) {
+		if ((Laya.Browser.onIOS || WebConfig.onIOS) && WebConfig.deviceToken && WebConfig.deviceToken.indexOf("aps-environment") == -1) {
 			WebConfig.deviceId = WebConfig.deviceToken;
 		} else {
 			WebConfig.deviceId = v;
@@ -249,7 +249,7 @@ WebConfig.deviceToken = "";
 __window.setDeviceToken = function (v) {
 	WebConfig.wxDebug && WebConfig.alert("setDeviceToken:" + v)
 	if (!WebConfig.deviceToken) {
-		if (Laya.Browser.onIOS || WebConfig.onIOS && v && v.indexOf("aps-environment") == -1) {
+		if ((Laya.Browser.onIOS || WebConfig.onIOS) && v && v.indexOf("aps-environment") == -1) {
 			WebConfig.deviceId = v;
 		}
 		WebConfig.deviceToken = v;
