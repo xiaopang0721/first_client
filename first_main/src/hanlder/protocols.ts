@@ -466,6 +466,16 @@ module hanlder{
 		public static  CMSG_HONGBAO_OPERATE :number = 229;	//hongbao_operate
 		/*红包通知*/
 		public static  SMSG_HONGBAO_SYNC :number = 230;	//hongbao_sync
+		/*微信红包扫雷-发红包*/
+		public static  CMSG_WXSAOLEIHB_SENDHB :number = 231;	//wxsaoleihb_sendhb
+		/*微信红包扫雷-红包操作*/
+		public static  CMSG_WXSAOLEIHB_OPT :number = 232;	//wxsaoleihb_opt
+		/*明牌牛牛-抢庄*/
+		public static  CMSG_MPNIUNIU_BANKER :number = 233;	//mpniuniu_banker
+		/*明牌牛牛-下注*/
+		public static  CMSG_MPNIUNIU_BET :number = 234;	//mpniuniu_bet
+		/*明牌牛牛-摊牌*/
+		public static  CMSG_MPNIUNIU_TANPAI :number = 235;	//mpniuniu_tanpai
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -706,6 +716,11 @@ module hanlder{
 			this._FUNCS[228] = "rshisanshui_vote";
 			this._FUNCS[229] = "hongbao_operate";
 			this._FUNCS[230] = "hongbao_sync";
+			this._FUNCS[231] = "wxsaoleihb_sendhb";
+			this._FUNCS[232] = "wxsaoleihb_opt";
+			this._FUNCS[233] = "mpniuniu_banker";
+			this._FUNCS[234] = "mpniuniu_bet";
+			this._FUNCS[235] = "mpniuniu_tanpai";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1537,6 +1552,25 @@ module hanlder{
 					var obj_hongbao_sync:s2c_hongbao_sync = new s2c_hongbao_sync;
 					s2c_hongbao_sync .read(obj_hongbao_sync, bs);
 					return obj_hongbao_sync;
+				case Protocols.CMSG_WXSAOLEIHB_SENDHB :	//wxsaoleihb_sendhb
+					var obj_wxsaoleihb_sendhb:c2s_wxsaoleihb_sendhb = new c2s_wxsaoleihb_sendhb;
+					c2s_wxsaoleihb_sendhb .read(obj_wxsaoleihb_sendhb, bs);
+					return obj_wxsaoleihb_sendhb;
+				case Protocols.CMSG_WXSAOLEIHB_OPT :	//wxsaoleihb_opt
+					var obj_wxsaoleihb_opt:c2s_wxsaoleihb_opt = new c2s_wxsaoleihb_opt;
+					c2s_wxsaoleihb_opt .read(obj_wxsaoleihb_opt, bs);
+					return obj_wxsaoleihb_opt;
+				case Protocols.CMSG_MPNIUNIU_BANKER :	//mpniuniu_banker
+					var obj_mpniuniu_banker:c2s_mpniuniu_banker = new c2s_mpniuniu_banker;
+					c2s_mpniuniu_banker .read(obj_mpniuniu_banker, bs);
+					return obj_mpniuniu_banker;
+				case Protocols.CMSG_MPNIUNIU_BET :	//mpniuniu_bet
+					var obj_mpniuniu_bet:c2s_mpniuniu_bet = new c2s_mpniuniu_bet;
+					c2s_mpniuniu_bet .read(obj_mpniuniu_bet, bs);
+					return obj_mpniuniu_bet;
+				case Protocols.CMSG_MPNIUNIU_TANPAI :	//mpniuniu_tanpai
+					var obj_mpniuniu_tanpai:c2s_mpniuniu_tanpai = new c2s_mpniuniu_tanpai;
+					return obj_mpniuniu_tanpai;
 				default:
 					break;
 			}
@@ -2421,7 +2455,7 @@ module hanlder{
 			this._stream.writeUint16( 113 );
 			//相对自身的朝向
 			this._stream.writeUint8 (toward);
-			//?樽寄勘闛ID
+			//瞄准目标OID
 			this._stream.writeUint32 (target_oid);
 			//是否炸金币
 			this._stream.writeUint8 (is_boom);
@@ -3299,6 +3333,50 @@ module hanlder{
 			this._stream.writeInt32 (type);
 			this.sendMsg( 229 , this._stream);
 			//Log.outDebug("CS====> cmd:229 hongbao_operate");
+		}
+		public call_wxsaoleihb_sendhb (type : number ,bao_num : number ,ld_num : string,money : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 231 );
+			//1:单雷|2:多雷
+			this._stream.writeInt32 (type);
+			//红包数
+			this._stream.writeInt32 (bao_num);
+			//雷点
+			this._stream.writeString (ld_num);
+			//金额
+			this._stream.writeInt32 (money);
+			this.sendMsg( 231 , this._stream);
+			//Log.outDebug("CS====> cmd:231 wxsaoleihb_sendhb");
+		}
+		public call_wxsaoleihb_opt (id : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 232 );
+			//红包id
+			this._stream.writeInt32 (id);
+			this.sendMsg( 232 , this._stream);
+			//Log.outDebug("CS====> cmd:232 wxsaoleihb_opt");
+		}
+		public call_mpniuniu_banker (num : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 233 );
+			//抢庄倍率
+			this._stream.writeInt32 (num);
+			this.sendMsg( 233 , this._stream);
+			//Log.outDebug("CS====> cmd:233 mpniuniu_banker");
+		}
+		public call_mpniuniu_bet (num : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 234 );
+			//下注倍率
+			this._stream.writeInt32 (num);
+			this.sendMsg( 234 , this._stream);
+			//Log.outDebug("CS====> cmd:234 mpniuniu_bet");
+		}
+		public call_mpniuniu_tanpai ():void{
+			this._stream.reset();
+			this._stream.writeUint16( 235 );
+			this.sendMsg( 235 , this._stream);
+			//Log.outDebug("CS====> cmd:235 mpniuniu_tanpai");
 		}
 	}
 
@@ -6660,7 +6738,7 @@ module hanlder{
 		*/
 		public num : number ;	//uint32
 		/**
-		* 下注?恢?
+		* 下注位置
 		*/
 		public index : number ;	//uint8
 		public constructor()
@@ -8657,7 +8735,7 @@ module hanlder{
 		*/
 		public mobile : string ;	//String
 		/**
-		* 验证码
+		* 验证??
 		*/
 		public code : string ;	//String
 		/**
@@ -9034,6 +9112,134 @@ module hanlder{
 			var i:number;
 			//
 			self.data = bytes. readString ();		
+		}
+	}
+	export class c2s_wxsaoleihb_sendhb
+	{
+		public optcode:number = 0;
+		public optname:string = "onWxsaoleihb_sendhb";
+	
+		/**
+		* 1:单雷|2:多雷
+		*/
+		public type : number ;	//int32
+		/**
+		* 红包数
+		*/
+		public bao_num : number ;	//int32
+		/**
+		* 雷点
+		*/
+		public ld_num : string ;	//String
+		/**
+		* 金额
+		*/
+		public money : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_wxsaoleihb_sendhb, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//1:单雷|2:多雷
+			self.type = bytes. readInt32 ();		
+			//红包数
+			self.bao_num = bytes. readInt32 ();		
+			//雷点
+			self.ld_num = bytes. readString ();		
+			//金额
+			self.money = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_wxsaoleihb_opt
+	{
+		public optcode:number = 0;
+		public optname:string = "onWxsaoleihb_opt";
+	
+		/**
+		* 红包id
+		*/
+		public id : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_wxsaoleihb_opt, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//红包id
+			self.id = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_mpniuniu_banker
+	{
+		public optcode:number = 0;
+		public optname:string = "onMpniuniu_banker";
+	
+		/**
+		* 抢庄倍率
+		*/
+		public num : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_mpniuniu_banker, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//抢庄倍率
+			self.num = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_mpniuniu_bet
+	{
+		public optcode:number = 0;
+		public optname:string = "onMpniuniu_bet";
+	
+		/**
+		* 下注倍率
+		*/
+		public num : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_mpniuniu_bet, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//下注倍率
+			self.num = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_mpniuniu_tanpai
+	{
+		public optcode:number = 0;
+		public optname:string = "onMpniuniu_tanpai";
+	
+		public constructor()
+		{
+			
 		}
 	}
 
