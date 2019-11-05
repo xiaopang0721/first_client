@@ -56,6 +56,7 @@ module utils {
 		private static ParseParam() {
 			WebConfig.platform = (StringU.getParameter(location.href, "p") || WebConfig.platform).toLowerCase();
 			WebConfig.gameid = (StringU.getParameter(location.href, "gameid") || WebConfig.gameid).toLowerCase();
+			WebConfig.enableWebp = (StringU.getParameter(location.href, "enableWebp") != "") || WebConfig.enableWebp;
 			WebConfig.sessionkey = (StringU.getParameter(location.href, "sessionkey") || WebConfig.sessionkey).toLowerCase();
 			WebConfig.params = (StringU.getParameter(location.href, "params") || WebConfig.params).toLowerCase();
 			WebConfig.enterGameLocked = WebConfig.gameid && WebConfig.sessionkey ? true : false;
