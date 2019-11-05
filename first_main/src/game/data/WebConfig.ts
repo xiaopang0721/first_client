@@ -4,6 +4,7 @@ let __conf = __window.externalInterfacePI;
 WebConfig.isDebug = __conf.isDebug;
 WebConfig.jsDebug = __conf.jsDebug;
 WebConfig.isOnline = __conf.isOnline;
+WebConfig.enableWebp = __conf.enableWebp;
 WebConfig.version = __conf.version;
 WebConfig.server_lock = __conf.server_lock;
 WebConfig.server_name = __conf.server_name;
