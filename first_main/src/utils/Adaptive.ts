@@ -56,7 +56,8 @@ module utils {
 		private static ParseParam() {
 			WebConfig.platform = (StringU.getParameter(location.href, "p") || WebConfig.platform).toLowerCase();
 			WebConfig.gameid = (StringU.getParameter(location.href, "gameid") || WebConfig.gameid).toLowerCase();
-			WebConfig.enableWebp = (StringU.getParameter(location.href, "enableWebp") != "") || WebConfig.enableWebp;
+			WebConfig.enableWebp = WebConfig.isOnline && ((StringU.getParameter(location.href, "enableWebp") != "") || WebConfig.enableWebp);
+			WebConfig.enableWebp && (this.checkJsLoader());
 			WebConfig.sessionkey = (StringU.getParameter(location.href, "sessionkey") || WebConfig.sessionkey).toLowerCase();
 			WebConfig.params = (StringU.getParameter(location.href, "params") || WebConfig.params).toLowerCase();
 			WebConfig.enterGameLocked = WebConfig.gameid && WebConfig.sessionkey ? true : false;
@@ -103,6 +104,34 @@ module utils {
 			logd("webParms", WebConfig.webParms);
 		}
 
+		private static checkJsLoader() {
+			function check_webp_feature(feature, callback) {
+				try {
+					var kTestImages = {
+						lossy: "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
+						lossless: "UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==",
+						alpha: "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==",
+						animation: "UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"
+					};
+					var img = new Image();
+					img.onload = function () {
+						var result = (img.width > 0) && (img.height > 0);
+						callback(feature, result);
+					};
+					img.onerror = function () {
+						callback(feature, false);
+					};
+					img.src = "data:image/webp;base64," + kTestImages[feature];
+				} catch (error) {
+
+				}
+			}
+			check_webp_feature('lossy', function (f, r) {
+				canUseImageWebP = r;
+			})
+		}
+
 
 	}
 }
+var canUseImageWebP = false;
