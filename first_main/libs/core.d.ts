@@ -637,7 +637,7 @@ declare module core.resource {
         static GENRAL: number;
         static BUFFER: number;
         static TEMPLET: number;
-        private static MAX_FREE_TIME;
+        static MAX_FREE_TIME: number;
         private static _refMap;
         private static _refAsset_objs;
         private static _refAsset_keys;
