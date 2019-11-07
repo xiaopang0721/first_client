@@ -662,10 +662,10 @@ class Web_operation_fields {
     public static GAME_ROOM_CONFIG_MPNIUNIU_8 = 249  //明牌牛牛场8
     public static GAME_ROOM_CONFIG_MPNIUNIU_9 = 250  //明牌牛牛场9
     public static GAME_ROOM_CONFIG_MPNIUNIU_10 = 251  //明牌牛牛场10
-    public static GAME_ROOM_CONFIG_WXSAOLEIHB_1 = 252  //微信扫雷红包新手场
-    public static GAME_ROOM_CONFIG_WXSAOLEIHB_2 = 253  //微信扫雷红包小资场
-    public static GAME_ROOM_CONFIG_WXSAOLEIHB_3 = 254  //微信扫雷红包老板场
-    public static GAME_ROOM_CONFIG_WXSAOLEIHB_4 = 255  //微信扫雷红包富豪场
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_1 = 252  //微信扫雷红包小资场
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_2 = 253  //微信扫雷红包老板场
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_3 = 254  //微信扫雷红包富豪场
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_4 = 255  //微信扫雷红包场4
     public static GAME_ROOM_CONFIG_WXSAOLEIHB_5 = 256  //微信扫雷红包场5
     public static GAME_ROOM_CONFIG_WXSAOLEIHB_6 = 257  //微信扫雷红包场6
     public static GAME_ROOM_CONFIG_WXSAOLEIHB_7 = 258  //微信扫雷红包场7
