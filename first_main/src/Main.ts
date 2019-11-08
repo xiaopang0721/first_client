@@ -128,12 +128,7 @@ class Main {
             }
         }
 
-        // 是否wss判断
-        let Network_isWss = Network.prototype.isWss;
-        Network.prototype.isWss = function (): boolean {
-            let isWss = Network_isWss.call(this);
-            return isWss;
-        }
+       
 
         isDebug = WebConfig.isDebug;
         //调试信息

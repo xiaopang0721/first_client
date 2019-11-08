@@ -4,6 +4,7 @@
 module utils {
 	export class Adaptive {
 		static init() {
+			this.patch();
 			this.ParseParam();
 			this.Stage_resetCanvas();
 		}
@@ -102,6 +103,24 @@ module utils {
 			logd("inviteCode", WebConfig.inviteCode);
 			!WebConfig.webParms && WebConfig.getWebParms();//获取额外参数
 			logd("webParms", WebConfig.webParms);
+		}
+
+		//补丁
+		private static patch() {
+			// 是否wss判断
+			let Network_isWss = Network.prototype.isWss;
+			Network.prototype.isWss = function (): boolean {
+				let isWss = Network_isWss.call(this);
+				return isWss;
+			}
+
+			
+			let refTemplet_get = RefTemplet.Get;
+			RefTemplet.Get = function (key: string, create?: boolean, isEventProgress?: boolean, priority?: number, type?: string): RefTemplet {
+				let refTemplet = refTemplet_get.call(this, key, create, isEventProgress, priority, type);
+				refTemplet.addTimeOut = RefTemplet.MAX_FREE_TIME;
+				return refTemplet;
+			}
 		}
 
 		private static checkJsLoader() {
