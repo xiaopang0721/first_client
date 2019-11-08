@@ -23,6 +23,10 @@ public static kGroupTypShouling:number = 6 //鱼群类型-首领鱼
 public static kGroupTypYuChao:number = 7 //鱼群类型-鱼潮来袭
 public static kGroupTypBoss:number = 8 //鱼群类型-Boss鱼
 public static kGroupTypHuaFei:number = 9 //鱼群类型-话费鱼
+public static WXSAOLEI_HB_ADD:number = 1 //微信扫雷红包-新增红包
+public static WXSAOLEI_HB_REMOVE:number = 2 //微信扫雷红包-删除红包
+public static WXSAOLEI_HB_UPDATE:number = 3 //微信扫雷红包-更新红包
+public static WXSAOLEI_HB_TOTAL:number = 4 //微信扫雷红包-全量下发
 }
 
 

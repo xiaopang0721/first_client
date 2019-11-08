@@ -482,8 +482,10 @@ module hanlder{
 		public static  CMSG_WXSAOLEIHB_GET_HISTORY :number = 237;	//wxsaoleihb_get_history
 		/*获取红包领取记录*/
 		public static  CMSG_WXSAOLEIHB_GET_LQJL :number = 238;	//wxsaoleihb_get_lqjl
-		/*发送红包领取数据*/
+		/*发送红包领取记录*/
 		public static  SMSG_WXSAOLEIHB_SEND_LQJL :number = 239;	//wxsaoleihb_send_lqjl
+		/*红包领取信息下发*/
+		public static  SMSG_WXSAOLEIHB_LQ_INFO :number = 240;	//wxsaoleihb_lq_info
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -733,6 +735,7 @@ module hanlder{
 			this._FUNCS[237] = "wxsaoleihb_get_history";
 			this._FUNCS[238] = "wxsaoleihb_get_lqjl";
 			this._FUNCS[239] = "wxsaoleihb_send_lqjl";
+			this._FUNCS[240] = "wxsaoleihb_lq_info";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1599,6 +1602,10 @@ module hanlder{
 					var obj_wxsaoleihb_send_lqjl:s2c_wxsaoleihb_send_lqjl = new s2c_wxsaoleihb_send_lqjl;
 					s2c_wxsaoleihb_send_lqjl .read(obj_wxsaoleihb_send_lqjl, bs);
 					return obj_wxsaoleihb_send_lqjl;
+				case Protocols.SMSG_WXSAOLEIHB_LQ_INFO :	//wxsaoleihb_lq_info
+					var obj_wxsaoleihb_lq_info:s2c_wxsaoleihb_lq_info = new s2c_wxsaoleihb_lq_info;
+					s2c_wxsaoleihb_lq_info .read(obj_wxsaoleihb_lq_info, bs);
+					return obj_wxsaoleihb_lq_info;
 				default:
 					break;
 			}
@@ -9300,7 +9307,7 @@ module hanlder{
 		/**
 		* 红包数据
 		*/
-		public info : string ;	//String
+		public hb_info : string ;	//String
 		public constructor()
 		{
 			
@@ -9316,7 +9323,7 @@ module hanlder{
 			//1:新增|2:删除|3:更新
 			self.op_type = bytes. readUint8 ();		
 			//红包数据
-			self.info = bytes. readString ();		
+			self.hb_info = bytes. readString ();		
 		}
 	}
 	export class c2s_wxsaoleihb_get_history
@@ -9398,6 +9405,31 @@ module hanlder{
 			var i:number;
 			//红包领取数据
 			self.lq_datas = bytes. readString ();		
+		}
+	}
+	export class s2c_wxsaoleihb_lq_info
+	{
+		public optcode:number = 0;
+		public optname:string = "onWxsaoleihb_lq_info";
+	
+		/**
+		* 
+		*/
+		public lq_data : string ;	//String
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:s2c_wxsaoleihb_lq_info, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//
+			self.lq_data = bytes. readString ();		
 		}
 	}
 
