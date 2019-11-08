@@ -156,6 +156,23 @@ function myeval(str) {
 }
 
 /**
+ * 去掉重复数据
+ * @param arr1 
+ */
+function myCheckArray(arr1: any[]) {
+    if(!arr1 || !arr1.length) return arr1;
+    let list = [];
+    let arr = laya.utils.Utils.concatArray(arr1, []);
+    for (let index = 0; index < arr.length; index++) {
+        let item = arr[index];
+        if (item && list.indexOf(item) == -1)  {
+            list.push(item);
+        }
+    }
+    return list;
+}
+
+/**
  * 获取pagedef name
  * @param gameid 
  */

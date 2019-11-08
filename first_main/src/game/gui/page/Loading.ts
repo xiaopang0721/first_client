@@ -81,8 +81,9 @@ module game.gui.page {
 		setProgress(str: string, callback?: Handler, preAssets?: any[]): void {
 			if (!this._viewUI) return;
 			this.setTip(str);
+			if(!callback || !preAssets) return;
 			this._callBack = callback;
-			this._preAssets = preAssets;
+			this._preAssets = myCheckArray(preAssets);
 			//如果需要加载资源
 			this.realLoad();
 		}
