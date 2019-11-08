@@ -23,24 +23,29 @@ module game.gui.page {
 			this.mouseThrough = true;
 		}
 
+
+		private _isApi: boolean;
 		// 页面初始化函数
 		protected init(): void {
-			if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_DAZHONGQP) {
-				View.regViewRuntime("ui.dating.Loading_DHUI", LoadingDH);
+			this._isApi = WebConfig.enterGameLocked || WebConfig.platform == 'qpae';
+			if (this._isApi) {
+				this._viewUI = this._view = this.createView('dating.LoadingUI');
+				this.addChild(this._viewUI);
 			} else {
 
-				View.regViewRuntime(StringU.substitute("ui.{0}.dating.Loading_DHUI", WebConfig.platform), LoadingDH);
+				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_DAZHONGQP) {
+					View.regViewRuntime("ui.dating.Loading_DHUI", LoadingDH);
+				} else {
+
+					View.regViewRuntime(StringU.substitute("ui.{0}.dating.Loading_DHUI", WebConfig.platform), LoadingDH);
+				}
+				this._viewUI = this._view = this.createView('dating.LoadingUI', ['dating.Loading_DHUI']);
+				this.addChild(this._viewUI);
+				(this._viewUI.di as LoadingDH).onOpen(this._game);
 			}
-			this._viewUI = this._view = this.createView('dating.LoadingUI', ['dating.Loading_DHUI']);
-			this.addChild(this._viewUI);
-			(this._viewUI.di as LoadingDH).onOpen(this._game);
 
 			this._viewUI.label_Tips.changeText("正在校验文件,请稍等");
 			this._viewUI.bar_jd.value = 0;
-
-			if (!this._handle) {
-				this._handle = Handler.create(this, this.progressHandle, null, false);
-			}
 
 			if (this._viewUI["progress_mask"]) {
 				this._viewUI["progress_mask"].width = 0;
@@ -111,6 +116,7 @@ module game.gui.page {
 
 		//资源加载完
 		private onLoadAssetCom(): void {
+			if(this._viewUI.bar_jd.value < 1) return;
 			this.setJinDu(1);
 			if (this._callBack != null) {
 				this._callBack.run();
@@ -153,16 +159,15 @@ module game.gui.page {
 			try {
 				this._viewUI.txt_ad.changeText(this.ENUM_TIPS[this._lastIndex]);
 			} catch (error) {
-				
+
 			}
 		}
 
-		private _handle: Handler;
 		private setJinDu(value: number): void {
 			value = value || 0.001;
 			if (this._viewUI.bar_jd) {
-				Laya.Tween.clearAll(this);
-				Laya.Tween.to(this._viewUI.bar_jd, { value: value, update: this._handle }, 200);
+				this._viewUI.bar_jd.value = value;
+				this.progressHandle();
 			}
 		}
 
@@ -174,16 +179,18 @@ module game.gui.page {
 				this._viewUI["progress_mask"].width = this._viewUI.bar_jd.bar.width;
 				// logd("xxx" + this._viewUI.bar_jd.bar.width)
 			}
+
+			let curnum = Math.floor(this._viewUI.bar_jd.value * this._preAssets.length);
+			let totalnum = this._preAssets.length;
+			this.setTip(StringU.substitute("{0}/{1}：正在启动游戏", curnum, totalnum))
 		}
 
 		// 页面关闭
 		close(): void {
 			if (this._viewUI) {
-				if (this._handle) {
-					this._handle.recover();
-					this._handle = null;
+				if (!this._isApi) {
+					(this._viewUI.di as LoadingDH).close();
 				}
-				(this._viewUI.di as LoadingDH).close();
 
 				Laya.timer.clearAll(this);
 				Laya.Tween.clearAll(this);

@@ -703,7 +703,7 @@ declare module core.resource {
     class RefTemplet extends core.resource.RefAsset {
         static Get(key: string, create?: boolean, isEventProgress?: boolean, priority?: number, type?: string): RefTemplet;
         private _factory;
-        constructor(url: string);
+        constructor(url: string, isEventProgress?: boolean, priority?: number, type?: string);
         protected init(): void;
         buildArmature(aniMode?: number): laya.ani.bone.Skeleton;
         protected destroy(): void;
