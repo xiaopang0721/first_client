@@ -178,7 +178,7 @@ module game.gui.component {
 		}
 	}
 
-	class LoadingRender {
+	export class LoadingRender {
 		private _gameId: string;
 		private _preAssets: any[];
 		private _priority: number;
