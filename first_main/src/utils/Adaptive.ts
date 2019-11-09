@@ -61,7 +61,7 @@ module utils {
 			WebConfig.enableWebp && (this.checkJsLoader());
 			WebConfig.sessionkey = decodeURIComponent((StringU.getParameter(location.href, "sessionkey") || WebConfig.sessionkey).toLowerCase());
 			WebConfig.params = (StringU.getParameter(location.href, "params") || WebConfig.params).toLowerCase();
-			WebConfig.enterGameLocked =  WebConfig.gameid && WebConfig.sessionkey ? true : false;
+			WebConfig.enterGameLocked = (WebConfig.platform == 'qpae' && WebConfig.gameid && WebConfig.sessionkey) ? true : false;
 			WebConfig.isSingleEnter = (StringU.getParameter(location.href, "logintype") == Web_operation_fields.ACCOUNT_TYPE_USERNAME.toString()) ? true : false;
 			WebConfig.server_name = (StringU.getParameter(location.href, "p") || WebConfig.server_name).toLowerCase();
 			WebConfig.gwUrl = WebConfig.gwconf[WebConfig.platform];

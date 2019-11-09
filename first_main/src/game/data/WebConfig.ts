@@ -14,8 +14,8 @@ WebConfig.baseqp = __conf.baseqp;
 WebConfig.gwconf = __conf.gwconf;
 WebConfig.ipconf = __conf.ipconf;
 WebConfig.platform = __conf.platform;//优先href
-WebConfig.gameid = "";
-WebConfig.sessionkey = "account%3D12345679%26server_name%3Dnqp%26tm%3D1574511581%26sign%3De6a56c8982c6c8ef55d5891d7b4d526c";
+WebConfig.gameid = "dating";
+WebConfig.sessionkey = "account%3D12345687%26server_name%3Dqpae%26tm%3D1574517145%26sign%3D01ddd1c80c5a95871ab1556067adf38f&param=";
 WebConfig.params = "";
 WebConfig.enterGameLocked = false;
 WebConfig.sub_baseplatform = __conf.sub_baseplatform

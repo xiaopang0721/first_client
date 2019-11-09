@@ -27,7 +27,7 @@ module game.gui.page {
 		private _isApi: boolean;
 		// 页面初始化函数
 		protected init(): void {
-			this._isApi = WebConfig.enterGameLocked || WebConfig.platform == 'qpae';
+			this._isApi = WebConfig.enterGameLocked;
 			if (this._isApi) {
 				this._viewUI = this._view = this.createView('dating.LoadingUI');
 				this.addChild(this._viewUI);
@@ -117,7 +117,7 @@ module game.gui.page {
 
 		//资源加载完
 		private onLoadAssetCom(): void {
-			if(this._viewUI.bar_jd.value < 1) return;
+			// if(this._viewUI.bar_jd.value < 1) return;
 			this.setJinDu(1);
 			if (this._callBack != null) {
 				this._callBack.run();
