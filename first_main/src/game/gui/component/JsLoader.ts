@@ -124,20 +124,23 @@ module game.gui.component {
 			this.doLoadNext();
 		}
 
-		private checkoutValue(gameid: string[]) {
-			if (gameid.indexOf("dating") != -1 && gameid.indexOf("component") == -1) {
-				!checkGameJsLoad("component") && gameid.unshift("component");
+		private checkoutValue(arr: string[]) {
+			let games = arr.concat();
+			if (games.indexOf("dating") != -1 && games.indexOf("component") == -1) {
+				!checkGameJsLoad("component") && games.unshift("component");
 			}
-			if (gameid.indexOf("dating") == -1 && gameid.indexOf("tongyong") == -1 && gameid.indexOf("component") == -1) {
+			if (games.indexOf("dating") == -1 && games.indexOf("tongyong") == -1 && games.indexOf("component") == -1) {
 				let GamePageDef = getPageDef("tongyong");
 				if (!GamePageDef || !GamePageDef["isinit"]) {
-					gameid.unshift("tongyong");
+					games.unshift("tongyong");
 				}
 			}
 			let game_list = [];
-			for (let index = 0; index < gameid.length; index++) {
-				let item = gameid[index];
-				game_list.push(item)
+			for (let index = 0; index < games.length; index++) {
+				let item = games[index];
+				if (item) {
+					game_list.push(item);
+				}
 			}
 			return game_list;
 		}
