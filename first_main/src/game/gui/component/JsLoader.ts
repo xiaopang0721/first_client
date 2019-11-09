@@ -11,7 +11,7 @@ module game.gui.component {
 		private _jsLoaderCellList: { [key: string]: JsLoaderCell } = {}
 		private _waitList: JsLoaderCell[] = [];
 		private _jsCellLock: boolean;
-		public startLoad(game_id: string, handle?: Handler) {
+		public startLoad(game_id: string, need_load?: boolean, handle?: Handler) {
 			if (!checkGameJsLoad(game_id)) {
 				if (!this._jsLoaderCellList) this._jsLoaderCellList = {}
 				let jscell = this._jsLoaderCellList[game_id];
@@ -19,6 +19,8 @@ module game.gui.component {
 					jscell = new JsLoaderCell(game_id);
 					jscell.path_list = [];
 					jscell.handle = handle;
+					jscell.need_load = need_load;
+					jscell.origin_gameid = game_id;
 					jscell.game_list = this.checkoutValue([game_id]);
 					this._jsLoaderCellList[game_id] = jscell;
 				} else {
@@ -65,7 +67,9 @@ module game.gui.component {
 			for (let index = 0; index < jscell.game_list.length; index++) {
 				let gameid = jscell.game_list[index];
 				let path = StringU.substitute(prePath, gameid);
-				jscell.path_list.push(path);
+				if (jscell.path_list.indexOf(path) == -1) {
+					jscell.path_list.push(path);
+				}
 			}
 			if (jscell.path_list.length) {
 				if (!jscell.assertloader) {
@@ -115,13 +119,40 @@ module game.gui.component {
 			}
 
 			assetList = myCheckArray(assetList);
-			jscell.handle && jscell.handle.runWith([assetList]);
+			if (jscell.need_load) {
+				this._checkGameID = jscell.origin_gameid;
+				LoadingMgr.ins.load(jscell.origin_gameid, assetList, 4)
+			} else {
+				jscell.handle && jscell.handle.runWith([assetList]);
+				jscell.assertloader.clear(true);
+				jscell.assertloader = null;
+				delete this._jsLoaderCellList[jscell.index];
+				this._jsLoaderCellList[jscell.index] = null;
+				this._jsCellLock = false;
+				this.doLoadNext();
+			}
+		}
+
+		private coverLoad(gameid: string) {
+			let jscell = this._jsLoaderCellList[gameid];
+			jscell.handle && jscell.handle.run();
 			jscell.assertloader.clear(true);
 			jscell.assertloader = null;
 			delete this._jsLoaderCellList[jscell.index];
 			this._jsLoaderCellList[jscell.index] = null;
 			this._jsCellLock = false;
 			this.doLoadNext();
+			this._checkGameID = null;
+		}
+
+		private _checkGameID: string;
+		update(diff: number) {
+			if (!this._checkGameID) return;
+			if (LoadingMgr.ins.isLoaded(this._checkGameID)) {
+				this.coverLoad(this._checkGameID);
+			} else {
+
+			}
 		}
 
 		private checkoutValue(arr: string[]) {
@@ -138,7 +169,7 @@ module game.gui.component {
 			let game_list = [];
 			for (let index = 0; index < games.length; index++) {
 				let item = games[index];
-				if (item) {
+				if (item && game_list.indexOf(item) == -1) {
 					game_list.push(item);
 				}
 			}
@@ -177,6 +208,8 @@ module game.gui.component {
 		assertloader: AssetsLoader;
 		game_list: string[];
 		path_list: string[];
+		need_load: boolean;
+		origin_gameid: string;
 	}
 
 }
