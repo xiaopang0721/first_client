@@ -34,9 +34,10 @@ module game.gui.component {
 					let gameid = game_list[index];
 					let asset = getAsset(gameid);
 					if (asset && asset.length) {
-						assetList = assetList.concat(asset);
+						assetList = laya.utils.Utils.concatArray(assetList,asset);
 					}
 				}
+				assetList = myCheckArray(assetList);
 				handle && handle.runWith([assetList]);
 			}
 		}
