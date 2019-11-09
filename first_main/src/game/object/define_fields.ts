@@ -23,6 +23,10 @@ public static kGroupTypShouling:number = 6 //鱼群类型-首领鱼
 public static kGroupTypYuChao:number = 7 //鱼群类型-鱼潮来袭
 public static kGroupTypBoss:number = 8 //鱼群类型-Boss鱼
 public static kGroupTypHuaFei:number = 9 //鱼群类型-话费鱼
+public static WXSAOLEI_HB_ADD:number = 1 //微信扫雷红包-新增红包
+public static WXSAOLEI_HB_REMOVE:number = 2 //微信扫雷红包-删除红包
+public static WXSAOLEI_HB_UPDATE:number = 3 //微信扫雷红包-更新红包
+public static WXSAOLEI_HB_TOTAL:number = 4 //微信扫雷红包-全量下发
 }
 
 
@@ -95,6 +99,12 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_INT_DRAW_MONEY_ERROR_C_D:number = 67 //玩家取款密码错误冻结时间或间隔时间
 	public static PLAYERDATA_INT_FIRST_PAY_MONEY:number = 68 //首充金额
 	public static PLAYERDATA_INT_NICK_NAME_TIME:number = 69 //修改昵称时间
+	public static PLAYERDATA_INT_SECOND_PAY_MONEY:number = 70 //二充金额
+	public static PLAYERDATA_INT_THIRDLY_PAY_MONEY:number = 71 //三充金额
+	public static PLAYERDATA_INT_JI_FEN:number = 72 //积分
+	public static PLAYERDATA_INT_PAY_COUNT:number = 73 //充值次数
+	public static PLAYERDATA_INT_CASH_MONEY:number = 74 //提款次数
+	public static PLAYERDATA_INT_MEDALLION:number = 75 //免死金牌
 
 // string field
 	public static PLAYERDATA_STR_ACCOUNT:number = 0 //账号信息
@@ -566,6 +576,36 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 	public GetNickNameTime():number{
        return this.GetInt32(PlayerDataField.PLAYERDATA_INT_NICK_NAME_TIME);
+    }
+
+
+	public GetSecondPayMoney():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_SECOND_PAY_MONEY);
+    }
+
+
+	public GetThirdlyPayMoney():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_THIRDLY_PAY_MONEY);
+    }
+
+
+	public GetJiFen():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_JI_FEN);
+    }
+
+
+	public GetPayCount():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_PAY_COUNT);
+    }
+
+
+	public GetCashMoney():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_CASH_MONEY);
+    }
+
+
+	public GetMedallion ():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_MEDALLION);
     }
 
 

@@ -47,6 +47,7 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_RECHARGE_WXBANK = 44  //微信转银行
     public static USE_MONEY_LOG_TYPE_RECHARGE_ZFBBANK = 45  //支付宝转银行
     public static USE_MONEY_LOG_TYPE_GUEST_GIVEMONEY = 46  //游客送金
+    public static USE_MONEY_LOG_TYPE_WXSLHB_FHB = 47  //微信扫雷红包发红包
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static client_money_logtype_table:{[key:number]:string}={
@@ -96,6 +97,7 @@ class Web_operation_fields {
         44:'微信转银行',//微信转银行
         45:'支付宝转银行',//支付宝转银行
         46:'游客送金',//游客送金
+        47:'微信扫雷红包发红包',//微信扫雷红包发红包
 	}
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
@@ -660,6 +662,16 @@ class Web_operation_fields {
     public static GAME_ROOM_CONFIG_MPNIUNIU_8 = 249  //明牌牛牛场8
     public static GAME_ROOM_CONFIG_MPNIUNIU_9 = 250  //明牌牛牛场9
     public static GAME_ROOM_CONFIG_MPNIUNIU_10 = 251  //明牌牛牛场10
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_1 = 252  //微信扫雷红包小资场
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_2 = 253  //微信扫雷红包老板场
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_3 = 254  //微信扫雷红包富豪场
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_4 = 255  //微信扫雷红包场4
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_5 = 256  //微信扫雷红包场5
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_6 = 257  //微信扫雷红包场6
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_7 = 258  //微信扫雷红包场7
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_8 = 259  //微信扫雷红包场8
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_9 = 260  //微信扫雷红包场9
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_10 = 261  //微信扫雷红包场10
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_CARDTYPE_EBGANG_DOUBLE_1 = 1  //一宝
