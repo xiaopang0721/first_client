@@ -47,6 +47,15 @@ module game.gui.component {
 			}
 		}
 
+		//是否是等待加载
+		public isWaitLoad(gameid: string) {
+			if (this._waitList[gameid]) {
+				return true;
+			}
+
+			return false;
+		}
+
 		private doLoadNext() {
 			if (this._jsCellLock) {
 				logd("队列中");
