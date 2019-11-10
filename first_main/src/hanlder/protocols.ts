@@ -476,7 +476,6 @@ module hanlder{
 		public static  CMSG_MPNIUNIU_BET :number = 234;	//mpniuniu_bet
 		/*明牌牛牛-摊牌*/
 		public static  CMSG_MPNIUNIU_TANPAI :number = 235;	//mpniuniu_tanpai
-<<<<<<< HEAD
 		/*红包数据信息*/
 		public static  SMSG_WXSAOLEIHB_INFO :number = 236;	//wxsaoleihb_info
 		/*获取红包历史记录*/
@@ -487,8 +486,6 @@ module hanlder{
 		public static  SMSG_WXSAOLEIHB_SEND_LQJL :number = 239;	//wxsaoleihb_send_lqjl
 		/*红包领取信息下发*/
 		public static  SMSG_WXSAOLEIHB_LQ_INFO :number = 240;	//wxsaoleihb_lq_info
-=======
->>>>>>> 81e95681e078a820212e465bd43aee591ec5e749
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -734,14 +731,11 @@ module hanlder{
 			this._FUNCS[233] = "mpniuniu_banker";
 			this._FUNCS[234] = "mpniuniu_bet";
 			this._FUNCS[235] = "mpniuniu_tanpai";
-<<<<<<< HEAD
 			this._FUNCS[236] = "wxsaoleihb_info";
 			this._FUNCS[237] = "wxsaoleihb_get_history";
 			this._FUNCS[238] = "wxsaoleihb_get_lqjl";
 			this._FUNCS[239] = "wxsaoleihb_send_lqjl";
 			this._FUNCS[240] = "wxsaoleihb_lq_info";
-=======
->>>>>>> 81e95681e078a820212e465bd43aee591ec5e749
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1592,7 +1586,6 @@ module hanlder{
 				case Protocols.CMSG_MPNIUNIU_TANPAI :	//mpniuniu_tanpai
 					var obj_mpniuniu_tanpai:c2s_mpniuniu_tanpai = new c2s_mpniuniu_tanpai;
 					return obj_mpniuniu_tanpai;
-<<<<<<< HEAD
 				case Protocols.SMSG_WXSAOLEIHB_INFO :	//wxsaoleihb_info
 					var obj_wxsaoleihb_info:s2c_wxsaoleihb_info = new s2c_wxsaoleihb_info;
 					s2c_wxsaoleihb_info .read(obj_wxsaoleihb_info, bs);
@@ -1613,8 +1606,6 @@ module hanlder{
 					var obj_wxsaoleihb_lq_info:s2c_wxsaoleihb_lq_info = new s2c_wxsaoleihb_lq_info;
 					s2c_wxsaoleihb_lq_info .read(obj_wxsaoleihb_lq_info, bs);
 					return obj_wxsaoleihb_lq_info;
-=======
->>>>>>> 81e95681e078a820212e465bd43aee591ec5e749
 				default:
 					break;
 			}
@@ -3422,7 +3413,6 @@ module hanlder{
 			this.sendMsg( 235 , this._stream);
 			//Log.outDebug("CS====> cmd:235 mpniuniu_tanpai");
 		}
-<<<<<<< HEAD
 		public call_wxsaoleihb_get_history (hb_min_id : number ,hb_num : number ):void{
 			this._stream.reset();
 			this._stream.writeUint16( 237 );
@@ -3441,8 +3431,6 @@ module hanlder{
 			this.sendMsg( 238 , this._stream);
 			//Log.outDebug("CS====> cmd:238 wxsaoleihb_get_lqjl");
 		}
-=======
->>>>>>> 81e95681e078a820212e465bd43aee591ec5e749
 	}
 
 	export class both_null_action
@@ -8800,7 +8788,7 @@ module hanlder{
 		*/
 		public mobile : string ;	//String
 		/**
-		* 验证??
+		* 验证码
 		*/
 		public code : string ;	//String
 		/**
@@ -9307,7 +9295,6 @@ module hanlder{
 			
 		}
 	}
-<<<<<<< HEAD
 	export class s2c_wxsaoleihb_info
 	{
 		public optcode:number = 0;
@@ -9445,8 +9432,6 @@ module hanlder{
 			self.lq_data = bytes. readString ();		
 		}
 	}
-=======
->>>>>>> 81e95681e078a820212e465bd43aee591ec5e749
 
 
 }
