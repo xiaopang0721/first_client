@@ -21,6 +21,7 @@ game_list=(
 "gamelonghu"
 "gamemajiang"
 "gameniuniu"
+"gamempniuniu"
 "gamerniuniu"
 "gamepaijiu"
 "gamerpaodekuai"

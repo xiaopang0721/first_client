@@ -4,6 +4,7 @@
 module utils {
 	export class Adaptive {
 		static init() {
+			this.patch();
 			this.ParseParam();
 			this.Stage_resetCanvas();
 		}
@@ -56,9 +57,11 @@ module utils {
 		private static ParseParam() {
 			WebConfig.platform = (StringU.getParameter(location.href, "p") || WebConfig.platform).toLowerCase();
 			WebConfig.gameid = (StringU.getParameter(location.href, "gameid") || WebConfig.gameid).toLowerCase();
-			WebConfig.sessionkey = (StringU.getParameter(location.href, "sessionkey") || WebConfig.sessionkey).toLowerCase();
+			WebConfig.enableWebp = WebConfig.isOnline && ((StringU.getParameter(location.href, "enableWebp") != "") || WebConfig.enableWebp);
+			WebConfig.enableWebp && (this.checkJsLoader());
+			WebConfig.sessionkey = decodeURIComponent((StringU.getParameter(location.href, "sessionkey") || WebConfig.sessionkey).toLowerCase());
 			WebConfig.params = (StringU.getParameter(location.href, "params") || WebConfig.params).toLowerCase();
-			WebConfig.enterGameLocked = WebConfig.gameid && WebConfig.sessionkey ? true : false;
+			WebConfig.enterGameLocked = (WebConfig.platform == 'qpae' && WebConfig.gameid && WebConfig.sessionkey) ? true : false;
 			WebConfig.isSingleEnter = (StringU.getParameter(location.href, "logintype") == Web_operation_fields.ACCOUNT_TYPE_USERNAME.toString()) ? true : false;
 			WebConfig.server_name = (StringU.getParameter(location.href, "p") || WebConfig.server_name).toLowerCase();
 			WebConfig.gwUrl = WebConfig.gwconf[WebConfig.platform];
@@ -102,6 +105,52 @@ module utils {
 			logd("webParms", WebConfig.webParms);
 		}
 
+		//补丁
+		private static patch() {
+			// 是否wss判断
+			let Network_isWss = Network.prototype.isWss;
+			Network.prototype.isWss = function (): boolean {
+				let isWss = Network_isWss.call(this);
+				return isWss;
+			}
+
+			
+			let refTemplet_get = RefTemplet.Get;
+			RefTemplet.Get = function (key: string, create?: boolean, isEventProgress?: boolean, priority?: number, type?: string): RefTemplet {
+				let refTemplet = refTemplet_get.call(this, key, create, isEventProgress, priority, type);
+				refTemplet.addTimeOut = RefTemplet.MAX_FREE_TIME;
+				return refTemplet;
+			}
+		}
+
+		private static checkJsLoader() {
+			function check_webp_feature(feature, callback) {
+				try {
+					var kTestImages = {
+						lossy: "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
+						lossless: "UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==",
+						alpha: "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==",
+						animation: "UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"
+					};
+					var img = new Image();
+					img.onload = function () {
+						var result = (img.width > 0) && (img.height > 0);
+						callback(feature, result);
+					};
+					img.onerror = function () {
+						callback(feature, false);
+					};
+					img.src = "data:image/webp;base64," + kTestImages[feature];
+				} catch (error) {
+
+				}
+			}
+			check_webp_feature('lossy', function (f, r) {
+				canUseImageWebP = r;
+			})
+		}
+
 
 	}
 }
+var canUseImageWebP = false;

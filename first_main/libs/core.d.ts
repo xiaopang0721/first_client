@@ -637,7 +637,7 @@ declare module core.resource {
         static GENRAL: number;
         static BUFFER: number;
         static TEMPLET: number;
-        private static MAX_FREE_TIME;
+        static MAX_FREE_TIME: number;
         private static _refMap;
         private static _refAsset_objs;
         private static _refAsset_keys;
@@ -703,7 +703,7 @@ declare module core.resource {
     class RefTemplet extends core.resource.RefAsset {
         static Get(key: string, create?: boolean, isEventProgress?: boolean, priority?: number, type?: string): RefTemplet;
         private _factory;
-        constructor(url: string);
+        constructor(url: string, isEventProgress?: boolean, priority?: number, type?: string);
         protected init(): void;
         buildArmature(aniMode?: number): laya.ani.bone.Skeleton;
         protected destroy(): void;

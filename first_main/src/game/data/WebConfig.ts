@@ -4,6 +4,7 @@ let __conf = __window.externalInterfacePI;
 WebConfig.isDebug = __conf.isDebug;
 WebConfig.jsDebug = __conf.jsDebug;
 WebConfig.isOnline = __conf.isOnline;
+WebConfig.enableWebp = __conf.enableWebp;
 WebConfig.version = __conf.version;
 WebConfig.server_lock = __conf.server_lock;
 WebConfig.server_name = __conf.server_name;
@@ -13,8 +14,8 @@ WebConfig.baseqp = __conf.baseqp;
 WebConfig.gwconf = __conf.gwconf;
 WebConfig.ipconf = __conf.ipconf;
 WebConfig.platform = __conf.platform;//优先href
-WebConfig.gameid = "";
-WebConfig.sessionkey = "account=12345735&server_name=zwx&tm=1571893298&sign=fd3df1fbebe1dd7df0e8f09b948dd2eb";
+WebConfig.gameid = "dating";
+WebConfig.sessionkey = "account%3D12345687%26server_name%3Dqpae%26tm%3D1574517145%26sign%3D01ddd1c80c5a95871ab1556067adf38f&param=";
 WebConfig.params = "";
 WebConfig.enterGameLocked = false;
 WebConfig.sub_baseplatform = __conf.sub_baseplatform
