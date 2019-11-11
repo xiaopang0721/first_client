@@ -76,8 +76,8 @@ module game.gui.component {
 			}
 
 			let jsload = checkGameJsLoad(gameid);
+			this.clear(jscell);
 			if (jsload) {
-				this.clear(jscell);
 				this.jsComplete(jscell, jsload);
 			} else {
 				if (jscell.path_list.length) {
@@ -208,6 +208,8 @@ module game.gui.component {
 							}
 						}
 						cell = null;
+						delete this._jsLoaderCellList[key];
+						this._jsLoaderCellList[key] = null;
 					}
 				}
 			}
