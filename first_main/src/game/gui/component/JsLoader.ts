@@ -9,8 +9,14 @@ module game.gui.component {
 		}
 
 		private _jsLoaderCellList: { [key: string]: JsLoaderCell } = {}
-		private _waitList: JsLoaderCell[] = [];
-		private _jsCellLock: boolean;
+		private _waitList: string[] = [];
+		private _jsCellLock: JsLoaderCell;
+		/**
+		 * 
+		 * @param game_id 游戏id
+		 * @param need_load 是否需要加载资源
+		 * @param handle 回调
+		 */
 		public startLoad(game_id: string, need_load?: boolean, handle?: Handler) {
 			if (!checkGameJsLoad(game_id)) {
 				if (!this._jsLoaderCellList) this._jsLoaderCellList = {}
@@ -20,15 +26,14 @@ module game.gui.component {
 					jscell.path_list = [];
 					jscell.handle = handle;
 					jscell.need_load = need_load;
-					jscell.origin_gameid = game_id;
 					jscell.game_list = this.checkoutValue([game_id]);
 					this._jsLoaderCellList[game_id] = jscell;
 				} else {
 					handle && handle.recover();
 				}
-				if (this._waitList.indexOf(jscell) == -1) {
+				if (this._waitList.indexOf(game_id) == -1) {
 					logd("进入队列", game_id);
-					this._waitList.push(jscell);
+					this._waitList.push(game_id);
 				}
 
 				this.doLoadNext();
@@ -49,7 +54,7 @@ module game.gui.component {
 
 		//是否是等待加载
 		public isWaitLoad(gameid: string) {
-			if (this._waitList[gameid]) {
+			if (this._waitList.indexOf(gameid) != -1) {
 				return true;
 			}
 
@@ -66,11 +71,14 @@ module game.gui.component {
 				logd("队列中2");
 				return;
 			}
-			let jscell = this._waitList.shift();
+			let gameid = this._waitList.shift();
+
+			let jscell = this._jsLoaderCellList[gameid]
 			if (jscell) {
-				this._jsCellLock = true;
+				this._jsCellLock = jscell;
 			} else {
-				this._jsCellLock = false;
+				this._jsCellLock = null;
+				return;
 			}
 			let prePath = WebConfig.isOnline ? "part/bin/game{0}.bin" : "part/js/game{0}.js";
 			for (let index = 0; index < jscell.game_list.length; index++) {
@@ -90,7 +98,7 @@ module game.gui.component {
 
 		//获取进度
 		getProgress(gameid: string) {
-			if ((this._jsLoaderCellList && this._jsLoaderCellList[gameid]) || checkGameJsLoad(gameid)) {//如果是正在加载的 内容 那就显示进度
+			if ((this._jsCellLock && this._jsCellLock.gameid == gameid) || checkGameJsLoad(gameid)) {//如果是正在加载的 内容 那就显示进度
 				return 0.001;
 			}
 			return 0;
@@ -129,15 +137,15 @@ module game.gui.component {
 
 			assetList = myCheckArray(assetList);
 			if (jscell.need_load) {
-				this._checkGameID = jscell.origin_gameid;
-				LoadingMgr.ins.load(jscell.origin_gameid, assetList, 4)
+				this._checkGameID = jscell.gameid;
+				LoadingMgr.ins.load(jscell.gameid, assetList, 4)
 			} else {
 				jscell.handle && jscell.handle.runWith([assetList]);
 				jscell.assertloader.clear(true);
 				jscell.assertloader = null;
-				delete this._jsLoaderCellList[jscell.index];
-				this._jsLoaderCellList[jscell.index] = null;
-				this._jsCellLock = false;
+				delete this._jsLoaderCellList[jscell.gameid];
+				this._jsLoaderCellList[jscell.gameid] = null;
+				this._jsCellLock = null;
 				this.doLoadNext();
 			}
 		}
@@ -147,9 +155,9 @@ module game.gui.component {
 			jscell.handle && jscell.handle.run();
 			jscell.assertloader.clear(true);
 			jscell.assertloader = null;
-			delete this._jsLoaderCellList[jscell.index];
-			this._jsLoaderCellList[jscell.index] = null;
-			this._jsCellLock = false;
+			delete this._jsLoaderCellList[jscell.gameid];
+			this._jsLoaderCellList[jscell.gameid] = null;
+			this._jsCellLock = null;
 			this.doLoadNext();
 			this._checkGameID = null;
 		}
@@ -196,7 +204,7 @@ module game.gui.component {
 							cell.handle && cell.handle.recover();
 							cell.game_list = null;
 							cell.path_list = null;
-							cell.index = null;
+							cell.gameid = null;
 						}
 					}
 					cell = null;
@@ -204,21 +212,20 @@ module game.gui.component {
 			}
 			this._jsLoaderCellList = null;
 			this._waitList.length = 0;
-			this._jsCellLock = false;
+			this._jsCellLock = null;
 		}
 	}
 
 	class JsLoaderCell {
 		constructor(index: string) {
-			this.index = index;
+			this.gameid = index;
 		}
-		index: string;
+		gameid: string;
 		handle: Handler;
 		assertloader: AssetsLoader;
 		game_list: string[];
 		path_list: string[];
 		need_load: boolean;
-		origin_gameid: string;
 	}
 
 }
