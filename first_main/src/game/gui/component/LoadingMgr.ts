@@ -145,6 +145,7 @@ module game.gui.component {
 				}
 			}
 			if (this._preLoader) {
+				clearJSGame(this._preLoader.gameId);
 				this._preLoader.preAsset && Laya.loader.cancelLoadByUrls(this._preLoader.preAsset);
 				this._preLoader.clearLoadingRender();
 				this._preLoader = null;

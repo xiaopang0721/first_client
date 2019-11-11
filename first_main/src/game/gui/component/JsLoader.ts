@@ -18,38 +18,24 @@ module game.gui.component {
 		 * @param handle 回调
 		 */
 		public startLoad(game_id: string, need_load?: boolean, handle?: Handler) {
-			if (!checkGameJsLoad(game_id)) {
-				if (!this._jsLoaderCellList) this._jsLoaderCellList = {}
-				let jscell = this._jsLoaderCellList[game_id];
-				if (!jscell) {
-					jscell = new JsLoaderCell(game_id);
-					jscell.path_list = [];
-					jscell.handle = handle;
-					jscell.need_load = need_load;
-					jscell.game_list = this.checkoutValue([game_id]);
-					this._jsLoaderCellList[game_id] = jscell;
-				} else {
-					handle && handle.recover();
-				}
-				if (this._waitList.indexOf(game_id) == -1) {
-					logd("进入队列", game_id);
-					this._waitList.push(game_id);
-				}
-
-				this.doLoadNext();
+			if (!this._jsLoaderCellList) this._jsLoaderCellList = {}
+			let jscell = this._jsLoaderCellList[game_id];
+			if (!jscell) {
+				jscell = new JsLoaderCell(game_id);
+				jscell.path_list = [];
+				jscell.handle = handle;
+				jscell.need_load = need_load;
+				jscell.game_list = this.checkoutValue([game_id]);
+				this._jsLoaderCellList[game_id] = jscell;
 			} else {
-				let game_list = this.checkoutValue([game_id]);
-				let assetList = []
-				for (let index = 0; index < game_list.length; index++) {
-					let gameid = game_list[index];
-					let asset = getAsset(gameid);
-					if (asset && asset.length) {
-						assetList = laya.utils.Utils.concatArray(assetList, asset);
-					}
-				}
-				assetList = myCheckArray(assetList);
-				handle && handle.runWith([assetList]);
+				handle && handle.recover();
 			}
+			if (this._waitList.indexOf(game_id) == -1) {
+				logd("进入队列", game_id);
+				this._waitList.push(game_id);
+			}
+
+			this.doLoadNext();
 		}
 
 		//是否是等待加载
@@ -88,17 +74,21 @@ module game.gui.component {
 					jscell.path_list.push(path);
 				}
 			}
-			if (jscell.path_list.length) {
-				if (!jscell.assertloader) {
-					jscell.assertloader = new AssetsLoader();
+
+			let jsload = checkGameJsLoad(gameid);
+			if (jsload) {
+				this.jsComplete(jscell, jsload);
+			} else {
+				if (jscell.path_list.length) {
+					jscell.assertloader.load(jscell.path_list, Handler.create(this, this.jsComplete, [jscell, jsload]), false, 4);
 				}
-				jscell.assertloader.load(jscell.path_list, Handler.create(this, this.jsComplete, [jscell]), false, 4);
 			}
+
 		}
 
 		//获取进度
 		getProgress(gameid: string) {
-			if ((this._jsCellLock && this._jsCellLock.gameid == gameid) || checkGameJsLoad(gameid)) {//如果是正在加载的 内容 那就显示进度
+			if ((this._jsCellLock && this._jsCellLock.gameid == gameid)) {//如果是正在加载的 内容 那就显示进度
 				return 0.001;
 			}
 			return 0;
@@ -108,15 +98,15 @@ module game.gui.component {
 		public get gameJsPool() {
 			return this._gameJsPool;
 		}
-		private jsComplete(jscell: JsLoaderCell) {
+		private jsComplete(jscell: JsLoaderCell, jsload?: boolean) {
 			let assetList = []
 			for (let index = 0; index < jscell.path_list.length; index++) {
 				let path = jscell.path_list[index];
 				let gameid = jscell.game_list[index];
-				let tempData = Laya.loader.getRes(path);
 				jscell.assertloader.release(path, true);
 
-				if (tempData) {
+				if (!jsload) {
+					let tempData = Laya.loader.getRes(path);
 					let dataStr = path.indexOf(".bin") != -1 ? StringU.readZlibData(new ByteArray(tempData)) : tempData;
 					let script = document.createElement('script');
 					// script.type = "module";
@@ -141,7 +131,7 @@ module game.gui.component {
 				LoadingMgr.ins.load(jscell.gameid, assetList, 4)
 			} else {
 				jscell.handle && jscell.handle.runWith([assetList]);
-				jscell.assertloader.clear(true);
+				jscell.assertloader && jscell.assertloader.clear(true);
 				jscell.assertloader = null;
 				delete this._jsLoaderCellList[jscell.gameid];
 				this._jsLoaderCellList[jscell.gameid] = null;
@@ -152,6 +142,7 @@ module game.gui.component {
 
 		private coverLoad(gameid: string) {
 			let jscell = this._jsLoaderCellList[gameid];
+			if(!jscell) return;
 			jscell.handle && jscell.handle.run();
 			jscell.assertloader.clear(true);
 			jscell.assertloader = null;
@@ -194,6 +185,7 @@ module game.gui.component {
 		}
 
 		clear() {
+			LoadingMgr.ins.cancleUnLoads();
 			for (let key in this._jsLoaderCellList) {
 				if (this._jsLoaderCellList.hasOwnProperty(key)) {
 					let cell = this._jsLoaderCellList[key];
@@ -222,7 +214,7 @@ module game.gui.component {
 		}
 		gameid: string;
 		handle: Handler;
-		assertloader: AssetsLoader;
+		assertloader: AssetsLoader = new AssetsLoader();
 		game_list: string[];
 		path_list: string[];
 		need_load: boolean;

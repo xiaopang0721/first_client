@@ -78,10 +78,10 @@ function updateGameJS(includes?: string[] | string) {
     }
 }
 
-function clearJSGame(ignore?: string[] | string) {
+function clearJSGame(gameid: string) {
     let obj = JsLoader.ins.gameJsPool;
     for (let key in obj) {
-        if (ignore && ignore.indexOf(key) != -1) continue;
+        if (gameid && gameid != key) continue;
         if (obj.hasOwnProperty(key)) {
             let script = obj[key];
             script.parentNode.removeChild(script);
