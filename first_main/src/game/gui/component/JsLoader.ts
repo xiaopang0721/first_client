@@ -77,13 +77,13 @@ module game.gui.component {
 
 			let jsload = checkGameJsLoad(gameid);
 			if (jsload) {
+				this.clear(jscell);
 				this.jsComplete(jscell, jsload);
 			} else {
 				if (jscell.path_list.length) {
 					jscell.assertloader.load(jscell.path_list, Handler.create(this, this.jsComplete, [jscell, jsload]), false, 4);
 				}
 			}
-
 		}
 
 		//获取进度
@@ -133,8 +133,10 @@ module game.gui.component {
 				jscell.handle && jscell.handle.runWith([assetList]);
 				jscell.assertloader && jscell.assertloader.clear(true);
 				jscell.assertloader = null;
-				delete this._jsLoaderCellList[jscell.gameid];
-				this._jsLoaderCellList[jscell.gameid] = null;
+				if (this._jsLoaderCellList) {
+					delete this._jsLoaderCellList[jscell.gameid];
+					this._jsLoaderCellList[jscell.gameid] = null;
+				}
 				this._jsCellLock = null;
 				this.doLoadNext();
 			}
@@ -142,12 +144,14 @@ module game.gui.component {
 
 		private coverLoad(gameid: string) {
 			let jscell = this._jsLoaderCellList[gameid];
-			if(!jscell) return;
+			if (!jscell) return;
 			jscell.handle && jscell.handle.run();
 			jscell.assertloader.clear(true);
 			jscell.assertloader = null;
-			delete this._jsLoaderCellList[jscell.gameid];
-			this._jsLoaderCellList[jscell.gameid] = null;
+			if (this._jsLoaderCellList) {
+				delete this._jsLoaderCellList[jscell.gameid];
+				this._jsLoaderCellList[jscell.gameid] = null;
+			}
 			this._jsCellLock = null;
 			this.doLoadNext();
 			this._checkGameID = null;
@@ -184,33 +188,40 @@ module game.gui.component {
 			return game_list;
 		}
 
-		clear() {
+		clear(jscell?: any) {
 			LoadingMgr.ins.cancleUnLoads();
-			for (let key in this._jsLoaderCellList) {
-				if (this._jsLoaderCellList.hasOwnProperty(key)) {
-					let cell = this._jsLoaderCellList[key];
-					if (cell) {
-						if (cell.assertloader) {
-							cell.assertloader.clear(true);
-							cell.assertloader = null;
-							cell.handle && cell.handle.recover();
-							cell.game_list = null;
-							cell.path_list = null;
-							cell.gameid = null;
+			if (this._jsLoaderCellList) {
+				for (let key in this._jsLoaderCellList) {
+					if (this._jsLoaderCellList.hasOwnProperty(key)) {
+						let cell = this._jsLoaderCellList[key];
+						if (cell) {
+							if (jscell && jscell == cell) {
+								continue;
+							}
+							if (cell.assertloader) {
+								cell.assertloader.clear(true);
+								cell.assertloader = null;
+								cell.handle && cell.handle.recover();
+								cell.game_list = null;
+								cell.path_list = null;
+								cell.gameid = null;
+							}
 						}
+						cell = null;
 					}
-					cell = null;
 				}
 			}
-			this._jsLoaderCellList = null;
+			if (!jscell || !this._jsLoaderCellList[jscell.gameid]) {
+				this._jsLoaderCellList = null;
+			}
 			this._waitList.length = 0;
 			this._jsCellLock = null;
 		}
 	}
 
 	class JsLoaderCell {
-		constructor(index: string) {
-			this.gameid = index;
+		constructor(gameid?: string) {
+			this.gameid = gameid;
 		}
 		gameid: string;
 		handle: Handler;
