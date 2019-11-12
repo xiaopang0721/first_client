@@ -353,7 +353,7 @@ module game.gui.base {
 		private btnTween(btn: any, caller?: any, callback?: Function, args?: any, defaultPath?: string, scaleX: number = 1, scaleY: number = 1): void {
 			if (!btn || btn == Laya.stage) return;
 			this._game.playSound(this._defaultSoundPath || defaultPath || Path.music_btn);
-			this._game.uiRoot.btnTween(btn, caller, callback, args, defaultPath, scaleX, scaleY);
+			this._game.uiRoot.btnTween(btn, caller, callback, args, this._defaultSoundPath || defaultPath, scaleX, scaleY);
 
 			//进队列
 			if (!this._btnTweenList) this._btnTweenList = [];
