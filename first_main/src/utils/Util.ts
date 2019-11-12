@@ -88,8 +88,8 @@ function clearJSGame(gameid: string) {
             {
                 script.parentNode.removeChild(script);
                 delete obj[key]
-                delete window["game" + key];
                 window["game" + key] = null
+                delete window["game" + key];
             }
         }
     }

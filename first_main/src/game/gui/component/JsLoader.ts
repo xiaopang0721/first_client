@@ -161,8 +161,8 @@ module game.gui.component {
 			jscell.assertloader && jscell.assertloader.clear(true);
 			jscell.assertloader = null;
 			if (this._jsLoaderCellList) {
-				delete this._jsLoaderCellList[jscell.gameid];
 				this._jsLoaderCellList[jscell.gameid] = null;
+				delete this._jsLoaderCellList[jscell.gameid];
 			}
 			this._jsCellLock = null;
 			this.doLoadNext();
@@ -206,8 +206,8 @@ module game.gui.component {
 							}
 						}
 						cell = null;
-						delete this._jsLoaderCellList[key];
 						this._jsLoaderCellList[key] = null;
+						delete this._jsLoaderCellList[key];
 					}
 				}
 			}

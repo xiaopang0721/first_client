@@ -78,8 +78,8 @@ module game.gui.component {
 					assertloader && assertloader.offAll();
 					assertloader && assertloader.clear(checknow);
 					assertloader = null;
-					delete this._assetsLoader[key];
 					this._assetsLoader[key] = null;
+					delete this._assetsLoader[key];
 				}
 			}
 		}
@@ -191,8 +191,14 @@ module game.gui.component {
 			return this._gameId;
 		}
 
+		private _formatUrl: string[] = []
 		get preAsset() {
-			return this._preAssets;
+			if (!this._formatUrl.length) {
+				this._preAssets.forEach(url => {
+					this._formatUrl.push(Laya.URL.formatURL(url));
+				});
+			}
+			return this._formatUrl;
 		}
 
 		private _assertloader: AssetsLoader;
@@ -243,6 +249,7 @@ module game.gui.component {
 				this._handle = null;
 			}
 			this._preAssets = null;
+			this._formatUrl = null;
 			this._gameId = null;
 		}
 	}
