@@ -114,7 +114,8 @@ class Operation_Fields {
 	public static OPRATE_GAME_GET_HONGBAO_FAILED:number = 18 //红包领取失败
 	public static OPRATE_GAME_HONGBAO_IS_UNVALID:number = 19 //当前红包已过期
 	public static OPRATE_GAME_HONGBAO_FORMAT_MONEY_ERROR:number = 20 //红包格式金额错误
-	public static OPRATE_GAME_WXSAOLEIHB_GET_MONEY:number = 21 //微信扫雷红包红包雨领取
+	public static OPRATE_GAME_WXSAOLEIHB_START_RAIN_MONEY:number = 21 //微信扫雷红包红包雨开始
+	public static OPRATE_GAME_WXSAOLEIHB_GET_RAIN_MONEY:number = 22 //微信扫雷红包红包雨领取
 	//错误提示
 	private static OPRATE_STRING:{[key:string]:string} = {
 		'1':'登录操作错误类型',//登录操作错误类型
@@ -223,7 +224,8 @@ class Operation_Fields {
 		'8_18':'红包领取失败',//红包领取失败
 		'8_19':'当前红包已过期',//当前红包已过期
 		'8_20':'红包格式金额错误',//红包格式金额错误
-		'8_21':'微信扫雷红包红包雨领取',//微信扫雷红包红包雨领取
+		'8_21':'微信扫雷红包红包雨开始',//微信扫雷红包红包雨开始
+		'8_22':'微信扫雷红包红包雨领取',//微信扫雷红包红包雨领取
 
 	}
 	//获取错误提示

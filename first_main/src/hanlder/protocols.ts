@@ -486,6 +486,8 @@ module hanlder{
 		public static  SMSG_WXSAOLEIHB_SEND_LQJL :number = 239;	//wxsaoleihb_send_lqjl
 		/*红包领取信息下发*/
 		public static  SMSG_WXSAOLEIHB_LQ_INFO :number = 240;	//wxsaoleihb_lq_info
+		/*获取红包历史记录*/
+		public static  CMSG_WXSAOLEIHB_GET_HB_HISTORY :number = 241;	//wxsaoleihb_get_hb_history
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -736,6 +738,7 @@ module hanlder{
 			this._FUNCS[238] = "wxsaoleihb_get_lqjl";
 			this._FUNCS[239] = "wxsaoleihb_send_lqjl";
 			this._FUNCS[240] = "wxsaoleihb_lq_info";
+			this._FUNCS[241] = "wxsaoleihb_get_hb_history";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1606,6 +1609,10 @@ module hanlder{
 					var obj_wxsaoleihb_lq_info:s2c_wxsaoleihb_lq_info = new s2c_wxsaoleihb_lq_info;
 					s2c_wxsaoleihb_lq_info .read(obj_wxsaoleihb_lq_info, bs);
 					return obj_wxsaoleihb_lq_info;
+				case Protocols.CMSG_WXSAOLEIHB_GET_HB_HISTORY :	//wxsaoleihb_get_hb_history
+					var obj_wxsaoleihb_get_hb_history:c2s_wxsaoleihb_get_hb_history = new c2s_wxsaoleihb_get_hb_history;
+					c2s_wxsaoleihb_get_hb_history .read(obj_wxsaoleihb_get_hb_history, bs);
+					return obj_wxsaoleihb_get_hb_history;
 				default:
 					break;
 			}
@@ -3430,6 +3437,14 @@ module hanlder{
 			this._stream.writeInt32 (hb_id);
 			this.sendMsg( 238 , this._stream);
 			//Log.outDebug("CS====> cmd:238 wxsaoleihb_get_lqjl");
+		}
+		public call_wxsaoleihb_get_hb_history (num : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 241 );
+			//获取红包数
+			this._stream.writeInt32 (num);
+			this.sendMsg( 241 , this._stream);
+			//Log.outDebug("CS====> cmd:241 wxsaoleihb_get_hb_history");
 		}
 	}
 
@@ -9430,6 +9445,31 @@ module hanlder{
 			var i:number;
 			//
 			self.lq_data = bytes. readString ();		
+		}
+	}
+	export class c2s_wxsaoleihb_get_hb_history
+	{
+		public optcode:number = 0;
+		public optname:string = "onWxsaoleihb_get_hb_history";
+	
+		/**
+		* 获取红包数
+		*/
+		public num : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_wxsaoleihb_get_hb_history, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//获取红包数
+			self.num = bytes. readInt32 ();		
 		}
 	}
 
