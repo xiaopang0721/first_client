@@ -79,6 +79,7 @@ module game.gui.component {
 					assertloader && assertloader.clear(checknow);
 					assertloader = null;
 					delete this._assetsLoader[key];
+					this._assetsLoader[key] = null;
 				}
 			}
 		}
@@ -123,13 +124,6 @@ module game.gui.component {
 		getProgress(gameid: string) {
 			if (this._preLoader && this._preLoader.gameId == gameid) {//如果是正在加载的 内容 那就显示进度
 				return this._preLoader.progress;
-			}
-
-			for (let index = 0; index < this._waitList.length; index++) {
-				let preload = this._waitList[index];
-				if (preload && preload.gameId == gameid) {////如果是在等待列表 那就随便给个初始进度
-					return 0.001;
-				}
 			}
 
 			return 0;
@@ -232,17 +226,21 @@ module game.gui.component {
 			localSetItem("gameLoadedObj", gameLoadedObj);
 			let name = PageDef.getNameById(this._gameId);
 			name && main.game.showTips(name + "更新完成！")
+			this._handle && this._handle.run();
+			this._handle = null;
 			LoadingMgr.ins.freeAndLoadNext();
 			this.clearLoadingRender();
 			main.game.sceneObjectMgr.event("SceneObjectMgr.__EVENT_JOIN_CARDROOM_GAME_UPDATE");
-			this._handle && this._handle.run();
-			this._handle = null;
 		}
 
 		clearLoadingRender(checknow?: boolean) {
 			if (this._assertloader) {
 				LoadingMgr.ins.clearGameAsset(this._gameId, checknow);
 				this._assertloader = null;
+			}
+			if (this._handle != null) {
+				this._handle.recover();
+				this._handle = null;
 			}
 			this._preAssets = null;
 			this._gameId = null;

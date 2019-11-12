@@ -39,7 +39,7 @@ module game.gui.component {
 				logd("进入队列", game_id);
 				this._waitList.push(game_id);
 			}
-
+			
 			this.doLoadNext();
 		}
 
@@ -96,7 +96,7 @@ module game.gui.component {
 
 		//获取进度
 		getProgress(gameid: string) {
-			if ((this._jsCellLock && this._jsCellLock.gameid == gameid)) {//如果是正在加载的 内容 那就显示进度
+			if (this._jsCellLock && this._jsCellLock.gameid == gameid) {//如果是正在加载的 内容 那就显示进度
 				return 0.001;
 			}
 			return 0;
@@ -149,6 +149,7 @@ module game.gui.component {
 		}
 
 		private runCallBack(jscell: JsLoaderCell, assetList?) {
+			logd("完成资源加载开始回调", jscell.gameid)
 			if (jscell.handle != null) {
 				if (assetList && assetList.length) {
 					jscell.handle.runWith([assetList]);
@@ -189,7 +190,7 @@ module game.gui.component {
 		}
 
 		clear() {
-			LoadingMgr.ins.cancleUnLoads(true);
+			LoadingMgr.ins.cancleUnLoads(false);
 			if (this._jsLoaderCellList) {
 				for (let key in this._jsLoaderCellList) {
 					if (this._jsLoaderCellList.hasOwnProperty(key)) {
@@ -211,8 +212,8 @@ module game.gui.component {
 				}
 			}
 			this._jsLoaderCellList = null;
-			this._waitList.length = 0;
 			this._jsCellLock = null;
+			this._waitList.length = 0;
 		}
 	}
 

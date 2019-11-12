@@ -84,10 +84,13 @@ function clearJSGame(gameid: string) {
         if (gameid && gameid != key) continue;
         if (obj.hasOwnProperty(key)) {
             let script = obj[key];
-            script.parentNode.removeChild(script);
-            delete obj[key]
-            delete window["game" + key];
-            window["game" + key] = null
+            if(script)
+            {
+                script.parentNode.removeChild(script);
+                delete obj[key]
+                delete window["game" + key];
+                window["game" + key] = null
+            }
         }
     }
 }
