@@ -79,7 +79,7 @@ function updateGameJS(includes?: string[] | string) {
 }
 
 function clearJSGame(gameid: string) {
-    let obj = JsLoader.ins.gameJsPool;
+    let obj:{ [key: string]: HTMLScriptElement } = JsLoader.ins.gameJsPool as { [key: string]: HTMLScriptElement };
     for (let key in obj) {
         if (gameid && gameid != key) continue;
         if (obj.hasOwnProperty(key)) {

@@ -70,13 +70,13 @@ module game.gui.component {
 			return this._assetsLoader[gameId];
 		}
 
-		public clearGameAsset(gameId: string) {
+		public clearGameAsset(gameId: string, checknow?: boolean) {
 			for (let key in this._assetsLoader) {
 				if (this._assetsLoader.hasOwnProperty(key)) {
 					if (gameId != key) continue;
 					let assertloader = this._assetsLoader[key];
 					assertloader && assertloader.offAll();
-					assertloader && assertloader.clear();
+					assertloader && assertloader.clear(checknow);
 					assertloader = null;
 					delete this._assetsLoader[key];
 				}
@@ -135,7 +135,7 @@ module game.gui.component {
 			return 0;
 		}
 
-		cancleUnLoads() {
+		cancleUnLoads(checknow?: boolean) {
 			//重置 其实就是清掉未加载的gameid
 			this._map = {};
 			for (let key in this._hasLoad) {
@@ -146,16 +146,15 @@ module game.gui.component {
 			if (this._preLoader) {
 				clearJSGame(this._preLoader.gameId);
 				this._preLoader.preAsset && Laya.loader.cancelLoadByUrls(this._preLoader.preAsset);
-				this._preLoader.clearLoadingRender();
+				this._preLoader.clearLoadingRender(checknow);
 				this._preLoader = null;
-			} else {
-				for (let index = 0; index < this._waitList.length; index++) {
-					let preLoader = this._waitList[index];
-					if (preLoader) {
-						preLoader.preAsset && Laya.loader.cancelLoadByUrls(preLoader.preAsset);
-						preLoader.clearLoadingRender();
-						preLoader = null;
-					}
+			}
+			for (let index = 0; index < this._waitList.length; index++) {
+				let preLoader = this._waitList[index];
+				if (preLoader) {
+					preLoader.preAsset && Laya.loader.cancelLoadByUrls(preLoader.preAsset);
+					preLoader.clearLoadingRender(checknow);
+					preLoader = null;
 				}
 			}
 
@@ -240,9 +239,9 @@ module game.gui.component {
 			this._handle = null;
 		}
 
-		clearLoadingRender() {
+		clearLoadingRender(checknow?: boolean) {
 			if (this._assertloader) {
-				LoadingMgr.ins.clearGameAsset(this._gameId);
+				LoadingMgr.ins.clearGameAsset(this._gameId, checknow);
 				this._assertloader = null;
 			}
 			this._preAssets = null;

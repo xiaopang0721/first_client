@@ -18,6 +18,9 @@ module game.gui.component {
 		 * @param handle 回调
 		 */
 		public startLoad(game_id: string, need_load?: boolean, handle?: Handler) {
+			if (LoadingMgr.ins.isLoaded(game_id)) {
+				this.clear();
+			}
 			if (!this._jsLoaderCellList) this._jsLoaderCellList = {}
 			let jscell = this._jsLoaderCellList[game_id];
 			if (!jscell) {
@@ -30,6 +33,8 @@ module game.gui.component {
 			} else {
 				handle && handle.recover();
 			}
+
+
 			if (this._waitList.indexOf(game_id) == -1) {
 				logd("进入队列", game_id);
 				this._waitList.push(game_id);
@@ -46,6 +51,8 @@ module game.gui.component {
 
 			return false;
 		}
+
+
 
 		private doLoadNext() {
 			if (this._jsCellLock) {
@@ -78,9 +85,6 @@ module game.gui.component {
 			}
 
 			let jsload = checkGameJsLoad(gameid);
-			if (LoadingMgr.ins.isLoaded(gameid)) {
-				this.clear(jscell);
-			}
 			if (jsload) {
 				this.jsComplete(jscell, jsload);
 			} else {
@@ -98,8 +102,8 @@ module game.gui.component {
 			return 0;
 		}
 
-		private _gameJsPool: { [key: string]: HTMLElement } = {};
-		public get gameJsPool() {
+		private _gameJsPool: { [key: string]: HTMLScriptElement } = {};
+		public get gameJsPool(): { [key: string]: HTMLScriptElement } {
 			return this._gameJsPool;
 		}
 		private jsComplete(jscell: JsLoaderCell, jsload?: boolean) {
@@ -152,6 +156,7 @@ module game.gui.component {
 					jscell.handle.run();
 				}
 			}
+
 			jscell.assertloader && jscell.assertloader.clear(true);
 			jscell.assertloader = null;
 			if (this._jsLoaderCellList) {
@@ -183,16 +188,13 @@ module game.gui.component {
 			return game_list;
 		}
 
-		clear(jscell?: any) {
-			LoadingMgr.ins.cancleUnLoads();
+		clear() {
+			LoadingMgr.ins.cancleUnLoads(true);
 			if (this._jsLoaderCellList) {
 				for (let key in this._jsLoaderCellList) {
 					if (this._jsLoaderCellList.hasOwnProperty(key)) {
 						let cell = this._jsLoaderCellList[key];
 						if (cell) {
-							if (jscell && jscell == cell) {
-								continue;
-							}
 							if (cell.assertloader) {
 								cell.assertloader.clear(true);
 								cell.assertloader = null;
@@ -208,9 +210,7 @@ module game.gui.component {
 					}
 				}
 			}
-			if (!jscell || !this._jsLoaderCellList[jscell.gameid]) {
-				this._jsLoaderCellList = null;
-			}
+			this._jsLoaderCellList = null;
 			this._waitList.length = 0;
 			this._jsCellLock = null;
 		}
