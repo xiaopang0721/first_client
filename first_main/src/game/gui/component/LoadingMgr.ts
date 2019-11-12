@@ -28,15 +28,14 @@ module game.gui.component {
 		}
 
 		private _preLoader: LoadingRender;
-		private _callBackHandle: Handler;
 		private _waitList: LoadingRender[] = []
-		load(gameid: string, preAsset: any[], priority: number = 4) {
+		load(gameid: string, preAsset: any[], handle?: Handler, priority: number = 4) {
 			if (this.isLoaded(gameid) || this.isInLoadList(gameid)) {
 				return false;
 			}
 			this._map[gameid] = findGameVesion(gameid);
 			if (this.isLoading) {//加载中 进入等待列表
-				let preLoader = new LoadingRender(gameid, preAsset, priority);
+				let preLoader = new LoadingRender(gameid, preAsset, handle, priority);
 				if (priority == 0) {
 					this._waitList.unshift(preLoader);
 				} else {
@@ -47,7 +46,7 @@ module game.gui.component {
 
 			if (preAsset && preAsset.length) {
 				if (!this._preLoader) {
-					this._preLoader = new LoadingRender(gameid, preAsset, priority);
+					this._preLoader = new LoadingRender(gameid, preAsset, handle, priority);
 					if (this._preLoader.startLoad()) {
 						return true;
 					}
@@ -183,10 +182,12 @@ module game.gui.component {
 		private _gameId: string;
 		private _preAssets: any[];
 		private _priority: number;
-		constructor(gameid?: string, preAssets?: any[], priority?: number) {
+		private _handle: Handler;
+		constructor(gameid?: string, preAssets?: any[], handle?: Handler, priority?: number) {
 			this._gameId = gameid;
 			this._preAssets = preAssets;
 			this._priority = priority;
+			this._handle = handle;
 		}
 
 		get progress() {
@@ -235,6 +236,8 @@ module game.gui.component {
 			LoadingMgr.ins.freeAndLoadNext();
 			this.clearLoadingRender();
 			main.game.sceneObjectMgr.event("SceneObjectMgr.__EVENT_JOIN_CARDROOM_GAME_UPDATE");
+			this._handle && this._handle.run();
+			this._handle = null;
 		}
 
 		clearLoadingRender() {

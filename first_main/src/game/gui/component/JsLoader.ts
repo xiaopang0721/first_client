@@ -57,7 +57,9 @@ module game.gui.component {
 				logd("队列中2");
 				return;
 			}
+
 			let gameid = this._waitList.shift();
+			logd("开始加载js", gameid);
 
 			let jscell = this._jsLoaderCellList[gameid]
 			if (jscell) {
@@ -76,7 +78,9 @@ module game.gui.component {
 			}
 
 			let jsload = checkGameJsLoad(gameid);
-			this.clear(jscell);
+			if (LoadingMgr.ins.isLoaded(gameid)) {
+				this.clear(jscell);
+			}
 			if (jsload) {
 				this.jsComplete(jscell, jsload);
 			} else {
@@ -99,6 +103,7 @@ module game.gui.component {
 			return this._gameJsPool;
 		}
 		private jsComplete(jscell: JsLoaderCell, jsload?: boolean) {
+			logd("js回调", jscell.gameid)
 			let assetList = []
 			for (let index = 0; index < jscell.path_list.length; index++) {
 				let path = jscell.path_list[index];
@@ -106,6 +111,7 @@ module game.gui.component {
 				jscell.assertloader.release(path, true);
 
 				if (!jsload) {
+					logd("解析JS", gameid)
 					let tempData = Laya.loader.getRes(path);
 					let dataStr = path.indexOf(".bin") != -1 ? StringU.readZlibData(new ByteArray(tempData)) : tempData;
 					let script = document.createElement('script');
@@ -125,28 +131,28 @@ module game.gui.component {
 				}
 			}
 
+			logd("资源列表回调", jscell.gameid)
+
 			assetList = myCheckArray(assetList);
 			if (jscell.need_load) {
-				this._checkGameID = jscell.gameid;
-				LoadingMgr.ins.load(jscell.gameid, assetList, 4)
+				logd("开始加载资源", jscell.gameid)
+				LoadingMgr.ins.load(jscell.gameid, assetList, Handler.create(this, () => {
+					this.runCallBack(jscell);
+				}));
 			} else {
-				jscell.handle && jscell.handle.runWith([assetList]);
-				jscell.assertloader && jscell.assertloader.clear(true);
-				jscell.assertloader = null;
-				if (this._jsLoaderCellList) {
-					delete this._jsLoaderCellList[jscell.gameid];
-					this._jsLoaderCellList[jscell.gameid] = null;
-				}
-				this._jsCellLock = null;
-				this.doLoadNext();
+				this.runCallBack(jscell, assetList);
 			}
 		}
 
-		private coverLoad(gameid: string) {
-			let jscell = this._jsLoaderCellList[gameid];
-			if (!jscell) return;
-			jscell.handle && jscell.handle.run();
-			jscell.assertloader.clear(true);
+		private runCallBack(jscell: JsLoaderCell, assetList?) {
+			if (jscell.handle != null) {
+				if (assetList && assetList.length) {
+					jscell.handle.runWith([assetList]);
+				} else {
+					jscell.handle.run();
+				}
+			}
+			jscell.assertloader && jscell.assertloader.clear(true);
 			jscell.assertloader = null;
 			if (this._jsLoaderCellList) {
 				delete this._jsLoaderCellList[jscell.gameid];
@@ -154,17 +160,6 @@ module game.gui.component {
 			}
 			this._jsCellLock = null;
 			this.doLoadNext();
-			this._checkGameID = null;
-		}
-
-		private _checkGameID: string;
-		update(diff: number) {
-			if (!this._checkGameID) return;
-			if (LoadingMgr.ins.isLoaded(this._checkGameID)) {
-				this.coverLoad(this._checkGameID);
-			} else {
-
-			}
 		}
 
 		private checkoutValue(arr: string[]) {
