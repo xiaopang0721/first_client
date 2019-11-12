@@ -56,6 +56,7 @@ module utils {
 		//解析参数
 		private static ParseParam() {
 			WebConfig.platform = (StringU.getParameter(location.href, "p") || WebConfig.platform).toLowerCase();
+			WebConfig.serviceurl = (decodeURIComponent(StringU.getParameter(location.href, "serviceurl"))).toLowerCase();
 			WebConfig.gameid = (StringU.getParameter(location.href, "gameid") || WebConfig.gameid).toLowerCase();
 			WebConfig.enableWebp = WebConfig.isOnline && ((StringU.getParameter(location.href, "enableWebp") != "") || WebConfig.enableWebp);
 			WebConfig.enableWebp && (this.checkJsLoader());

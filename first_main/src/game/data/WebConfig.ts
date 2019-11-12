@@ -39,6 +39,7 @@ WebConfig.res_url = "rsync_folder/first_res/";
 WebConfig.downLoadUrl = "";
 WebConfig.game_type = 0;
 WebConfig.appVersion = "";
+WebConfig.serviceurl = "";
 WebConfig.getAppVersion = function () {
 	if (Laya.Browser.onPC) {
 

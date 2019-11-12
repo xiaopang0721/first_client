@@ -78,10 +78,10 @@ function updateGameJS(includes?: string[] | string) {
     }
 }
 
-function clearJSGame(ignore?: string[] | string) {
+function clearJSGame(gameid: string) {
     let obj = JsLoader.ins.gameJsPool;
     for (let key in obj) {
-        if (ignore && ignore.indexOf(key) != -1) continue;
+        if (gameid && gameid != key) continue;
         if (obj.hasOwnProperty(key)) {
             let script = obj[key];
             script.parentNode.removeChild(script);
@@ -120,8 +120,9 @@ function checkGameJsLoad(gameid, needError?) {
 
 
 function getAsset(gameid: string, check?) {
+    let list = [];
     if (gameid.indexOf("component") != -1) {
-        return []
+        return list
     }
     else if (gameid.indexOf("dating") != -1) {
         let DatingPageDef = getPageDef(gameid, "DatingPageDef");
@@ -130,7 +131,8 @@ function getAsset(gameid: string, check?) {
             DatingPageDef.myinit(gameid);
             DatingPageDef["isinit"] = true;
         }
-        return DatingPageDef["__needLoadAsset"];
+
+        list = DatingPageDef["__needLoadAsset"];
     } else {
         let GamePageDef = getPageDef(gameid);
         if (check) return !GamePageDef || GamePageDef["isinit"];
@@ -138,8 +140,11 @@ function getAsset(gameid: string, check?) {
             GamePageDef.myinit(gameid);
             GamePageDef["isinit"] = true;
         }
-        return GamePageDef["__needLoadAsset"];
+        list = GamePageDef["__needLoadAsset"];
     }
+
+    if (!list || !list.length) return [];
+    return laya.utils.Utils.concatArray(list, []);
 }
 
 function myeval(str) {
@@ -160,12 +165,12 @@ function myeval(str) {
  * @param arr1 
  */
 function myCheckArray(arr1: any[]) {
-    if(!arr1 || !arr1.length) return arr1;
+    if (!arr1 || !arr1.length) return arr1;
     let list = [];
     let arr = laya.utils.Utils.concatArray(arr1, []);
     for (let index = 0; index < arr.length; index++) {
         let item = arr[index];
-        if (item && list.indexOf(item) == -1)  {
+        if (item && list.indexOf(item) == -1) {
             list.push(item);
         }
     }

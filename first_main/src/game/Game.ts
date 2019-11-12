@@ -85,10 +85,10 @@ module game {
 		// 加载必要素材
 		protected loadNeedAsset(): void {
 			this._uiRoot.showLoadProgress("资源加载中...");
-			JsLoader.ins.startLoad("component", Handler.create(this, (asserts) => {
-				JsLoader.ins.startLoad("dating", Handler.create(this, (asserts) => {
+			JsLoader.ins.startLoad("component", false, Handler.create(this, (asserts) => {
+				JsLoader.ins.startLoad("dating", false, Handler.create(this, (asserts) => {
 					if (WebConfig.enterGameLocked) {
-						JsLoader.ins.startLoad(WebConfig.gameid, Handler.create(this, (asserts) => {
+						JsLoader.ins.startLoad(WebConfig.gameid, false, Handler.create(this, (asserts) => {
 							this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
 						}));
 					} else {
@@ -360,6 +360,7 @@ module game {
 		// 心跳更新
 		onUpdate(diff: number): void {
 			this._uiRoot && this._uiRoot.update(diff);
+			JsLoader.ins.update(diff);
 			if (this.__gamedating && this.datingGame) {
 				this.datingGame.onUpdate(diff)
 			}
