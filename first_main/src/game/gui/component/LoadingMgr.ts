@@ -114,7 +114,7 @@ module game.gui.component {
 						assertloader.clear();
 						assertloader = null;
 					}
-
+					this._assetsLoader[key] = null;
 					delete this._assetsLoader[key];
 				}
 			}
@@ -157,8 +157,10 @@ module game.gui.component {
 
 		freeAndLoadNext() {
 			if (this._preLoader) {
-				if (this._hasLoad[this._preLoader.gameId] != findGameVesion(this._preLoader.gameId)) {
-					this._hasLoad[this._preLoader.gameId] = findGameVesion(this._preLoader.gameId);
+				let gameID = this._preLoader.gameId;
+				let nowVesion = findGameVesion(gameID);
+				if (gameID && nowVesion && this._hasLoad[gameID] != nowVesion) {
+					this._hasLoad[gameID] = nowVesion;
 				}
 				//再去清理
 				this._preLoader.clearLoadingRender();
