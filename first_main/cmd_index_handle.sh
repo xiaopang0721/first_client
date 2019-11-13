@@ -34,6 +34,8 @@ game_list=(
 "gamezjh"
 "gamezoo"
 "gameelslp"
+"mpniuniu"
+"wxsaoleihb"
 )
 
 src="$__root/src"
