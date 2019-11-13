@@ -39,7 +39,7 @@ module game.gui.component {
 				logd("进入队列", game_id);
 				this._waitList.push(game_id);
 			}
-			
+
 			this.doLoadNext();
 		}
 
@@ -56,12 +56,12 @@ module game.gui.component {
 
 		private doLoadNext() {
 			if (this._jsCellLock) {
-				logd("队列中");
+				// logd("队列中");
 				return;
 			}
 
 			if (!this._waitList.length) {
-				logd("队列中2");
+				// logd("队列中2");
 				return;
 			}
 
@@ -146,6 +146,10 @@ module game.gui.component {
 			} else {
 				this.runCallBack(jscell, assetList);
 			}
+		}
+
+		onUpdate(diff?) {
+			this.doLoadNext();
 		}
 
 		private runCallBack(jscell: JsLoaderCell, assetList?) {
