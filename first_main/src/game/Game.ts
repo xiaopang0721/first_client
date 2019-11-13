@@ -368,7 +368,7 @@ module game {
 			if (this.__gamedating && this.datingGame) {
 				this.datingGame.onUpdate(diff)
 			}
-			
+			JsLoader.ins.onUpdate(diff);
 			if (this.__gamecomponent) {
 				this.sceneGame.onUpdate(diff)
 				for (let scene of this.sceneGame.scenes) {

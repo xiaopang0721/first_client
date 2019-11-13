@@ -148,8 +148,13 @@ module game.gui.component {
 			}
 		}
 
-		onUpdate(diff?) {
-			this.doLoadNext();
+		private _diffTotal: number = 0;
+		onUpdate(diff) {
+			if (this._diffTotal < 0) {
+				this._diffTotal = 200;
+				this.doLoadNext();
+			}
+			this._diffTotal -= diff;
 		}
 
 		private runCallBack(jscell: JsLoaderCell, assetList?) {
