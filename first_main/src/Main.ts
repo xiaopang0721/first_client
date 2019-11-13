@@ -113,7 +113,7 @@ class Main {
             Laya.init(this.widthDesginPixelw, this.heightDesginPixelw, Laya.WebGL);
         }
 
-        Laya.stage.frameRate = 'mouse';
+        Laya.stage.frameRate = 'slow';
 
         Laya.SoundManager.useAudioMusic = false
         logd('location.href', location.href);
