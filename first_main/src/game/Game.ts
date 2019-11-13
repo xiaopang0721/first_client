@@ -360,7 +360,6 @@ module game {
 		// 心跳更新
 		onUpdate(diff: number): void {
 			this._uiRoot && this._uiRoot.update(diff);
-			JsLoader.ins.update(diff);
 			if (this.__gamedating && this.datingGame) {
 				this.datingGame.onUpdate(diff)
 			}

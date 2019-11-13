@@ -34,6 +34,7 @@ game_list=(
 "gamezjh"
 "gamezoo"
 "gameelslp"
+"gamempniuniu"
 "gamewxsaoleihb"
 )
 

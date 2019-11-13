@@ -28,15 +28,14 @@ module game.gui.component {
 		}
 
 		private _preLoader: LoadingRender;
-		private _callBackHandle: Handler;
 		private _waitList: LoadingRender[] = []
-		load(gameid: string, preAsset: any[], priority: number = 4) {
+		load(gameid: string, preAsset: any[], handle?: Handler, priority: number = 4) {
 			if (this.isLoaded(gameid) || this.isInLoadList(gameid)) {
 				return false;
 			}
 			this._map[gameid] = findGameVesion(gameid);
 			if (this.isLoading) {//加载中 进入等待列表
-				let preLoader = new LoadingRender(gameid, preAsset, priority);
+				let preLoader = new LoadingRender(gameid, preAsset, handle, priority);
 				if (priority == 0) {
 					this._waitList.unshift(preLoader);
 				} else {
@@ -47,7 +46,7 @@ module game.gui.component {
 
 			if (preAsset && preAsset.length) {
 				if (!this._preLoader) {
-					this._preLoader = new LoadingRender(gameid, preAsset, priority);
+					this._preLoader = new LoadingRender(gameid, preAsset, handle, priority);
 					if (this._preLoader.startLoad()) {
 						return true;
 					}
@@ -71,14 +70,15 @@ module game.gui.component {
 			return this._assetsLoader[gameId];
 		}
 
-		public clearGameAsset(gameId: string) {
+		public clearGameAsset(gameId: string, checknow?: boolean) {
 			for (let key in this._assetsLoader) {
 				if (this._assetsLoader.hasOwnProperty(key)) {
 					if (gameId != key) continue;
 					let assertloader = this._assetsLoader[key];
 					assertloader && assertloader.offAll();
-					assertloader && assertloader.clear();
+					assertloader && assertloader.clear(checknow);
 					assertloader = null;
+					this._assetsLoader[key] = null;
 					delete this._assetsLoader[key];
 				}
 			}
@@ -114,7 +114,7 @@ module game.gui.component {
 						assertloader.clear();
 						assertloader = null;
 					}
-
+					this._assetsLoader[key] = null;
 					delete this._assetsLoader[key];
 				}
 			}
@@ -126,17 +126,10 @@ module game.gui.component {
 				return this._preLoader.progress;
 			}
 
-			for (let index = 0; index < this._waitList.length; index++) {
-				let preload = this._waitList[index];
-				if (preload && preload.gameId == gameid) {////如果是在等待列表 那就随便给个初始进度
-					return 0.001;
-				}
-			}
-
 			return 0;
 		}
 
-		cancleUnLoads() {
+		cancleUnLoads(checknow?: boolean) {
 			//重置 其实就是清掉未加载的gameid
 			this._map = {};
 			for (let key in this._hasLoad) {
@@ -147,16 +140,15 @@ module game.gui.component {
 			if (this._preLoader) {
 				clearJSGame(this._preLoader.gameId);
 				this._preLoader.preAsset && Laya.loader.cancelLoadByUrls(this._preLoader.preAsset);
-				this._preLoader.clearLoadingRender();
+				this._preLoader.clearLoadingRender(checknow);
 				this._preLoader = null;
-			} else {
-				for (let index = 0; index < this._waitList.length; index++) {
-					let preLoader = this._waitList[index];
-					if (preLoader) {
-						preLoader.preAsset && Laya.loader.cancelLoadByUrls(preLoader.preAsset);
-						preLoader.clearLoadingRender();
-						preLoader = null;
-					}
+			}
+			for (let index = 0; index < this._waitList.length; index++) {
+				let preLoader = this._waitList[index];
+				if (preLoader) {
+					preLoader.preAsset && Laya.loader.cancelLoadByUrls(preLoader.preAsset);
+					preLoader.clearLoadingRender(checknow);
+					preLoader = null;
 				}
 			}
 
@@ -165,8 +157,10 @@ module game.gui.component {
 
 		freeAndLoadNext() {
 			if (this._preLoader) {
-				if (this._hasLoad[this._preLoader.gameId] != findGameVesion(this._preLoader.gameId)) {
-					this._hasLoad[this._preLoader.gameId] = findGameVesion(this._preLoader.gameId);
+				let gameID = this._preLoader.gameId;
+				let nowVesion = findGameVesion(gameID);
+				if (gameID && nowVesion && this._hasLoad[gameID] != nowVesion) {
+					this._hasLoad[gameID] = nowVesion;
 				}
 				//再去清理
 				this._preLoader.clearLoadingRender();
@@ -183,10 +177,12 @@ module game.gui.component {
 		private _gameId: string;
 		private _preAssets: any[];
 		private _priority: number;
-		constructor(gameid?: string, preAssets?: any[], priority?: number) {
+		private _handle: Handler;
+		constructor(gameid?: string, preAssets?: any[], handle?: Handler, priority?: number) {
 			this._gameId = gameid;
 			this._preAssets = preAssets;
 			this._priority = priority;
+			this._handle = handle;
 		}
 
 		get progress() {
@@ -197,8 +193,14 @@ module game.gui.component {
 			return this._gameId;
 		}
 
+		private _formatUrl: string[] = []
 		get preAsset() {
-			return this._preAssets;
+			if (!this._formatUrl.length) {
+				this._preAssets.forEach(url => {
+					this._formatUrl.push(Laya.URL.formatURL(url));
+				});
+			}
+			return this._formatUrl;
 		}
 
 		private _assertloader: AssetsLoader;
@@ -232,17 +234,24 @@ module game.gui.component {
 			localSetItem("gameLoadedObj", gameLoadedObj);
 			let name = PageDef.getNameById(this._gameId);
 			name && main.game.showTips(name + "更新完成！")
+			this._handle && this._handle.run();
+			this._handle = null;
 			LoadingMgr.ins.freeAndLoadNext();
 			this.clearLoadingRender();
 			main.game.sceneObjectMgr.event("SceneObjectMgr.__EVENT_JOIN_CARDROOM_GAME_UPDATE");
 		}
 
-		clearLoadingRender() {
+		clearLoadingRender(checknow?: boolean) {
 			if (this._assertloader) {
-				LoadingMgr.ins.clearGameAsset(this._gameId);
+				LoadingMgr.ins.clearGameAsset(this._gameId, checknow);
 				this._assertloader = null;
 			}
+			if (this._handle != null) {
+				this._handle.recover();
+				this._handle = null;
+			}
 			this._preAssets = null;
+			this._formatUrl = null;
 			this._gameId = null;
 		}
 	}
