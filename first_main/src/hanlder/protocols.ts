@@ -3438,9 +3438,11 @@ module hanlder{
 			this.sendMsg( 238 , this._stream);
 			//Log.outDebug("CS====> cmd:238 wxsaoleihb_get_lqjl");
 		}
-		public call_wxsaoleihb_get_hb_history (num : number ):void{
+		public call_wxsaoleihb_get_hb_history (id : number ,num : number ):void{
 			this._stream.reset();
 			this._stream.writeUint16( 241 );
+			//红包id
+			this._stream.writeInt32 (id);
 			//获取红包数
 			this._stream.writeInt32 (num);
 			this.sendMsg( 241 , this._stream);
@@ -9066,7 +9068,7 @@ module hanlder{
 		}
 
 		/**
-		从输入二进制流中读取结构体
+		从输入二进制流?卸寥〗峁固?
 		*/
 		public static read(self:c2s_rniuniu_vote, bytes:ByteArray):void
 		{
@@ -9453,6 +9455,10 @@ module hanlder{
 		public optname:string = "onWxsaoleihb_get_hb_history";
 	
 		/**
+		* 红包id
+		*/
+		public id : number ;	//int32
+		/**
 		* 获取红包数
 		*/
 		public num : number ;	//int32
@@ -9468,6 +9474,8 @@ module hanlder{
 		{
 			var parmLen:number;
 			var i:number;
+			//红包id
+			self.id = bytes. readInt32 ();		
 			//获取红包数
 			self.num = bytes. readInt32 ();		
 		}
