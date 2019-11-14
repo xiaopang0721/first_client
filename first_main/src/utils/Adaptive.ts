@@ -61,7 +61,8 @@ module utils {
 			WebConfig.enableWebp = WebConfig.isOnline && ((StringU.getParameter(location.href, "enableWebp") != "") || WebConfig.enableWebp);
 			WebConfig.enableWebp && (this.checkJsLoader());
 			WebConfig.sessionkey = decodeURIComponent((StringU.getParameter(location.href, "sessionkey") || WebConfig.sessionkey).toLowerCase());
-			WebConfig.params = (StringU.getParameter(location.href, "params") || WebConfig.params).toLowerCase();
+			WebConfig.params = decodeURIComponent((StringU.getParameter(location.href, "param") || WebConfig.params)).toLowerCase();
+			WebConfig.apicanback = (WebConfig.gameid == 'dating' || (WebConfig.params && StringU.getParameter(WebConfig.params, 'canback').toLowerCase() == '1')) ? true : false;
 			WebConfig.enterGameLocked = (WebConfig.platform == 'qpae' && WebConfig.gameid && WebConfig.sessionkey) ? true : false;
 			WebConfig.isSingleEnter = (StringU.getParameter(location.href, "logintype") == Web_operation_fields.ACCOUNT_TYPE_USERNAME.toString()) ? true : false;
 			WebConfig.server_name = (StringU.getParameter(location.href, "p") || WebConfig.server_name).toLowerCase();
@@ -115,7 +116,7 @@ module utils {
 				return isWss;
 			}
 
-			
+
 			let refTemplet_get = RefTemplet.Get;
 			RefTemplet.Get = function (key: string, create?: boolean, isEventProgress?: boolean, priority?: number, type?: string): RefTemplet {
 				let refTemplet = refTemplet_get.call(this, key, create, isEventProgress, priority, type);
