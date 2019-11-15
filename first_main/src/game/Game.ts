@@ -149,6 +149,14 @@ module game {
 			this._uiRoot.closeLoadProgress();
 		}
 
+		//鼠标点击声音回调
+		onMouseSoudHandle(e: LEvent): boolean {
+			if (this._uiRoot && this._uiRoot.onMouseSoudHandle(e)) {
+				return true;
+			}
+			return false;
+		}
+
 		// 鼠标点击
 		onMouseClick(e: LEvent): void {
 			if (this._uiRoot && this._uiRoot.onMouseClick(e)) {

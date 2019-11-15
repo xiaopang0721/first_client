@@ -179,6 +179,30 @@ module game {
 		}
 
 
+		//鼠标点击声音事件
+		onMouseSoudHandle(e: LEvent): boolean {
+			for (let key in this._topUI.pages) {
+				let item = this._topUI.pages[key];
+				if (item && item.isOpened) {
+					if (item.__onMouseSoudHandle(e)) return true;
+				}
+			}
+			for (let key in this._generalUI.pages) {
+				let item = this._generalUI.pages[key];
+				if (item && item.isOpened) {
+					if (item.__onMouseSoudHandle(e)) return true;
+				}
+			}
+			for (let key in this._HUD.pages) {
+				let item = this._HUD.pages[key];
+				if (item && item.isOpened) {
+					if (item.__onMouseSoudHandle(e)) return true;
+				}
+
+			}
+			return false;
+		}
+
 		//鼠标点击事件
 		onMouseClick(e: LEvent): boolean {
 			for (let key in this._topUI.pages) {
