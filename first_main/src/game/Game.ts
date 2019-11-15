@@ -88,9 +88,13 @@ module game {
 			JsLoader.ins.startLoad("component", false, Handler.create(this, (asserts) => {
 				JsLoader.ins.startLoad("dating", false, Handler.create(this, (asserts) => {
 					if (WebConfig.enterGameLocked) {
-						JsLoader.ins.startLoad(WebConfig.gameid, false, Handler.create(this, (asserts) => {
+						if (WebConfig.gameid == 'dating') {
 							this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
-						}));
+						} else {
+							JsLoader.ins.startLoad(WebConfig.gameid, false, Handler.create(this, (asserts) => {
+								this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
+							}));
+						}
 					} else {
 						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
 						let gameid = localGetItem("local_game_id");
@@ -98,6 +102,7 @@ module game {
 							updateGameJS(gameid);
 						}
 					}
+
 				}));
 
 			}));
@@ -360,11 +365,10 @@ module game {
 		// 心跳更新
 		onUpdate(diff: number): void {
 			this._uiRoot && this._uiRoot.update(diff);
-			JsLoader.ins.update(diff);
 			if (this.__gamedating && this.datingGame) {
 				this.datingGame.onUpdate(diff)
 			}
-
+			JsLoader.ins.onUpdate(diff);
 			if (this.__gamecomponent) {
 				this.sceneGame.onUpdate(diff)
 				for (let scene of this.sceneGame.scenes) {
