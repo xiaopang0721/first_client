@@ -103,9 +103,10 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_INT_THIRDLY_PAY_MONEY:number = 71 //三充金额
 	public static PLAYERDATA_INT_JI_FEN:number = 72 //积分
 	public static PLAYERDATA_INT_PAY_COUNT:number = 73 //充值次数
-	public static PLAYERDATA_INT_CASH_MONEY:number = 74 //提款金额
+	public static PLAYERDATA_INT_CASH_MONEY:number = 74 //已提款金额
 	public static PLAYERDATA_INT_CASH_MONEY_COUNT:number = 75 //提款次数
 	public static PLAYERDATA_INT_BYTE2:number = 76 //0.首充免死金牌,1.二充免死金牌,2.三充免死金牌,3.空
+	public static PLAYERDATA_INT_INITIATE_CASH_MONEY:number = 77 //发起提款金额
 
 // string field
 	public static PLAYERDATA_STR_ACCOUNT:number = 0 //账号信息
@@ -641,6 +642,11 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public SetThirdMianSi(val:number):void{
        this.SetByte(PlayerDataField.PLAYERDATA_INT_BYTE2,2, val);
     }
+
+	public GetInitiateCashMoney():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_INITIATE_CASH_MONEY);
+    }
+
 
 //////////////////////////////////////str function
 
