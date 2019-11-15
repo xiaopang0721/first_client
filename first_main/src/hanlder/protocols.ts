@@ -476,6 +476,18 @@ module hanlder{
 		public static  CMSG_MPNIUNIU_BET :number = 234;	//mpniuniu_bet
 		/*明牌牛牛-摊牌*/
 		public static  CMSG_MPNIUNIU_TANPAI :number = 235;	//mpniuniu_tanpai
+		/*红包数据信息*/
+		public static  SMSG_WXSAOLEIHB_INFO :number = 236;	//wxsaoleihb_info
+		/*获取红包历史记录*/
+		public static  CMSG_WXSAOLEIHB_GET_HISTORY :number = 237;	//wxsaoleihb_get_history
+		/*获取红包领取记录*/
+		public static  CMSG_WXSAOLEIHB_GET_LQJL :number = 238;	//wxsaoleihb_get_lqjl
+		/*发送红包领取记录*/
+		public static  SMSG_WXSAOLEIHB_SEND_LQJL :number = 239;	//wxsaoleihb_send_lqjl
+		/*红包领取信息下发*/
+		public static  SMSG_WXSAOLEIHB_LQ_INFO :number = 240;	//wxsaoleihb_lq_info
+		/*获取红包历史记录*/
+		public static  CMSG_WXSAOLEIHB_GET_HB_HISTORY :number = 241;	//wxsaoleihb_get_hb_history
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -721,6 +733,12 @@ module hanlder{
 			this._FUNCS[233] = "mpniuniu_banker";
 			this._FUNCS[234] = "mpniuniu_bet";
 			this._FUNCS[235] = "mpniuniu_tanpai";
+			this._FUNCS[236] = "wxsaoleihb_info";
+			this._FUNCS[237] = "wxsaoleihb_get_history";
+			this._FUNCS[238] = "wxsaoleihb_get_lqjl";
+			this._FUNCS[239] = "wxsaoleihb_send_lqjl";
+			this._FUNCS[240] = "wxsaoleihb_lq_info";
+			this._FUNCS[241] = "wxsaoleihb_get_hb_history";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1571,6 +1589,30 @@ module hanlder{
 				case Protocols.CMSG_MPNIUNIU_TANPAI :	//mpniuniu_tanpai
 					var obj_mpniuniu_tanpai:c2s_mpniuniu_tanpai = new c2s_mpniuniu_tanpai;
 					return obj_mpniuniu_tanpai;
+				case Protocols.SMSG_WXSAOLEIHB_INFO :	//wxsaoleihb_info
+					var obj_wxsaoleihb_info:s2c_wxsaoleihb_info = new s2c_wxsaoleihb_info;
+					s2c_wxsaoleihb_info .read(obj_wxsaoleihb_info, bs);
+					return obj_wxsaoleihb_info;
+				case Protocols.CMSG_WXSAOLEIHB_GET_HISTORY :	//wxsaoleihb_get_history
+					var obj_wxsaoleihb_get_history:c2s_wxsaoleihb_get_history = new c2s_wxsaoleihb_get_history;
+					c2s_wxsaoleihb_get_history .read(obj_wxsaoleihb_get_history, bs);
+					return obj_wxsaoleihb_get_history;
+				case Protocols.CMSG_WXSAOLEIHB_GET_LQJL :	//wxsaoleihb_get_lqjl
+					var obj_wxsaoleihb_get_lqjl:c2s_wxsaoleihb_get_lqjl = new c2s_wxsaoleihb_get_lqjl;
+					c2s_wxsaoleihb_get_lqjl .read(obj_wxsaoleihb_get_lqjl, bs);
+					return obj_wxsaoleihb_get_lqjl;
+				case Protocols.SMSG_WXSAOLEIHB_SEND_LQJL :	//wxsaoleihb_send_lqjl
+					var obj_wxsaoleihb_send_lqjl:s2c_wxsaoleihb_send_lqjl = new s2c_wxsaoleihb_send_lqjl;
+					s2c_wxsaoleihb_send_lqjl .read(obj_wxsaoleihb_send_lqjl, bs);
+					return obj_wxsaoleihb_send_lqjl;
+				case Protocols.SMSG_WXSAOLEIHB_LQ_INFO :	//wxsaoleihb_lq_info
+					var obj_wxsaoleihb_lq_info:s2c_wxsaoleihb_lq_info = new s2c_wxsaoleihb_lq_info;
+					s2c_wxsaoleihb_lq_info .read(obj_wxsaoleihb_lq_info, bs);
+					return obj_wxsaoleihb_lq_info;
+				case Protocols.CMSG_WXSAOLEIHB_GET_HB_HISTORY :	//wxsaoleihb_get_hb_history
+					var obj_wxsaoleihb_get_hb_history:c2s_wxsaoleihb_get_hb_history = new c2s_wxsaoleihb_get_hb_history;
+					c2s_wxsaoleihb_get_hb_history .read(obj_wxsaoleihb_get_hb_history, bs);
+					return obj_wxsaoleihb_get_hb_history;
 				default:
 					break;
 			}
@@ -3377,6 +3419,34 @@ module hanlder{
 			this._stream.writeUint16( 235 );
 			this.sendMsg( 235 , this._stream);
 			//Log.outDebug("CS====> cmd:235 mpniuniu_tanpai");
+		}
+		public call_wxsaoleihb_get_history (hb_min_id : number ,hb_num : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 237 );
+			//红包最小id号
+			this._stream.writeInt32 (hb_min_id);
+			//红包数
+			this._stream.writeInt32 (hb_num);
+			this.sendMsg( 237 , this._stream);
+			//Log.outDebug("CS====> cmd:237 wxsaoleihb_get_history");
+		}
+		public call_wxsaoleihb_get_lqjl (hb_id : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 238 );
+			//红包id
+			this._stream.writeInt32 (hb_id);
+			this.sendMsg( 238 , this._stream);
+			//Log.outDebug("CS====> cmd:238 wxsaoleihb_get_lqjl");
+		}
+		public call_wxsaoleihb_get_hb_history (id : number ,num : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 241 );
+			//红包id
+			this._stream.writeInt32 (id);
+			//获取红包数
+			this._stream.writeInt32 (num);
+			this.sendMsg( 241 , this._stream);
+			//Log.outDebug("CS====> cmd:241 wxsaoleihb_get_hb_history");
 		}
 	}
 
@@ -8735,7 +8805,7 @@ module hanlder{
 		*/
 		public mobile : string ;	//String
 		/**
-		* 验证??
+		* 验证码
 		*/
 		public code : string ;	//String
 		/**
@@ -8998,7 +9068,7 @@ module hanlder{
 		}
 
 		/**
-		从输入二进制流中读取结构体
+		从输入二进制流?卸寥〗峁固?
 		*/
 		public static read(self:c2s_rniuniu_vote, bytes:ByteArray):void
 		{
@@ -9240,6 +9310,174 @@ module hanlder{
 		public constructor()
 		{
 			
+		}
+	}
+	export class s2c_wxsaoleihb_info
+	{
+		public optcode:number = 0;
+		public optname:string = "onWxsaoleihb_info";
+	
+		/**
+		* 1:新增|2:删除|3:更新
+		*/
+		public op_type : number ;	//uint8
+		/**
+		* 红包数据
+		*/
+		public hb_info : string ;	//String
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:s2c_wxsaoleihb_info, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//1:新增|2:删除|3:更新
+			self.op_type = bytes. readUint8 ();		
+			//红包数据
+			self.hb_info = bytes. readString ();		
+		}
+	}
+	export class c2s_wxsaoleihb_get_history
+	{
+		public optcode:number = 0;
+		public optname:string = "onWxsaoleihb_get_history";
+	
+		/**
+		* 红包最小id号
+		*/
+		public hb_min_id : number ;	//int32
+		/**
+		* 红包数
+		*/
+		public hb_num : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_wxsaoleihb_get_history, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//红包最小id号
+			self.hb_min_id = bytes. readInt32 ();		
+			//红包数
+			self.hb_num = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_wxsaoleihb_get_lqjl
+	{
+		public optcode:number = 0;
+		public optname:string = "onWxsaoleihb_get_lqjl";
+	
+		/**
+		* 红包id
+		*/
+		public hb_id : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_wxsaoleihb_get_lqjl, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//红包id
+			self.hb_id = bytes. readInt32 ();		
+		}
+	}
+	export class s2c_wxsaoleihb_send_lqjl
+	{
+		public optcode:number = 0;
+		public optname:string = "onWxsaoleihb_send_lqjl";
+	
+		/**
+		* 红包领取数据
+		*/
+		public lq_datas : string ;	//String
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:s2c_wxsaoleihb_send_lqjl, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//红包领取数据
+			self.lq_datas = bytes. readString ();		
+		}
+	}
+	export class s2c_wxsaoleihb_lq_info
+	{
+		public optcode:number = 0;
+		public optname:string = "onWxsaoleihb_lq_info";
+	
+		/**
+		* 
+		*/
+		public lq_data : string ;	//String
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:s2c_wxsaoleihb_lq_info, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//
+			self.lq_data = bytes. readString ();		
+		}
+	}
+	export class c2s_wxsaoleihb_get_hb_history
+	{
+		public optcode:number = 0;
+		public optname:string = "onWxsaoleihb_get_hb_history";
+	
+		/**
+		* 红包id
+		*/
+		public id : number ;	//int32
+		/**
+		* 获取红包数
+		*/
+		public num : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_wxsaoleihb_get_hb_history, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//红包id
+			self.id = bytes. readInt32 ();		
+			//获取红包数
+			self.num = bytes. readInt32 ();		
 		}
 	}
 
