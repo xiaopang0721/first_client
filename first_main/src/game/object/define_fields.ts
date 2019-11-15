@@ -58,7 +58,7 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_INT_ONLINE_TIME:number = 2 //在线时长，分钟
 	public static PLAYERDATA_INT_ZERO_RESET_TIME:number = 3 //0点重置时间
 	public static PLAYERDATA_INT_BYTE0:number = 4 //0.性别
-	public static PLAYERDATA_INT_BIT0:number = 5 //0.是否游客,1.是否可以修改昵称,2.全民代理,3.连续签到,4.幸运轮盘,5.签到小红点,6.轮盘小红点,7.全面代理小红点,8.支付宝,9.IsShowBank,10.微信开关,11.在线客服是否外跳,12.今日是否分享,13.是否需要判断绑定银行卡,14.是否领取绑定赠送,15.是否已提交过取款订单,16.是否已提交过汇款订单,17.首充小红点,18.是否已领取首充奖励,19.是否有新游戏公告,20.是否封号,21.是否接入api
+	public static PLAYERDATA_INT_BIT0:number = 5 //0.是否游客,1.是否可以修改昵称,2.全民代理,3.连续签到,4.幸运轮盘,5.签到小红点,6.轮盘小红点,7.全面代理小红点,8.支付宝,9.IsShowBank,10.微信开关,11.在线客服是否外跳,12.今日是否分享,13.是否需要判断绑定银行卡,14.是否领取绑定赠送,15.是否已提交过取款订单,16.是否已提交过汇款订单,17.首充小红点,18.是否已领取首充奖励,19.是否有新游戏公告,20.是否封号
 	public static PLAYERDATA_INT_MONEY:number = 6 //金币
 	public static PLAYERDATA_INT_PLAYER_CARD_VALUE:number = 7 //玩家的牌
 	public static PLAYERDATA_INT_SAVE_BOX_MONEY:number = 27 //余额宝金钱
@@ -306,12 +306,6 @@ export class PlayerDataField extends core.obj.GuidObject{
 //是否封号
 	public IsIsLockAccount():boolean{
        return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,20);
-    }
-
-
-//是否接入API
-	public IsIsApi():boolean{
-       return this.GetBit(PlayerDataField.PLAYERDATA_INT_BIT0,21);
     }
 
 	public GetMoney():number{
