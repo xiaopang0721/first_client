@@ -225,6 +225,12 @@ module game.gui.base {
 		}
 
 		//舞台鼠标点击 不可重写
+		__onMouseSoudHandle(e: LEvent) {
+			if (!this._isOnOpenComplete) return false;
+			return this.onMouseSoudHandle(e) as boolean;
+		}
+
+		//舞台鼠标点击 不可重写
 		__onMouseClick(e: LEvent) {
 			if (!this._isOnOpenComplete) return false;
 			return this.onMouseClick(e) as boolean;
@@ -246,6 +252,10 @@ module game.gui.base {
 		__onMouseMove(e: LEvent) {
 			if (!this._isOnOpenComplete) return false;
 			return this.onMouseMove(e) as boolean;
+		}
+
+		protected onMouseSoudHandle(e: LEvent): any {
+			return false;
 		}
 
 		protected onMouseClick(e: LEvent): any {
