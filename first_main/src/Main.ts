@@ -248,9 +248,9 @@ class Main {
     //鼠标按钮声音 全局控制
     private onMouseClick(e: LEvent): void {
         if (!this._game) return;
-        if (!this._game.onMouseSoudHandle(e))  {
-            if (e.target instanceof Laya.Node && e.target != this._lastTarget && e.target.name && e.target.name.indexOf("item") != -1) {
-                this._lastTarget = e.target;
+        if (e.target instanceof Laya.Node && e.target != this._lastTarget && e.target.name && e.target.name.indexOf("item") != -1) {
+            this._lastTarget = e.target;
+            if (!this._game.onMouseSoudHandle(e)) {
                 this._game.playSound(Path.music_btn);
             }
         }
