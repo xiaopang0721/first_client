@@ -48,6 +48,10 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_RECHARGE_ZFBBANK = 45  //支付宝转银行
     public static USE_MONEY_LOG_TYPE_GUEST_GIVEMONEY = 46  //游客送金
     public static USE_MONEY_LOG_TYPE_WXSLHB_FHB = 47  //微信扫雷红包发红包
+    public static USE_MONEY_LOG_TYPE_API_UPPERPOINT = 48  //API上分
+    public static USE_MONEY_LOG_TYPE_API_LOWERPOINT = 49  //API下分
+    public static USE_MONEY_LOG_TYPE_WXSLHB_GHB = 50  //微信扫雷红包领红包
+    public static USE_MONEY_LOG_TYPE_WXSLHB_FLHB = 51  //微信扫雷红包福利包
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static client_money_logtype_table:{[key:number]:string}={
@@ -98,6 +102,10 @@ class Web_operation_fields {
         45:'支付宝转银行',//支付宝转银行
         46:'游客送金',//游客送金
         47:'微信扫雷红包发红包',//微信扫雷红包发红包
+        48:'API上分',//API上分
+        49:'API下分',//API下分
+        50:'微信扫雷红包领红包',//微信扫雷红包领红包
+        51:'微信扫雷红包福利包',//微信扫雷红包福利包
 	}
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
@@ -1021,5 +1029,11 @@ class Web_operation_fields {
 //------------------------START-----------------------------------
     public static APP_STATE_TYPE_NORMAL = 1  //正常
     public static APP_STATE_TYPE_MINIMIZE = 2  //最小化
+//------------------------ END -----------------------------------
+//------------------------START-----------------------------------
+    public static GAME_MSG_CALLBACK_TYPE_UPLIMIT = 1  //超过上限
+    public static GAME_MSG_CALLBACK_TYPE_LACKING = 2  //余额不足
+    public static GAME_MSG_CALLBACK_TYPE_INMAP = 3  //在地图内
+    public static GAME_MSG_CALLBACK_TYPE_INGAME = 4  //在游戏中
 //------------------------ END -----------------------------------
 }
