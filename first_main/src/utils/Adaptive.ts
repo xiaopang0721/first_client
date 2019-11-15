@@ -60,7 +60,7 @@ module utils {
 			WebConfig.gameid = (StringU.getParameter(location.href, "gameid") || WebConfig.gameid).toLowerCase();
 			WebConfig.enableWebp = WebConfig.isOnline && ((StringU.getParameter(location.href, "enableWebp") != "") || WebConfig.enableWebp);
 			WebConfig.enableWebp && (this.checkJsLoader());
-			WebConfig.sessionkey = decodeURIComponent((StringU.getParameter(location.href, "sessionkey") || WebConfig.sessionkey).toLowerCase());
+			WebConfig.sessionkey = WebConfig.apisessionkey = decodeURIComponent((StringU.getParameter(location.href, "sessionkey") || WebConfig.sessionkey).toLowerCase());
 			WebConfig.params = decodeURIComponent((StringU.getParameter(location.href, "param") || WebConfig.params)).toLowerCase();
 			WebConfig.apicanback = (WebConfig.gameid == 'dating' || (WebConfig.params && StringU.getParameter(WebConfig.params, 'canback').toLowerCase() == '1')) ? true : false;
 			WebConfig.enterGameLocked = (WebConfig.platform == 'qpae' && WebConfig.gameid && WebConfig.sessionkey) ? true : false;

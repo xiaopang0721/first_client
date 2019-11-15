@@ -359,6 +359,9 @@ module game {
 		//打开登陆界面
 		public openLoginPage() {
 			if (!this.__gamedating) return;
+			if (WebConfig.enterGameLocked) {
+				return;
+			}
 			this.datingGame.openLoginPage();
 		}
 
