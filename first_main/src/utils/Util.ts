@@ -84,7 +84,7 @@ function clearJSGame(gameid: string) {
         if (gameid && gameid != key) continue;
         if (obj.hasOwnProperty(key)) {
             let script = obj[key];
-            if (script)  {
+            if (script) {
                 script.parentNode.removeChild(script);
                 delete obj[key]
                 window["game" + key] = null
@@ -249,7 +249,7 @@ function localSetItem(key: string, value: string): void {
 }
 
 function localGetItem(key: string): string {
-    if (WebConfig.enterGameLocked)  {
+    if (key == 'session_key' && WebConfig.enterGameLocked) {
         return WebConfig.apisessionkey;
     }
     return Laya.LocalStorage.getItem(key) as string;
