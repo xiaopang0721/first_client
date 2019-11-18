@@ -47,11 +47,11 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_RECHARGE_WXBANK = 44  //微信转银行
     public static USE_MONEY_LOG_TYPE_RECHARGE_ZFBBANK = 45  //支付宝转银行
     public static USE_MONEY_LOG_TYPE_GUEST_GIVEMONEY = 46  //游客送金
-    public static USE_MONEY_LOG_TYPE_WXSLHB_FHB = 47  //微信扫雷红包发红包
+    public static USE_MONEY_LOG_TYPE_WXSLHB_FHB = 47  //发红包
     public static USE_MONEY_LOG_TYPE_API_UPPERPOINT = 48  //API上分
     public static USE_MONEY_LOG_TYPE_API_LOWERPOINT = 49  //API下分
-    public static USE_MONEY_LOG_TYPE_WXSLHB_GHB = 50  //微信扫雷红包领红包
-    public static USE_MONEY_LOG_TYPE_WXSLHB_FLHB = 51  //微信扫雷红包福利包
+    public static USE_MONEY_LOG_TYPE_WXSLHB_GHB = 50  //领红包
+    public static USE_MONEY_LOG_TYPE_WXSLHB_FLHB = 51  //红包雨
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static client_money_logtype_table:{[key:number]:string}={
@@ -101,11 +101,11 @@ class Web_operation_fields {
         44:'微信转银行',//微信转银行
         45:'支付宝转银行',//支付宝转银行
         46:'游客送金',//游客送金
-        47:'微信扫雷红包发红包',//微信扫雷红包发红包
+        47:'发红包',//发红包
         48:'API上分',//API上分
         49:'API下分',//API下分
-        50:'微信扫雷红包领红包',//微信扫雷红包领红包
-        51:'微信扫雷红包福利包',//微信扫雷红包福利包
+        50:'领红包',//领红包
+        51:'红包雨',//红包雨
 	}
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
@@ -660,16 +660,16 @@ class Web_operation_fields {
     public static GAME_ROOM_CONFIG_ELSLP_8 = 239  //俄罗斯轮盘8
     public static GAME_ROOM_CONFIG_ELSLP_9 = 240  //俄罗斯轮盘9
     public static GAME_ROOM_CONFIG_ELSLP_10 = 241  //俄罗斯轮盘10
-    public static GAME_ROOM_CONFIG_MPNIUNIU_1 = 242  //明牌牛牛新手场
-    public static GAME_ROOM_CONFIG_MPNIUNIU_2 = 243  //明牌牛牛小资场
-    public static GAME_ROOM_CONFIG_MPNIUNIU_3 = 244  //明牌牛牛老板场
-    public static GAME_ROOM_CONFIG_MPNIUNIU_4 = 245  //明牌牛牛富豪场
-    public static GAME_ROOM_CONFIG_MPNIUNIU_5 = 246  //明牌牛牛场5
-    public static GAME_ROOM_CONFIG_MPNIUNIU_6 = 247  //明牌牛牛场6
-    public static GAME_ROOM_CONFIG_MPNIUNIU_7 = 248  //明牌牛牛场7
-    public static GAME_ROOM_CONFIG_MPNIUNIU_8 = 249  //明牌牛牛场8
-    public static GAME_ROOM_CONFIG_MPNIUNIU_9 = 250  //明牌牛牛场9
-    public static GAME_ROOM_CONFIG_MPNIUNIU_10 = 251  //明牌牛牛场10
+    public static GAME_ROOM_CONFIG_MPNIUNIU_1 = 242  //看牌牛牛新手场
+    public static GAME_ROOM_CONFIG_MPNIUNIU_2 = 243  //看牌牛牛小资场
+    public static GAME_ROOM_CONFIG_MPNIUNIU_3 = 244  //看牌牛牛老板场
+    public static GAME_ROOM_CONFIG_MPNIUNIU_4 = 245  //看牌牛牛富豪场
+    public static GAME_ROOM_CONFIG_MPNIUNIU_5 = 246  //看牌牛牛场5
+    public static GAME_ROOM_CONFIG_MPNIUNIU_6 = 247  //看牌牛牛场6
+    public static GAME_ROOM_CONFIG_MPNIUNIU_7 = 248  //看牌牛牛场7
+    public static GAME_ROOM_CONFIG_MPNIUNIU_8 = 249  //看牌牛牛场8
+    public static GAME_ROOM_CONFIG_MPNIUNIU_9 = 250  //看牌牛牛场9
+    public static GAME_ROOM_CONFIG_MPNIUNIU_10 = 251  //看牌牛牛场10
     public static GAME_ROOM_CONFIG_WXSAOLEIHB_1 = 252  //微信扫雷红包小资场
     public static GAME_ROOM_CONFIG_WXSAOLEIHB_2 = 253  //微信扫雷红包老板场
     public static GAME_ROOM_CONFIG_WXSAOLEIHB_3 = 254  //微信扫雷红包富豪场

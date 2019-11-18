@@ -1093,7 +1093,7 @@ export class UnitField extends core.obj.GuidObject{
 	public static UNIT_INT_FLAG:number = 16 //bit位
 	public static UNIT_INT_BYTE3:number = 17 //0 玩家的炮台位置, 1 是不是机器人, 2 划鱼状态 3当前炮倍数
 	public static UNIT_INT_AIM_AT_I_D:number = 18 //瞄准某只鱼oid
-	public static UNIT_INT_CUR_CHIP:number = 19 //当前下注筹码
+	public static UNIT_INT_CUR_CHIP:number = 19 //当前下注筹码(微信扫雷红包红包雨时间戳)
 	public static UNIT_INT_DE_ZHOU_MONEY:number = 20 //德州带入的金币
 	public static UNIT_INT_QI_FU_END_TIME:number = 21 //祈福结束时间
 	public static UNIT_INT_QI_FU_TYPE:number = 22 //祈福类型
