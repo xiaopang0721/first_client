@@ -114,7 +114,7 @@ module game.gui.component {
 				let gameid = jscell.game_list[index];
 				jscell.assertloader.release(path, true);
 
-				if (!jsload) {
+				if (!jsload && path) {
 					logd("解析JS", gameid)
 					let tempData = Laya.loader.getRes(path);
 					let dataStr = path.indexOf(".bin") != -1 ? StringU.readZlibData(new ByteArray(tempData)) : tempData;
