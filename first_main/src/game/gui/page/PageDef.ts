@@ -147,7 +147,7 @@ module game.gui.page {
 		"rniuniu": "房卡-抢庄牛牛",
 		"rpaodekuai": "房卡-跑得快",
 		"rshisanshui": "房卡-十三水",
-		"wxsaoleihb": "微信扫雷红包",
+		"wxsaoleihb": "微信红包扫雷",
 	}
 
 }
