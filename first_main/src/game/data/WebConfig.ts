@@ -342,6 +342,18 @@ WebConfig.showToast = function (str) {
 	}
 }
 
+WebConfig.setMyOrientation = function (islandscape) {
+	if (Laya.Browser.onPC) {
+
+	}
+	else if (Laya.Browser.onAndroid || WebConfig.onAndroid) {
+		__window.android && __window.android.setMyOrientation && __window.android.setMyOrientation(islandscape)
+	}
+	else if (Laya.Browser.onIOS || WebConfig.onIOS) {
+		__window.webkit && __window.webkit.messageHandlers && __window.webkit.messageHandlers.setMyOrientation && __window.webkit.messageHandlers.setMyOrientation.postMessage(islandscape)
+	}
+}
+
 WebConfig.closeHelloImg = function () {
 	if (Laya.Browser.onPC) {
 
