@@ -377,6 +377,12 @@ class Main {
             this._clientWidth = this.widthDesginPixelw;
             this._clientHeight = this.widthDesginPixelw * (this._designHeight / this._designWidth);
         }
+
+        let clientScale = this._clientScale;
+        let clientWidth = this._clientWidth;
+        let clientHeight = this._clientHeight;
+        if (this._game)
+            this._game.onResize(clientWidth, clientHeight, clientScale);
     }
 }
 
