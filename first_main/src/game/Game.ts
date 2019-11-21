@@ -44,7 +44,7 @@ module game {
 
 		// 判断是否全面屏
 		get isFullScreen(): boolean {
-			logd('********************', this._clientWidth, this._clientHeight, this._clientWidth / this._clientHeight);
+			// logd('********************', this._clientWidth, this._clientHeight, this._clientWidth / this._clientHeight);
 			let rate: number;
 			if (Laya.stage.screenMode == Stage.SCREEN_VERTICAL) {
 				rate = this._clientHeight / this._clientWidth;
