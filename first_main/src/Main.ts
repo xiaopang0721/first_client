@@ -213,9 +213,7 @@ class Main {
             Laya.stage.on(LEvent.RESIZE, this, this.onResize);
         }
         window.addEventListener("orientationchange", (e) => {
-            Laya.timer.frameOnce(1,this,()=>{
-                this.onResize(true);
-            })
+            this.onResize();
         });
         this.onResize();
     }
@@ -288,19 +286,17 @@ class Main {
     }
 
     // 游戏窗口尺寸发生变化
-    onResize(foruce?:boolean): void {
+    onResize(): void {
         // logd('Browser:', Browser.width, Browser.height, Browser.clientWidth, Browser.clientHeight, Browser.pixelRatio)
         // logd('window:', window.innerWidth, window.innerHeight, window.outerWidth, window.outerHeight, window.devicePixelRatio)
         // logd('screen:', screen.width, screen.height, screen.availWidth, screen.availHeight, screen.deviceXDPI, screen.deviceYDPI, screen.pixelDepth)
         // logd('onIPhoneX', onIPhoneX)
-        this.checkClientSize(foruce);
+        this.checkClientSize();
         let clientScale = this._clientScale;
         let clientWidth = this._clientWidth;
         let clientHeight = this._clientHeight;
         if (this._game)
-        {
             this._game.onResize(clientWidth, clientHeight, clientScale);
-        }
     }
 
 
@@ -315,12 +311,12 @@ class Main {
         this._lockOrientation = v;
     }
     // 校验浏览器可视屏幕像素
-    private checkClientSize(foruce?:boolean): void {
+    private checkClientSize(): void {
         // this._game && this._game.showTips("checkClientSize",true);
         let browser_clientWidth = Browser.clientWidth;
         let browser_clientHeight = Browser.clientHeight;
         let onPc: boolean = Browser.onPC;
-        if (!onPc && !foruce && !Browser.onIPhone && this._prevBrowserClientWidth) {
+        if (!onPc && !Browser.onIPhone && this._prevBrowserClientWidth) {
             if ((browser_clientWidth == this._prevBrowserClientWidth
                 && browser_clientHeight != this._prevBrowserClientHeight)
                 || (browser_clientHeight == this._prevBrowserClientHeight
@@ -353,7 +349,7 @@ class Main {
                 break;
         }
 
-        if (!foruce && this._browserClientWidth == browser_clientWidth && this._browserClientHeight == browser_clientHeight) {
+        if (this._browserClientWidth == browser_clientWidth && this._browserClientHeight == browser_clientHeight) {
             return;
         }
 
@@ -386,9 +382,7 @@ class Main {
         let clientWidth = this._clientWidth;
         let clientHeight = this._clientHeight;
         if (this._game)
-        {
             this._game.onResize(clientWidth, clientHeight, clientScale);
-        }
     }
 }
 
