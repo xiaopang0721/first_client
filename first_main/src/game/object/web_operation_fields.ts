@@ -54,6 +54,8 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_WXSLHB_FLHB = 51  //红包雨
     public static USE_MONEY_LOG_TYPE_WXSLHB_GHB_SETTLE = 52  //领红包结算
     public static USE_MONEY_LOG_TYPE_WXSLHB_FHB_SETTLE = 53  //发红包结算
+    public static USE_MONEY_LOG_TYPE_WXSLHB_SPECIAL_REWARD = 54  //特殊数值奖励
+    public static USE_MONEY_LOG_TYPE_WXSLHB_BOM_NUM_REWARD = 55  //雷数奖励
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static client_money_logtype_table:{[key:number]:string}={
@@ -110,6 +112,8 @@ class Web_operation_fields {
         51:'红包雨',//红包雨
         52:'领红包结算',//领红包结算
         53:'发红包结算',//发红包结算
+        54:'特殊数值奖励',//特殊数值奖励
+        55:'雷数奖励',//雷数奖励
 	}
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
@@ -938,6 +942,7 @@ class Web_operation_fields {
     public static GAME_SERVER_MSG_TYPE_NEW_BULLETIN = 16  //新游戏公告通知
     public static GAME_SERVER_MSG_TYPE_LOCK_ACCOUNT = 17  //封号
     public static GAME_SERVER_MSG_TYPE_CHANGE_HONGBAO = 18  //红包通知
+    public static GAME_SERVER_MSG_TYPE_GETSCORE = 19  //通知推送当前打码量
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_QIFU_TYPE_XISHOU = 1  //洗手
