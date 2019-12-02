@@ -21,6 +21,7 @@ game_list=(
 "gamelonghu"
 "gamemajiang"
 "gameniuniu"
+"gamempniuniu"
 "gamerniuniu"
 "gamepaijiu"
 "gamerpaodekuai"
@@ -33,6 +34,8 @@ game_list=(
 "gamezjh"
 "gamezoo"
 "gameelslp"
+"gamempniuniu"
+"gamewxsaoleihb"
 )
 
 src="$__root/src"

@@ -23,6 +23,10 @@ public static kGroupTypShouling:number = 6 //鱼群类型-首领鱼
 public static kGroupTypYuChao:number = 7 //鱼群类型-鱼潮来袭
 public static kGroupTypBoss:number = 8 //鱼群类型-Boss鱼
 public static kGroupTypHuaFei:number = 9 //鱼群类型-话费鱼
+public static WXSAOLEI_HB_ADD:number = 1 //微信扫雷红包-新增红包
+public static WXSAOLEI_HB_REMOVE:number = 2 //微信扫雷红包-删除红包
+public static WXSAOLEI_HB_UPDATE:number = 3 //微信扫雷红包-更新红包
+public static WXSAOLEI_HB_TOTAL:number = 4 //微信扫雷红包-全量下发
 }
 
 
@@ -54,7 +58,7 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_INT_ONLINE_TIME:number = 2 //在线时长，分钟
 	public static PLAYERDATA_INT_ZERO_RESET_TIME:number = 3 //0点重置时间
 	public static PLAYERDATA_INT_BYTE0:number = 4 //0.性别
-	public static PLAYERDATA_INT_BIT0:number = 5 //0.是否游客,1.是否可以修改昵称,2.全民代理,3.连续签到,4.幸运轮盘,5.签到小红点,6.轮盘小红点,7.全面代理小红点,8.支付宝,9.IsShowBank,10.微信开关,11.在线客服是否外跳,12.今日是否分享,13.是否需要判断绑定银行卡,14.是否领取绑定赠送,15.是否已提交过取款订单,16.是否已提交过汇款订单,17.首充小红点,18.是否已领取首充奖励
+	public static PLAYERDATA_INT_BIT0:number = 5 //0.是否游客,1.是否可以修改昵称,2.全民代理,3.连续签到,4.幸运轮盘,5.签到小红点,6.轮盘小红点,7.全面代理小红点,8.支付宝,9.IsShowBank,10.微信开关,11.在线客服是否外跳,12.今日是否分享,13.是否需要判断绑定银行卡,14.是否领取绑定赠送,15.是否已提交过取款订单,16.是否已提交过汇款订单,17.首充小红点,18.是否已领取首充奖励,19.是否有新游戏公告,20.是否封号
 	public static PLAYERDATA_INT_MONEY:number = 6 //金币
 	public static PLAYERDATA_INT_PLAYER_CARD_VALUE:number = 7 //玩家的牌
 	public static PLAYERDATA_INT_SAVE_BOX_MONEY:number = 27 //余额宝金钱
@@ -95,6 +99,15 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_INT_DRAW_MONEY_ERROR_C_D:number = 67 //玩家取款密码错误冻结时间或间隔时间
 	public static PLAYERDATA_INT_FIRST_PAY_MONEY:number = 68 //首充金额
 	public static PLAYERDATA_INT_NICK_NAME_TIME:number = 69 //修改昵称时间
+	public static PLAYERDATA_INT_SECOND_PAY_MONEY:number = 70 //二充金额
+	public static PLAYERDATA_INT_THIRDLY_PAY_MONEY:number = 71 //三充金额
+	public static PLAYERDATA_INT_JI_FEN:number = 72 //积分
+	public static PLAYERDATA_INT_PAY_COUNT:number = 73 //充值次数
+	public static PLAYERDATA_INT_CASH_MONEY:number = 74 //已提款金额
+	public static PLAYERDATA_INT_CASH_MONEY_COUNT:number = 75 //提款次数
+	public static PLAYERDATA_INT_BYTE2:number = 76 //0.首充免死金牌,1.二充免死金牌,2.三充免死金牌,3.空
+	public static PLAYERDATA_INT_INITIATE_CASH_MONEY:number = 77 //发起提款金额
+	public static PLAYERDATA_INT_A_P_I_DA_MA_LIANG:number = 78 //API打码量
 
 // string field
 	public static PLAYERDATA_STR_ACCOUNT:number = 0 //账号信息
@@ -569,6 +582,78 @@ export class PlayerDataField extends core.obj.GuidObject{
     }
 
 
+	public GetSecondPayMoney():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_SECOND_PAY_MONEY);
+    }
+
+
+	public GetThirdlyPayMoney():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_THIRDLY_PAY_MONEY);
+    }
+
+
+	public GetJiFen():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_JI_FEN);
+    }
+
+
+	public GetPayCount():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_PAY_COUNT);
+    }
+
+
+	public GetCashMoney():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_CASH_MONEY);
+    }
+
+
+	public GetCashMoneyCount():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_CASH_MONEY_COUNT);
+    }
+
+
+	public GetByte2(offset:number):number{
+       return this.GetByte(PlayerDataField.PLAYERDATA_INT_BYTE2, offset);
+    }
+
+
+
+//首充免死金牌
+	public GetFirstMianSi():number{
+       return this.GetByte(PlayerDataField.PLAYERDATA_INT_BYTE2,0);
+    }
+	public SetFirstMianSi(val:number):void{
+       this.SetByte(PlayerDataField.PLAYERDATA_INT_BYTE2,0, val);
+    }
+
+
+//二充免死金牌
+	public GetSecondMianSi():number{
+       return this.GetByte(PlayerDataField.PLAYERDATA_INT_BYTE2,1);
+    }
+	public SetSecondMianSi(val:number):void{
+       this.SetByte(PlayerDataField.PLAYERDATA_INT_BYTE2,1, val);
+    }
+
+
+//三充免死金牌
+	public GetThirdMianSi():number{
+       return this.GetByte(PlayerDataField.PLAYERDATA_INT_BYTE2,2);
+    }
+	public SetThirdMianSi(val:number):void{
+       this.SetByte(PlayerDataField.PLAYERDATA_INT_BYTE2,2, val);
+    }
+
+	public GetInitiateCashMoney():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_INITIATE_CASH_MONEY);
+    }
+
+
+	public GetAPIDaMaLiang():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_A_P_I_DA_MA_LIANG);
+    }
+
+
 //////////////////////////////////////str function
 
 	public GetAccount():string{
@@ -1014,7 +1099,7 @@ export class UnitField extends core.obj.GuidObject{
 	public static UNIT_INT_FLAG:number = 16 //bit位
 	public static UNIT_INT_BYTE3:number = 17 //0 玩家的炮台位置, 1 是不是机器人, 2 划鱼状态 3当前炮倍数
 	public static UNIT_INT_AIM_AT_I_D:number = 18 //瞄准某只鱼oid
-	public static UNIT_INT_CUR_CHIP:number = 19 //当前下注筹码
+	public static UNIT_INT_CUR_CHIP:number = 19 //当前下注筹码(微信扫雷红包红包雨时间戳)
 	public static UNIT_INT_DE_ZHOU_MONEY:number = 20 //德州带入的金币
 	public static UNIT_INT_QI_FU_END_TIME:number = 21 //祈福结束时间
 	public static UNIT_INT_QI_FU_TYPE:number = 22 //祈福类型

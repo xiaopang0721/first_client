@@ -3,6 +3,7 @@
 */
 module game.gui.base {
 	export interface IGame {
+		onMouseSoudHandle(e: LEvent): boolean
 		onMouseClick(e: LEvent): void;
 		onMouseDown(e: LEvent): void;
 		onMouseMove(e: LEvent): void;

@@ -114,6 +114,7 @@ module game.gui.page {
 	const GAME_NAME_LIST = {
 		"majiang": "四川麻将",
 		"niuniu": "抢庄牛牛",
+		"mpniuniu": "看牌抢庄牛牛",
 		"tbniuniu": "通比牛牛",
 		"zjh": "炸金花",
 		"baijiale": "百家乐",
@@ -138,6 +139,7 @@ module game.gui.page {
 		"rniuniu": "房卡-抢庄牛牛",
 		"rpaodekuai": "房卡-跑得快",
 		"rshisanshui": "房卡-十三水",
+		"wxsaoleihb": "微信红包扫雷",
 	}
 
 }

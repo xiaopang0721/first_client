@@ -41,6 +41,7 @@ class Operation_Fields {
 	public static OPRATE_CLOSE_WEB_CRASH:number = 17 //web崩溃
 	public static OPRATE_CLOSE_ON_PKT_STATUS_NOVER_ERR:number = 18 //还没登陆就发了错误的包上来
 	public static OPRATE_CLOSE_RECEIVE_TIME_OUT:number = 19 //太久没收到网络包
+	public static OPRATE_CLOSE_LOGIN_TYPE_ERROR:number = 20 //登录类型错误
 	//操作错误类型
 	public static OPRATE_TELEPORT:number = 3 //传送操作错误类型
 	public static OPRATE_TELEPORT_FAIL:number = 1 //传送失败
@@ -110,6 +111,12 @@ class Operation_Fields {
 	public static OPRATE_GAME_BIND_GIFT_SUCCESS:number = 14 //绑定送金成功
 	public static OPRATE_GAME_FIRST_PAY_CAN_GET:number = 15 //首充可领取弹窗
 	public static OPRATE_GAME_DRAW_FAIL_LEFT_MA:number = 16 //剩余打码量不为0
+	public static OPRATE_GAME_GET_HONGBAO_SUCCESS:number = 17 //红包领取成功
+	public static OPRATE_GAME_GET_HONGBAO_FAILED:number = 18 //红包领取失败
+	public static OPRATE_GAME_HONGBAO_IS_UNVALID:number = 19 //当前红包已过期
+	public static OPRATE_GAME_HONGBAO_FORMAT_MONEY_ERROR:number = 20 //红包格式金额错误
+	public static OPRATE_GAME_WXSAOLEIHB_START_RAIN_MONEY:number = 21 //微信扫雷红包红包雨开始
+	public static OPRATE_GAME_WXSAOLEIHB_GET_RAIN_MONEY:number = 22 //微信扫雷红包红包雨领取
 	//错误提示
 	private static OPRATE_STRING:{[key:string]:string} = {
 		'1':'登录操作错误类型',//登录操作错误类型
@@ -151,6 +158,7 @@ class Operation_Fields {
 		'2_17':'web崩溃',//web崩溃
 		'2_18':'还没登陆就发了错误的包上来',//还没登陆就发了错误的包上来
 		'2_19':'太久没收到网络包',//太久没收到网络包
+		'2_20':'登录类型错误',//登录类型错误
 		'3':'传送操作错误类型',//传送操作错误类型
 		'3_1':'传送失败',//传送失败
 		'3_2':'离开地图失败',//离开地图失败
@@ -214,6 +222,12 @@ class Operation_Fields {
 		'8_14':'绑定送金成功',//绑定送金成功
 		'8_15':'首充可领取弹窗',//首充可领取弹窗
 		'8_16':'剩余打码量不为0',//剩余打码量不为0
+		'8_17':'红包领取成功',//红包领取成功
+		'8_18':'红包领取失败',//红包领取失败
+		'8_19':'当前红包已过期',//当前红包已过期
+		'8_20':'红包格式金额错误',//红包格式金额错误
+		'8_21':'微信扫雷红包红包雨开始',//微信扫雷红包红包雨开始
+		'8_22':'微信扫雷红包红包雨领取',//微信扫雷红包红包雨领取
 
 	}
 	//获取错误提示

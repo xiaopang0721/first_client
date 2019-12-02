@@ -112,6 +112,9 @@ class Main {
             //初始化引擎
             Laya.init(this.widthDesginPixelw, this.heightDesginPixelw, Laya.WebGL);
         }
+
+        Laya.stage.frameRate = 'slow';
+
         Laya.SoundManager.useAudioMusic = false
         logd('location.href', location.href);
         let erralert = 0;
@@ -128,12 +131,7 @@ class Main {
             }
         }
 
-        // 是否wss判断
-        let Network_isWss = Network.prototype.isWss;
-        Network.prototype.isWss = function (): boolean {
-            let isWss = Network_isWss.call(this);
-            return isWss;
-        }
+
 
         isDebug = WebConfig.isDebug;
         //调试信息
@@ -180,7 +178,7 @@ class Main {
             localSetItem("client_vesion", cur_vesion)
         }
 
-       
+
 
         Vesion.once(Vesion.LOAD_VESION_COMPLETE, this, () => {
             this.init();
@@ -249,11 +247,14 @@ class Main {
     private _lastTarget: Laya.Node;
     //鼠标按钮声音 全局控制
     private onMouseClick(e: LEvent): void {
+        if (!this._game) return;
         if (e.target instanceof Laya.Node && e.target != this._lastTarget && e.target.name && e.target.name.indexOf("item") != -1) {
             this._lastTarget = e.target;
-            this._game.playSound(Path.music_btn);
+            if (!this._game.onMouseSoudHandle(e)) {
+                this._game.playSound(Path.music_btn);
+            }
         }
-        this._game && this._game.onMouseClick(e);
+        this._game.onMouseClick(e);
     }
 
     // 鼠标按下
@@ -376,6 +377,12 @@ class Main {
             this._clientWidth = this.widthDesginPixelw;
             this._clientHeight = this.widthDesginPixelw * (this._designHeight / this._designWidth);
         }
+
+        let clientScale = this._clientScale;
+        let clientWidth = this._clientWidth;
+        let clientHeight = this._clientHeight;
+        if (this._game)
+            this._game.onResize(clientWidth, clientHeight, clientScale);
     }
 }
 

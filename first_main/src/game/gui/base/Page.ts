@@ -225,6 +225,12 @@ module game.gui.base {
 		}
 
 		//舞台鼠标点击 不可重写
+		__onMouseSoudHandle(e: LEvent) {
+			if (!this._isOnOpenComplete) return false;
+			return this.onMouseSoudHandle(e) as boolean;
+		}
+
+		//舞台鼠标点击 不可重写
 		__onMouseClick(e: LEvent) {
 			if (!this._isOnOpenComplete) return false;
 			return this.onMouseClick(e) as boolean;
@@ -248,6 +254,10 @@ module game.gui.base {
 			return this.onMouseMove(e) as boolean;
 		}
 
+		protected onMouseSoudHandle(e: LEvent): any {
+			return false;
+		}
+
 		protected onMouseClick(e: LEvent): any {
 			return false;
 		}
@@ -265,6 +275,7 @@ module game.gui.base {
 		}
 
 		update(diff: number) {
+			if(this._isCloseing) return;
 			if (this.__time <= 0) {
 				this.deltaUpdate();
 				this.__time = this._delta;
@@ -338,6 +349,7 @@ module game.gui.base {
 			}
 		}
 
+		protected _defaultSoundPath;
 		//按钮动画列表
 		private _btnTweenList: any[];
 		/**
@@ -350,8 +362,8 @@ module game.gui.base {
 		 */
 		private btnTween(btn: any, caller?: any, callback?: Function, args?: any, defaultPath?: string, scaleX: number = 1, scaleY: number = 1): void {
 			if (!btn || btn == Laya.stage) return;
-			this._game.playSound(Path.music + "btn.mp3");
-			this._game.uiRoot.btnTween(btn, caller, callback, args, defaultPath, scaleX, scaleY);
+			this._game.playSound(this._defaultSoundPath || defaultPath || Path.music_btn);
+			this._game.uiRoot.btnTween(btn, caller, callback, args, this._defaultSoundPath || defaultPath, scaleX, scaleY);
 
 			//进队列
 			if (!this._btnTweenList) this._btnTweenList = [];

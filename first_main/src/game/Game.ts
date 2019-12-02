@@ -44,9 +44,13 @@ module game {
 
 		// 判断是否全面屏
 		get isFullScreen(): boolean {
-			// logd('********************', this._clientWidth, this._clientHeight, this._clientWidth / this._clientHeight);
-			let rate: number = this._clientWidth / this._clientHeight;
-			return rate >= 1.8;
+			let rate: number;
+			if (Laya.stage.screenMode == Stage.SCREEN_VERTICAL) {
+				rate = this._clientHeight / this._clientWidth;
+			} else if(Laya.stage.screenMode == Stage.SCREEN_HORIZONTAL){
+				rate = this._clientWidth / this._clientHeight;
+			}
+			return rate > 2;
 		}
 
 		// ui
@@ -85,12 +89,16 @@ module game {
 		// 加载必要素材
 		protected loadNeedAsset(): void {
 			this._uiRoot.showLoadProgress("资源加载中...");
-			JsLoader.ins.startLoad("component", Handler.create(this, (asserts) => {
-				JsLoader.ins.startLoad("dating", Handler.create(this, (asserts) => {
+			JsLoader.ins.startLoad("component", false, Handler.create(this, (asserts) => {
+				JsLoader.ins.startLoad("dating", false, Handler.create(this, (asserts) => {
 					if (WebConfig.enterGameLocked) {
-						JsLoader.ins.startLoad(WebConfig.gameid, Handler.create(this, (asserts) => {
+						if (WebConfig.gameid == 'dating') {
 							this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
-						}));
+						} else {
+							JsLoader.ins.startLoad(WebConfig.gameid, false, Handler.create(this, (asserts) => {
+								this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
+							}));
+						}
 					} else {
 						this._uiRoot.showLoadProgress("资源加载中...", Handler.create(this, this.onNeedAssetLoaded), asserts);
 						let gameid = localGetItem("local_game_id");
@@ -98,6 +106,7 @@ module game {
 							updateGameJS(gameid);
 						}
 					}
+
 				}));
 
 			}));
@@ -142,6 +151,14 @@ module game {
 
 		private closeProssgress(): void {
 			this._uiRoot.closeLoadProgress();
+		}
+
+		//鼠标点击声音回调
+		onMouseSoudHandle(e: LEvent): boolean {
+			if (this._uiRoot && this._uiRoot.onMouseSoudHandle(e)) {
+				return true;
+			}
+			return false;
 		}
 
 		// 鼠标点击
@@ -208,7 +225,7 @@ module game {
 			if (url == Path.music_btn && Laya.timer.currTimer - this._lastSoundTime < 500) {
 				return;
 			}
-			this._lastSoundTime = Laya.timer.currTimer;
+			if (url == Path.music_btn) this._lastSoundTime = Laya.timer.currTimer;
 			//为什么先取音量再设置音量？
 			let volume = Laya.SoundManager.soundVolume;
 			Laya.SoundManager.setSoundVolume(volume);
@@ -354,6 +371,9 @@ module game {
 		//打开登陆界面
 		public openLoginPage() {
 			if (!this.__gamedating) return;
+			if (WebConfig.enterGameLocked) {
+				return;
+			}
 			this.datingGame.openLoginPage();
 		}
 
@@ -363,7 +383,7 @@ module game {
 			if (this.__gamedating && this.datingGame) {
 				this.datingGame.onUpdate(diff)
 			}
-
+			JsLoader.ins.onUpdate(diff);
 			if (this.__gamecomponent) {
 				this.sceneGame.onUpdate(diff)
 				for (let scene of this.sceneGame.scenes) {

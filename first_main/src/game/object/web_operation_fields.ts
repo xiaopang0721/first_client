@@ -14,7 +14,7 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_SIGNIN = 11  //签到奖励
     public static USE_MONEY_LOG_TYPE_TURNTABLE = 12  //转盘奖励
     public static USE_MONEY_LOG_TYPE_RECHARGE_TYMOBILE = 13  //特邀手机赠送
-    public static USE_MONEY_LOG_TYPE_GMSUB = 14  //GM减钱
+    public static USE_MONEY_LOG_TYPE_HONGBAO = 14  //红包发放
     public static USE_MONEY_LOG_TYPE_RECHARGE_VIP = 15  //VIP充值
     public static USE_MONEY_LOG_TYPE_RECHARGE_RAKEBACK = 16  //佣金池领取
     public static USE_MONEY_LOG_TYPE_RECHARGE_OTHER = 17  //其他加款
@@ -47,6 +47,15 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_RECHARGE_WXBANK = 44  //微信转银行
     public static USE_MONEY_LOG_TYPE_RECHARGE_ZFBBANK = 45  //支付宝转银行
     public static USE_MONEY_LOG_TYPE_GUEST_GIVEMONEY = 46  //游客送金
+    public static USE_MONEY_LOG_TYPE_WXSLHB_FHB = 47  //发红包
+    public static USE_MONEY_LOG_TYPE_API_UPPERPOINT = 48  //API上分
+    public static USE_MONEY_LOG_TYPE_API_LOWERPOINT = 49  //API下分
+    public static USE_MONEY_LOG_TYPE_WXSLHB_GHB = 50  //领红包
+    public static USE_MONEY_LOG_TYPE_WXSLHB_FLHB = 51  //红包雨
+    public static USE_MONEY_LOG_TYPE_WXSLHB_GHB_SETTLE = 52  //领红包结算
+    public static USE_MONEY_LOG_TYPE_WXSLHB_FHB_SETTLE = 53  //发红包结算
+    public static USE_MONEY_LOG_TYPE_WXSLHB_SPECIAL_REWARD = 54  //特殊数值奖励
+    public static USE_MONEY_LOG_TYPE_WXSLHB_BOM_NUM_REWARD = 55  //雷数奖励
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static client_money_logtype_table:{[key:number]:string}={
@@ -63,7 +72,7 @@ class Web_operation_fields {
         11:'签到奖励',//签到奖励
         12:'转盘奖励',//转盘奖励
         13:'特邀手机赠送',//特邀手机赠送
-        14:'GM减钱',//GM减钱
+        14:'红包发放',//红包发放
         15:'VIP充值',//VIP充值
         16:'佣金池领取',//佣金池领取
         17:'其他加款',//其他加款
@@ -96,6 +105,15 @@ class Web_operation_fields {
         44:'微信转银行',//微信转银行
         45:'支付宝转银行',//支付宝转银行
         46:'游客送金',//游客送金
+        47:'发红包',//发红包
+        48:'API上分',//API上分
+        49:'API下分',//API下分
+        50:'领红包',//领红包
+        51:'红包雨',//红包雨
+        52:'领红包结算',//领红包结算
+        53:'发红包结算',//发红包结算
+        54:'特殊数值奖励',//特殊数值奖励
+        55:'雷数奖励',//雷数奖励
 	}
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
@@ -650,6 +668,26 @@ class Web_operation_fields {
     public static GAME_ROOM_CONFIG_ELSLP_8 = 239  //俄罗斯轮盘8
     public static GAME_ROOM_CONFIG_ELSLP_9 = 240  //俄罗斯轮盘9
     public static GAME_ROOM_CONFIG_ELSLP_10 = 241  //俄罗斯轮盘10
+    public static GAME_ROOM_CONFIG_MPNIUNIU_1 = 242  //看牌牛牛新手场
+    public static GAME_ROOM_CONFIG_MPNIUNIU_2 = 243  //看牌牛牛小资场
+    public static GAME_ROOM_CONFIG_MPNIUNIU_3 = 244  //看牌牛牛老板场
+    public static GAME_ROOM_CONFIG_MPNIUNIU_4 = 245  //看牌牛牛富豪场
+    public static GAME_ROOM_CONFIG_MPNIUNIU_5 = 246  //看牌牛牛场5
+    public static GAME_ROOM_CONFIG_MPNIUNIU_6 = 247  //看牌牛牛场6
+    public static GAME_ROOM_CONFIG_MPNIUNIU_7 = 248  //看牌牛牛场7
+    public static GAME_ROOM_CONFIG_MPNIUNIU_8 = 249  //看牌牛牛场8
+    public static GAME_ROOM_CONFIG_MPNIUNIU_9 = 250  //看牌牛牛场9
+    public static GAME_ROOM_CONFIG_MPNIUNIU_10 = 251  //看牌牛牛场10
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_1 = 252  //微信扫雷红包小资场
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_2 = 253  //微信扫雷红包老板场
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_3 = 254  //微信扫雷红包富豪场
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_4 = 255  //微信扫雷红包场4
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_5 = 256  //微信扫雷红包场5
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_6 = 257  //微信扫雷红包场6
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_7 = 258  //微信扫雷红包场7
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_8 = 259  //微信扫雷红包场8
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_9 = 260  //微信扫雷红包场9
+    public static GAME_ROOM_CONFIG_WXSAOLEIHB_10 = 261  //微信扫雷红包场10
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_CARDTYPE_EBGANG_DOUBLE_1 = 1  //一宝
@@ -903,6 +941,8 @@ class Web_operation_fields {
     public static GAME_SERVER_MSG_TYPE_ADD_YONGJIN = 15  //添加佣金池金额
     public static GAME_SERVER_MSG_TYPE_NEW_BULLETIN = 16  //新游戏公告通知
     public static GAME_SERVER_MSG_TYPE_LOCK_ACCOUNT = 17  //封号
+    public static GAME_SERVER_MSG_TYPE_CHANGE_HONGBAO = 18  //红包通知
+    public static GAME_SERVER_MSG_TYPE_GETSCORE = 19  //通知推送当前打码量
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_QIFU_TYPE_XISHOU = 1  //洗手
@@ -998,5 +1038,11 @@ class Web_operation_fields {
 //------------------------START-----------------------------------
     public static APP_STATE_TYPE_NORMAL = 1  //正常
     public static APP_STATE_TYPE_MINIMIZE = 2  //最小化
+//------------------------ END -----------------------------------
+//------------------------START-----------------------------------
+    public static GAME_MSG_CALLBACK_TYPE_UPLIMIT = 1  //超过上限
+    public static GAME_MSG_CALLBACK_TYPE_LACKING = 2  //余额不足
+    public static GAME_MSG_CALLBACK_TYPE_INMAP = 3  //在地图内
+    public static GAME_MSG_CALLBACK_TYPE_INGAME = 4  //在游戏中
 //------------------------ END -----------------------------------
 }
