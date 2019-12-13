@@ -134,6 +134,7 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_STR_VIP_RECEIVED:number = 21 //vip奖励已领取标识
 	public static PLAYERDATA_STR_TAKE_PASSWORD:number = 22 //取款密码
 	public static PLAYERDATA_STR_HEAD_KUANG_IMG:number = 23 //头像框
+	public static PLAYERDATA_STR_VERSION:number = 24 //版本号
 
 
 	public GetRegTime():number{
@@ -773,6 +774,11 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 	public GetHeadKuangImg():string{
        return this.GetStr(PlayerDataField.PLAYERDATA_STR_HEAD_KUANG_IMG);
+    }
+
+
+	public GetVersion():string{
+       return this.GetStr(PlayerDataField.PLAYERDATA_STR_VERSION);
     }
 
 
