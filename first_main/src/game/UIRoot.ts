@@ -103,6 +103,81 @@ module game {
 			}
 		}
 
+		/**iframe---------------------------start */
+		public showIframe(url, x, y, w, h) {
+			if (WebConfig.iframe) return;
+			if (!Browser.onPC) {
+				x = x / Browser.pixelRatio;
+				y = y / Browser.pixelRatio;
+				w = w / Browser.pixelRatio;
+				h = h / Browser.pixelRatio;
+			}
+
+			let iframe = WebConfig.iframe = Laya.Browser.window.document.createElement('iframe');
+			iframe.setAttribute('src', url);
+			iframe.setAttribute('frameborder', 0);
+			iframe.setAttribute('scrolling', 'no');
+			iframe.setAttribute('allowfullscreen', true);
+			iframe.setAttribute('name', "kefu");
+			let body = laya.utils.Browser.window.document.getElementsByTagName("body")[0];
+			body.appendChild(iframe);
+
+			//适配处理
+			let styleStr = "position: absolute;left: {0}px; top: {1}px; z-index: 100009;";//laya 的index是100000
+			let str = StringU.substitute(styleStr, x, y);
+			iframe.setAttribute('width', w);
+			iframe.setAttribute('height', h);
+			iframe.setAttribute('style', str);
+		}
+
+		/**
+		 * 
+		 * @param b true 显示
+		 */
+		public visibleIframe(b: boolean) {
+			if (!WebConfig.iframe) return;
+			let iframe = WebConfig.iframe;
+			if (b) {
+				if (iframe.parentNode) return;
+				let body = laya.utils.Browser.window.document.getElementsByTagName("body")[0];
+				body.appendChild(iframe);
+			} else {
+				iframe.parentNode && iframe.parentNode.removeChild(iframe);
+			}
+		}
+
+		public closeIframe() {
+			if (!WebConfig.iframe) return;
+			let iframe = WebConfig.iframe;
+			//把iframe指向空白页面，这样可以释放大部分内存。 
+			iframe.src = 'about:blank';
+			try {
+				iframe.contentWindow.document.write('');
+				iframe.contentWindow.document.clear();
+			} catch (error) {
+
+			}
+			//把iframe从页面移除 
+			iframe.parentNode && iframe.parentNode.removeChild(iframe);
+			WebConfig.iframe = null;
+		}
+
+		public resizeIframe(x, y, w, h) {
+			if (!WebConfig.iframe) return;
+			if (!Browser.onPC) {
+				x = x / Browser.pixelRatio;
+				y = y / Browser.pixelRatio;
+				w = w / Browser.pixelRatio;
+				h = h / Browser.pixelRatio;
+			}
+			let iframe = WebConfig.iframe;
+			let styleStr = "position: absolute;left: {0}px; top: {1}px; z-index: 100009";//laya 的index是100000
+			let str = StringU.substitute(styleStr, x, y);
+			iframe.setAttribute('width', w);
+			iframe.setAttribute('height', h);
+			iframe.setAttribute('style', str);
+		}
+		/**iframe-------------------------end */
 		/**
 		 * 弹窗提示
 		 * @param str  字符串
@@ -309,6 +384,7 @@ module game {
 			this._topUI.resize(w, h, realW, realH);
 			this._generalUI.resize(w, h, realW, realH);
 			this._topUnderUI.resize(w, h, realW, realH);
+			this.resizeIframe(this.x, this.y, w, h);
 		}
 
 
