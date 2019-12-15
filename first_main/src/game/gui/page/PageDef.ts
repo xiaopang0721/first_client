@@ -128,7 +128,7 @@ module game.gui.page {
 		"ebgang": "二八杠",
 		"elslp": "俄罗斯轮盘",
 		"honghei": "红黑大战",
-		"longhu": "百人龙虎",
+		"longhu": "龙虎斗",
 		"paijiu": "牌九",
 		"sangong": "三公",
 		"saolei": "红包扫雷",
