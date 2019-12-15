@@ -384,7 +384,7 @@ module game {
 			this._topUI.resize(w, h, realW, realH);
 			this._generalUI.resize(w, h, realW, realH);
 			this._topUnderUI.resize(w, h, realW, realH);
-			this.resizeIframe(this.x, this.y, w, h);
+			this.resizeIframe(this.x, this.y, Laya.stage.width, Laya.stage.height);
 		}
 
 
