@@ -118,7 +118,7 @@ module game {
 			iframe.setAttribute('frameborder', 0);
 			iframe.setAttribute('scrolling', 'no');
 			iframe.setAttribute('allowfullscreen', true);
-			iframe.setAttribute('name', "kefu");
+			iframe.setAttribute('name', "api");
 			let body = laya.utils.Browser.window.document.getElementsByTagName("body")[0];
 			body.appendChild(iframe);
 
@@ -128,6 +128,19 @@ module game {
 			iframe.setAttribute('width', w);
 			iframe.setAttribute('height', h);
 			iframe.setAttribute('style', str);
+			if (iframe.attachEvent) {
+				iframe.attachEvent("onload", () => {
+					this._times++;
+					if (this._times == 2)
+						this.closeIframe()
+				});
+			} else {
+				iframe.onload = () => {
+					this._times++;
+					if (this._times == 2)
+						this.closeIframe()
+				};
+			}
 		}
 
 		/**
@@ -146,8 +159,15 @@ module game {
 			}
 		}
 
+		private _times: number = 0
 		public closeIframe() {
 			if (!WebConfig.iframe) return;
+			if (this._game.datingGame.apiMgr.isApi) {
+				//发送下分协议
+				this._game.datingGame.apiMgr.isApi = false;
+				this._game.network.call_api_sub_score(ApiMgr.TYPE_QP_KY)
+			}
+			this._times = 0;
 			let iframe = WebConfig.iframe;
 			//把iframe指向空白页面，这样可以释放大部分内存。 
 			iframe.src = 'about:blank';
