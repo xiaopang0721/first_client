@@ -18,6 +18,7 @@ WebConfig.gameid = "niuniu";
 WebConfig.sessionkey = WebConfig.apisessionkey = "account%3D12345687%26server_name%3Dqpae%26tm%3D1574517145%26sign%3D01ddd1c80c5a95871ab1556067adf38f";
 WebConfig.params = "canback%3D1";
 WebConfig.enterGameLocked = false;
+WebConfig.isApiDJ = false;
 WebConfig.sub_baseplatform = __conf.sub_baseplatform
 WebConfig.baseplatform = __conf.baseplatform
 WebConfig.defaultplatform = __conf.defaultplatform;
