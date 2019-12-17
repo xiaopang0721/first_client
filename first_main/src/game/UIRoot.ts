@@ -165,7 +165,7 @@ module game {
 			if (this._game.datingGame.apiMgr.isApi) {
 				//发送下分协议
 				this._game.datingGame.apiMgr.isApi = false;
-				this._game.network.call_api_sub_score(ApiMgr.TYPE_QP_KY)
+				this._game.network.call_api_sub_score(1)
 			}
 			this._times = 0;
 			let iframe = WebConfig.iframe;
