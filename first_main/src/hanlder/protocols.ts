@@ -488,6 +488,10 @@ module hanlder{
 		public static  SMSG_WXSAOLEIHB_LQ_INFO :number = 240;	//wxsaoleihb_lq_info
 		/*获取红包历史记录*/
 		public static  CMSG_WXSAOLEIHB_GET_HB_HISTORY :number = 241;	//wxsaoleihb_get_hb_history
+		/*登陆api游戏*/
+		public static  CMSG_API_LOGIN_GAME :number = 242;	//api_login_game
+		/*api下分*/
+		public static  CMSG_API_SUB_SCORE :number = 243;	//api_sub_score
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -739,6 +743,8 @@ module hanlder{
 			this._FUNCS[239] = "wxsaoleihb_send_lqjl";
 			this._FUNCS[240] = "wxsaoleihb_lq_info";
 			this._FUNCS[241] = "wxsaoleihb_get_hb_history";
+			this._FUNCS[242] = "api_login_game";
+			this._FUNCS[243] = "api_sub_score";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1613,6 +1619,14 @@ module hanlder{
 					var obj_wxsaoleihb_get_hb_history:c2s_wxsaoleihb_get_hb_history = new c2s_wxsaoleihb_get_hb_history;
 					c2s_wxsaoleihb_get_hb_history .read(obj_wxsaoleihb_get_hb_history, bs);
 					return obj_wxsaoleihb_get_hb_history;
+				case Protocols.CMSG_API_LOGIN_GAME :	//api_login_game
+					var obj_api_login_game:c2s_api_login_game = new c2s_api_login_game;
+					c2s_api_login_game .read(obj_api_login_game, bs);
+					return obj_api_login_game;
+				case Protocols.CMSG_API_SUB_SCORE :	//api_sub_score
+					var obj_api_sub_score:c2s_api_sub_score = new c2s_api_sub_score;
+					c2s_api_sub_score .read(obj_api_sub_score, bs);
+					return obj_api_sub_score;
 				default:
 					break;
 			}
@@ -3447,6 +3461,24 @@ module hanlder{
 			this._stream.writeInt32 (num);
 			this.sendMsg( 241 , this._stream);
 			//Log.outDebug("CS====> cmd:241 wxsaoleihb_get_hb_history");
+		}
+		public call_api_login_game (type : number ,api_gameid : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 242 );
+			//平台类型
+			this._stream.writeInt32 (type);
+			//平台游戏id
+			this._stream.writeInt32 (api_gameid);
+			this.sendMsg( 242 , this._stream);
+			//Log.outDebug("CS====> cmd:242 api_login_game");
+		}
+		public call_api_sub_score (type : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 243 );
+			//平台类型
+			this._stream.writeInt32 (type);
+			this.sendMsg( 243 , this._stream);
+			//Log.outDebug("CS====> cmd:243 api_sub_score");
 		}
 	}
 
@@ -8088,7 +8120,7 @@ module hanlder{
 		*/
 		public type : number ;	//int32
 		/**
-		* 转账信息
+		* 转?诵畔?
 		*/
 		public from_msg : string ;	//String
 		public constructor()
@@ -9068,7 +9100,7 @@ module hanlder{
 		}
 
 		/**
-		从输入二进制流?卸寥〗峁固?
+		从输入二进制流中读取结构体
 		*/
 		public static read(self:c2s_rniuniu_vote, bytes:ByteArray):void
 		{
@@ -9478,6 +9510,62 @@ module hanlder{
 			self.id = bytes. readInt32 ();		
 			//获取红包数
 			self.num = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_api_login_game
+	{
+		public optcode:number = 0;
+		public optname:string = "onApi_login_game";
+	
+		/**
+		* 平台类型
+		*/
+		public type : number ;	//int32
+		/**
+		* 平台游戏id
+		*/
+		public api_gameid : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_api_login_game, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//平台类型
+			self.type = bytes. readInt32 ();		
+			//平台游戏id
+			self.api_gameid = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_api_sub_score
+	{
+		public optcode:number = 0;
+		public optname:string = "onApi_sub_score";
+	
+		/**
+		* 平台类型
+		*/
+		public type : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_api_sub_score, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//平台类型
+			self.type = bytes. readInt32 ();		
 		}
 	}
 
