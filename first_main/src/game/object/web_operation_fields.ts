@@ -1053,5 +1053,7 @@ class Web_operation_fields {
 //------------------------START-----------------------------------
     public static GAME_PLATFORM_TYPE_AEQP = 1  //AE棋牌
     public static GAME_PLATFORM_TYPE_KYQP = 2  //KY棋牌
+    public static GAME_PLATFORM_TYPE_JDBQP = 3  //JDB棋牌
+    public static GAME_PLATFORM_TYPE_AGQP = 4  //AG棋牌
 //------------------------ END -----------------------------------
 }
