@@ -1050,4 +1050,8 @@ class Web_operation_fields {
     public static GAME_MSG_CALLBACK_TYPE_INMAP = 3  //在地图内
     public static GAME_MSG_CALLBACK_TYPE_INGAME = 4  //在游戏中
 //------------------------ END -----------------------------------
+//------------------------START-----------------------------------
+    public static GAME_PLATFORM_TYPE_AEQP = 1  //AE棋牌
+    public static GAME_PLATFORM_TYPE_KYQP = 2  //KY棋牌
+//------------------------ END -----------------------------------
 }
