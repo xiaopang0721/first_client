@@ -165,7 +165,12 @@ module game {
 			if (this._game.datingGame.apiMgr.isApi) {
 				//发送下分协议
 				this._game.datingGame.apiMgr.isApi = false;
-				this._game.network.call_api_sub_score(1)
+				let mainPlayer: PlayerData = this._game.sceneObjectMgr.mainPlayer;
+				if (!mainPlayer) return;
+				let playerInfo = mainPlayer.playerInfo;
+				if (playerInfo.apiData.length > 0) {
+					this._game.network.call_api_sub_score(playerInfo.apiData[0])
+				}
 			}
 			this._times = 0;
 			let iframe = WebConfig.iframe;
