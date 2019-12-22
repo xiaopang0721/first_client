@@ -167,9 +167,10 @@ module game {
 				this._game.datingGame.apiMgr.isApi = false;
 				let mainPlayer: PlayerData = this._game.sceneObjectMgr.mainPlayer;
 				if (!mainPlayer) return;
-				let playerInfo = mainPlayer.playerInfo;
-				if (playerInfo.apiData.length > 0) {
-					this._game.network.call_api_sub_score(playerInfo.apiData[0])
+				let apiDataStr = mainPlayer.GetLoginApiData();
+				let apiData = apiDataStr ? apiDataStr.split("&") : [];
+				if (apiData.length > 0) {
+					this._game.network.call_api_sub_score(apiData[0])
 				}
 			}
 			this._times = 0;
