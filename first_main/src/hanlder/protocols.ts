@@ -3462,13 +3462,13 @@ module hanlder{
 			this.sendMsg( 241 , this._stream);
 			//Log.outDebug("CS====> cmd:241 wxsaoleihb_get_hb_history");
 		}
-		public call_api_login_game (type : number ,api_gameid : number ):void{
+		public call_api_login_game (type : number ,param : string):void{
 			this._stream.reset();
 			this._stream.writeUint16( 242 );
 			//平台类型
 			this._stream.writeInt32 (type);
-			//平台游戏id
-			this._stream.writeInt32 (api_gameid);
+			//登陆平台所需要的参数
+			this._stream.writeString (param);
 			this.sendMsg( 242 , this._stream);
 			//Log.outDebug("CS====> cmd:242 api_login_game");
 		}
@@ -9522,9 +9522,9 @@ module hanlder{
 		*/
 		public type : number ;	//int32
 		/**
-		* 平台游戏id
+		* 登陆平台所需要的参数
 		*/
-		public api_gameid : number ;	//int32
+		public param : string ;	//String
 		public constructor()
 		{
 			
@@ -9539,8 +9539,8 @@ module hanlder{
 			var i:number;
 			//平台类型
 			self.type = bytes. readInt32 ();		
-			//平台游戏id
-			self.api_gameid = bytes. readInt32 ();		
+			//登陆平台所需要的参数
+			self.param = bytes. readString ();		
 		}
 	}
 	export class c2s_api_sub_score
