@@ -170,7 +170,7 @@ module game {
 				let apiDataStr = mainPlayer.GetLoginApiData();
 				let apiData = apiDataStr ? apiDataStr.split("&") : [];
 				if (apiData.length > 0) {
-					this._game.network.call_api_sub_score(apiData[0])
+					this._game.network.call_api_sub_score(parseFloat(apiData[0]))
 				}
 			}
 			this._times = 0;
