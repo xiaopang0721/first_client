@@ -81,7 +81,7 @@ module game.gui.page {
 		setProgress(str: string, callback?: Handler, preAssets?: any[]): void {
 			if (!this._viewUI) return;
 			this.setTip(str);
-			if(!callback || !preAssets) return;
+			if (!callback || !preAssets) return;
 			this._callBack = callback;
 			this._preAssets = myCheckArray(preAssets);
 			//如果需要加载资源
@@ -156,7 +156,11 @@ module game.gui.page {
 		private _lastIndex: number = 0;
 		private changeTips(): void {
 			if (!this._lenTips) this._lenTips = this.ENUM_TIPS.length;
-			this._lastIndex = this._lastIndex++ % this._lenTips;
+			if (!this._lastIndex) {
+				this._lastIndex = MathU.randomRange(0, this._lenTips);
+			} else {
+				this._lastIndex = this._lastIndex++ % this._lenTips;
+			}
 			try {
 				this._viewUI.txt_ad.changeText(this.ENUM_TIPS[this._lastIndex]);
 			} catch (error) {
