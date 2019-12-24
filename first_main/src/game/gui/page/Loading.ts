@@ -157,7 +157,7 @@ module game.gui.page {
 		private changeTips(): void {
 			if (!this._lenTips) this._lenTips = this.ENUM_TIPS.length;
 			if (!this._lastIndex) {
-				this._lastIndex = MathU.randomRange(0, this._lenTips);
+				this._lastIndex = MathU.randomRange(0, this._lenTips - 1);
 			} else {
 				this._lastIndex = this._lastIndex++ % this._lenTips;
 			}
@@ -173,7 +173,16 @@ module game.gui.page {
 			if (this._viewUI.bar_jd) {
 				this._viewUI.bar_jd.value = value;
 				this.progressHandle();
+				//暗金版才有的光效
+				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_AJQP) {
+					this.effBarSetPos(value);
+				}
 			}
+		}
+
+		private effBarSetPos(value: number) {
+			let interval = this._viewUI.bar_jd.width * value;
+			this._viewUI["eff_bar"].x = 40 + interval;
 		}
 
 		private progressHandle() {
