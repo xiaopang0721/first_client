@@ -792,6 +792,8 @@ class Web_operation_fields {
     public static CLIENT_IRCODE_PLAYERLVAWARE = 64  //playerlevelaware
     public static CLIENT_IRCODE_CHECKLOGINVF = 65  //checkloginvf
     public static CLIENT_IRCODE_GETBULLETINLIST = 66  //getbulletinlist
+    public static CLIENT_IRCODE_GETAPIGAMEBAOBIAO = 67  //getapigamebaobiao
+    public static CLIENT_IRCODE_GETAPIGAMERECORD = 68  //getapigamerecord
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static CARD_GAME_PAY_TYP_MASTER = 1  //房主付费
@@ -1031,6 +1033,7 @@ class Web_operation_fields {
     public static FREE_STYLE_TYPES_PROMOTIONSCFG_C = "promotionscfg_c"  //优惠活动配置
     public static FREE_STYLE_TYPES_GUANGGAOLUNBO_C = "guanggaolunbo_c"  //首页轮播图片配置
     public static FREE_STYLE_TYPES_GAMEPARAMS = "gameparams"  //游戏参数配置
+    public static FREE_STYLE_TYPES_GAMEFS_C = "gamefs_c"  //游戏反水配置
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static GAME_HOME_AD_LOOP_TYPE_DAILI = 1  //代理
