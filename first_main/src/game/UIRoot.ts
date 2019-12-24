@@ -165,7 +165,7 @@ module game {
 			if (this._game.datingGame.apiMgr.isApi) {
 				//发送下分协议
 				this._game.datingGame.apiMgr.isApi = false;
-				let mainPlayer: PlayerData = this._game.sceneObjectMgr.mainPlayer;
+				let mainPlayer: any = this._game.sceneObjectMgr.mainPlayer;
 				if (!mainPlayer) return;
 				let apiDataStr = mainPlayer.GetLoginApiData();
 				let apiData = apiDataStr ? apiDataStr.split("&") : [];
