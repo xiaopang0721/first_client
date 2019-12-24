@@ -492,6 +492,10 @@ module hanlder{
 		public static  CMSG_API_LOGIN_GAME :number = 242;	//api_login_game
 		/*api下分*/
 		public static  CMSG_API_SUB_SCORE :number = 243;	//api_sub_score
+		/*获取api游戏报表*/
+		public static  CMSG_API_GET_GAME_BAOBIAO :number = 244;	//api_get_game_baobiao
+		/*获取api游戏记录*/
+		public static  CMSG_API_GET_GAME_RECORD :number = 245;	//api_get_game_record
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -745,6 +749,8 @@ module hanlder{
 			this._FUNCS[241] = "wxsaoleihb_get_hb_history";
 			this._FUNCS[242] = "api_login_game";
 			this._FUNCS[243] = "api_sub_score";
+			this._FUNCS[244] = "api_get_game_baobiao";
+			this._FUNCS[245] = "api_get_game_record";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1627,6 +1633,14 @@ module hanlder{
 					var obj_api_sub_score:c2s_api_sub_score = new c2s_api_sub_score;
 					c2s_api_sub_score .read(obj_api_sub_score, bs);
 					return obj_api_sub_score;
+				case Protocols.CMSG_API_GET_GAME_BAOBIAO :	//api_get_game_baobiao
+					var obj_api_get_game_baobiao:c2s_api_get_game_baobiao = new c2s_api_get_game_baobiao;
+					c2s_api_get_game_baobiao .read(obj_api_get_game_baobiao, bs);
+					return obj_api_get_game_baobiao;
+				case Protocols.CMSG_API_GET_GAME_RECORD :	//api_get_game_record
+					var obj_api_get_game_record:c2s_api_get_game_record = new c2s_api_get_game_record;
+					c2s_api_get_game_record .read(obj_api_get_game_record, bs);
+					return obj_api_get_game_record;
 				default:
 					break;
 			}
@@ -3479,6 +3493,30 @@ module hanlder{
 			this._stream.writeInt32 (type);
 			this.sendMsg( 243 , this._stream);
 			//Log.outDebug("CS====> cmd:243 api_sub_score");
+		}
+		public call_api_get_game_baobiao (start_time : number ,end_time : number ,pf_code : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 244 );
+			//开始时间
+			this._stream.writeInt32 (start_time);
+			//结束时间
+			this._stream.writeInt32 (end_time);
+			//平台
+			this._stream.writeInt32 (pf_code);
+			this.sendMsg( 244 , this._stream);
+			//Log.outDebug("CS====> cmd:244 api_get_game_baobiao");
+		}
+		public call_api_get_game_record (start_time : number ,end_time : number ,pf_code : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 245 );
+			//开始时间
+			this._stream.writeInt32 (start_time);
+			//结束时间
+			this._stream.writeInt32 (end_time);
+			//平台
+			this._stream.writeInt32 (pf_code);
+			this.sendMsg( 245 , this._stream);
+			//Log.outDebug("CS====> cmd:245 api_get_game_record");
 		}
 	}
 
@@ -8120,7 +8158,7 @@ module hanlder{
 		*/
 		public type : number ;	//int32
 		/**
-		* 转?诵畔?
+		* 转账信息
 		*/
 		public from_msg : string ;	//String
 		public constructor()
@@ -9566,6 +9604,80 @@ module hanlder{
 			var i:number;
 			//平台类型
 			self.type = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_api_get_game_baobiao
+	{
+		public optcode:number = 0;
+		public optname:string = "onApi_get_game_baobiao";
+	
+		/**
+		* 开始时间
+		*/
+		public start_time : number ;	//int32
+		/**
+		* 结束时间
+		*/
+		public end_time : number ;	//int32
+		/**
+		* 平台
+		*/
+		public pf_code : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_api_get_game_baobiao, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//开始时间
+			self.start_time = bytes. readInt32 ();		
+			//结束时间
+			self.end_time = bytes. readInt32 ();		
+			//平台
+			self.pf_code = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_api_get_game_record
+	{
+		public optcode:number = 0;
+		public optname:string = "onApi_get_game_record";
+	
+		/**
+		* 开始时间
+		*/
+		public start_time : number ;	//int32
+		/**
+		* 结束时间
+		*/
+		public end_time : number ;	//int32
+		/**
+		* 平台
+		*/
+		public pf_code : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_api_get_game_record, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//开始时间
+			self.start_time = bytes. readInt32 ();		
+			//结束时间
+			self.end_time = bytes. readInt32 ();		
+			//平台
+			self.pf_code = bytes. readInt32 ();		
 		}
 	}
 
