@@ -275,7 +275,7 @@ module game.gui.base {
 		}
 
 		update(diff: number) {
-			if(this._isCloseing) return;
+			if (this._isCloseing) return;
 			if (this.__time <= 0) {
 				this.deltaUpdate();
 				this.__time = this._delta;
@@ -314,7 +314,9 @@ module game.gui.base {
 				this.drawBlack();
 			if (this._view) {
 				if (this._isNeedDuang) {
-					Laya.Tween.from(this._view, { scaleX: 0, scaleY: 0, alpha: 0 }, 200, Laya.Ease.backOut);
+					Laya.Tween.from(this._view, { scaleX: 0.7, scaleY: 0.7, alpha: 0 }, 250, Laya.Ease.backOut, Handler.create(this, () => {
+						this._blackSprite && Laya.Tween.to(this._blackSprite, { alpha: 0.5 }, 1000);
+					}));
 				}
 			}
 
@@ -342,8 +344,10 @@ module game.gui.base {
 		private closeTween() {
 			if (this._view) {
 				if (this._isNeedDuang) {
-					Laya.Tween.to(this._view, { scaleX: 0, scaleY: 0, alpha: 0 }, 200, Laya.Ease.backIn, Handler.create(this, this.close));
+					Laya.Tween.to(this._blackSprite, { alpha: 0 }, 450, Laya.Ease.cubicOut, Handler.create(this, this.clearBlack));
+					Laya.Tween.to(this._view, { scaleX: 0, scaleY: 0, alpha: 0 }, 450, Laya.Ease.cubicOut, Handler.create(this, this.close));
 				} else {
+					this.clearBlack();
 					this.close();
 				}
 			}
@@ -444,7 +448,6 @@ module game.gui.base {
 			this._isCloseing = true;
 			this._isOnOpenComplete = false;
 			this._key = "";
-			this.clearBlack();
 			if (this._view && this._view.hasOwnProperty("btn_close"))
 				this._view.btn_close.off(LEvent.CLICK, this, this.close);//更多
 			//清理按钮缓动
@@ -485,11 +488,12 @@ module game.gui.base {
 			// 	return;
 			if (!this._blackSprite) {
 				this._blackSprite = new Sprite();
-				this._blackSprite.alpha = 0.7;
+				this._blackSprite.alpha = 0.3;
 				this._blackSprite.mouseEnabled = true;
 				this._blackSprite.on(LEvent.CLICK, this, this.onBlackSpriteClick);
 				this.addChildAt(this._blackSprite, 0);
 			}
+			Laya.Tween.to(this._blackSprite, { alpha: 0.5 }, 1000);
 			this._blackSprite.x = -this._game.uiRoot.x;
 			this._blackSprite.y = -this._game.uiRoot.y;
 			let w: number = main.widthDesginPixelw;

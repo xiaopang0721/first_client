@@ -135,7 +135,7 @@ class Main {
 
         isDebug = WebConfig.isDebug;
         //调试信息
-        this.showStat = isDebug;
+        this.showStat = false//isDebug;
         window["showStatInfo"] = false;
         // 抗锯齿
         Config.isAntialias = true;

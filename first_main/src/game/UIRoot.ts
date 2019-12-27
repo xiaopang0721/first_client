@@ -266,8 +266,8 @@ module game {
 			if (btn.scaleY > 0 && btn.scaleY < 1) scaleY = btn.scaleY;
 			let props: any = { scaleX: scaleX * 0.9, scaleY: scaleY * 0.9 };
 			Laya.Tween.clearAll(btn);
-			Laya.Tween.to(btn, props, delayTime, null, Handler.create(this, () => {
-				Laya.Tween.to(btn, { scaleX: scaleX, scaleY: scaleY }, delayTime, null, Handler.create(this, () => {
+			Laya.Tween.to(btn, props, delayTime, Laya.Ease.circIn, Handler.create(this, () => {
+				Laya.Tween.to(btn, { scaleX: scaleX, scaleY: scaleY }, delayTime, Laya.Ease.circOut, Handler.create(this, () => {
 					if (callback) {
 						if (caller)
 							callback.call(caller, args, btn);
