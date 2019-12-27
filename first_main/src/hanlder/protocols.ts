@@ -498,6 +498,8 @@ module hanlder{
 		public static  CMSG_API_GET_GAME_RECORD :number = 245;	//api_get_game_record
 		/*洗码*/
 		public static  CMSG_XM_OPT :number = 246;	//xm_opt
+		/*洗码记录*/
+		public static  CMSG_XM_RECORD :number = 247;	//xm_record
 		private _FUNCS:Object = new Object();	
 		private _stream:ByteArray = new ByteArray;
 	
@@ -754,6 +756,7 @@ module hanlder{
 			this._FUNCS[244] = "api_get_game_baobiao";
 			this._FUNCS[245] = "api_get_game_record";
 			this._FUNCS[246] = "xm_opt";
+			this._FUNCS[247] = "xm_record";
 		}
 		/**
 		* 获取发送协议函数名称
@@ -1648,6 +1651,10 @@ module hanlder{
 					var obj_xm_opt:c2s_xm_opt = new c2s_xm_opt;
 					c2s_xm_opt .read(obj_xm_opt, bs);
 					return obj_xm_opt;
+				case Protocols.CMSG_XM_RECORD :	//xm_record
+					var obj_xm_record:c2s_xm_record = new c2s_xm_record;
+					c2s_xm_record .read(obj_xm_record, bs);
+					return obj_xm_record;
 				default:
 					break;
 			}
@@ -3532,6 +3539,14 @@ module hanlder{
 			this._stream.writeInt32 (pf_code);
 			this.sendMsg( 246 , this._stream);
 			//Log.outDebug("CS====> cmd:246 xm_opt");
+		}
+		public call_xm_record (pf_code : number ):void{
+			this._stream.reset();
+			this._stream.writeUint16( 247 );
+			//平台
+			this._stream.writeInt32 (pf_code);
+			this.sendMsg( 247 , this._stream);
+			//Log.outDebug("CS====> cmd:247 xm_record");
 		}
 	}
 
@@ -5906,7 +5921,7 @@ module hanlder{
 		}
 
 		/**
-		从输入二进制?髦卸寥〗峁固?
+		从输入二进制流中读取结构体
 		*/
 		public static read(self:c2s_brniuniu_bet, bytes:ByteArray):void
 		{
@@ -9713,6 +9728,31 @@ module hanlder{
 		从输入二进制流中读取结构体
 		*/
 		public static read(self:c2s_xm_opt, bytes:ByteArray):void
+		{
+			var parmLen:number;
+			var i:number;
+			//平台
+			self.pf_code = bytes. readInt32 ();		
+		}
+	}
+	export class c2s_xm_record
+	{
+		public optcode:number = 0;
+		public optname:string = "onXm_record";
+	
+		/**
+		* 平台
+		*/
+		public pf_code : number ;	//int32
+		public constructor()
+		{
+			
+		}
+
+		/**
+		从输入二进制流中读取结构体
+		*/
+		public static read(self:c2s_xm_record, bytes:ByteArray):void
 		{
 			var parmLen:number;
 			var i:number;

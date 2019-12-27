@@ -117,6 +117,7 @@ class Operation_Fields {
 	public static OPRATE_GAME_HONGBAO_FORMAT_MONEY_ERROR:number = 20 //红包格式金额错误
 	public static OPRATE_GAME_WXSAOLEIHB_START_RAIN_MONEY:number = 21 //微信扫雷红包红包雨开始
 	public static OPRATE_GAME_WXSAOLEIHB_GET_RAIN_MONEY:number = 22 //微信扫雷红包红包雨领取
+	public static OPRATE_GAME_XIMA_SUCCESS:number = 23 //洗码成功
 	//操作错误类型
 	public static OPRATE_API:number = 9 //API相关操作错误类型
 	public static OPRATE_API_API_LOGIN_GAME_RESULT:number = 1 //API登陆游戏返回
@@ -234,6 +235,7 @@ class Operation_Fields {
 		'8_20':'红包格式金额错误',//红包格式金额错误
 		'8_21':'微信扫雷红包红包雨开始',//微信扫雷红包红包雨开始
 		'8_22':'微信扫雷红包红包雨领取',//微信扫雷红包红包雨领取
+		'8_23':'洗码成功',//洗码成功
 		'9':'API相关操作错误类型',//API相关操作错误类型
 		'9_1':'API登陆游戏返回',//API登陆游戏返回
 		'9_2':'API上分返回',//API上分返回

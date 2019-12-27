@@ -796,6 +796,7 @@ class Web_operation_fields {
     public static CLIENT_IRCODE_GETBULLETINLIST = 66  //getbulletinlist
     public static CLIENT_IRCODE_GETAPIGAMEBAOBIAO = 67  //getapigamebaobiao
     public static CLIENT_IRCODE_GETAPIGAMERECORD = 68  //getapigamerecord
+    public static CLIENT_IRCODE_GETXIMARECORD = 69  //getximarecord
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static CARD_GAME_PAY_TYP_MASTER = 1  //房主付费
