@@ -104,7 +104,7 @@ module game {
 		}
 
 		/**iframe---------------------------start */
-		public showIframe(url, x, y, w, h) {
+		public showIframe(url, x, y, w, h, pf_code) {
 			if (WebConfig.iframe) return;
 			if (!Browser.onPC) {
 				x = x / Browser.pixelRatio;
@@ -137,8 +137,13 @@ module game {
 			} else {
 				iframe.onload = () => {
 					this._times++;
-					if (this._times == 2)
-						this.closeIframe()
+					if (pf_code != Web_operation_fields.GAME_PLATFORM_TYPE_AGQP) {
+						if (this._times == 2)
+							this.closeIframe()
+					}else{
+						if (this._times == 3)
+							this.closeIframe()
+					}
 				};
 			}
 		}

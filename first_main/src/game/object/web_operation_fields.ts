@@ -58,6 +58,7 @@ class Web_operation_fields {
     public static USE_MONEY_LOG_TYPE_WXSLHB_BOM_NUM_REWARD = 55  //雷数奖励
     public static USE_MONEY_LOG_TYPE_API_DJ_ADD_SCORE = 56  //API加分
     public static USE_MONEY_LOG_TYPE_API_DJ_SUB_SCORE = 57  //API扣分
+    public static USE_MONEY_LOG_TYPE_GAME_XIMA = 58  //游戏洗码
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static client_money_logtype_table:{[key:number]:string}={
@@ -118,6 +119,7 @@ class Web_operation_fields {
         55:'雷数奖励',//雷数奖励
         56:'API加分',//API加分
         57:'API扣分',//API扣分
+        58:'游戏洗码',//游戏洗码
 	}
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
@@ -794,6 +796,7 @@ class Web_operation_fields {
     public static CLIENT_IRCODE_GETBULLETINLIST = 66  //getbulletinlist
     public static CLIENT_IRCODE_GETAPIGAMEBAOBIAO = 67  //getapigamebaobiao
     public static CLIENT_IRCODE_GETAPIGAMERECORD = 68  //getapigamerecord
+    public static CLIENT_IRCODE_GETXIMARECORD = 69  //getximarecord
 //------------------------ END -----------------------------------
 //------------------------START-----------------------------------
     public static CARD_GAME_PAY_TYP_MASTER = 1  //房主付费
