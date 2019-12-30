@@ -140,7 +140,7 @@ module game {
 					if (pf_code != Web_operation_fields.GAME_PLATFORM_TYPE_AGQP) {
 						if (this._times == 2)
 							this.closeIframe()
-					}else{
+					} else {
 						if (this._times == 3)
 							this.closeIframe()
 					}
@@ -209,14 +209,51 @@ module game {
 			iframe.setAttribute('style', str);
 		}
 		/**iframe-------------------------end */
+
+		/**进入全屏 */
+		public requestFullScreen() {
+			let document = Laya.Browser.window.document.documentElement;
+			if (document.requestFullscreen) {
+				document.requestFullscreen();
+			}
+			else if (document.mozRequestFullScreen) {
+				document.mozRequestFullScreen();
+			} 
+			else if (document.webkitRequestFullScreen) {
+				document.webkitRequestFullScreen();
+			}
+		}
+		/**退出全屏 */
+		public exitFullScreen() {
+			let document = Laya.Browser.window.document;
+			if (document.exitFullscreen) {
+				document.exitFullscreen();
+			}
+			else if (document.mozCancelFullScreen) {
+				document.mozCancelFullScreen();
+			} 
+			else if (document.webkitCancelFullScreen) {
+				document.webkitCancelFullScreen();
+			}
+		}
+		/**检测是否全屏 */
+		public checkFullScreen() {
+			let document = Laya.Browser.window.document;
+			if (document.fullscreenElement || document.webkitFullScreenElement || document.mozFullScreenElement || document.msFullScreenElement) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 		/**
-		 * 弹窗提示
-		 * @param str  字符串
-		 * @param ecb 确定
-		 * @param ccb 取消
-		 * @param isOnlyOK  是否只有一个按钮 =》确定
-		 * @param okSkin 确定的皮肤
-		 */
+		  * 弹窗提示
+		  * @param str  字符串
+		  * @param ecb 确定
+		  * @param ccb 取消
+		  * @param isOnlyOK  是否只有一个按钮 =》确定
+		  * @param okSkin 确定的皮肤
+		  */
 		alert(str: string, ecb: Function = null, ccb: Function = null, isOnlyOK: boolean = true, okSkin?: string, cancleSkin?: string, titleSkin?: string): void {
 			this.top.close(window["DatingPageDef"].PAGE_TIP);
 			this.top.open(window["DatingPageDef"].PAGE_TIP, (tip: any) => {
