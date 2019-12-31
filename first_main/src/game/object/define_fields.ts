@@ -108,10 +108,6 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_INT_BYTE2:number = 76 //0.首充免死金牌,1.二充免死金牌,2.三充免死金牌,3.空
 	public static PLAYERDATA_INT_INITIATE_CASH_MONEY:number = 77 //发起提款金额
 	public static PLAYERDATA_INT_A_P_I_DA_MA_LIANG:number = 78 //API打码量
-	public static PLAYERDATA_INT_XI_MA_LIANG_A_E:number = 79 //AE洗码量
-	public static PLAYERDATA_INT_XI_MA_LIANG_K_Y:number = 80 //开元洗码量
-	public static PLAYERDATA_INT_XI_MA_LIANG_J_D_B:number = 81 //JDB洗码量
-	public static PLAYERDATA_INT_XI_MA_LIANG_A_G:number = 82 //AG洗码量
 
 // string field
 	public static PLAYERDATA_STR_ACCOUNT:number = 0 //账号信息
@@ -139,7 +135,6 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_STR_TAKE_PASSWORD:number = 22 //取款密码
 	public static PLAYERDATA_STR_HEAD_KUANG_IMG:number = 23 //头像框
 	public static PLAYERDATA_STR_VERSION:number = 24 //版本号
-	public static PLAYERDATA_STR_LOGIN_API_DATA:number = 25 //API登陆信息
 
 
 	public GetRegTime():number{
@@ -660,26 +655,6 @@ export class PlayerDataField extends core.obj.GuidObject{
     }
 
 
-	public GetXiMaLiangAE():number{
-       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_XI_MA_LIANG_A_E);
-    }
-
-
-	public GetXiMaLiangKY():number{
-       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_XI_MA_LIANG_K_Y);
-    }
-
-
-	public GetXiMaLiangJDB():number{
-       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_XI_MA_LIANG_J_D_B);
-    }
-
-
-	public GetXiMaLiangAG():number{
-       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_XI_MA_LIANG_A_G);
-    }
-
-
 //////////////////////////////////////str function
 
 	public GetAccount():string{
@@ -804,11 +779,6 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 	public GetVersion():string{
        return this.GetStr(PlayerDataField.PLAYERDATA_STR_VERSION);
-    }
-
-
-	public GetLoginApiData():string{
-       return this.GetStr(PlayerDataField.PLAYERDATA_STR_LOGIN_API_DATA);
     }
 
 
