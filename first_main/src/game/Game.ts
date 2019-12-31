@@ -47,7 +47,7 @@ module game {
 			let rate: number;
 			if (Laya.stage.screenMode == Stage.SCREEN_VERTICAL) {
 				rate = this._clientHeight / this._clientWidth;
-			} else if(Laya.stage.screenMode == Stage.SCREEN_HORIZONTAL){
+			} else if (Laya.stage.screenMode == Stage.SCREEN_HORIZONTAL) {
 				rate = this._clientWidth / this._clientHeight;
 			}
 			return rate > 2;

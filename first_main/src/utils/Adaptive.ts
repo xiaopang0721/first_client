@@ -63,7 +63,7 @@ module utils {
 			WebConfig.sessionkey = WebConfig.apisessionkey = decodeURIComponent((StringU.getParameter(location.href, "sessionkey") || WebConfig.sessionkey).toLowerCase());
 			WebConfig.params = decodeURIComponent((StringU.getParameter(location.href, "param") || WebConfig.params)).toLowerCase();
 			WebConfig.apicanback = (WebConfig.gameid == 'dating' || (WebConfig.params && StringU.getParameter(WebConfig.params, 'canback').toLowerCase() == '1')) ? true : false;
-			WebConfig.enterGameLocked = (WebConfig.platform == 'qpae' && WebConfig.gameid && WebConfig.sessionkey) ? true : false;
+			WebConfig.enterGameLocked = ((WebConfig.platform == 'qpae' || WebConfig.platform == 'qpapi') && WebConfig.gameid && WebConfig.sessionkey) ? true : false;
 			WebConfig.isSingleEnter = (StringU.getParameter(location.href, "logintype") == Web_operation_fields.ACCOUNT_TYPE_USERNAME.toString()) ? true : false;
 			WebConfig.server_name = (StringU.getParameter(location.href, "p") || WebConfig.server_name).toLowerCase();
 			WebConfig.gwUrl = WebConfig.gwconf[WebConfig.platform];
@@ -89,7 +89,7 @@ module utils {
 				}
 			}
 
-			
+
 			!WebConfig.systemInfo && WebConfig.getSystemInfo();//获取手机系统信息
 			logd("systemInfo", WebConfig.systemInfo);
 			!WebConfig.modelInfo && WebConfig.getModelInfo();//获取机型
