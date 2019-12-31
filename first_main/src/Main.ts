@@ -81,7 +81,7 @@ class Main {
     // 是否休眠
     isBlur: number = 0;
 
-    private _showStat: boolean = false;
+    private _showStat: boolean = isDebug;
     get showStat(): boolean {
         return this._showStat;
     }
