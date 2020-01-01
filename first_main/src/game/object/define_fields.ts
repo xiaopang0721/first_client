@@ -112,6 +112,7 @@ export class PlayerDataField extends core.obj.GuidObject{
 	public static PLAYERDATA_INT_XI_MA_LIANG_K_Y:number = 80 //开元洗码量
 	public static PLAYERDATA_INT_XI_MA_LIANG_J_D_B:number = 81 //JDB洗码量
 	public static PLAYERDATA_INT_XI_MA_LIANG_A_G:number = 82 //AG洗码量
+	public static PLAYERDATA_INT_MONEY_PLATFORM:number = 83 //转入平台金额
 
 // string field
 	public static PLAYERDATA_STR_ACCOUNT:number = 0 //账号信息
@@ -677,6 +678,11 @@ export class PlayerDataField extends core.obj.GuidObject{
 
 	public GetXiMaLiangAG():number{
        return this.GetInt32(PlayerDataField.PLAYERDATA_INT_XI_MA_LIANG_A_G);
+    }
+
+
+	public GetMoneyPlatform():number{
+       return this.GetInt32(PlayerDataField.PLAYERDATA_INT_MONEY_PLATFORM);
     }
 
 

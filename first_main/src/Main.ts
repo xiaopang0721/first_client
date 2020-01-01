@@ -333,6 +333,7 @@ class Main {
         let oldH: number = 0;
         switch (Laya.stage.screenMode) {
             case Stage.SCREEN_VERTICAL:
+            case Stage.SCREEN_NONE:
                 oldH = browser_clientHeight = Math.max(__width, __height);
                 oldW = browser_clientWidth = Math.min(__width, __height);
                 break;
