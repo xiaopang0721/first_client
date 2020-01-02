@@ -102,10 +102,7 @@ class Main {
         utils.Adaptive.init();
         // 是否IPhoneX
         if (Browser.onIPhone && Math.abs(Browser.pixelRatio - 3) < 0.01) {
-            onIPhoneX = ((Browser.clientWidth == 375 && Browser.clientHeight == 812) ||
-                (Browser.clientWidth == 812 && Browser.clientHeight == 375) ||
-                (Browser.clientWidth == 375 && Browser.clientHeight == 690) ||
-                (Browser.clientWidth == 690 && Browser.clientHeight == 375));
+            onIPhoneX = (Browser.clientWidth == 375 && Browser.clientHeight == 812) || (Browser.clientWidth == 812 && Browser.clientHeight == 375);
         }
         if (onIPhoneX) {
             //初始化引擎
