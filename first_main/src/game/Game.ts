@@ -483,41 +483,41 @@ module game {
 
 			let x = 0, y = 0;
 			//判断IPhoneX
-			if (onIPhoneX) {
-				//Iphone X 安全区域距离顶部
-				const IPHONEX_TOP: number = 44 / 812;
-				//Iphone X 安全区域距离底部
-				const IPHONEX_BOTTOM: number = 34 / 812;
-				if (Laya.stage.screenMode == Stage.SCREEN_HORIZONTAL) {
-					//正横屏 
-					width = width * (1 - IPHONEX_TOP - IPHONEX_BOTTOM);
-					// x偏移
-					x = width * IPHONEX_TOP * clientScale;
-				}
-				else if (Laya.stage.screenMode == Stage.SCREEN_VERTICAL) {
-					// 竖屏
-					height = height * (1 - IPHONEX_TOP - IPHONEX_BOTTOM);
-					// y偏移
-					y = height * IPHONEX_TOP * clientScale;
-				} else {
-					if (window.orientation == 0) {
-						// 竖屏
-						height = height * (1 - IPHONEX_TOP - IPHONEX_BOTTOM);
-						// y偏移
-						y = height * IPHONEX_TOP * clientScale;
-					} else if (window.orientation == 90) {
-						//正横屏 
-						width = width * (1 - IPHONEX_TOP - IPHONEX_BOTTOM);
-						// x偏移
-						x = width * IPHONEX_TOP * clientScale;
-					} else if (window.orientation == -90) {
-						//反横屏
-						width = width * (1 - IPHONEX_TOP - IPHONEX_BOTTOM);
-						// x偏移
-						x = width * IPHONEX_BOTTOM * clientScale;
-					}
-				}
-			}
+			// if (onIPhoneX) {
+			// 	//Iphone X 安全区域距离顶部
+			// 	const IPHONEX_TOP: number = 44 / 812;
+			// 	//Iphone X 安全区域距离底部
+			// 	const IPHONEX_BOTTOM: number = 34 / 812;
+			// 	if (Laya.stage.screenMode == Stage.SCREEN_HORIZONTAL) {
+			// 		//正横屏 
+			// 		width = width * (1 - IPHONEX_TOP - IPHONEX_BOTTOM);
+			// 		// x偏移
+			// 		x = width * IPHONEX_TOP * clientScale;
+			// 	}
+			// 	else if (Laya.stage.screenMode == Stage.SCREEN_VERTICAL) {
+			// 		// 竖屏
+			// 		height = height * (1 - IPHONEX_TOP - IPHONEX_BOTTOM);
+			// 		// y偏移
+			// 		y = height * IPHONEX_TOP * clientScale;
+			// 	} else {
+			// 		if (window.orientation == 0) {
+			// 			// 竖屏
+			// 			height = height * (1 - IPHONEX_TOP - IPHONEX_BOTTOM);
+			// 			// y偏移
+			// 			y = height * IPHONEX_TOP * clientScale;
+			// 		} else if (window.orientation == 90) {
+			// 			//正横屏 
+			// 			width = width * (1 - IPHONEX_TOP - IPHONEX_BOTTOM);
+			// 			// x偏移
+			// 			x = width * IPHONEX_TOP * clientScale;
+			// 		} else if (window.orientation == -90) {
+			// 			//反横屏
+			// 			width = width * (1 - IPHONEX_TOP - IPHONEX_BOTTOM);
+			// 			// x偏移
+			// 			x = width * IPHONEX_BOTTOM * clientScale;
+			// 		}
+			// 	}
+			// }
 			this._sceneCurScale == this.sceneScale && this.sceneResize(this._sceneCurScale);
 
 			if (this._uiRoot) {
