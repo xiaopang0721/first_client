@@ -124,6 +124,7 @@ class Operation_Fields {
 	public static OPRATE_API_API_ADD_SCORE_RESULT:number = 2 //API上分返回
 	public static OPRATE_API_API_SUB_SCORE_RESULT:number = 3 //API下分返回
 	public static OPRATE_API_API_GET_RECODE_RESULT:number = 4 //API获取游戏记录返回
+	public static OPRATE_API_API_LOGIN_FAIL_RESULT:number = 5 //API登陆失败返回
 	//错误提示
 	private static OPRATE_STRING:{[key:string]:string} = {
 		'1':'登录操作错误类型',//登录操作错误类型
@@ -241,6 +242,7 @@ class Operation_Fields {
 		'9_2':'API上分返回',//API上分返回
 		'9_3':'API下分返回',//API下分返回
 		'9_4':'API获取游戏记录返回',//API获取游戏记录返回
+		'9_5':'API登陆失败返回',//API登陆失败返回
 
 	}
 	//获取错误提示
