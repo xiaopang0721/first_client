@@ -174,7 +174,7 @@ module game.gui.page {
 				this._viewUI.bar_jd.value = value;
 				this.progressHandle();
 				//暗金版才有的光效
-				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_AJQP) {
+				if (WebConfig.baseplatform == PageDef.BASE_PLATFORM_TYPE_AJQP) {
 					this.effBarSetPos(value);
 				}
 			}
