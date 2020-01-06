@@ -22,13 +22,20 @@ module game.gui.page {
 			this.mouseThrough = true;
 		}
 
-
-		private _isApi: boolean;
 		// 页面初始化函数
 		protected init(): void {
-			this._isApi = WebConfig.enterGameLocked;
+			WebConfig.setMyOrientation(false);
+			if (Browser.onPC) {
+				Laya.stage.screenMode = Stage.SCREEN_NONE;
+			} else {
+				Laya.stage.screenMode = Stage.SCREEN_VERTICAL;
+			}
 			this._viewUI = this._view = this.createView('dating.Loading_SPUI');
 			this.addChild(this._viewUI);
+			if (this._viewUI) {
+				this._viewUI.box_main.scaleX = 1.5;
+				this._viewUI.box_main.scaleY = 1.5;
+			}
 			this._viewUI.label_Tips.changeText("正在校验文件,请稍等");
 			this._viewUI.bar_jd.value = 0;
 
@@ -159,7 +166,7 @@ module game.gui.page {
 				this._viewUI.bar_jd.value = value;
 				this.progressHandle();
 				//暗金版才有的光效
-				if (WebConfig.platform == PageDef.BASE_PLATFORM_TYPE_AJQP) {
+				if (WebConfig.baseplatform == PageDef.BASE_PLATFORM_TYPE_AJQP) {
 					this.effBarSetPos(value);
 				}
 			}
@@ -167,7 +174,7 @@ module game.gui.page {
 
 		private effBarSetPos(value: number) {
 			let interval = this._viewUI.bar_jd.width * value;
-			this._viewUI["eff_bar"].x = 40 + interval;
+			this._viewUI["eff_bar"].x = -90 + interval;
 		}
 
 		private progressHandle() {
