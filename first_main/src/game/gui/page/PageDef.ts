@@ -14,7 +14,11 @@ module game.gui.page {
 		//页面集合
 		protected static _pageClassMap: ClassMap = {};
 		public static init(): void {
-			PageDef._pageClassMap[PageDef.PAGE_LOADING] = Loading;
+			if (WebConfig.enterGameLocked&&WebConfig.gameid == "wxsaoleihb") {
+				PageDef._pageClassMap[PageDef.PAGE_LOADING] = LoadingSP;
+			} else {
+				PageDef._pageClassMap[PageDef.PAGE_LOADING] = Loading;
+			}
 			PageDef._pageClassMap[PageDef.PAGE_WAITEFFECT] = WaitEffectPage;
 		}
 
