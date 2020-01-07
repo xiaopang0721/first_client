@@ -176,7 +176,7 @@ module game.gui.page {
 
 		private effBarSetPos(value: number) {
 			let interval = this._viewUI.bar_jd.width * value;
-			this._viewUI["eff_bar"].x = -85 + interval; 
+			this._viewUI["eff_bar"].x = -90 + interval; 
 		}
 
 		private progressHandle() {
