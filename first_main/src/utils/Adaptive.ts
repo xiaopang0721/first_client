@@ -104,6 +104,8 @@ module utils {
 			logd("inviteCode", WebConfig.inviteCode);
 			!WebConfig.webParms && WebConfig.getWebParms();//获取额外参数
 			logd("webParms", WebConfig.webParms);
+
+
 		}
 
 		//补丁
