@@ -16,7 +16,7 @@ module game.gui.page {
 		constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
 			super(v, onOpenFunc, onCloseFunc);
 			this._asset = [
-				Path.atlas_ui + "loading.atlas"
+				// Path.atlas_ui + "loading.atlas"
 			];
 			this._isNeedDuang = false;
 			this._delta = 500;

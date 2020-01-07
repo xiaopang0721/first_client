@@ -178,7 +178,12 @@ class Main {
             localSetItem("client_vesion", cur_vesion)
         }
 
-
+        //api的微信红包要转成竖屏
+        if (WebConfig.enterGameLocked && WebConfig.gameid == "wxsaoleihb") {
+            Laya.stage.screenMode = Stage.SCREEN_VERTICAL;
+        } else {
+            Laya.stage.screenMode = Stage.SCREEN_HORIZONTAL;
+        }
 
         Vesion.once(Vesion.LOAD_VESION_COMPLETE, this, () => {
             this.init();
