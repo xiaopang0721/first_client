@@ -33,8 +33,8 @@ module game.gui.page {
 			this._viewUI = this._view = this.createView('dating.Loading_SPUI');
 			this.addChild(this._viewUI);
 			if (this._viewUI) {
-				this._viewUI.box_main.scaleX = 1.5;
-				this._viewUI.box_main.scaleY = 1.5;
+				this._viewUI.box_main.scaleX = 1.77;
+				this._viewUI.box_main.scaleY = 1.77;
 			}
 			this._viewUI.label_Tips.changeText("正在校验文件,请稍等");
 			this._viewUI.bar_jd.value = 0;
@@ -174,7 +174,7 @@ module game.gui.page {
 
 		private effBarSetPos(value: number) {
 			let interval = this._viewUI.bar_jd.width * value;
-			this._viewUI["eff_bar"].x = -90 + interval;
+			this._viewUI["eff_bar"].x = -79 + interval; 
 		}
 
 		private progressHandle() {
