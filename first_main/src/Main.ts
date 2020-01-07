@@ -179,7 +179,9 @@ class Main {
         }
 
         //api的微信红包要转成竖屏
-        if (WebConfig.enterGameLocked && WebConfig.gameid == "wxsaoleihb") {
+        if (Browser.onPC && WebConfig.gameid == "wxsaoleihb") {
+            Laya.stage.screenMode = Stage.SCREEN_NONE;
+        } else if (WebConfig.enterGameLocked && WebConfig.gameid == "wxsaoleihb") {
             Laya.stage.screenMode = Stage.SCREEN_VERTICAL;
         } else {
             Laya.stage.screenMode = Stage.SCREEN_HORIZONTAL;
