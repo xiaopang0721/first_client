@@ -14,9 +14,11 @@ module game.gui.page {
 		private _nowVesion: number = 0
 		constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
 			super(v, onOpenFunc, onCloseFunc);
-			this._asset = [
-				Path.atlas_ui + "loading.atlas"
-			];
+			if (!WebConfig.enterGameLocked) {
+				this._asset = [
+					Path.atlas_ui + "loading.atlas"
+				];
+			}
 			this._isNeedDuang = false;
 			this._delta = 500;
 			this.mouseThrough = true;
