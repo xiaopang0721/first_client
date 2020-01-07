@@ -69,15 +69,18 @@ module game {
 			this._uiRoot = new UIRoot(this);
 			Laya.stage.addChild(this._uiRoot);
 
-			let assetsLoader: AssetsLoader = new AssetsLoader();
-			let assetList: any = [
-				Path.atlas_ui + 'logo.atlas',
-				Path.atlas_ui + 'loading.atlas',
-			]
+			//非API才做预加载
+			if (!WebConfig.enterGameLocked){
+				let assetsLoader: AssetsLoader = new AssetsLoader();
+				let assetList: any = [
+					Path.atlas_ui + 'logo.atlas',
+					Path.atlas_ui + 'loading.atlas',
+				]
 
-			assetsLoader.load(assetList, Handler.create(this, () => {
-				this.loadNeedAsset();
-			}), false, 0);
+				assetsLoader.load(assetList, Handler.create(this, () => {
+					this.loadNeedAsset();
+				}), false, 0);
+			}
 
 			// 初始化音量
 			let soundVolume: string = localGetItem("soundVolume")
