@@ -70,7 +70,7 @@ module game {
 			Laya.stage.addChild(this._uiRoot);
 
 			//API直接进loading
-			if (!WebConfig.enterGameLocked) {
+			if (WebConfig.enterGameLocked) {
 				this.loadNeedAsset();
 			} else {
 				let assetsLoader: AssetsLoader = new AssetsLoader();
