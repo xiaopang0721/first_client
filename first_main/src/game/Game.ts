@@ -69,8 +69,10 @@ module game {
 			this._uiRoot = new UIRoot(this);
 			Laya.stage.addChild(this._uiRoot);
 
-			//非API才做预加载
-			if (!WebConfig.enterGameLocked){
+			//API直接进loading
+			if (!WebConfig.enterGameLocked) {
+				this.loadNeedAsset();
+			} else {
 				let assetsLoader: AssetsLoader = new AssetsLoader();
 				let assetList: any = [
 					Path.atlas_ui + 'logo.atlas',
