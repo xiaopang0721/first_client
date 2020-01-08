@@ -66,6 +66,10 @@ module utils {
 			WebConfig.enterGameLocked = ((WebConfig.platform == 'qpae' || WebConfig.platform == 'qpapi') && WebConfig.gameid && WebConfig.sessionkey) ? true : false;
 			WebConfig.isSingleEnter = (StringU.getParameter(location.href, "logintype") == Web_operation_fields.ACCOUNT_TYPE_USERNAME.toString()) ? true : false;
 			WebConfig.server_name = (StringU.getParameter(location.href, "p") || WebConfig.server_name).toLowerCase();
+			//两套api皮，目前使用qpapi这套皮
+			if (WebConfig.server_name == "qpae") {
+				WebConfig.platform = "qpapi";
+			}
 			WebConfig.gwUrl = WebConfig.gwconf[WebConfig.platform];
 			Vesion.addSearchPath(WebConfig.platform + "/", "langpack_1000.bin");
 			let baseplatform = WebConfig.baseqp[WebConfig.platform];
