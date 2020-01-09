@@ -70,6 +70,8 @@ module utils {
 			if (WebConfig.server_name == "qpae") {
 				WebConfig.platform = "qpapi";
 			}
+			//是否api对接其他棋牌
+			WebConfig.isApiDJ = WebConfig.platform == "ajqp2" ? true : false;
 			WebConfig.gwUrl = WebConfig.gwconf[WebConfig.platform];
 			Vesion.addSearchPath(WebConfig.platform + "/", "langpack_1000.bin");
 			let baseplatform = WebConfig.baseqp[WebConfig.platform];
